@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>OPDOPDOPD</title>
     <link rel="stylesheet" href="styling.css">
-    <script type = "text/javascript" src="potomPridumayu.js"></script>
+    <script type="text/javascript" src="potomPridumayu.js"></script>
 </head>
 <body>
 <div class="header">
@@ -13,22 +13,38 @@
 <h1>Регистрация</h1>
 <p>Заполните форму ниже для регистрации</p>
 <hr>
-<div class="main">
+<div class="RegWindow">
     <div class="reg" id="reg">
+        <label for="regEmail"><b>E-mail</b></label>
+        <input type="text" placeholder="Введите почту" name="email" id="regEmail" required>
+
+        <label for="regPsw"><b>Пароль</b></label>
+        <input type="password" placeholder="Введите пароль" name="psw" id="regPsw" required>
+
+        <label for="psw-repeat"><b>Повторите пароль</b></label>
+        <input type="password" placeholder="Повторите пароль" name="psw-repeat" id="psw-repeat" required>
+        <button type="submit" class="registerbtn">Регистрация</button>
+        <div class="container signin">
+            <p>Уже есть аккаунт?
+                <button onclick="ChangeDiv('enter','reg')"> Вход</button>
+            </p>
+        </div>
+    </div>
+    <div class="enter" id="enter">
         <label for="email"><b>E-mail</b></label>
         <input type="text" placeholder="Введите почту" name="email" id="email" required>
 
         <label for="psw"><b>Пароль</b></label>
         <input type="password" placeholder="Введите пароль" name="psw" id="psw" required>
 
-        <label for="psw-repeat"><b>Повторите пароль</b></label>
-        <input type="password" placeholder="Повторите пароль" name="psw-repeat" id="psw-repeat" required>
-        <button type="submit" class="registerbtn">Регистрация</button>
+        <button type="submit" class="registerbtn" onclick="CheckInput()">Вход</button>
+        <div class="container signin">
+            <p>Ещё нет аккаунта?
+                <button onclick="ChangeDiv('reg','enter')">Регистрация</button>
+            </p>
+        </div>
     </div>
     <hr>
-    <div class="container signin">
-        <p>Уже есть аккаунт? <a href="enterPage.html">Вход</a>.</p>
-    </div>
 </div>
 </body>
 </html>

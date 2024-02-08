@@ -4,3 +4,9 @@ a{
 li{
     list-style: none;
 }
+div.enter{
+    display: block;
+}
+div.reg{
+    display: none;
+}
