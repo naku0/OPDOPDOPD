@@ -4,17 +4,18 @@
     <meta charset="UTF-8">
     <title>OPDOPDOPD</title>
     <link rel="stylesheet" href="styling.css">
-    <script type="text/javascript" src="potomPridumayu.js"></script>
+    <script type="text/javascript" src="javaScript(s).js"></script>
 </head>
 <body>
 <div class="header">
     <span class="logo"><a href="">OPDOPDOPD team</a></span>
 </div>
-<h1>Регистрация</h1>
-<p>Заполните форму ниже для регистрации</p>
-<hr>
+
 <div class="RegWindow">
     <div class="reg" id="reg">
+        <h1>Регистрация</h1>
+        <p>Заполните форму ниже для регистрации</p>
+        <hr>
         <label for="regEmail"><b>E-mail</b></label>
         <input type="text" placeholder="Введите почту" name="email" id="regEmail" required>
 
@@ -23,7 +24,7 @@
 
         <label for="psw-repeat"><b>Повторите пароль</b></label>
         <input type="password" placeholder="Повторите пароль" name="psw-repeat" id="psw-repeat" required>
-        <button type="submit" class="registerbtn">Регистрация</button>
+        <button type="submit" class="registerbtn" onclick="CheckInputReg()">Регистрация</button>
         <div class="container signin">
             <p>Уже есть аккаунт?
                 <button onclick="ChangeDiv('enter','reg')"> Вход</button>
@@ -31,13 +32,16 @@
         </div>
     </div>
     <div class="enter" id="enter">
+        <h1>Вход</h1>
+        <p>Заполните форму ниже для входа</p>
+        <hr>
         <label for="email"><b>E-mail</b></label>
         <input type="text" placeholder="Введите почту" name="email" id="email" required>
 
         <label for="psw"><b>Пароль</b></label>
         <input type="password" placeholder="Введите пароль" name="psw" id="psw" required>
 
-        <button type="submit" class="registerbtn" onclick="CheckInput()">Вход</button>
+        <button type="submit" class="enterbtn" onclick="CheckInput()">Вход</button>
         <div class="container signin">
             <p>Ещё нет аккаунта?
                 <button onclick="ChangeDiv('reg','enter')">Регистрация</button>
