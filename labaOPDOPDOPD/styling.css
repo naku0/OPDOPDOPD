@@ -10,3 +10,7 @@ div.enter{
 div.reg{
     display: none;
 }
+body{
+    margin: 0;
+
+}

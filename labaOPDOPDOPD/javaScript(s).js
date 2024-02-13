@@ -31,3 +31,6 @@ function CheckInputReg(){
 function ConfirmPassword(psw1, psw2){
     return psw1 === psw2;
 }
+function EndSession(){
+
+}
