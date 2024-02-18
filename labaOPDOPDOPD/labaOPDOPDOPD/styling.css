@@ -1,0 +1,19 @@
+a{
+    text-decoration: none;
+}
+li{
+    list-style: none;
+}
+div.enter{
+    display: block;
+}
+div.reg{
+    display: none;
+}
+body{
+    margin: 0;
+
+}
+div.RegWindow{
+    display: none;
+}
