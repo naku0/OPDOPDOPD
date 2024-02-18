@@ -2,17 +2,23 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <script type="text/javascript" src="javaScript(s).js"></script>
     <link rel="stylesheet" href="styling.css">
     <title>OPDOPDOPD</title>
 </head>
 <body>
 <header>
-    <div class="logo">
-<a href="https://youtu.be/dQw4w9WgXcQ?si=swkKsubkCwZgkvkd" target="_blank">OPDOPDOPD</a>
-    </div>
-    <div class="exit">
-        <a href="welcomepage.html" onclick="EndSession()">Выйти</a>
-    </div>
+    <nav>
+        <ul>
+            <li class="logo">
+                <a href="https://youtu.be/dQw4w9WgXcQ?si=swkKsubkCwZgkvkd">OPDOPDOPD</a>
+            </li>
+            <li>
+                <a href="#" onclick="ShowDiv('RegWindow')">Вход</a>
+            </li>
+            <li><a href="welcomepage.html" onclick="EndSession()">Выйти</a></li>
+        </ul>
+    </nav>
 </header>
 <p>Мы выбрали профессии:</p>
 <ul>
@@ -26,6 +32,45 @@
         <a href="SysAnal.html" target="_blank">Системный аналитик</a>
     </li>
 </ul>
+<div class="RegWindow" id="RegWindow">
+    <div class="reg" id="reg">
+        <h1>Регистрация</h1>
+        <p>Заполните форму ниже для регистрации</p>
+        <hr>
+        <label for="regEmail"><b>E-mail</b></label>
+        <input type="text" placeholder="Введите почту" name="email" id="regEmail" required>
+
+        <label for="regPsw"><b>Пароль</b></label>
+        <input type="password" placeholder="Введите пароль" name="psw" id="regPsw" required>
+
+        <label for="psw-repeat"><b>Повторите пароль</b></label>
+        <input type="password" placeholder="Повторите пароль" name="psw-repeat" id="psw-repeat" required>
+        <button type="submit" class="registerbtn" onclick="CheckInputReg()">Регистрация</button>
+        <div class="container signin">
+            <p>Уже есть аккаунт?
+                <button onclick="ChangeDiv('enter','reg')"> Вход</button>
+            </p>
+        </div>
+    </div>
+    <div class="enter" id="enter">
+        <h1>Вход</h1>
+        <p>Заполните форму ниже для входа</p>
+        <hr>
+        <label for="email"><b>E-mail</b></label>
+        <input type="text" placeholder="Введите почту" name="email" id="email" required>
+
+        <label for="psw"><b>Пароль</b></label>
+        <input type="password" placeholder="Введите пароль" name="psw" id="psw" required>
+
+        <button type="submit" class="enterbtn" onclick="CheckInput()">Вход</button>
+        <div class="container signin">
+            <p>Ещё нет аккаунта?
+                <button onclick="ChangeDiv('reg','enter')">Регистрация</button>
+            </p>
+        </div>
+    </div>
+    <hr>
+</div>
 <img src="popug.jpg" alt="popug">
 <p>это мы, делаем лабораторную</p>
 </body>
