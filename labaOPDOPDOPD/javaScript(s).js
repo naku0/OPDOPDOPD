@@ -10,16 +10,17 @@ function CheckInput() {
 
 function ShowDiv(class1) {
     class1 = document.getElementById(class1);
-    class1.style.display = "block";
+    class1.style.display = "grid";
 }
-function ChangeDiv(id1, id2){
+
+function ChangeDiv(id1, id2) {
     id1 = document.getElementById(id1);
     id2 = document.getElementById(id2);
-    if(id2.style.display === "none"){
+    if (id2.style.display === "none") {
         id1.style.display = "none";
-        id2.style.display = "block";
-    }else{
-        id1.style.display = "block";
+        id2.style.display = "grid";
+    } else {
+        id1.style.display = "grid";
         id2.style.display = "none";
     }
 }

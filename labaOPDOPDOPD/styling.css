@@ -1,19 +1,140 @@
-a{
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Quicksand", sans-serif;
+}
+
+a {
     text-decoration: none;
 }
-li{
+
+li {
     list-style: none;
 }
-div.enter{
-    display: block;
-}
-div.reg{
-    display: none;
-}
-body{
-    margin: 0;
 
+header {
+    background-color: transparent;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
 }
-div.RegWindow{
+
+header ul {
+    width: 100%;
+    list-style: none;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+header li {
+    height: 50px;
+}
+
+header a {
+    height: 100%;
+    padding: 0 30px;
+    display: flex;
+    align-items: center;
+    color: black;
+}
+
+header a:hover {
+    background-color: #CCFA5B;
+}
+
+header li:first-child {
+    font-weight: bold;
+    margin-right: auto;
+}
+
+header {
+    width: auto;
+    height: auto;
+    display: flex;
+    place-content: flex-end;
+}
+
+div.enter {
+    display: grid;
+}
+
+div.reg {
     display: none;
+}
+
+body {
+    min-height: 10vh;
+    background-color: #EDF0F2;
+    display: grid;
+}
+
+div.RegWindow {
+    display: none;
+    z-index: 1;
+    position: absolute;
+    background-color: rgb(250, 253, 255, 0.9);
+    font-family: "Quicksand", sans-serif;
+    place-content: center;
+    width: 50vh;
+    height: 60vh;
+    border-radius: 50px;
+}
+
+hr {
+    border: 1px solid #f0f0f0;
+    margin-bottom: 25px;
+}
+
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+.enterbtn, .registerbtn {
+    background-color: #CCFA5B;
+    color: white;
+    padding: 16px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+}
+
+.enterbtn:hover, .registerbtn:hover {
+    background-color: #AAD94A;
+}
+
+p.title {
+    width: auto;
+    color: black;
+    opacity: 1;
+    font-size: 8vh;
+    font-weight: bold;
+    justify-content: center;
+}
+
+.main {
+    height: 50vh;
+    width: 100%;
+    display: grid;
+    place-content: center;
+}
+
+.AAAAAAA {
+    background: radial-gradient(circle at center, #CCFA5B 20%, #EDF0F2 70%, transparent 100%);
+    /*rgb(204,250,91);
+    border-radius: 0 0 50rem 50rem;*/
+    height: 50vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
 }

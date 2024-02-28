@@ -4,34 +4,30 @@
     <meta charset="UTF-8">
     <script type="text/javascript" src="javaScript(s).js"></script>
     <link rel="stylesheet" href="styling.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
     <title>OPDOPDOPD</title>
 </head>
 <body>
-<header>
-    <nav>
-        <ul>
+<div class="AAAAAAA">
+    <header>
+        <ul class = "topper">
             <li class="logo">
                 <a href="https://youtu.be/dQw4w9WgXcQ?si=swkKsubkCwZgkvkd">OPDOPDOPD</a>
             </li>
-            <li>
+            <li class="stertSession">
                 <a href="#" onclick="ShowDiv('RegWindow')">Вход</a>
             </li>
-            <li><a href="welcomepage.html" onclick="EndSession()">Выйти</a></li>
+            <li class="endSession">
+                <a href="welcomepage.html" onclick="EndSession()">Выйти</a>
+            </li>
         </ul>
-    </nav>
-</header>
-<p>Мы выбрали профессии:</p>
-<ul>
-    <li>
-        <a href="GameDesigner.html" target="_blank">Гейм-дизайнер</a>
-    </li>
-    <li>
-        <a href="SysAdmin.html" target="_blank">Сис.админ</a>
-    </li>
-    <li>
-        <a href="SysAnal.html" target="_blank">Системный аналитик</a>
-    </li>
-</ul>
+    </header>
+    <div class="main">
+        <p class="title">laboratory work</p>
+    </div>
+</div>
 <div class="RegWindow" id="RegWindow">
     <div class="reg" id="reg">
         <h1>Регистрация</h1>
@@ -48,7 +44,7 @@
         <button type="submit" class="registerbtn" onclick="CheckInputReg()">Регистрация</button>
         <div class="container signin">
             <p>Уже есть аккаунт?
-                <button onclick="ChangeDiv('enter','reg')"> Вход</button>
+                <a onclick="ChangeDiv('enter','reg')"> Вход</a>
             </p>
         </div>
     </div>
@@ -65,13 +61,28 @@
         <button type="submit" class="enterbtn" onclick="CheckInput()">Вход</button>
         <div class="container signin">
             <p>Ещё нет аккаунта?
-                <button onclick="ChangeDiv('reg','enter')">Регистрация</button>
+                <a onclick="ChangeDiv('reg','enter')">Регистрация</a>
             </p>
         </div>
     </div>
     <hr>
 </div>
+<div class='list'>
+    <ul class = "workers">
+        <li>
+            <a href="GameDesigner.html">Гейм-дизайнер</a>
+        </li>
+        <li>
+            <a href="SysAdmin.html">Сис.админ</a>
+        </li>
+        <li>
+            <a href="SysAnal.html">Системный аналитик</a>
+        </li>
+    </ul>
+</div>
+
 <img src="popug.jpg" alt="popug">
 <p>это мы, делаем лабораторную</p>
+
 </body>
 </html>
