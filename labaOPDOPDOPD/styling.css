@@ -187,7 +187,7 @@ p.title {
 
 }
 .list a{
-    display: flex;
+    display: grid;
     place-content: center;
     width: 80vh;
     height: auto;
@@ -205,5 +205,5 @@ p.title {
 }
 .list a:hover{
     color: #000000;
-    background-color: #D0D0D0;
+    background-color: #DFDFDF;
 }
