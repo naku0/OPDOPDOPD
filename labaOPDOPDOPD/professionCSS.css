@@ -25,7 +25,8 @@ i.material-icons {
 a {
     text-decoration: none;
 }
-main li{
+
+main li {
     padding: 10px;
 }
 
@@ -91,15 +92,23 @@ main {
     display: flex;
     border: solid rgba(0, 0, 0, 0.2);
     border-radius: 20px;
+    height: auto;
+    width: auto;
 }
 
 aside.tasks {
     font-weight: bold;
+    font-size: 20px;
+    width: auto;
+    padding: 20px;
     display: flex;
     justify-content: flex-end;
-    padding: 5vh;
-}
 
+}
+.funcList{
+    display: grid;
+    place-items: center;
+}
 
 .pvk {
     border: solid rgba(0, 0, 0, 0.2);
@@ -111,5 +120,5 @@ p.PVKname {
     display: grid;
     place-items: center;
     font-weight: bold;
-    padding: 10vh;
+    padding: 10px;
 }
