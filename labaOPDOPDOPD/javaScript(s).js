@@ -43,3 +43,6 @@ function ConfirmPassword(psw1, psw2) {
 function EndSession() {
 
 }
+function randomLogo(){
+    let arr = Array();
+}

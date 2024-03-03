@@ -17,6 +17,9 @@ a {
     color: white;
     background-color: #AAD94A;
 }
+i.material-icons{
+    font-size: 20px;
+}
 
 li {
     list-style: none;
@@ -88,6 +91,7 @@ div.RegWindow {
     padding: 30px 50px;
     border-radius: 50px;
     position: absolute;
+    box-shadow: 3px 3px rgba(0,0,0,0.1);
 }
 
 hr {
@@ -144,7 +148,7 @@ p.title {
     width: auto;
     color: black;
     opacity: 1;
-    font-size: 10vh;
+    font-size: 12vh;
     justify-content: center;
 }
 
@@ -156,7 +160,7 @@ p.title {
 }
 
 .AAAAAAA {
-    background: radial-gradient(ellipse at center, #CCFA5B 30%, #EDF0F2 70%, transparent 100%);
+    background: radial-gradient(ellipse at center, #CCFA5B 30%, #EDF0F2 60%, transparent 100%);
     /*rgb(204,250,91);
     border-radius: 0 0 50rem 50rem;*/
     height: 50vh;
@@ -195,7 +199,7 @@ p.title {
     border: solid rgba(0,0,0,0.1);
     border-radius: 30px;
     font-size: 20px;
-    font-family: "Quicksand", sans-serif ;
+    font-family: "Montserrat", serif ;
 }
 .list a:link{
     color: black;
