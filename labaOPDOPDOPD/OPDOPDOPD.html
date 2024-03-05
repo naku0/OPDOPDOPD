@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <script type="text/javascript" src="javaScript(s).js"></script>
-    <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="styling.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,16 +20,19 @@
         <ul class="topper">
             <li class="logo">
                 <a href="https://youtu.be/dQw4w9WgXcQ?si=swkKsubkCwZgkvkd">OPDOPDOPD
-                    <i class="material-icons" id="logo"><script>randomLogo("logo")</script></i>
+                    <i class="material-icons" id="logo">
+                        <script>randomLogo("logo")</script>
+                    </i>
                 </a>
             </li>
-            <li class="stertSession">
+            <li class="startSession" id="startSession">
                 <a href="#" onclick="ShowDiv('RegWindow')">Вход</a>
             </li>
-            <li class="endSession">
+            <li class="endSession" id="endSession">
                 <a href="welcomepage.html" onclick="EndSession()">Выйти</a>
             </li>
         </ul>
+        <script>CheckFlag("startSession", "endSession")</script>
     </header>
     <div class="main">
         <div class="yaNeZnayu">
@@ -98,9 +100,13 @@
         </li>
     </ul>
 </div>
-
-<img src="popug.jpg" alt="popug">
-<p>это мы, делаем лабораторную</p>
-
+<footer>
+    <div class="heart">
+        <i class="material-icons" id="heart" onclick="heartClicker('popug','heart')">favorite</i>
+    </div>
+    <div class="popug" id="popug">
+        <img src="popug.jpg" alt="popug">
+    </div>
+</footer>
 </body>
 </html>

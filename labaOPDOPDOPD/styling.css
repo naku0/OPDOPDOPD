@@ -17,7 +17,8 @@ a {
     color: white;
     background-color: #AAD94A;
 }
-i.material-icons{
+
+i.material-icons {
     font-size: 20px;
 }
 
@@ -91,7 +92,7 @@ div.RegWindow {
     padding: 30px 50px;
     border-radius: 50px;
     position: absolute;
-    box-shadow: 3px 3px rgba(0,0,0,0.1);
+    box-shadow: 3px 3px rgba(0, 0, 0, 0.1);
 }
 
 hr {
@@ -137,25 +138,30 @@ input[type=text]:focus, input[type=password]:focus {
     color: #CCFA5B;
     text-decoration: #CCFA5B;
 }
-ul.registerlist{
+
+ul.registerlist {
     display: flex;
     justify-content: flex-end;
     align-items: center;
 }
-.registerlist .material-icons{
+
+.registerlist .material-icons {
     font-size: 30px;
     cursor: pointer;
 }
-.registerlist .material-icons:hover{
-    border: 2px rgba(0,0,0,0.2);
+
+.registerlist .material-icons:hover {
+    border: 2px rgba(0, 0, 0, 0.2);
     background-color: #dddddd;
     border-radius: 10px;
-    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: inset 1px 2px 5px rgba(0, 0, 0, 0.2);
 
 }
-.registerlist li:first-child{
+
+.registerlist li:first-child {
     margin-right: auto;
 }
+
 .RegWindow a:hover {
     color: #AAD94A;
     text-decoration: #CCFA5B;
@@ -191,10 +197,12 @@ p.title {
     display: flex;
     place-content: center;
 }
-.list{
-    padding-top:20px;
+
+.list {
+    padding-top: 20px;
 }
-.list ul{
+
+.list ul {
     width: 100%;
     list-style: none;
     flex-direction: column;
@@ -208,24 +216,55 @@ p.title {
     padding: 3vh 0;
 
 }
-.list a{
+
+.list a {
     display: grid;
     place-content: center;
     width: 80vh;
     height: auto;
     background-color: #EDF0F2;
-    border: solid rgba(0,0,0,0.1);
+    border: solid rgba(0, 0, 0, 0.1);
     border-radius: 30px;
     font-size: 20px;
-    font-family: "Montserrat", serif ;
+    font-family: "Montserrat", serif;
 }
-.list a:link{
+
+.list a:link {
     color: black;
 }
-.list a:visited{
+
+.list a:visited {
     color: black;
 }
-.list a:hover{
+
+.list a:hover {
     color: #000000;
     background-color: #DFDFDF;
+}
+
+footer {
+
+}
+footer .heart{
+    display: flex;
+    place-content: center;
+}
+footer .material-icons {
+    font-size: 40px;
+    color: #CCFA5B;
+    filter: drop-shadow(0 0 4px rgba(0,0,0,0.35));
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    margin-top: 35px;
+}
+footer .material-icons:hover{
+    color: #AAD94A;
+    filter: drop-shadow(0 0 10px #EDF0F2);
+    cursor: pointer;
+}
+.popug{
+    display: none;
+    place-content: center;
+    margin-top: 10px;
 }
