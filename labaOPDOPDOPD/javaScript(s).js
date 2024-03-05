@@ -12,6 +12,10 @@ function ShowDiv(class1) {
     class1 = document.getElementById(class1);
     class1.style.display = "grid";
 }
+function closeReg(class1){
+    class1= document.getElementById(class1);
+    class1.style.display ="none";
+}
 
 function ChangeDiv(id1, id2) {
     id1 = document.getElementById(id1);
@@ -43,6 +47,11 @@ function ConfirmPassword(psw1, psw2) {
 function EndSession() {
 
 }
-function randomLogo(){
-    let arr = Array();
+function randomLogo(id1){
+    let arr = Array("smoking_rooms", "accessible_forward","mood","functions","favorite",
+        "school","school","school","wifi","wifi","code","");
+    let item = arr[Math.floor(Math.random() * arr.length)];
+    console.log(item);
+    let iconElement = document.getElementById(id1);
+    iconElement.textContent = item;
 }

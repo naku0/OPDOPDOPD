@@ -100,7 +100,7 @@ aside.tasks {
     font-weight: bold;
     font-size: 20px;
     width: auto;
-    padding: 20px;
+    padding: 20px 40px;
     display: flex;
     justify-content: flex-end;
 

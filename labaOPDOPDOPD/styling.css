@@ -83,7 +83,7 @@ body {
 div.RegWindow {
     display: none;
     z-index: 1;
-    background-color: rgb(250, 253, 255, 0.9);
+    background-color: rgb(250, 253, 255, 1);
     font-family: "Quicksand", sans-serif;
     place-content: center;
     width: auto;
@@ -105,7 +105,7 @@ hr {
 }
 
 input[type=text], input[type=password] {
-    width: 100%;
+    width: 90%;
     padding: 15px;
     margin: 5px 0 22px 0;
     display: inline-block;
@@ -137,7 +137,25 @@ input[type=text]:focus, input[type=password]:focus {
     color: #CCFA5B;
     text-decoration: #CCFA5B;
 }
+ul.registerlist{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.registerlist .material-icons{
+    font-size: 30px;
+    cursor: pointer;
+}
+.registerlist .material-icons:hover{
+    border: 2px rgba(0,0,0,0.2);
+    background-color: #dddddd;
+    border-radius: 10px;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
 
+}
+.registerlist li:first-child{
+    margin-right: auto;
+}
 .RegWindow a:hover {
     color: #AAD94A;
     text-decoration: #CCFA5B;
