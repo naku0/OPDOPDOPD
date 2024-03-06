@@ -3,11 +3,11 @@ const mysql = require("mysql2");
 const connection = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "",
+    password: "qwerty0987654321",
     database: "opdopdopd"
 });
 //функция регистрации
-function registration(connection, login, password, name, surname){
+export function registration(connection, login, password, name, surname){
 
     connection.connect(function (err){
         if (err) throw err;
@@ -28,5 +28,7 @@ function registration(connection, login, password, name, surname){
                 });
             }
         });
+        connection.end();
     });
 }
+export default function (){registration()};

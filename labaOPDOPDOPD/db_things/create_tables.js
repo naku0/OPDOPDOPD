@@ -3,7 +3,7 @@ const mysql = require("mysql2");
 const connection = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "",
+    password: "qwerty0987654321",
     database: "opdopdopd"
 });
 //да и здесь не сложнее
@@ -35,4 +35,5 @@ connection.connect(function (err){
         if (err) throw err;
         console.log("Table opinions created!");
     });
+    connection.end();
 });
