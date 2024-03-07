@@ -48,5 +48,5 @@ app.post('/endpoint', (req, res) => {
 });
 
 app.listen(PORT2, () => {
-    console.log(`Сервер запущен на порту${PORT2}`);
+    console.log(`Сервер запущен на порту ${PORT2}`);
 });
