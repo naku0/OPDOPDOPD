@@ -1,8 +1,9 @@
-const  express = require('express');
-const app =  express();
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
 const path = require('path');
 const PORT = 1488;
-app.use( express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public')));
 app.listen(PORT, () => {
     console.log(`Сервер запущен на порту ${PORT}`);
 });
@@ -34,4 +35,20 @@ app.get('/SysAdmin.html', (req, res) => {
 app.get('/SysAnal.html', (req, res) => {
     const htmlFilePath = path.join(__dirname, 'SysAnal.html');
     res.sendFile(htmlFilePath);
+<<<<<<< HEAD
 })
+=======
+})
+app.use(bodyParser.json());
+
+app.post('/endpoint', (req, res) => {
+    const jsonData = req.body;
+    console.log('Полученные данные:', jsonData);
+    res.send('Данные успешно получены на сервере');
+    console.log(req.body)
+});
+
+app.listen(1337, () => {
+    console.log('Сервер запущен на порту 3000');
+});
+>>>>>>> 8297a5e67cacc68dce515b9944fcb308a5061890
