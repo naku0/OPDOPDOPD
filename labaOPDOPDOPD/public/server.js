@@ -46,6 +46,6 @@ app.post('/endpoint', (req, res) => {
     console.log(req.body)
 });
 
-app.listen(1337, () => {
+app.listen(5252, () => {
     console.log('Сервер запущен на порту 3000');
 });
