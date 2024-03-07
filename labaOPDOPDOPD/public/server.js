@@ -3,6 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const path = require('path');
 const PORT = 1488;
+const PORT2 = 5252;
 app.use(express.static(path.join(__dirname, 'public')));
 app.listen(PORT, () => {
     console.log(`Сервер запущен на порту ${PORT}`);
@@ -46,6 +47,6 @@ app.post('/endpoint', (req, res) => {
     console.log(req.body)
 });
 
-app.listen(5252, () => {
-    console.log('Сервер запущен на порту 3000');
+app.listen(PORT2, () => {
+    console.log(`Сервер запущен на порту${PORT2}`);
 });
