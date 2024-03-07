@@ -35,4 +35,3 @@ app.get('/SysAnal.html', (req, res) => {
     const htmlFilePath = path.join(__dirname, 'SysAnal.html');
     res.sendFile(htmlFilePath);
 })
-
