@@ -38,6 +38,10 @@ app.get('/SysAnal.html', (req, res) => {
     res.sendFile(htmlFilePath);
 });
 
+app.get('/popug.jpg', (req, res) => {
+    res.sendFile(__dirname + '/popug.jpg');
+});
+
 app.use(bodyParser.json());
 
 app.post('/endpoint', (req, res) => {
