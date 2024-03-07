@@ -48,7 +48,6 @@ app.post('/endpoint', (req, res) => {
     const jsonData = req.body;
     console.log('Полученные данные:', jsonData);
     res.send('Данные успешно получены на сервере');
-    console.log(req.body)
 });
 
 app.listen(PORT2, () => {

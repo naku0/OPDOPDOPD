@@ -65,7 +65,6 @@ function CheckInputReg() {
     let password = document.getElementById("regPsw").value;
     let passwordConfirm = document.getElementById("psw-repeat").value;
     if (ConfirmPassword(password, passwordConfirm)) {
-        window.location.href = "OPDOPDOPD.html";
         StartSession();
         let data = {
             login: login,
