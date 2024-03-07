@@ -71,11 +71,24 @@ function CheckInputReg() {
             login: login,
             password: password
         };
-        let JsonStringData = JSON.stringify(data);
-        console.log(JsonStringData);
-        app.use(function (_, response) {
-            response.send(JsonStringData);
-        });
+
+        fetch('/endpoint', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+            .then(response => {
+                if (response.ok) {
+                    console.log('Данные успешно отправлены на сервер');
+                } else {
+                    console.error('Ошибка отправки данных на сервер:', response.status);
+                }
+            })
+            .catch(error => {
+                console.error('Ошибка отправки данных на сервер:', error);
+            });
     } else {
         alert("Сука")
     }
