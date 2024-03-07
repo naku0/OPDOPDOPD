@@ -36,6 +36,7 @@ app.get('/SysAnal.html', (req, res) => {
     const htmlFilePath = path.join(__dirname, 'SysAnal.html');
     res.sendFile(htmlFilePath);
 });
+
 app.use(bodyParser.json());
 
 app.post('/endpoint', (req, res) => {
