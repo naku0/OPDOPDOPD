@@ -71,7 +71,6 @@ function CheckInputReg() {
             login: login,
             password: password
         };
-
         fetch('/endpoint', {
             method: 'POST',
             headers: {

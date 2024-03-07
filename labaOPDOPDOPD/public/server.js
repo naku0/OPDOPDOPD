@@ -27,15 +27,15 @@ app.get('/professionCSS.css', (req, res) => {
 app.get('/GameDesigner.html', (req, res) => {
     const htmlFilePath = path.join(__dirname, 'GameDesigner.html');
     res.sendFile(htmlFilePath);
-})
+});
 app.get('/SysAdmin.html', (req, res) => {
     const htmlFilePath = path.join(__dirname, 'SysAdmin.html');
     res.sendFile(htmlFilePath);
-})
+});
 app.get('/SysAnal.html', (req, res) => {
     const htmlFilePath = path.join(__dirname, 'SysAnal.html');
     res.sendFile(htmlFilePath);
-})
+});
 app.use(bodyParser.json());
 
 app.post('/endpoint', (req, res) => {
