@@ -35,10 +35,8 @@ app.get('/SysAdmin.html', (req, res) => {
 app.get('/SysAnal.html', (req, res) => {
     const htmlFilePath = path.join(__dirname, 'SysAnal.html');
     res.sendFile(htmlFilePath);
-<<<<<<< HEAD
 })
-=======
-})
+
 app.use(bodyParser.json());
 
 app.post('/endpoint', (req, res) => {
@@ -51,4 +49,3 @@ app.post('/endpoint', (req, res) => {
 app.listen(1337, () => {
     console.log('Сервер запущен на порту 3000');
 });
->>>>>>> 8297a5e67cacc68dce515b9944fcb308a5061890
