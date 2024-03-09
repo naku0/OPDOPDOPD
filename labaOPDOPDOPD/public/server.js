@@ -37,6 +37,10 @@ app.get('/SysAnal.html', (req, res) => {
     const htmlFilePath = path.join(__dirname, 'SysAnal.html');
     res.sendFile(htmlFilePath);
 });
+app.get('/OPDOPDOPD.html', (req, res) => {
+    const htmlFilePath = path.join(__dirname, 'OPDOPDOPD.html');
+    res.sendFile(htmlFilePath)
+});
 
 app.get('/popug.jpg', (req, res) => {
     res.sendFile(__dirname + '/popug.jpg');
