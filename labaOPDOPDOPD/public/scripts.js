@@ -60,21 +60,15 @@ function CheckInput() {
 }
 
 function CheckInputReg() {
-    let login = document.getElementById("regEmail").value;
-    let password = document.getElementById("regPsw").value;
+    let UserLogin = document.getElementById("regEmail").value;
+    let UserPassword = document.getElementById("regPsw").value;
     let passwordConfirm = document.getElementById("psw-repeat").value;
-    if (ConfirmPassword(password, passwordConfirm)) {
+    if (ConfirmPassword(UserPassword, passwordConfirm)) {
         StartSession();
-        let data = {
-            login: login,
-            password: password
-        };
+        let UserData ={login: UserLogin, password: UserPassword}
         fetch('/endpoint', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
+            body: JSON.stringify(UserData)
         })
             .then(response => {
                 if (response.ok) {
