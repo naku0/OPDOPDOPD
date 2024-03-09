@@ -258,6 +258,7 @@ footer .material-icons {
     -moz-user-select: none;
     -webkit-user-select: none;
     margin-top: 35px;
+    text-shadow: 0 0 10px;
 }
 footer .material-icons:hover{
     color: #AAD94A;

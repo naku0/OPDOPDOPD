@@ -26,13 +26,12 @@ function CheckFlag(enterId, exitId) {
     }
 }
 
-
 function ShowDiv(class1) {
     class1 = document.getElementById(class1);
     class1.style.display = "grid";
 }
 
-function closeReg(class1) {
+function closeDiv(class1) {
     class1 = document.getElementById(class1);
     class1.style.display = "none";
 }
@@ -80,6 +79,7 @@ function CheckInputReg() {
             .then(response => {
                 if (response.ok) {
                     console.log('Данные успешно отправлены на сервер');
+                    closeDiv('RegWindow');
                 } else {
                     console.error('Ошибка отправки данных на сервер:', response.status);
                 }
