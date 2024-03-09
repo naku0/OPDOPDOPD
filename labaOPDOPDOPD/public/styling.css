@@ -121,7 +121,8 @@ input[type=text]:focus, input[type=password]:focus {
 
 .enterbtn, .registerbtn {
     background-color: #CCFA5B;
-    color: white;
+    color: black;
+    font-family: "Montserrat", sans-serif ;
     padding: 16px 20px;
     margin: 8px 0;
     border: none;
