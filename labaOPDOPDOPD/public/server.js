@@ -50,7 +50,7 @@ app.use(bodyParser.json());
 
 app.post('/endpoint', (req, res) => {
     const jsonData = req.body;
-    console.log('Полученные данные:', jsonData);
+    console.log('Полученные данные нового пользователя:', jsonData.login, jsonData.password);
     res.send('Данные успешно получены на сервере');
 });
 
