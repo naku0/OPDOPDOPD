@@ -65,9 +65,12 @@ function CheckInputReg() {
     let passwordConfirm = document.getElementById("psw-repeat").value;
     if (ConfirmPassword(UserPassword, passwordConfirm)) {
         StartSession();
-        let UserData ={login: UserLogin, password: UserPassword}
+        let UserData ={"login": UserLogin, "password": UserPassword}
         fetch('/endpoint', {
             method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
             body: JSON.stringify(UserData)
         })
             .then(response => {
