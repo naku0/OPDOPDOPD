@@ -54,10 +54,12 @@ function CheckInput() {
     if (login === "creeper2005@opdopdopd.com" && psw === "1488") {
         window.location.href = "OPDOPDOPD.html";
         StartSession();
+        sendJSON(login,psw);
     } else {
         alert("Cука")
     }
 }
+
 
 function CheckInputReg() {
     let UserLogin = document.getElementById("regEmail").value;
@@ -65,28 +67,35 @@ function CheckInputReg() {
     let passwordConfirm = document.getElementById("psw-repeat").value;
     if (ConfirmPassword(UserPassword, passwordConfirm)) {
         StartSession();
-        let UserData ={"login": UserLogin, "password": UserPassword}
-        fetch('/endpoint', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(UserData)
-        })
-            .then(response => {
-                if (response.ok) {
-                    console.log('Данные успешно отправлены на сервер');
-                    closeDiv('RegWindow');
-                } else {
-                    console.error('Ошибка отправки данных на сервер:', response.status);
-                }
-            })
-            .catch(error => {
-                console.error('Ошибка отправки данных на сервер:', error);
-            });
+        sendJSON(UserLogin, UserPassword);
     } else {
         alert("Сука")
     }
+}
+
+function sendJSON(data1, data2) {
+    let UserData = {
+        "login": data1,
+        "password": data2
+    }
+    fetch('/endpoint', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(UserData)
+    })
+        .then(response => {
+            if (response.ok) {
+                console.log('Данные успешно отправлены на сервер');
+                closeDiv('RegWindow');
+            } else {
+                console.error('Ошибка отправки данных на сервер:', response.status);
+            }
+        })
+        .catch(error => {
+            console.error('Ошибка отправки данных на сервер:', error);
+        });
 }
 
 function ConfirmPassword(psw1, psw2) {
