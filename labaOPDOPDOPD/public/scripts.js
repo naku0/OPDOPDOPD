@@ -66,7 +66,7 @@ function CheckInputReg() {
     let UserLogin = document.getElementById("regEmail").value;
     let UserPassword = document.getElementById("regPsw").value;
     let passwordConfirm = document.getElementById("psw-repeat").value;
-    if (ConfirmPassword(UserPassword, passwordConfirm)) {
+    if (ConfirmPassword(UserPassword, passwordConfirm) && ConfirmLogin(UserLogin)) {
         StartSession();
         sendJSON(UserLogin, UserPassword);
         closeDiv('RegWindow');
@@ -106,7 +106,10 @@ function sendJSON(data1, data2) {
 function ConfirmPassword(psw1, psw2) {
     return psw1 === psw2;
 }
-
+function ConfirmLogin(login){
+    const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/i;
+    return pattern.test(login);
+}
 function StartSession() {
     flag._flag = true;
 }
