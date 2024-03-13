@@ -18,9 +18,13 @@ html {
     background-color: #AAD94A;
 }
 
-header i.material-icons {
+i.material-icons {
     font-size: 20px;
+    padding: 2px;
+}
 
+.home i.material-icons {
+    font-size: 25px;
 }
 
 a {
