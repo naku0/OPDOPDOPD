@@ -51,16 +51,21 @@
     <div class="pvk">
         <div class="pvkHeader">
             <p class="PVKname">СПИСОК ПВК</p>
-            <i class="material-icons" onclick="changeOrder()">edit_note</i>
+            <div class="edit" id="edit">
+                <i class="material-icons" onclick="ChangeDiv('done', 'edit'); changeOrder()">edit_note</i>
+            </div>
+            <div class="done" id ="done">
+                <i class="material-symbols-outlined" onclick="saveOrderToServer(); ChangeDiv('edit', 'done')">done</i>
+            </div>
         </div>
-        <ol>
-            <li class="item">...</li>
-            <li class="item">...</li>
-            <li class="item">...</li>
-            <li class="item">...</li>
-            <li class="item">...</li>
-            <li class="item">...</li>
-            <li class="item">...</li>
+        <ol class="pvkList">
+            <li class="item" draggable="true">a</li>
+            <li class="item" draggable="true">b</li>
+            <li class="item" draggable="true">c</li>
+            <li class="item" draggable="true">d</li>
+            <li class="item" draggable="true">...</li>
+            <li class="item" draggable="true">...</li>
+            <li class="item" draggable="true">...</li>
         </ol>
     </div>
 </main>
