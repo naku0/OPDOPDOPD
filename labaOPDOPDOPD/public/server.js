@@ -105,7 +105,9 @@ app.use(bodyParser.json());
 app.post('/endpoint', (req, res) => {
     const jsonData = req.body;
     console.log('Полученные данные нового пользователя:', jsonData.login, jsonData.password);
-    res.send('Данные успешно получены на сервере');
+    res.json({
+        status: "success",
+    });
     let user_login = jsonData.login.toString();
     let user_password = jsonData.password.toString();
 
@@ -132,7 +134,7 @@ app.post('/endpoint', (req, res) => {
                 }
             });
         });
-    };
+    }
     registration(connection, jsonData.login, jsonData.password);
 });
 app.listen(PORT2, () => {

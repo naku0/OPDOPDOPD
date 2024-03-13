@@ -154,4 +154,6 @@ p.PVKname {
     box-shadow: inset 1px 2px 5px rgba(0, 0, 0, 0.2);
     cursor: pointer;
 }
-
+.item.dragging:where(.item){
+    opacity: 0;
+}

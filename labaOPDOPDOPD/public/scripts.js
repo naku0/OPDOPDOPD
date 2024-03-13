@@ -12,6 +12,7 @@ class Flag {
 
 const flag = new Flag();
 let counter = 0;
+let dataFlag;
 
 function CheckFlag(enterId, exitId) {
     enterId = document.getElementById(enterId);
@@ -54,7 +55,7 @@ function CheckInput() {
     if (login === "creeper2005@opdopdopd.com" && psw === "1488") {
         window.location.href = "OPDOPDOPD.html";
         StartSession();
-        sendJSON(login,psw);
+        sendJSON(login, psw);
     } else {
         alert("Cука")
     }
@@ -68,6 +69,7 @@ function CheckInputReg() {
     if (ConfirmPassword(UserPassword, passwordConfirm)) {
         StartSession();
         sendJSON(UserLogin, UserPassword);
+        closeDiv('RegWindow');
     } else {
         alert("Сука")
     }
@@ -87,16 +89,19 @@ function sendJSON(data1, data2) {
     })
         .then(response => {
             if (response.ok) {
-                console.log('Данные успешно отправлены на сервер');
-                closeDiv('RegWindow');
+                return response.json();
             } else {
                 console.error('Ошибка отправки данных на сервер:', response.status);
             }
         })
+        .then(data =>{
+            console.log('Данные от сервера:', data);
+            dataFlag = data.status === 'success';
+        })
         .catch(error => {
             console.error('Ошибка отправки данных на сервер:', error);
         });
-}
+    }
 
 function ConfirmPassword(psw1, psw2) {
     return psw1 === psw2;
@@ -136,5 +141,27 @@ function heartClicker(id1, buttonId) {
 
     buttonId.addEventListener('click', incrementCounter, {once: true});
 
+}
+
+function changeOrder() {
+    const pvkList = document.querySelector(".pvkList")
+    const items = document.querySelectorAll(".item");
+    const initSortableList = (e) => {
+        const draggingItem = pvkList.querySelector(".dragging");
+        const siblings = [...pvkList.querySelectorAll(".item:not(.dragging)")];
+        let nextSibling = siblings.find(sibling => {
+            return e.clientY <= sibling.offsetTop + sibling.offsetHeight / 2;
+        });
+        pvkList.insertBefore(draggingItem, nextSibling);
+    }
+    items.forEach(item => {
+        item.addEventListener("dragstart", () => {
+            setTimeout(() => item.classList.add("dragging"), 0);
+        });
+        item.addEventListener("dragend", () => {
+            item.classList.remove("dragging");
+        });
+    });
+    pvkList.addEventListener("dragover", initSortableList)
 }
 
