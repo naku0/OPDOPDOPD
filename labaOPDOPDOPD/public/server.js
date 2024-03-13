@@ -5,7 +5,7 @@ const path = require('path');
 const PORT = 1488;
 const PORT2 = 5252;
 
-const mysql = require("mysql2")
+const mysql = require("mysql2");
 const connection = mysql.createConnection({
     port: "1337",
     host: "localhost",
@@ -57,6 +57,67 @@ connection.connect(function (err){
         console.log("Table opinions created!");
     });
 });
+function registration(connection, user_login, user_password){
+    connection.connect(function (err){
+        if (err) throw err;
+        connection.query("SELECT login FROM users", function (err, result, fields){ //запрашиваем все логины
+            if (err) throw err;
+            let flag = true;
+            for (let log in result){ //проверяем нет ли юзера с таким логином
+                if (log.login === user_login){
+                    flag = false;
+                }
+            }
+            if (!(flag)){ //если есть - шлём нахуй, хотя надо попросить придумать другой логин
+                console.log("User already exist!");
+            }else{ //если нет - делаем новую запись в бд и все круто классно
+                connection.query(`INSERT INTO users (login, password, permissions) VALUES ('${user_login}', '${user_password}', 0)`, function (result){
+                    console.log("Registration success!");
+                });
+            }
+        });
+    });
+}
+function authorisation(connection, user_login, user_password){
+    let message; //итоговое сообщение
+    let result = false; //результат авторизации
+    connection.connect(function (err){
+        if (err) throw err;
+        connection.query("SELECT login, password FROM users", function(err, result, fields){ //выбираем из бд логины и пароли
+            if (err) throw err;
+            let logs_and_pass = result; //получаем массив объектов
+            let flag = false;
+            let login;
+            let password;
+            for (let log of logs_and_pass){ //проверяем есть ли вообще такой логин
+                if (log.login === user_login){
+                    flag = true;
+                    login = log.login;
+                    password = log.password;
+                    break;
+                }
+            }
+            if (!(flag)){ //Если нет такого логина - шлем нахуй
+                message = "No such user!";
+                result = false;
+                console.log(message);
+                return result;
+            }else{
+                if (user_password === password){ //если есть и пароль совпадает - все заебись
+                    message = "Authorisation successful!";
+                    result = true;
+                    console.log(message);
+                    return result;
+                }else{ //если не совпадает пароль - тоже шлем нахуй, хотя надо бы еще раз пароль запросить
+                    message = "Wrong password!";
+                    result = false;
+                    console.log(message);
+                    return result;
+                }
+            }
+        });
+    });
+}
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.listen(PORT, () => {
@@ -111,32 +172,14 @@ app.post('/endpoint', (req, res) => {
     let user_login = jsonData.login.toString();
     let user_password = jsonData.password.toString();
 
-    //функция регистрации
-    function registration(connection, user_login, user_password){
-        connection.connect(function (err){
-            console.log("БД успешно подняты!");
-            if (err) throw err;
-            connection.query("SELECT login FROM users", function (err, result, fields){ //запрашиваем все логины
-                if (err) throw err;
-                let flag = true;
-                for (let log in result){ //проверяем нет ли юзера с таким логином
-                    if (log.login === user_login){
-                        flag = false;
-                    }
-                }
-                if (!(flag)){ //если есть - шлём нахуй, хотя надо попросить придумать другой логин
-                    console.log("User already exist!");
-                }else{ //если нет - делаем новую запись в бд и все круто классно
-                    connection.query(`INSERT INTO users (login, password, permissions) VALUES ('${user_login}', '${user_password}', 0)`, function (err, result){
-                        if (err) throw err;
-                        console.log("Registration success!");
-                    });
-                }
-            });
-        });
+    if(!(authorisation(connection, user_login, user_password))){
+        registration(connection, user_login, user_password);
+    }else{
+        authorisation(connection, user_login, user_password);
     }
-    registration(connection, jsonData.login, jsonData.password);
+
 });
+
 app.listen(PORT2, () => {
     console.log(`Сервер запущен на порту ${PORT2}`);
 });

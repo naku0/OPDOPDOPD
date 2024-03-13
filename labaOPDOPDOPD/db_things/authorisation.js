@@ -38,7 +38,6 @@ function authorisation(connection, get_login, get_password){
                 }
             }
         });
-        connection.end();
     });
     console.log(message);
     return result;
