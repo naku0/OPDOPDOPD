@@ -1,14 +1,16 @@
 const mysql = require("mysql2");
 
 const connection = mysql.createConnection({
+    port: "1337",
     host: "localhost",
     user: "root",
-    password: "qwerty0987654321",
-    database: "opdopdopd"
+    password: "1234"
 });
+
 //на случай если надо снести всё к хуям собачьим
 connection.connect(function (err){
     if (err) throw err;
+    connection.query("USE opdopdopd")
     const drop_users = "DROP TABLE users";
     const drop_professions = "DROP TABLE professions";
     const drop_opinions = "DROP TABLE opinions";
