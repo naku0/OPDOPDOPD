@@ -272,3 +272,26 @@ footer .material-icons:hover{
     place-content: center;
     margin-top: 10px;
 }
+.RegWindow.wrong{
+    animation: simpleshake 0.3s forwards;
+}
+
+.RegWindow.wrong input[type=text],
+.RegWindow.wrong input[type=password] {
+    background-color: rgba(255,100,100,0.5);
+}
+
+@keyframes simpleshake {
+    25%{
+        transform: translateX(5px);
+    }
+    50%{
+        transform: translateX(-5px);
+    }
+    75%{
+        transform: translateX(5px);
+    }
+    100%{
+        transform: translateX(-5px);
+    }
+}

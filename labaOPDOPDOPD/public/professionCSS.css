@@ -140,20 +140,27 @@ p.PVKname {
     font-weight: bold;
 }
 
-.pvkHeader i.material-icons {
+.pvkHeader i.material-icons, .pvkHeader i.material-symbols-outlined {
     margin-left: 10px;
     font-size: 25px;
     font-weight: bold;
     padding: 5px;
 }
 
-.pvkHeader i.material-icons:hover {
+.pvkHeader i.material-icons:hover, .pvkHeader i.material-symbols-outlined:hover{
     border: 2px rgba(0, 0, 0, 0.2);
     background-color: #dddddd;
     border-radius: 5px;
     box-shadow: inset 1px 2px 5px rgba(0, 0, 0, 0.2);
     cursor: pointer;
 }
-.item.dragging:where(.item){
+.pvkHeader .edit{
+    display: block;
+}
+.pvkHeader .done{
+    display: none;
+}
+
+.item.dragging{
     opacity: 0;
 }

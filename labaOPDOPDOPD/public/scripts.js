@@ -38,6 +38,7 @@ function closeDiv(class1) {
 }
 
 function ChangeDiv(id1, id2) {
+    console.log("changed")
     id1 = document.getElementById(id1);
     id2 = document.getElementById(id2);
     if (id2.style.display === "none") {
@@ -52,12 +53,11 @@ function ChangeDiv(id1, id2) {
 function CheckInput() {
     let login = document.getElementById("email").value;
     let psw = document.getElementById("psw").value;
-    if (login === "creeper2005@opdopdopd.com" && psw === "1488") {
-        window.location.href = "OPDOPDOPD.html";
+    sendJSON(login, psw);
+    if (CheckFlag) {
         StartSession();
-        sendJSON(login, psw);
     } else {
-        alert("Cука")
+        paintEntReg();
     }
 }
 
@@ -71,7 +71,8 @@ function CheckInputReg() {
         sendJSON(UserLogin, UserPassword);
         closeDiv('RegWindow');
     } else {
-        alert("Сука")
+        paintRedReg()
+
     }
 }
 
@@ -94,22 +95,24 @@ function sendJSON(data1, data2) {
                 console.error('Ошибка отправки данных на сервер:', response.status);
             }
         })
-        .then(data =>{
+        .then(data => {
             console.log('Данные от сервера:', data);
             dataFlag = data.status === 'success';
         })
         .catch(error => {
             console.error('Ошибка отправки данных на сервер:', error);
         });
-    }
+}
 
 function ConfirmPassword(psw1, psw2) {
     return psw1 === psw2;
 }
-function ConfirmLogin(login){
+
+function ConfirmLogin(login) {
     const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/i;
     return pattern.test(login);
 }
+
 function StartSession() {
     flag._flag = true;
 }
@@ -168,3 +171,45 @@ function changeOrder() {
     pvkList.addEventListener("dragover", initSortableList)
 }
 
+
+function saveOrderToServer() {
+    const items = document.querySelectorAll(".item");
+    const order = [];
+    items.forEach((item, index) => {
+        // Добавляем порядковый номер каждого элемента к массиву order
+        order.push({
+            id: item.dataset.id, // предположим, что у элемента есть уникальный идентификатор
+            order: index + 1 // порядковый номер начинается с 1
+        });
+    });
+
+    // Отправляем данные на сервер с помощью AJAX-запроса
+    fetch('/endpoint', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(order),
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Результат сохранения:', data);
+        })
+        .catch((error) => {
+            console.error('Ошибка:', error);
+        });
+}
+
+function paintRedReg() {
+    const regWindow = document.querySelector(".RegWindow");
+    const paragraph = document.getElementById("RegText");
+    regWindow.classList.add("wrong");
+    paragraph.textContent = "Проверьте введенные вами данные";
+}
+
+function paintEntReg() {
+    const regWindow = document.querySelector(".RegWindow");
+    const paragraph = document.getElementById("EntText");
+    regWindow.classList.add("wrong");
+    paragraph.textContent = "Проверьте введенные данные";
+}
