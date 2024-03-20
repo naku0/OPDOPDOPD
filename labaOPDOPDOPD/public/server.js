@@ -78,42 +78,7 @@ function registration(connection, user_login, user_password){
         });
     });
 }
-function add_piq_opinion(connection, piq, user_login, profession_name, position){
-    connection.connect(function (err){
-        if (err) throw err;
-        connection.query("SELECT id FROM piq WHERE name = " + mysql.escape(piq) + " UNION SELECT id FROM users WHERE login = " + mysql.escape(user_login) + " UNION SELECT id FROM professions WHERE name = " + mysql.escape(profession_name), function (err, result, fields){
-            //Находим айдишники ПВК, юзера и профессии
-            if (err) throw err;
-            let piq_id;
-            let user_id;
-            let profession_id;
-            let counter = 0;
-            for (let id in result){
-                if (counter === 0){
-                    piq_id = id.id;
-                }else if (counter === 1){
-                    user_id = id.id;
-                }else{
-                    profession_id = id.id;
-                }
-            }
-            connection.query("SELECT position FROM opinions WHERE piq_id = " + mysql.escape(piq_id) + " AND user_id = " + mysql.escape(user_id) + " AND profession_id = " + mysql.escape(profession_id), function (err, result, fields){
-                //Проверяем нет ли уже такого мнения у данного пользователя по данной профессии с данным ПВК
-                if (result === []){ //если такого мнения еще нет, добавляем новое
-                    connection.query("INSERT INTO opinions (user_id, piq_id, profession_id, position) VALUES (" + mysql.escape(user_id) + ", " + mysql.escape(piq_id) + ", " + mysql.escape(profession_id) + ", " + mysql.escape(position), function (err){
-                        if (err) throw err;
-                        console.log("Opinion inserted!");
-                    });
-                }else{ //если есть, то обновляем позицию
-                    connection.query("UPDATE opinions SET position = " + mysql.escape(position) + " WHERE piq_id = " + mysql.escape(piq_id) + " AND user_id = " + mysql.escape(user_id) + " AND profession_id = " + mysql.escape(profession_id), function (err){
-                        if (err) throw err;
-                        console.log("Opinion updated!");
-                    })
-                }
-            });
-        });
-    });
-}
+
 function authorisation(connection, user_login, user_password){
     let message; //итоговое сообщение
     let result = false; //результат авторизации
@@ -151,6 +116,42 @@ function authorisation(connection, user_login, user_password){
                     return result;
                 }
             }
+        });
+    });
+}
+function add_piq_opinion(connection, piq, user_login, profession_name, position){
+    connection.connect(function (err){
+        if (err) throw err;
+        connection.query("SELECT id FROM piq WHERE name = " + mysql.escape(piq) + " UNION SELECT id FROM users WHERE login = " + mysql.escape(user_login) + " UNION SELECT id FROM professions WHERE name = " + mysql.escape(profession_name), function (err, result, fields){
+            //Находим айдишники ПВК, юзера и профессии
+            if (err) throw err;
+            let piq_id;
+            let user_id;
+            let profession_id;
+            let counter = 0;
+            for (let id in result){
+                if (counter === 0){
+                    piq_id = id.id;
+                }else if (counter === 1){
+                    user_id = id.id;
+                }else{
+                    profession_id = id.id;
+                }
+            }
+            connection.query("SELECT position FROM opinions WHERE piq_id = " + mysql.escape(piq_id) + " AND user_id = " + mysql.escape(user_id) + " AND profession_id = " + mysql.escape(profession_id), function (err, result, fields){
+                //Проверяем нет ли уже такого мнения у данного пользователя по данной профессии с данным ПВК
+                if (result === []){ //если такого мнения еще нет, добавляем новое
+                    connection.query("INSERT INTO opinions (user_id, piq_id, profession_id, position) VALUES (" + mysql.escape(user_id) + ", " + mysql.escape(piq_id) + ", " + mysql.escape(profession_id) + ", " + mysql.escape(position), function (err){
+                        if (err) throw err;
+                        console.log("Opinion inserted!");
+                    });
+                }else{ //если есть, то обновляем позицию
+                    connection.query("UPDATE opinions SET position = " + mysql.escape(position) + " WHERE piq_id = " + mysql.escape(piq_id) + " AND user_id = " + mysql.escape(user_id) + " AND profession_id = " + mysql.escape(profession_id), function (err){
+                        if (err) throw err;
+                        console.log("Opinion updated!");
+                    })
+                }
+            });
         });
     });
 }
