@@ -200,6 +200,29 @@ function saveOrderToServer() {
         });
 }
 
+function sendSessionStatus(){
+    let sessionStatus = {
+        "sessionStatus": flag._flag
+    }
+    fetch('/endpoint', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(sessionStatus)
+    })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                console.error('Ошибка отправки данных на сервер:', response.status);
+            }
+        })
+        .catch((error) => {
+            console.error('Ошибка:', error);
+        });
+}
+
 function paintRedReg() {
     const regWindow = document.querySelector(".RegWindow");
     const paragraph = document.getElementById("RegText");
