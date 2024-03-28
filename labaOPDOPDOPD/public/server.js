@@ -7,10 +7,9 @@ const PORT2 = 5252;
 
 const mysql = require("mysql2");
 const connection = mysql.createConnection({
-    port: "1337",
     host: "localhost",
     user: "root",
-    password: "1234"
+    password: "qwerty0987654321"
 });
 connection.connect(function(err) {
     if (err) throw err;
@@ -215,6 +214,11 @@ app.post('/endpoint', (req, res) => {
         authorisation(connection, user_login, user_password);
     }
 
+});
+
+app.post('/pvkpoint', (req, res) =>{
+    const jsonData = req.body;
+    console.log(jsonData)
 });
 
 app.listen(PORT2, () => {

@@ -29,7 +29,11 @@ function CheckFlag(enterId, exitId) {
 
 function ShowDiv(class1) {
     class1 = document.getElementById(class1);
-    class1.style.display = "grid";
+    if(class1.style.display === "grid") {
+        class1.style.display = "none";
+    } else {
+        class1.style.display = "grid";
+    }
 }
 
 function closeDiv(class1) {
@@ -173,18 +177,16 @@ function changeOrder() {
 
 
 function saveOrderToServer() {
+
     const items = document.querySelectorAll(".item");
     const order = [];
     items.forEach((item, index) => {
-        // Добавляем порядковый номер каждого элемента к массиву order
         order.push({
-            id: item.dataset.id, // предположим, что у элемента есть уникальный идентификатор
-            order: index + 1 // порядковый номер начинается с 1
+            id: item.dataset.id,
+            order: index + 1
         });
     });
-
-    // Отправляем данные на сервер с помощью AJAX-запроса
-    fetch('/endpoint', {
+    fetch('/pvkpoint', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
