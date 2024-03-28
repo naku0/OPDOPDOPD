@@ -12,6 +12,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Quicksand:wght@300..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
           rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"/>
     <title>OPDOPDOPD</title>
 </head>
 <body>
@@ -29,10 +31,16 @@
                 <a href="#" onclick="ShowDiv('RegWindow')">Вход</a>
             </li>
             <li class="endSession" id="endSession">
-                <a href="welcomepage.html" onclick="EndSession()">Выйти</a>
+                <a onclick="ShowDiv('menu')"><i class="material-symbols-outlined">menu</i></a>
+                <div class="menu" id="menu">
+                    <ul class="menulist">
+                        <li class="profile"><a href="">Личный кабинет</a></li>
+                        <li class ="exit">Выйти</li>
+                    </ul>
+                </div>
             </li>
         </ul>
-        <script>CheckFlag("startSession", "endSession")</script>
+        <!--<script>CheckFlag("startSession", "endSession")</script>-->
     </header>
     <div class="main">
         <div class="yaNeZnayu">

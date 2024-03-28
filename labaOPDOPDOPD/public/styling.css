@@ -31,7 +31,7 @@ header {
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
 }
 
-header ul {
+header ul.topper {
     width: 100%;
     list-style: none;
     display: flex;
@@ -41,6 +41,8 @@ header ul {
 
 header li {
     height: 50px;
+    width: 100px;
+    cursor: pointer;
 }
 
 header a {
@@ -58,6 +60,7 @@ header a:hover {
 header li:first-child {
     font-weight: bold;
     margin-right: auto;
+    width: auto;
 }
 
 header {
@@ -66,6 +69,21 @@ header {
     display: flex;
     place-content: flex-end;
 }
+div.menu{
+    display: none;
+    width: 200px;
+    margin-left: -100px;
+    margin-top: 10px;
+    padding: 10px;
+    background-color: rgba(250, 253, 255, 0.9);
+    border-radius: 10px;
+    box-shadow: black;
+}
+div.menu li{
+    place-content: center;
+
+}
+
 
 div.enter {
     display: grid;
