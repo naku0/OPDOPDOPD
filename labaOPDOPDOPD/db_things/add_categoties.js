@@ -6,7 +6,7 @@ const connection = mysql.createConnection({
     user: "root",
     password: "1234"
 });
-
+//файл для заполнения таблицы с категориями пвк
 connection.connect(function (err){
     if (err) throw err;
     const use_db = "USE opdopdopd";                                             //1                                                 2                                      3                                 4                                 5                               6                         7                                     8                                     9                             10                             11                            12                                              13                             14                                                             15
