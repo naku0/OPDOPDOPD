@@ -3,6 +3,7 @@
     padding: 0;
     font-family: "Montserrat", sans-serif;
 }
+
 a {
     text-decoration: none;
 }
@@ -17,7 +18,7 @@ a {
     background-color: #AAD94A;
 }
 
-i.material-icons {
+i.material-icons i.material-symbols-outlined {
     font-size: 20px;
     padding: 2px;
 }
@@ -43,6 +44,8 @@ header li {
     height: 50px;
     width: 100px;
     cursor: pointer;
+    display: grid;
+    place-items: center;
 }
 
 header a {
@@ -57,7 +60,7 @@ header a:hover {
     background-color: #CCFA5B;
 }
 
-header li:first-child {
+header .topper li:first-child {
     font-weight: bold;
     margin-right: auto;
     width: auto;
@@ -69,21 +72,38 @@ header {
     display: flex;
     place-content: flex-end;
 }
-div.menu{
+
+div.menu {
     display: none;
     width: 200px;
-    margin-left: -100px;
-    margin-top: 10px;
+    margin-left: -140px;
+    margin-top: 200px;
     padding: 10px;
     background-color: rgba(250, 253, 255, 0.9);
     border-radius: 10px;
-    box-shadow: black;
+    z-index: 1;
+    position: absolute;
+    box-shadow: 3px 3px rgba(0, 0, 0, 0.1);
+
 }
-div.menu li{
+
+div.menu ul.menulist li {
+    width: 100%;
+    display: grid;
     place-content: center;
-
 }
 
+.menu .menulist li{
+    color: #AAD94A;
+}
+.menu .menulist li:first-child{
+    font-size: 15px;
+}
+
+div.menu li:hover {
+    background-color: #CCFA5B;
+    color: #000000;
+}
 
 div.enter {
     display: grid;
@@ -140,7 +160,7 @@ input[type=text]:focus, input[type=password]:focus {
 .enterbtn, .registerbtn {
     background-color: #CCFA5B;
     color: black;
-    font-family: "Montserrat", sans-serif ;
+    font-family: "Montserrat", sans-serif;
     padding: 16px 20px;
     margin: 8px 0;
     border: none;
@@ -154,7 +174,7 @@ input[type=text]:focus, input[type=password]:focus {
 }
 
 .RegWindow a {
-    color: black;/*#CCFA5B;*/
+    color: black; /*#CCFA5B;*/
     text-decoration: #CCFA5B;
     font-weight: bold;
 }
@@ -189,18 +209,19 @@ ul.registerlist {
 }
 
 p.title {
-    width: auto;
     color: black;
-    opacity: 1;
-    font-size: 12vh;
+    font-size: 70px;
     justify-content: center;
+    width: auto;
 }
 
-.main {
+.laba {
     height: 50vh;
     width: 100%;
     display: grid;
     place-content: center;
+    position: relative;
+
 }
 
 .AAAAAAA {
@@ -211,6 +232,7 @@ p.title {
     width: 100%;
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 
 .yaNeZnayu {
@@ -260,56 +282,61 @@ p.title {
 .list a:hover {
     color: #000000;
     background-color: #DFDFDF;
-    box-shadow: inset rgba(0,0,0,9);
+    box-shadow: inset rgba(0, 0, 0, 9);
 }
 
 footer {
 
 }
-footer .heart{
+
+footer .heart {
     display: flex;
     place-content: center;
 }
+
 footer .material-icons {
     font-size: 40px;
     color: #CCFA5B;
-    filter: drop-shadow(0 0 4px rgba(0,0,0,0.35));
+    filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.35));
     user-select: none;
     -moz-user-select: none;
     -webkit-user-select: none;
     margin-top: 35px;
     text-shadow: 0 0 10px;
 }
-footer .material-icons:hover{
+
+footer .material-icons:hover {
     color: #AAD94A;
     filter: drop-shadow(0 0 10px #EDF0F2);
     cursor: pointer;
 }
-.popug{
+
+.popug {
     display: none;
     place-content: center;
     margin-top: 10px;
 }
-.RegWindow.wrong{
+
+.RegWindow.wrong {
     animation: simpleshake 0.3s forwards;
 }
 
 .RegWindow.wrong input[type=text],
 .RegWindow.wrong input[type=password] {
-    background-color: rgba(255,100,100,0.5);
+    background-color: rgba(255, 100, 100, 0.5);
 }
 
 @keyframes simpleshake {
-    25%{
+    25% {
         transform: translateX(5px);
     }
-    50%{
+    50% {
         transform: translateX(-5px);
     }
-    75%{
+    75% {
         transform: translateX(5px);
     }
-    100%{
+    100% {
         transform: translateX(-5px);
     }
 }

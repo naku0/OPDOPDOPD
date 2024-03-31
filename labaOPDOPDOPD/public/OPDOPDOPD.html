@@ -34,15 +34,15 @@
                 <a onclick="ShowDiv('menu')"><i class="material-symbols-outlined">menu</i></a>
                 <div class="menu" id="menu">
                     <ul class="menulist">
-                        <li class="profile"><a href="">Личный кабинет</a></li>
-                        <li class ="exit">Выйти</li>
+                        <li class="profile" draggable="false"><a href="profile.html">Личный кабинет</a></li>
+                        <li class ="exit" draggable="false"><a href="#">Выйти</a></li>
                     </ul>
                 </div>
             </li>
         </ul>
         <!--<script>CheckFlag("startSession", "endSession")</script>-->
     </header>
-    <div class="main">
+    <div class="laba">
         <div class="yaNeZnayu">
             <div class="RegWindow" id="RegWindow">
                 <div class="reg" id="reg">
@@ -63,7 +63,7 @@
                     <button type="submit" class="registerbtn" onclick="CheckInputReg()">Регистрация</button>
                     <div class="container signin">
                         <p>Уже есть аккаунт?
-                            <a onclick="ChangeDiv('enter','reg')"> Вход</a>
+                            <a class="changer" onclick="ChangeDiv('enter','reg')"> Вход</a>
                         </p>
                     </div>
                 </div>
@@ -91,7 +91,6 @@
             </div>
         </div>
         <p class="title">LABORATORY WORK</p>
-
     </div>
 </div>
 

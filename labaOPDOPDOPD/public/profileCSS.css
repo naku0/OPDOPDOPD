@@ -23,6 +23,9 @@ i.material-icons i.material-symbols-outlined {
     padding: 2px;
 }
 
+li {
+    list-style: none;
+}
 
 header {
     background-color: #EDF0F2;;
@@ -102,96 +105,75 @@ div.menu li:hover {
 }
 
 body {
-    background: radial-gradient(circle at center, #EDF0F2 75%, #CCFA5B 100%);
+    background: radial-gradient(circle at center, #CCFA5B 20%, #EDF0F2 100%);
+    display: grid;
 }
 
 main {
     display: flex;
-    justify-content: space-evenly;
+    place-content: center;
 }
-main li {
-    padding: 10px;
+.profileinfo {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+.info {
+    background-color: rgba(250, 253, 255, 0.7);
+    border-radius: 50px;
+    width: 70%;
+    margin-top: 30px;
+    padding: 20px;
+    box-shadow: 3px 3px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
 }
 
-.profession {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 5rem;
-    padding: 10vh;
+.picture img {
+    border-radius: 50%;
+    height: 35vh;
+    width: 35vh;
 }
-
-.functions {
+.profileinfo .other{
+    width: 100%;
+}
+.profileinfo .name{
+    font-size: 40px;
+    width: 100%;
+    font-weight: bold;
     display: flex;
-    border: solid rgba(0, 0, 0, 0.2);
-    border-radius: 20px;
+    place-content: center;
+    height: auto;
+}
+.profileinfo .name i{
     height: auto;
     width: auto;
-}
-
-aside.tasks {
-    font-weight: bold;
-    font-size: 20px;
-    width: auto;
-    padding: 20px 40px;
-    display: flex;
-    justify-content: flex-end;
-
-}
-
-.funcList {
-    display: grid;
-    place-items: center;
-}
-
-
-.pvk {
-    border: solid rgba(0, 0, 0, 0.2);
-    border-radius: 20px;
-    padding: 10px 40px;
-}
-
-.pvkHeader {
-    display: flex;
-    place-items: center;
-    padding: 10px;
-}
-
-
-p.PVKname {
-    display: flex;
-    align-items: flex-end;
-    font-weight: bold;
-}
-
-.pvkHeader i.material-icons, .pvkHeader i.material-symbols-outlined {
-    margin-left: 10px;
-    font-size: 25px;
-    font-weight: bold;
-    padding: 5px;
-}
-
-.pvkHeader i.material-icons:hover, .pvkHeader i.material-symbols-outlined:hover{
-    border: 2px rgba(0, 0, 0, 0.2);
-    background-color: #dddddd;
-    border-radius: 5px;
-    box-shadow: inset 1px 2px 5px rgba(0, 0, 0, 0.2);
     cursor: pointer;
 }
-.pvkHeader .edit{
-    display: block;
+.profileinfo .name i:hover{
+
 }
-.pvkHeader .done{
+.profileinfo .message{
+    font-size: 15px;
+    font-weight: normal;
+    z-index: 1;
     display: none;
 }
-.pvkList li:hover {
-    background-color: #DFDFDF;
-}
-.pvkList .item .material-icons{
+.tests{
+    margin-top: 20px;
+    width: auto;
     display: flex;
-    position: absolute;
-    place-content: end;
+    place-content: center;
+    flex-direction: column;
 }
-.item.dragging{
-    opacity: 0;
+.tests .test{
+    padding: 10px;
+    border: solid rgba(0, 0, 0, 0.2);
+    display: flex;
+    margin-top: 20px;
+    border-radius: 20px;
+    width: 70%;
+    box-shadow: 3px 3px rgba(0, 0, 0, 0.1);
+    background-color: #EDF0F2;
+
 }

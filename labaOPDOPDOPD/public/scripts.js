@@ -76,7 +76,6 @@ function CheckInputReg() {
         closeDiv('RegWindow');
     } else {
         paintRedReg()
-
     }
 }
 
@@ -156,6 +155,7 @@ function heartClicker(id1, buttonId) {
 function changeOrder() {
     const pvkList = document.querySelector(".pvkList")
     const items = document.querySelectorAll(".item");
+    const done = document.querySelector(".done");
     const initSortableList = (e) => {
         const draggingItem = pvkList.querySelector(".dragging");
         const siblings = [...pvkList.querySelectorAll(".item:not(.dragging)")];
@@ -173,6 +173,10 @@ function changeOrder() {
         });
     });
     pvkList.addEventListener("dragover", initSortableList)
+    done.addEventListener("click", ()=>{
+        saveOrderToServer()
+        pvkList.removeEventListener("dragover", initSortableList)
+    });
 }
 
 
@@ -203,15 +207,27 @@ function saveOrderToServer() {
 }
 
 function paintRedReg() {
+    const button = document.querySelector(".changer");
     const regWindow = document.querySelector(".RegWindow");
     const paragraph = document.getElementById("RegText");
-    regWindow.classList.add("wrong");
-    paragraph.textContent = "Проверьте введенные вами данные";
+
+    button.addEventListener("click", function() {
+        regWindow.classList.remove("wrong");
+    });
+
+    if (!regWindow.classList.contains("wrong")){
+        regWindow.classList.add("wrong");
+        paragraph.textContent = "Проверьте введенные вами данные";
+    }
 }
 
 function paintEntReg() {
+    const button = document.querySelector(".changer");
     const regWindow = document.querySelector(".RegWindow");
     const paragraph = document.getElementById("EntText");
+    button.addEventListener("click", function() {
+        regWindow.classList.remove("wrong");
+    });
     regWindow.classList.add("wrong");
     paragraph.textContent = "Проверьте введенные данные";
 }
