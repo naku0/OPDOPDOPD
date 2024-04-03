@@ -4,12 +4,16 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const PORT = 1488;
 const PORT2 = 5252;
+let usertype = "null";
+let checkisreg = false;
 
 const mysql = require("mysql2");
+const {static} = require("express");
 const connection = mysql.createConnection({
+    port: "1337",
     host: "localhost",
     user: "root",
-    password: "qwerty0987654321"
+    password: "1234"
 });
 connection.connect(function(err) {
     if (err) throw err;
@@ -25,7 +29,7 @@ connection.connect(function (err){
     if (err) throw err;
     const standDev = "ALTER TABLE test_attempt ADD COLUMN stadart_deviation DOUBLE NOT NULL";
     const use_db = "USE opdopdopd";
-    const create_users = "CREATE TABLE IF NOT EXISTS users(id INT AUTO_INCREMENT, login VARCHAR(255) NOT NULL UNIQUE, password VARCHAR(255) NOT NULL, permissions INT CHECK (permissions = 1 OR permissions = 0) NOT NULL, PRIMARY KEY (id))";
+    const create_users = "CREATE TABLE IF NOT EXISTS users(id INT AUTO_INCREMENT, login VARCHAR(255) NOT NULL UNIQUE, password VARCHAR(255) NOT NULL, permissions INT CHECK (permissions = 2 or permissions = 1 OR permissions = 0) NOT NULL, PRIMARY KEY (id))";
     const create_professions = "CREATE TABLE IF NOT EXISTS professions(id INT AUTO_INCREMENT, name VARCHAR(255) NOT NULL, PRIMARY KEY (id))";
     const create_categories = "CREATE TABLE IF NOT EXISTS categories(id INT AUTO_INCREMENT, name VARCHAR(255) NOT NULL, PRIMARY KEY (id))";
     const create_PIQ = "CREATE TABLE IF NOT EXISTS piq(id INT AUTO_INCREMENT, name VARCHAR(255) NOT NULL, category_id INT NOT NULL, FOREIGN KEY fk_category_id (category_id) REFERENCES categories(id), PRIMARY KEY (id))";
@@ -106,6 +110,11 @@ function authorisation(connection, user_login, user_password){
             }else{
                 if (user_password === password){ //если есть и пароль совпадает - все заебись
                     message = "Authorisation successful!";
+                    connection.query("SELECT permissions FROM users WHERE login = " + mysql.escape(login) + " UNION SELECT id FROM users", function(err, res, fields){
+                        if (err) throw err;
+                        usertype = res[0].permissions;
+                        console.log(usertype);
+                    })
                     result = true;
                     console.log(message);
                     return result;
@@ -208,13 +217,16 @@ app.post('/endpoint', (req, res) => {
     });
     let user_login = jsonData.login.toString();
     let user_password = jsonData.password.toString();
+    let check = false;
 
-    if(!(authorisation(connection, user_login, user_password))){
-        registration(connection, user_login, user_password);
-    }else{
-        authorisation(connection, user_login, user_password);
+    if (connection.query("SELECT login FROM users WHERE login = " + mysql.escape(user_login)) !== null){
+        let check = true;
+        if(check){
+            authorisation(connection, user_login, user_password);
+        }else{
+            registration(connection, user_login, user_password);
+        }
     }
-
 });
 
 app.post('/pvkpoint', (req, res) =>{
