@@ -23,7 +23,6 @@ i.material-icons i.material-symbols-outlined {
     padding: 2px;
 }
 
-
 header {
     background-color: #EDF0F2;;
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
@@ -169,6 +168,7 @@ p.PVKname {
     font-size: 25px;
     font-weight: bold;
     padding: 5px;
+    display: none;
 }
 
 .pvkHeader i.material-icons:hover, .pvkHeader i.material-symbols-outlined:hover{

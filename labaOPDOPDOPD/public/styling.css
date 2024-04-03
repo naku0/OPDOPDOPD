@@ -91,6 +91,7 @@ div.menu ul.menulist li {
     width: 100%;
     display: grid;
     place-content: center;
+    color: #CCFA5B;
 }
 
 .menu .menulist li{

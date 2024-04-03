@@ -23,18 +23,19 @@ connection.connect(function(err) {
 
 connection.connect(function (err){
     if (err) throw err;
+    const standDev = "ALTER TABLE test_attempt ADD COLUMN stadart_deviation DOUBLE NOT NULL";
     const use_db = "USE opdopdopd";
     const create_users = "CREATE TABLE IF NOT EXISTS users(id INT AUTO_INCREMENT, login VARCHAR(255) NOT NULL UNIQUE, password VARCHAR(255) NOT NULL, permissions INT CHECK (permissions = 1 OR permissions = 0) NOT NULL, PRIMARY KEY (id))";
     const create_professions = "CREATE TABLE IF NOT EXISTS professions(id INT AUTO_INCREMENT, name VARCHAR(255) NOT NULL, PRIMARY KEY (id))";
     const create_categories = "CREATE TABLE IF NOT EXISTS categories(id INT AUTO_INCREMENT, name VARCHAR(255) NOT NULL, PRIMARY KEY (id))";
     const create_PIQ = "CREATE TABLE IF NOT EXISTS piq(id INT AUTO_INCREMENT, name VARCHAR(255) NOT NULL, category_id INT NOT NULL, FOREIGN KEY fk_category_id (category_id) REFERENCES categories(id), PRIMARY KEY (id))";
     const create_opinions = "CREATE TABLE IF NOT EXISTS opinions(user_id INT NOT NULL, piq_id INT NOT NULL, profession_id INT NOT NULL, position INT CHECK (position > 0), FOREIGN KEY fk_user_id (user_id) REFERENCES users(id), FOREIGN KEY fk_piq_id (piq_id) REFERENCES piq(id), FOREIGN KEY fk_profession_id (profession_id) REFERENCES professions(id))";
-    console.log("Connected!");
-
+    const add_users = "INSERT INTO `users` (`login`, `password`, `name`, `permissions`) VALUES ('dvoeglasova_n@opdopdopd.com', '19842024', 'nadvoe', 1), ('egorova_varvara@opdopdopd.com', '27122005', 'bapehuk', 1), ('maks1488@opdopdopd.com', '413029', 'masema', 1), ('gerger@opdopdopd.com', '14881995', 'sexinstructor', 1), ('tatti@opdopdopd.com' , '444555666777', 'Mr.Marihuan4ik', 1), ('sniyaq@opdopdopd.com', '88005553535', 'naku0', 1), ('kivisd3n@opdopdopd.com', 'chonadosucca', 'Kivisdenchyk', 1)";
     connection.query(use_db, function (err, result){
         if (err) throw err;
         console.log("DB is in use!");
     });
+    console.log("Connected!");
     connection.query(create_users, function (err, result){
         if (err) throw err;
         console.log("Table users created!");
