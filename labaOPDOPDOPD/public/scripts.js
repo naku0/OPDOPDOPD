@@ -57,7 +57,8 @@ function ChangeDiv(id1, id2) {
 function CheckInput() {
     let login = document.getElementById("email").value;
     let psw = document.getElementById("psw").value;
-    const window = document.querySelector(".enter").toString();
+    const window = "enter";
+
     sendJSON(login, psw, window);
     if (CheckFlag) {
         StartSession();
@@ -72,7 +73,7 @@ function CheckInputReg() {
     let UserLogin = document.getElementById("regEmail").value;
     let UserPassword = document.getElementById("regPsw").value;
     let passwordConfirm = document.getElementById("psw-repeat").value;
-    const window = document.querySelector(".RegWindow").toString();
+    const window = "registration";
     if (ConfirmPassword(UserPassword, passwordConfirm) && ConfirmLogin(UserLogin)) {
         StartSession();
         sendJSON(UserLogin, UserPassword, window);
@@ -83,6 +84,7 @@ function CheckInputReg() {
 }
 
 function sendJSON(data1, data2, window) {
+    console.log(window);
     let UserData = {
         "login": data1,
         "password": data2,
