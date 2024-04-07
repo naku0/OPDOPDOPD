@@ -38,10 +38,10 @@ connection.connect(function (err){
         console.log("DB is in use!");
     });
     console.log("Connected!");
-   /* connection.query(add_users, function (err, result){
+    connection.query(add_users, function (err, result){
         if (err) throw err;
         console.log("Table users created!");
-    });*/
+    });
     connection.query(create_users, function (err, result){
         if (err) throw err;
         console.log("Table users created!");
@@ -219,10 +219,11 @@ app.post('/endpoint', (req, res) => {
     });
     let user_login = jsonData.login.toString();
     let user_password = jsonData.password.toString();
-    let window = jsonData.window.toString();
+    let check = false;
 
     if (connection.query("SELECT login FROM users WHERE login = " + mysql.escape(user_login)) !== null){
-        if(window === "enter"){
+        let check = true;
+        if(check){
             authorisation(connection, user_login, user_password);
         }else{
             registration(connection, user_login, user_password);
