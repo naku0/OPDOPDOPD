@@ -39,10 +39,6 @@ connection.connect(function (err){
         console.log("DB is in use!");
     });
     console.log("Connected!");
-    connection.query(add_users, function (err, result){
-        if (err) throw err;
-        console.log("Table users created!");
-    });
     connection.query(create_users, function (err, result){
         if (err) throw err;
         console.log("Table users created!");
@@ -63,6 +59,12 @@ connection.connect(function (err){
         if (err) throw err;
         console.log("Table opinions created!");
     });
+    if (connection.query("SELECT login FROM users") === null){
+        connection.query(add_users, function (err, result){
+            if (err) throw err;
+            console.log("Table users created!");
+        });
+    }
 });
 function registration(connection, user_login, user_password){
     connection.connect(function (err){
@@ -219,29 +221,11 @@ app.post('/endpoint', (req, res) => {
     let user_password = jsonData.password.toString();
     let check = false;
 
-    if (connection.query("SELECT login FROM users WHERE login = " + mysql.escape(user_login)) !== null){
-        let check = true;
-        if(check){
-            if(authorisation(connection, user_login, user_password)){
-                res.json({
-                    status: "success",
-                });
-            }else{
-                res.json({
-                    status: "error",
-                });
-            }
-        }
-    }else{
-        if(registration(connection, user_login, user_password)){
-            res.json({
-                status: "success",
-            });
-        }else{
-            res.json({
-                status: "error",
-            });
-        }
+    if (jsonData.window.toString() === 'authorization'){ {
+        authorisation(connection, user_login, user_password);
+    }
+    }else if (jsonData.window.toString() === 'registration'){
+        registration(connection, user_login, user_password);
     }
 });
 
