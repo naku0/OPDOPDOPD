@@ -17,8 +17,8 @@ let dataFlag;
 function CheckFlag(enterId, exitId) {
     enterId = document.getElementById(enterId);
     exitId = document.getElementById(exitId);
-    console.log(flag._flag)
-    if (flag._flag === false) {
+    console.log(dataFlag);
+    if (dataFlag === false) {
         enterId.style.display = "none";
         exitId.style.display = "flex";
     } else {
@@ -29,7 +29,7 @@ function CheckFlag(enterId, exitId) {
 
 function ShowDiv(class1) {
     class1 = document.getElementById(class1);
-    if(class1.style.display === "grid") {
+    if (class1.style.display === "grid") {
         class1.style.display = "none";
     } else {
         class1.style.display = "grid";
@@ -180,7 +180,7 @@ function changeOrder() {
         });
     });
     pvkList.addEventListener("dragover", initSortableList)
-    done.addEventListener("click", ()=>{
+    done.addEventListener("click", () => {
         saveOrderToServer()
         pvkList.removeEventListener("dragover", initSortableList)
     });
@@ -241,11 +241,11 @@ function paintRedReg() {
     const regWindow = document.querySelector(".RegWindow");
     const paragraph = document.getElementById("RegText");
 
-    button.addEventListener("click", function() {
+    button.addEventListener("click", function () {
         regWindow.classList.remove("wrong");
     });
 
-    if (!regWindow.classList.contains("wrong")){
+    if (!regWindow.classList.contains("wrong")) {
         regWindow.classList.add("wrong");
         paragraph.textContent = "Проверьте введенные вами данные";
     }
@@ -255,7 +255,7 @@ function paintEntReg() {
     const button = document.querySelector(".changer");
     const regWindow = document.querySelector(".RegWindow");
     const paragraph = document.getElementById("EntText");
-    button.addEventListener("click", function() {
+    button.addEventListener("click", function () {
         regWindow.classList.remove("wrong");
     });
     regWindow.classList.add("wrong");
