@@ -72,9 +72,7 @@ function CheckInputReg() {
     let passwordConfirm = document.getElementById("psw-repeat").value;
     const window = "registration";
     if (ConfirmPassword(UserPassword, passwordConfirm) && ConfirmLogin(UserLogin)) {
-        StartSession();
         sendJSON(UserLogin, UserPassword, window);
-        closeDiv('RegWindow');
     } else {
         paintRedReg()
     }
@@ -95,11 +93,11 @@ function sendJSON(data1, data2, window) {
         },
         body: JSON.stringify(UserData)
     })
-        .then(response => {
-            if (response.ok) {
-                return response.json();
+        .then(res => {
+            if (res.ok) {
+                return res.json();
             } else {
-                console.error('Ошибка отправки данных на сервер:', response.status);
+                console.error('Ошибка отправки данных на сервер:', res.status);
             }
         })
         .then(data => {
