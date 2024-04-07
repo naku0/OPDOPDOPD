@@ -25,6 +25,9 @@
                 </i>
             </a>
         </li>
+        <li class="startSession" id="startSession">
+            <a href="#" onclick="ShowDiv('RegWindow')">Вход</a>
+        </li>
         <li class="endSession" id="endSession">
             <a onclick="ShowDiv('menu')"><i class="material-symbols-outlined">menu</i></a>
             <div class="menu" id="menu">
@@ -32,12 +35,14 @@
                     <li class="home">
                         <a href="OPDOPDOPD.html">Главная</a>
                     </li>
-                    <li class="exit">Выйти</li>
+                    <li class="exit" onclick="EndSession()">Выйти</li>
                 </ul>
             </div>
         </li>
     </ul>
 </header>
+
+<script>CheckFlag()</script>
 <p class="profession">
     СИСТЕМНЫЙ АНАЛИТИК
 </p>

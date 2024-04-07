@@ -12,18 +12,18 @@ class Flag {
 
 const flag = new Flag();
 let counter = 0;
-let dataFlag;
+let dataFlag = false;
 
-function CheckFlag(enterId, exitId) {
-    enterId = document.getElementById(enterId);
-    exitId = document.getElementById(exitId);
-    console.log(dataFlag);
-    if (dataFlag === false) {
-        enterId.style.display = "none";
-        exitId.style.display = "flex";
+function CheckFlag() {
+    const enterElement = document.querySelector(".startSession");
+    const exitElement = document.querySelector(".endSession");
+
+    if (dataFlag) {
+        enterElement.style.display = "none";
+        exitElement.style.display = "flex";
     } else {
-        enterId.style.display = "flex";
-        exitId.style.display = "none";
+        enterElement.style.display = "flex";
+        exitElement.style.display = "none";
     }
 }
 
@@ -58,12 +58,9 @@ function CheckInput() {
     let login = document.getElementById("email").value;
     let psw = document.getElementById("psw").value;
     const window = "enter";
-
-    sendJSON(login, psw, window);
-    if (CheckFlag) {
-        StartSession();
-        closeDiv('RegWindow')
-    } else {
+    if (login.length < 40 && psw.length < 40) {
+        sendJSON(login, psw, window);
+    }else {
         paintEntReg();
     }
 }
@@ -108,6 +105,13 @@ function sendJSON(data1, data2, window) {
         .then(data => {
             console.log('Данные от сервера:', data);
             dataFlag = data.status === 'success';
+            console.log(dataFlag);
+            if (dataFlag === true) {
+                StartSession();
+                closeDiv('RegWindow');
+            } else {
+                paintEntReg();
+            }
         })
         .catch(error => {
             console.error('Ошибка отправки данных на сервер:', error);
@@ -124,11 +128,16 @@ function ConfirmLogin(login) {
 }
 
 function StartSession() {
-    flag._flag = true;
+    CheckFlag();
 }
 
 function EndSession() {
-    flag._flag = false;
+    let button = document.querySelector(".exit");
+    button.addEventListener("click", function () {
+        flag._flag = false;
+        dataFlag = false;
+    });
+    CheckFlag();
 }
 
 function randomLogo(id1) {

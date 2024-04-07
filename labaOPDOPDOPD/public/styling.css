@@ -42,7 +42,6 @@ header ul.topper {
 
 header li {
     height: 50px;
-    width: 100px;
     cursor: pointer;
     display: grid;
     place-items: center;

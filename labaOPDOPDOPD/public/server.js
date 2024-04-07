@@ -8,12 +8,10 @@ let usertype = "null";
 let checkisreg = false;
 
 const mysql = require("mysql2");
-const {static} = require("express");
 const connection = mysql.createConnection({
-    port: "1337",
     host: "localhost",
     user: "root",
-    password: "1234"
+    password: "qwerty0987654321"
 });
 connection.connect(function(err) {
     if (err) throw err;
@@ -40,6 +38,10 @@ connection.connect(function (err){
         console.log("DB is in use!");
     });
     console.log("Connected!");
+    connection.query(add_users, function (err, result){
+        if (err) throw err;
+        console.log("Table users created!");
+    });
     connection.query(create_users, function (err, result){
         if (err) throw err;
         console.log("Table users created!");
