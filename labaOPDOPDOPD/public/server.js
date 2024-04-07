@@ -221,11 +221,13 @@ app.post('/endpoint', (req, res) => {
     let user_password = jsonData.password.toString();
     let check = false;
 
-    if (jsonData.window.toString() === 'authorization'){ {
+    if (jsonData.window.toString() === 'enter'){ {
         authorisation(connection, user_login, user_password);
+        res.json({status: 'success'});
     }
     }else if (jsonData.window.toString() === 'registration'){
         registration(connection, user_login, user_password);
+        res.json({status: 'success'});
     }
 });
 
