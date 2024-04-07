@@ -9,9 +9,10 @@ let checkisreg = false;
 
 const mysql = require("mysql2");
 const connection = mysql.createConnection({
+    port: "1337",
     host: "localhost",
     user: "root",
-    password: "qwerty0987654321"
+    password: "1234"
 });
 connection.connect(function(err) {
     if (err) throw err;
@@ -214,9 +215,6 @@ app.use(bodyParser.json());
 app.post('/endpoint', (req, res) => {
     const jsonData = req.body;
     console.log('Полученные данные нового пользователя:', jsonData.login, jsonData.password);
-    res.json({
-        status: "success",
-    });
     let user_login = jsonData.login.toString();
     let user_password = jsonData.password.toString();
     let check = false;
@@ -224,9 +222,25 @@ app.post('/endpoint', (req, res) => {
     if (connection.query("SELECT login FROM users WHERE login = " + mysql.escape(user_login)) !== null){
         let check = true;
         if(check){
-            authorisation(connection, user_login, user_password);
+            if(authorisation(connection, user_login, user_password)){
+                res.json({
+                    status: "success",
+                });
+            }else{
+                res.json({
+                    status: "error",
+                });
+            }
         }else{
-            registration(connection, user_login, user_password);
+            if(registration(connection, user_login, user_password)){
+                res.json({
+                    status: "success",
+                });
+            }else{
+                res.json({
+                    status: "error",
+                });
+            }
         }
     }
 });
