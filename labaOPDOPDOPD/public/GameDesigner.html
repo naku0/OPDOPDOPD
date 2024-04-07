@@ -47,51 +47,6 @@
     ГЕЙМ-ДИЗАЙНЕР
 </p>
 <main>
-    <div class="RegWindow" id="RegWindow">
-        <div class="reg" id="reg">
-            <ul class="registerlist">
-                <li><h1>Регистрация</h1></li>
-                <li><i class="material-icons" onclick="closeDiv('RegWindow')">close</i></li>
-            </ul>
-            <p id="RegText">Заполните форму ниже для регистрации</p>
-            <hr>
-            <label for="regEmail"><b>E-mail</b></label>
-            <input type="text" placeholder="Введите почту" name="email" id="regEmail" required>
-
-            <label for="regPsw"><b>Пароль</b></label>
-            <input type="password" placeholder="Введите пароль" name="psw" id="regPsw" required>
-
-            <label for="psw-repeat"><b>Повторите пароль</b></label>
-            <input type="password" placeholder="Повторите пароль" name="psw-repeat" id="psw-repeat" required>
-            <button type="submit" class="registerbtn" onclick="CheckInputReg()">Регистрация</button>
-            <div class="container signin">
-                <p>Уже есть аккаунт?
-                    <a class="changer" onclick="ChangeDiv('enter','reg')"> Вход</a>
-                </p>
-            </div>
-        </div>
-        <div class="enter" id="enter">
-            <ul class="registerlist">
-                <li><h1>Вход</h1></li>
-                <li><i class="material-icons" onclick="closeDiv('RegWindow')">close</i></li>
-            </ul>
-            <p id="EntText">Заполните форму ниже для входа</p>
-            <hr>
-            <label for="email"><b>E-mail</b></label>
-            <input type="text" placeholder="Введите почту" name="email" id="email" required>
-
-            <label for="psw"><b>Пароль</b></label>
-            <input type="password" placeholder="Введите пароль" name="psw" id="psw" required>
-
-            <button type="submit" class="enterbtn" onclick="CheckInput()">Вход</button>
-            <div class="container signin">
-                <p>Ещё нет аккаунта?
-                    <a onclick="ChangeDiv('reg','enter')">Регистрация</a>
-                </p>
-            </div>
-        </div>
-        <hr>
-    </div>
     <div class="functions">
         <aside class="tasks">ОСНОВНЫЕ <br/> ЗАДАЧИ</aside>
         <div class="funcList">
