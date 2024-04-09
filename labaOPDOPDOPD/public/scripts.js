@@ -219,7 +219,6 @@ function saveOrderToServer() {
             console.error('Ошибка:', error);
         });
 }
-
 // function sendSessionStatus(){
 //     let sessionStatus = {
 //         "sessionStatus": flag._flag
