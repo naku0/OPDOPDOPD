@@ -220,14 +220,23 @@ app.post('/endpoint', (req, res) => {
     let user_password = jsonData.password.toString();
     let check = false;
 
-    if (jsonData.window.toString() === 'enter'){ {
+    if (jsonData.window.toString() === 'enter'){
         authorisation(connection, user_login, user_password);
-        res.json({status: 'success'});
-    }
+        connection.query("SELECT * FROM users WHERE login = " + mysql.escape(user_login) + " AND password = " + mysql.escape(user_password), function (err, result, fields){
+            if (result === []){
+                let st = 'error';
+                let pm = '';
+            }else{
+                let st = 'success';
+                let pm = connection.query("SELECT permissions FROM users WHERE login = " + mysql.escape(user_login) + " AND password = " + mysql.escape(user_password)).toString();
+            }
+        })
     }else if (jsonData.window.toString() === 'registration'){
         registration(connection, user_login, user_password);
-        res.json({status: 'success'});
+        let st = 'success';
+        let pm = '0';
     }
+    res.json({status: '${st}', permissions: '${pm}'});
 });
 
 app.post('/pvkpoint', (req, res) =>{
