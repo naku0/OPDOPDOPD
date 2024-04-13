@@ -1,0 +1,19 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Montserrat", sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+::-moz-selection {
+    color: white;
+    background-color: #AAD94A;
+}
+
+::selection {
+    color: white;
+    background-color: #AAD94A;
+}

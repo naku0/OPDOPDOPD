@@ -238,6 +238,7 @@ p.title {
 .yaNeZnayu {
     display: flex;
     place-content: center;
+    position: sticky;
 }
 
 .list {
