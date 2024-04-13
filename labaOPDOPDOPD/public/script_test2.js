@@ -43,6 +43,9 @@ startBtn.addEventListener('keydown', function (btn) {
         if (counter < amount) {
             restartTest();
             const clr = setTimeout(startTest, getRandomInt(1, 5) * 1000);
+            let dataSec = document.getElementById('sec').innerHTML;
+            let dataMilisec = document.getElementById('milisec').innerHTML;
+            results.push(dataSec + dataMilisec);
         } else {
             timer = false;
         }

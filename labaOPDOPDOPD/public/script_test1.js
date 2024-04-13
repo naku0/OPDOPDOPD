@@ -6,6 +6,8 @@ let milisec = 0;
 let timer = false;
 let counter = 0;
 let amount = 5;
+const secFinal = document.getElementById('sec');
+const milisecFinal  = document.getElementById('milisec');
 let results = new Array(amount);
 
 function block_space(btn) {
@@ -32,7 +34,6 @@ function restartTest() {
     second = 0;
     milisec = 0;
     testBtn.style.backgroundColor = "white";
-    block_space(testBtn);
 }
 
 function isSpaceKeyPressedAndCounterNotZero(event, counter) {
@@ -45,6 +46,9 @@ startBtn.addEventListener('keydown', function (event) {
         if (counter < amount) {
             restartTest();
             const clr = setTimeout(startTest, getRandomInt(1, 5) * 1000);
+            let dataSec = document.getElementById('sec').innerHTML;
+            let dataMilisec = document.getElementById('milisec').innerHTML;
+            results.push(dataSec + dataMilisec);
         } else {
             timer = false;
         }
@@ -61,7 +65,6 @@ startBtn.addEventListener('click', function () {
 function stopWatch() {
     if (timer) {
         milisec++;
-
         if (milisec === 100) {
             second++;
             milisec = 0;
@@ -72,13 +75,11 @@ function stopWatch() {
         if (second < 10) {
             secString = "0" + secString;
         }
-
         if (milisec < 10) {
             milisecString = "0" + milisecString;
         }
-
-        document.getElementById('sec').innerHTML = secString;
-        document.getElementById('milisec').innerHTML = milisecString;
+        secFinal.innerHTML = secString;
+        milisecFinal.innerHTML = milisecString;
         setTimeout(stopWatch, 10);
     }
 }
