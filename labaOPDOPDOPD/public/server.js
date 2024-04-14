@@ -236,7 +236,8 @@ app.post('/endpoint', (req, res) => {
                 pm = '';
             }else{
                 st = 'success';
-                pm = result[0].toString();
+                pm = result[0].permissions.toString();
+                console.log(pm);
             }
             res.json({status:  st, permissions: pm});
         });
