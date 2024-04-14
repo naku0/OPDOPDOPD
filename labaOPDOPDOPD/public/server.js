@@ -229,7 +229,7 @@ app.post('/endpoint', (req, res) => {
                 pm = '';
             }else{
                 st = 'success';
-                pm = connection.query("SELECT permissions FROM users WHERE login = " + mysql.escape(user_login) + " AND password = " + mysql.escape(user_password));
+                pm = connection.query("SELECT permissions FROM users WHERE login = " + mysql.escape(user_login) + " AND password = " + mysql.escape(user_password)).toString();
             }
             res.json({status:  st, permissions: pm});
         });
