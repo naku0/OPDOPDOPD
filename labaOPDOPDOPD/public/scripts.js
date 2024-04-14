@@ -13,6 +13,7 @@ class Flag {
 const flag = new Flag();
 let counter = 0;
 let dataFlag = false;
+let permission = 0;
 
 function CheckFlag() {
     const enterElement = document.querySelector(".startSession");
@@ -58,7 +59,7 @@ function CheckInput() {
     let login = document.getElementById("email").value;
     let psw = document.getElementById("psw").value;
     const window = "enter";
-    if (login.length < 40 && psw.length < 40) {
+    if (login.length < 100 && psw.length < 40) {
         sendJSON(login, psw, window);
     }else {
         paintEntReg();
@@ -102,6 +103,7 @@ function sendJSON(data1, data2, window) {
         })
         .then(data => {
             console.log('Данные от сервера:', data);
+            console.log(data.status);
             dataFlag = data.status === 'success';
             console.log(dataFlag);
             if (dataFlag === true) {
