@@ -169,6 +169,13 @@ function add_piq_opinion(connection, piq, user_login, profession_name, position)
     });
 }
 
+function sendUserInfo(connection, user_login, user_password){
+    connection.connect(function(err){
+        if (err) throw err;
+        connection.query("")
+    })
+}
+
 app.use(express.static(path.join(__dirname, 'public')));
 app.listen(PORT, () => {
     console.log(`Сервер запущен на порту ${PORT}`);
@@ -229,7 +236,7 @@ app.post('/endpoint', (req, res) => {
                 pm = '';
             }else{
                 st = 'success';
-                pm = connection.query("SELECT permissions FROM users WHERE login = " + mysql.escape(user_login) + " AND password = " + mysql.escape(user_password)).toString();
+                pm = result[0].toString();
             }
             res.json({status:  st, permissions: pm});
         });
