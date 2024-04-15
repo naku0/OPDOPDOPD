@@ -43,7 +43,6 @@ header ul.topper {
 
 header li {
     height: 50px;
-    width: 100px;
     cursor: pointer;
     display: grid;
     place-items: center;
@@ -162,13 +161,16 @@ p.PVKname {
     align-items: flex-end;
     font-weight: bold;
 }
-
+.pvkHeader .hiddenElement{
+    display: none;
+}
 .pvkHeader i.material-icons, .pvkHeader i.material-symbols-outlined {
     margin-left: 10px;
     font-size: 25px;
     font-weight: bold;
     padding: 5px;
-    display: none;
+    display: flex;
+
 }
 
 .pvkHeader i.material-icons:hover, .pvkHeader i.material-symbols-outlined:hover{
