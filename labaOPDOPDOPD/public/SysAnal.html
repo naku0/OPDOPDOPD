@@ -13,7 +13,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Quicksand:wght@300..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
           rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"/>
 </head>
 <body>
 <header>
@@ -62,11 +63,14 @@
     <div class="pvk">
         <div class="pvkHeader">
             <p class="PVKname">СПИСОК ПВК</p>
-            <div class="edit" id="edit">
-                <i class="material-icons" onclick="ChangeDiv('done', 'edit'); changeOrder()">edit_note</i>
-            </div>
-            <div class="done" id ="done">
-                <i class="material-symbols-outlined" onclick="saveOrderToServer(); ChangeDiv('edit', 'done')">done</i>
+            <div class="hiddenElement" id="hiddenElement">
+                <div class="edit" id="edit">
+                    <i class="material-icons" onclick="ChangeDiv('done', 'edit'); changeOrder()">edit_note</i>
+                </div>
+                <div class="done" id="done">
+                    <i class="material-symbols-outlined"
+                       onclick="saveOrderToServer(); ChangeDiv('edit', 'done')">done</i>
+                </div>
             </div>
         </div>
         <ol class="pvkList">
@@ -79,7 +83,8 @@
             <li class="item" draggable="true">...</li>
         </ol>
     </div>
-    <script>CheckSession(); CheckPerms()</script>
+    <script>CheckSession();
+    CheckPerms()</script>
 </main>
 </body>
 </html>

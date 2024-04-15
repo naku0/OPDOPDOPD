@@ -169,50 +169,7 @@ function add_piq_opinion(connection, piq, user_login, profession_name, position)
     });
 }
 
-app.post('/endpoint', (req, res) => {
-    const jsonData = req.body;
-    let status;
-        let login = jsonData.login.toString();
-        let password = jsonData.password.toString();
-        let username, permissions, user_id;
-        let test_attempts = [];
-        let piq_opinions = [];
-        connection.query("SELECT * FROM users WHERE login = " + mysql.escape(login) + " AND password = " + mysql.escape(password) + ";", function (err, result){
-            if (err) throw err;
-            if (!(result === [])){
-                status = "success";
-                username = result[0].name.toString();
-                permissions = result[0].permissions.toString();
-                user_id = result[0].id.toInt();
-            } else {
-                status = "error";
-                username = "";
-                permissions = "";
-                user_id = "";
-            }
-        });
-        connection.query("SELECT test.name, test_attempt.average_value, test_attempt.number_of_passes, test_attempt.number_of_mistakes, test_attempt.stadart_deviation FROM test_attempt INNER JOIN test ON test_attempt.test_id = test.id WHERE test_attempt.user_id = " + mysql.escape(user_id), function (err, result){
-            if (err) throw err;
-            if (!(result === [])){
-                let iterator = 0;
-                for (let res in result){
-                    test_attempts[iterator] = [res.name.toString(), res.average_value.toString(), res.number_of_passes.toString(), res.number_of_mistakes.toString(), res.stadart_deviation.toString()];
-                    iterator += 1;
-                }
-            }
-        });
-        connection.query("SELECT profession.name, piq.name, opinions.position FROM opinions JOIN profession ON profession.id = opinions.profession_id JOIN piq ON piq.id = opinions.piq_id WHERE user_id = " + mysql.escape(user_id), function (err, result){
-            if (err) throw err;
-            if (!(result === [])){
-                let iterator = 0;
-                for (let res in result){
-                    piq_opinions[iterator] = [res.profession.name.toString(), res.piq.name.toString(), res.position.toString()];
-                    iterator += 1;
-                }
-            }
-        });
-        res.json({username: username, permissions: permissions, test_attempts: test_attempts, piq_opinions: piq_opinions});
-});
+
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.listen(PORT, () => {
@@ -275,9 +232,74 @@ app.get('style_test.css', (req, res) => {
     res.header("Content-Type", "text/css");
     res.sendFile(__dirname + '/style_test.css');
 });
+app.get('/Kivisdenchyk.jpg', (req, res) => {
+    res.sendFile(path.join(__dirname, 'Kivisdenchyk.jpg'));
+});
 app.use(bodyParser.json());
-
 app.post('/endpoint', (req, res) => {
+    const jsonData = req.body;
+    const login = jsonData.login ? jsonData.login.toString() : null;
+    const password = jsonData.password ? jsonData.password.toString() : null;
+
+    if (!login || !password) {
+        return res.status(400).json({ error: 'Отсутствуют данные для аутентификации' });
+    }
+
+    let username = "";
+    let permissions = "";
+    let test_attempts = [];
+    let piq_opinions = [];
+    let status = "";
+
+    if (jsonData.window === 'registration') {
+        registration(connection, login, password);
+        status = 'success';
+        permissions = '0';
+        return res.json({ login: login, status: status, username: username, permissions: permissions, test_attempts: test_attempts, piq_opinions: piq_opinions });
+    }
+
+    connection.query("SELECT * FROM users WHERE login = ? AND password = ?", [login, password], function (err, result) {
+        if (err) {
+            console.error('Ошибка выполнения запроса к базе данных:', err);
+            return res.status(500).json({ error: 'Ошибка выполнения запроса к базе данных' });
+        }
+
+        if (result.length === 0) {
+            status = "error";
+            return res.json({ login: login, status: status, username: username, permissions: permissions, test_attempts: test_attempts, piq_opinions: piq_opinions });
+        }
+
+        status = "success";
+        username = result[0].name.toString();
+        permissions = result[0].permissions.toString();
+        const user_id = result[0].id;
+
+        connection.query("SELECT test.name, test_attempt.average_value, test_attempt.number_of_passes, test_attempt.number_of_mistakes, test_attempt.stadart_deviation FROM test_attempt INNER JOIN test ON test_attempt.test_id = test.id WHERE test_attempt.user_id = ?", [user_id], function (err, result) {
+            if (err) {
+                console.error('Ошибка выполнения запроса к базе данных:', err);
+                return res.status(500).json({ error: 'Ошибка выполнения запроса к базе данных' });
+            }
+
+            result.forEach(res => {
+                test_attempts.push([res.name.toString(), res.average_value.toString(), res.number_of_passes.toString(), res.number_of_mistakes.toString(), res.stadart_deviation.toString()]);
+            });
+
+            connection.query("SELECT professions.name, piq.name, opinions.position FROM opinions JOIN professions ON professions.id = opinions.profession_id JOIN piq ON piq.id = opinions.piq_id WHERE user_id = ?", [user_id], function (err, result) {
+                if (err) {
+                    console.error('Ошибка выполнения запроса к базе данных:', err);
+                    return res.status(500).json({ error: 'Ошибка выполнения запроса к базе данных' });
+                }
+
+                result.forEach(res => {
+                    piq_opinions.push([res.professions.name.toString(), res.piq.name.toString(), res.position.toString()]);
+                });
+
+                res.json({ login: login, status: status, username: username, permissions: permissions, test_attempts: test_attempts, piq_opinions: piq_opinions });
+            });
+        });
+    });
+});
+/*app.post('/endpoint', (req, res) => {
     const jsonData = req.body;
     console.log('Полученные данные нового пользователя:', jsonData.login, jsonData.password);
     let user_login = jsonData.login.toString();
@@ -304,8 +326,7 @@ app.post('/endpoint', (req, res) => {
         pm = '0';
         res.json({status:  st, permissions: pm});
     }
-
-});
+});*/
 
 app.post('/pvkpoint', (req, res) =>{
     const jsonData = req.body;

@@ -34,7 +34,13 @@ function CheckPerms() {
     const permissions = sessionStorage.getItem('permissions');
     const hiddenElement = document.querySelector(".hiddenElement");
     hiddenElement.style.display = permissions === '1' ? "flex" : "none";
-
+}
+function CheckData() {
+    const name = sessionStorage.getItem('name');
+    const namespace = document.querySelector('.name');
+    console.log(name);
+    const picture = document.querySelector('.picture')
+    namespace.textContent = name;
 }
 
 function ShowDiv(class1) {
@@ -112,10 +118,12 @@ function sendJSON(data1, data2, window) {
         })
         .then(data => {
             console.log('Данные от сервера:', data);
-            dataFlag = data.status === 'success';
+            const dataFlag = data.status === 'success';
             sessionStorage.setItem('status', dataFlag);
             sessionStorage.setItem('permissions', data.permissions);
-            console.log(sessionStorage.getItem('status'), sessionStorage.getItem('permissions'));
+            sessionStorage.setItem('name', data.username ? data.username : data.login.split('@')[0]);
+
+            console.log(sessionStorage.getItem('status'), sessionStorage.getItem('permissions'), sessionStorage.getItem('name'));
             if (dataFlag) {
                 StartSession();
                 closeDiv('RegWindow');

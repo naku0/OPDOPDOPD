@@ -127,14 +127,23 @@ main {
     display: flex;
     flex-direction: column;
 }
-
+.picture{
+    box-shadow: 10px 10px 10px #AAD94A;
+    border-radius: 50%;
+    background-color: #EDF0F2;
+    padding: 10px;
+    display: flex;
+    place-content: center;
+}
 .picture img {
+
     border-radius: 50%;
     height: 35vh;
     width: 35vh;
 }
 .profileinfo .other{
     width: 100%;
+
 }
 .profileinfo .name{
     font-size: 40px;
@@ -144,7 +153,7 @@ main {
     place-content: center;
     height: auto;
 }
-.profileinfo .symbol{
+.profileinfo .hiddenElement{
     width: auto;
     height: auto;
     cursor: pointer;
@@ -152,10 +161,16 @@ main {
     align-items: center;
     padding-left: 5px;
 }
+.profileinfo hr{
+    color: rgba(0,0,0,0.2);
+}
 .profileinfo .nameW{
     display: flex;
     flex-direction: row;
-    place-content: center;
+    place-content: start;
+    flex-grow: 1;
+    padding-left: 10px;
+
 }
 .profileinfo .message{
     font-size: 15px;
