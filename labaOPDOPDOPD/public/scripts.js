@@ -13,19 +13,28 @@ class Flag {
 const flag = new Flag();
 let counter = 0;
 let dataFlag = false;
-let permission = 0;
 
-function CheckFlag() {
+function CheckSession() {
+    const checker = () => {
+        const isLogined = sessionStorage.getItem('status');
+        if (isLogined !== null) {
+            dataFlag = isLogined === 'true';
+            console.log(isLogined);
+        }
+        return isLogined;
+    };
+    window.onload = checker;
     const enterElement = document.querySelector(".startSession");
     const exitElement = document.querySelector(".endSession");
+    enterElement.style.display = checker() === 'true'? "none" : "flex";
+    exitElement.style.display = checker() === 'true'? "flex" : "none";
+}
 
-    if (dataFlag) {
-        enterElement.style.display = "none";
-        exitElement.style.display = "flex";
-    } else {
-        enterElement.style.display = "flex";
-        exitElement.style.display = "none";
-    }
+function CheckPerms() {
+    const permissions = sessionStorage.getItem('permissions');
+    const hiddenElement = document.querySelector(".hiddenElement");
+    hiddenElement.style.display = permissions === '1' ? "flex" : "none";
+
 }
 
 function ShowDiv(class1) {
@@ -61,7 +70,7 @@ function CheckInput() {
     const window = "enter";
     if (login.length < 100 && psw.length < 40) {
         sendJSON(login, psw, window);
-    }else {
+    } else {
         paintEntReg();
     }
 }
@@ -103,15 +112,17 @@ function sendJSON(data1, data2, window) {
         })
         .then(data => {
             console.log('Данные от сервера:', data);
-            console.log(data.status);
             dataFlag = data.status === 'success';
-            console.log(dataFlag);
-            if (dataFlag === true) {
+            sessionStorage.setItem('status', dataFlag);
+            sessionStorage.setItem('permissions', data.permissions);
+            console.log(sessionStorage.getItem('status'), sessionStorage.getItem('permissions'));
+            if (dataFlag) {
                 StartSession();
                 closeDiv('RegWindow');
             } else {
                 paintEntReg();
             }
+
         })
         .catch(error => {
             console.error('Ошибка отправки данных на сервер:', error);
@@ -128,16 +139,17 @@ function ConfirmLogin(login) {
 }
 
 function StartSession() {
-    CheckFlag();
+    CheckSession();
 }
 
 function EndSession() {
-    let button = document.querySelector(".exit");
-    button.addEventListener("click", function () {
         flag._flag = false;
         dataFlag = false;
-    });
-    CheckFlag();
+        sessionStorage.removeItem('status');
+        sessionStorage.removeItem('permissions');
+        console.log(sessionStorage.getItem('status'), sessionStorage.getItem('permissions'));
+        CheckSession();
+        CheckPerms();
 }
 
 function randomLogo(id1) {
@@ -221,6 +233,7 @@ function saveOrderToServer() {
             console.error('Ошибка:', error);
         });
 }
+
 // function sendSessionStatus(){
 //     let sessionStatus = {
 //         "sessionStatus": flag._flag

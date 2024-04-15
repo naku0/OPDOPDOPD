@@ -35,12 +35,12 @@
                 <div class="menu" id="menu">
                     <ul class="menulist">
                         <li class="profile" draggable="false"><a href="profile.html">Личный кабинет</a></li>
-                        <li class ="exit" draggable="false" onclick="EndSession()"><a href="#">Выйти</a></li>
+                        <li class="exit" draggable="false" onclick="EndSession()"><a href="#">Выйти</a></li>
                     </ul>
                 </div>
             </li>
         </ul>
-        <script>CheckFlag()</script>
+        <script>CheckSession()</script>
     </header>
     <div class="laba">
         <div class="yaNeZnayu">
@@ -107,6 +107,7 @@
         </li>
     </ul>
 </div>
+<script>CheckSession()</script>
 <footer>
     <div class="heart">
         <i class="material-icons" id="heart" onclick="heartClicker('popug','heart')">favorite</i>

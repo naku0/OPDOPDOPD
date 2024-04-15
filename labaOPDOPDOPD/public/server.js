@@ -255,7 +255,26 @@ app.get('/OPDOPDOPD.html', (req, res) => {
 app.get('/popug.jpg', (req, res) => {
     res.sendFile(__dirname + '/popug.jpg');
 });
-
+app.get('/profile.html', (req, res) => {
+    const htmlFilePath = path.join(__dirname, 'profile.html');
+    res.sendFile(htmlFilePath);
+});
+app.get('/profileCSS.css', (req, res) => {
+    res.header("Content-Type", "text/css");
+    res.sendFile(__dirname + '/profileCSS.css');
+});
+app.get('/test1.html', (req, res) => {
+    const htmlFilePath = path.join(__dirname, 'test1.html');
+    res.sendFile(htmlFilePath);
+});
+app.get('/test2.html', (req, res) => {
+    const htmlFilePath = path.join(__dirname, 'test2.html');
+    res.sendFile(htmlFilePath);
+});
+app.get('style_test.css', (req, res) => {
+    res.header("Content-Type", "text/css");
+    res.sendFile(__dirname + '/style_test.css');
+});
 app.use(bodyParser.json());
 
 app.post('/endpoint', (req, res) => {
