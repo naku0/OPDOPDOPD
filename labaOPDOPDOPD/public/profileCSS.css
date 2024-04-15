@@ -18,7 +18,7 @@ a {
     background-color: #AAD94A;
 }
 
-i.material-icons i.material-symbols-outlined {
+i.material-icons {
     font-size: 20px;
     padding: 2px;
 }
@@ -47,7 +47,6 @@ header ul.topper {
 
 header li {
     height: 50px;
-    width: 100px;
     cursor: pointer;
     display: grid;
     place-items: center;
@@ -139,19 +138,24 @@ main {
 }
 .profileinfo .name{
     font-size: 40px;
-    width: 100%;
+    width: auto;
     font-weight: bold;
     display: flex;
     place-content: center;
     height: auto;
 }
-.profileinfo .name i{
-    height: auto;
+.profileinfo .symbol{
     width: auto;
+    height: auto;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding-left: 5px;
 }
-.profileinfo .name i:hover{
-
+.profileinfo .nameW{
+    display: flex;
+    flex-direction: row;
+    place-content: center;
 }
 .profileinfo .message{
     font-size: 15px;
