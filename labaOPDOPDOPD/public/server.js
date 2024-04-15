@@ -9,9 +9,10 @@ let checkisreg = false;
 
 const mysql = require("mysql2");
 const connection = mysql.createConnection({
+    port: "1337",
     host: "localhost",
     user: "root",
-    password: "qwerty0987654321"
+    password: "1234"
 });
 connection.connect(function(err) {
     if (err) throw err;
@@ -168,51 +169,52 @@ function add_piq_opinion(connection, piq, user_login, profession_name, position)
         });
     });
 }
-
-app.post('/endpoint', (req, res) => {
-    const jsonData = req.body;
-    let status;
-        let login = jsonData.login.toString();
-        let password = jsonData.password.toString();
-        let username, permissions, user_id;
-        let test_attempts = [];
-        let piq_opinions = [];
-        connection.query("SELECT * FROM users WHERE login = " + mysql.escape(login) + " AND password = " + mysql.escape(password) + ";", function (err, result){
-            if (err) throw err;
-            if (!(result === [])){
-                status = "success";
-                username = result[0].name.toString();
-                permissions = result[0].permissions.toString();
-                user_id = result[0].id.toInt();
-            } else {
-                status = "error";
-                username = "";
-                permissions = "";
-                user_id = "";
-            }
-        });
-        connection.query("SELECT test.name, test_attempt.average_value, test_attempt.number_of_passes, test_attempt.number_of_mistakes, test_attempt.stadart_deviation FROM test_attempt INNER JOIN test ON test_attempt.test_id = test.id WHERE test_attempt.user_id = " + mysql.escape(user_id), function (err, result){
-            if (err) throw err;
-            if (!(result === [])){
-                let iterator = 0;
-                for (let res in result){
-                    test_attempts[iterator] = [res.name.toString(), res.average_value.toString(), res.number_of_passes.toString(), res.number_of_mistakes.toString(), res.stadart_deviation.toString()];
-                    iterator += 1;
-                }
-            }
-        });
-        connection.query("SELECT profession.name, piq.name, opinions.position FROM opinions JOIN profession ON profession.id = opinions.profession_id JOIN piq ON piq.id = opinions.piq_id WHERE user_id = " + mysql.escape(user_id), function (err, result){
-            if (err) throw err;
-            if (!(result === [])){
-                let iterator = 0;
-                for (let res in result){
-                    piq_opinions[iterator] = [res.profession.name.toString(), res.piq.name.toString(), res.position.toString()];
-                    iterator += 1;
-                }
-            }
-        });
-        res.json({username: username, permissions: permissions, test_attempts: test_attempts, piq_opinions: piq_opinions});
-});
+//
+// app.post('/endpoint', (req, res) => {
+//     const jsonData = req.body;
+//
+//     let status;
+//     let login = jsonData.login.toString();
+//     let password = jsonData.password.toString();
+//     let username, permissions, user_id;
+//     let test_attempts = [];
+//     let piq_opinions = [];
+//     connection.query("SELECT * FROM users WHERE login = " + mysql.escape(login) + " AND password = " + mysql.escape(password) + ";", function (err, result){
+//         if (err) throw err;
+//         if (!(result === [])){
+//             status = "success";
+//             username = result[0].name.toString();
+//             permissions = result[0].permissions.toString();
+//             user_id = result[0].id.toInt();
+//         } else {
+//             status = "error";
+//             username = "";
+//             permissions = "";
+//             user_id = "";
+//         }
+//     });
+//     connection.query("SELECT test.name, test_attempt.average_value, test_attempt.number_of_passes, test_attempt.number_of_mistakes, test_attempt.stadart_deviation FROM test_attempt INNER JOIN test ON test_attempt.test_id = test.id WHERE test_attempt.user_id = " + mysql.escape(user_id), function (err, result){
+//         if (err) throw err;
+//         if (!(result === [])){
+//             let iterator = 0;
+//             for (let res in result){
+//                 test_attempts[iterator] = [res.name.toString(), res.average_value.toString(), res.number_of_passes.toString(), res.number_of_mistakes.toString(), res.stadart_deviation.toString()];
+//                 iterator += 1;
+//             }
+//         }
+//     });
+//     connection.query("SELECT profession.name, piq.name, opinions.position FROM opinions JOIN profession ON profession.id = opinions.profession_id JOIN piq ON piq.id = opinions.piq_id WHERE user_id = " + mysql.escape(user_id), function (err, result){
+//         if (err) throw err;
+//         if (!(result === [])){
+//             let iterator = 0;
+//             for (let res in result){
+//                 piq_opinions[iterator] = [res.profession.name.toString(), res.piq.name.toString(), res.position.toString()];
+//                 iterator += 1;
+//             }
+//         }
+//     });
+//     res.json({status: status, username: username, permissions: permissions, test_attempts: test_attempts, piq_opinions: piq_opinions});
+// });
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.listen(PORT, () => {
@@ -294,15 +296,14 @@ app.post('/endpoint', (req, res) => {
             }else{
                 st = 'success';
                 pm = result[0].permissions.toString();
-                console.log(pm);
             }
-            res.json({status:  st, permissions: pm});
+            res.json({status:  st, login: user_login, password: user_password, permissions: pm});
         });
     }else if (jsonData.window.toString() === 'registration'){
         registration(connection, user_login, user_password);
         st = 'success';
         pm = '0';
-        res.json({status:  st, permissions: pm});
+        res.json({status:  st, login: user_login, password: user_password, permissions: pm});
     }
 
 });
