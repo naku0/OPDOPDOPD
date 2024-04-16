@@ -195,6 +195,14 @@ app.get('/professionCSS.css', (req, res) => {
     res.header("Content-Type", "text/css");
     res.sendFile(__dirname + '/professionCSS.css');
 });
+app.get('/script_test1.js', (req, res) => {
+    res.header("Content-Type", "application/javascript");
+    res.sendFile(__dirname + '/script_test1.js');
+});
+app.get('/script_test2.js', (req, res) => {
+    res.header("Content-Type", "application/javascript");
+    res.sendFile(__dirname + '/script_test2.js');
+});
 app.get('/GameDesigner.html', (req, res) => {
     const htmlFilePath = path.join(__dirname, 'GameDesigner.html');
     res.sendFile(htmlFilePath);
