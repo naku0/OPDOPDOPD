@@ -22,11 +22,11 @@ connection.connect(function(err) {
     });
 });
 
-
 connection.connect(function (err){
     if (err) throw err;
     const standDev = "ALTER TABLE test_attempt ADD COLUMN stadart_deviation DOUBLE NOT NULL";
     const use_db = "USE opdopdopd";
+    const alter = "alter table test add column description text";
     const create_users = "CREATE TABLE IF NOT EXISTS users(id INT AUTO_INCREMENT, login VARCHAR(255) NOT NULL UNIQUE, password VARCHAR(255) NOT NULL, permissions INT CHECK (permissions = 2 or permissions = 1 OR permissions = 0) NOT NULL, PRIMARY KEY (id))";
     const create_professions = "CREATE TABLE IF NOT EXISTS professions(id INT AUTO_INCREMENT, name VARCHAR(255) NOT NULL, PRIMARY KEY (id))";
     const create_categories = "CREATE TABLE IF NOT EXISTS categories(id INT AUTO_INCREMENT, name VARCHAR(255) NOT NULL, PRIMARY KEY (id))";
@@ -256,48 +256,63 @@ app.post('/endpoint', (req, res) => {
         status = 'success';
         permissions = '0';
         return res.json({ login: login, status: status, username: username, permissions: permissions, test_attempts: test_attempts, piq_opinions: piq_opinions });
-    }
-
-    connection.query("SELECT * FROM users WHERE login = ? AND password = ?", [login, password], function (err, result) {
-        if (err) {
-            console.error('Ошибка выполнения запроса к базе данных:', err);
-            return res.status(500).json({ error: 'Ошибка выполнения запроса к базе данных' });
-        }
-
-        if (result.length === 0) {
-            status = "error";
-            return res.json({ login: login, status: status, username: username, permissions: permissions, test_attempts: test_attempts, piq_opinions: piq_opinions });
-        }
-
-        status = "success";
-        username = result[0].name.toString();
-        permissions = result[0].permissions.toString();
-        const user_id = result[0].id;
-
-        connection.query("SELECT test.name, test_attempt.average_value, test_attempt.number_of_passes, test_attempt.number_of_mistakes, test_attempt.stadart_deviation FROM test_attempt INNER JOIN test ON test_attempt.test_id = test.id WHERE test_attempt.user_id = ?", [user_id], function (err, result) {
+    }else if(jsonData.window === 'enter') {
+        authorisation(connection, login, password);
+        connection.query("SELECT * FROM users WHERE login = ? AND password = ?", [login, password], function (err, result) {
             if (err) {
                 console.error('Ошибка выполнения запроса к базе данных:', err);
-                return res.status(500).json({ error: 'Ошибка выполнения запроса к базе данных' });
+                return res.status(500).json({error: 'Ошибка выполнения запроса к базе данных'});
             }
 
-            result.forEach(res => {
-                test_attempts.push([res.name.toString(), res.average_value.toString(), res.number_of_passes.toString(), res.number_of_mistakes.toString(), res.stadart_deviation.toString()]);
-            });
+            if (result.length === 0) {
+                status = "error";
+                return res.json({
+                    login: login,
+                    status: status,
+                    username: username,
+                    permissions: permissions,
+                    test_attempts: test_attempts,
+                    piq_opinions: piq_opinions
+                });
+            }
 
-            connection.query("SELECT professions.name, piq.name, opinions.position FROM opinions JOIN professions ON professions.id = opinions.profession_id JOIN piq ON piq.id = opinions.piq_id WHERE user_id = ?", [user_id], function (err, result) {
+            status = "success";
+            username = result[0].name.toString();
+            permissions = result[0].permissions.toString();
+            const user_id = result[0].id;
+
+            connection.query("SELECT test.name, test_attempt.average_value, test_attempt.number_of_passes, test_attempt.number_of_mistakes, test_attempt.stadart_deviation FROM test_attempt INNER JOIN test ON test_attempt.test_id = test.id WHERE test_attempt.user_id = ?", [user_id], function (err, result) {
                 if (err) {
                     console.error('Ошибка выполнения запроса к базе данных:', err);
-                    return res.status(500).json({ error: 'Ошибка выполнения запроса к базе данных' });
+                    return res.status(500).json({error: 'Ошибка выполнения запроса к базе данных'});
                 }
 
                 result.forEach(res => {
-                    piq_opinions.push([res.professions.name.toString(), res.piq.name.toString(), res.position.toString()]);
+                    test_attempts.push([res.name.toString(), res.average_value.toString(), res.number_of_passes.toString(), res.number_of_mistakes.toString(), res.stadart_deviation.toString()]);
                 });
 
-                res.json({ login: login, status: status, username: username, permissions: permissions, test_attempts: test_attempts, piq_opinions: piq_opinions });
+                connection.query("SELECT professions.name, piq.name, opinions.position FROM opinions JOIN professions ON professions.id = opinions.profession_id JOIN piq ON piq.id = opinions.piq_id WHERE user_id = ?", [user_id], function (err, result) {
+                    if (err) {
+                        console.error('Ошибка выполнения запроса к базе данных:', err);
+                        return res.status(500).json({error: 'Ошибка выполнения запроса к базе данных'});
+                    }
+
+                    result.forEach(res => {
+                        piq_opinions.push([res.professions.name.toString(), res.piq.name.toString(), res.position.toString()]);
+                    });
+
+                    res.json({
+                        login: login,
+                        status: status,
+                        username: username,
+                        permissions: permissions,
+                        test_attempts: test_attempts,
+                        piq_opinions: piq_opinions
+                    });
+                });
             });
         });
-    });
+    }
 });
 /*app.post('/endpoint', (req, res) => {
     const jsonData = req.body;
