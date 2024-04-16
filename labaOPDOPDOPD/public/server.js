@@ -297,6 +297,7 @@ app.post('/endpoint', (req, res) => {
 
     let username = "";
     let permissions = "";
+    let avatar = "";
     let test_attempts = [];
     let piq_opinions = [];
     let status = "";
@@ -305,7 +306,7 @@ app.post('/endpoint', (req, res) => {
         registration(connection, login, password, jsonData);
         status = 'success';
         permissions = '0';
-        return res.json({ login: login, status: status, username: username, permissions: permissions, test_attempts: test_attempts, piq_opinions: piq_opinions });
+        return res.json({ login: login, status: status, username: username, permissions: permissions, avatar: avatar, test_attempts: test_attempts, piq_opinions: piq_opinions });
     }
 
     connection.query("SELECT * FROM users WHERE login = ? AND password = ?", [login, password], function (err, result) {
@@ -316,12 +317,13 @@ app.post('/endpoint', (req, res) => {
 
         if (result.length === 0) {
             status = "error";
-            return res.json({login: login, status: status, username: username, permissions: permissions, test_attempts: test_attempts, piq_opinions: piq_opinions });
+            return res.json({login: login, status: status, username: username, permissions: permissions, avatar: avatar, test_attempts: test_attempts, piq_opinions: piq_opinions });
         }
 
         status = "success";
         username = result[0].name.toString();
         permissions = result[0].permissions.toString();
+        avatar = result[0].avatar.toString();
         const user_id = result[0].id;
 
         connection.query("SELECT test.name, test_attempt.average_value, test_attempt.number_of_passes, test_attempt.number_of_mistakes, test_attempt.stadart_deviation FROM test_attempt INNER JOIN test ON test_attempt.test_id = test.id WHERE test_attempt.user_id = ?", [user_id], function (err, result) {
@@ -344,7 +346,7 @@ app.post('/endpoint', (req, res) => {
                     piq_opinions.push([res.professions.name.toString(), res.piq.name.toString(), res.position.toString()]);
                 });
 
-                res.json({ login: login, status: status, username: username, permissions: permissions, test_attempts: test_attempts, piq_opinions: piq_opinions });
+                res.json({ login: login, status: status, username: username, permissions: permissions, avatar: avatar, test_attempts: test_attempts, piq_opinions: piq_opinions });
             });
         });
     });
