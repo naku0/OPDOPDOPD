@@ -33,6 +33,13 @@ connection.connect(function (err){
     const create_PIQ = "CREATE TABLE IF NOT EXISTS piq(id INT AUTO_INCREMENT, name VARCHAR(255) NOT NULL, category_id INT NOT NULL, FOREIGN KEY fk_category_id (category_id) REFERENCES categories(id), PRIMARY KEY (id))";
     const create_opinions = "CREATE TABLE IF NOT EXISTS opinions(user_id INT NOT NULL, piq_id INT NOT NULL, profession_id INT NOT NULL, position INT CHECK (position > 0), FOREIGN KEY fk_user_id (user_id) REFERENCES users(id), FOREIGN KEY fk_piq_id (piq_id) REFERENCES piq(id), FOREIGN KEY fk_profession_id (profession_id) REFERENCES professions(id))";
     const add_users = "INSERT INTO `users` (`login`, `password`, `name`, `permissions`) VALUES ('dvoeglasova_n@opdopdopd.com', '19842024', 'nadvoe', 1), ('egorova_varvara@opdopdopd.com', '27122005', 'bapehuk', 1), ('maks1488@opdopdopd.com', '413029', 'masema', 1), ('gerger@opdopdopd.com', '14881995', 'sexinstructor', 1), ('tatti@opdopdopd.com' , '444555666777', 'Mr.Marihuan4ik', 1), ('sniyaq@opdopdopd.com', '88005553535', 'naku0', 1), ('kivisd3n@opdopdopd.com', 'chonadosucca', 'Kivisdenchyk', 1)";
+    const add_sniyaq_ava = "UPDATE users SET avatar = '/sniyaq.jpg' WHERE login = 'sniyaq@opdopdopd.com';";
+    const add_nadvoe_ava = "UPDATE users SET avatar = '/nadvoe.jpg' WHERE login = 'dvoeglasova_n@opdopdopd.com';";
+    const add_bapehuk_ava = "UPDATE users SET avatar = '/bapehuk.jpg' WHERE login = 'egorova_varvara@opdopdopd.com';";
+    const add_maks_ava = "UPDATE users SET avatar = '/maks.jpg' WHERE login = 'maks1488@opdopdopd.com';";
+    const add_ger_ava = "UPDATE users SET avatar = '/ger.jpg' WHERE login = 'gerger@opdopdopd.com';";
+    const add_tatti_ava = "UPDATE users SET avatar = '/tatti.jpg' WHERE login = 'tatti@opdopdopd.com';";
+    const add_kivi_ava = "UPDATE users SET avatar = '/Kivisdenchyk.jpg' WHERE login = 'kivisd3n@opdopdopd.com';";
     connection.query(use_db, function (err, result){
         if (err) throw err;
         console.log("DB is in use!");
@@ -64,6 +71,36 @@ connection.connect(function (err){
             console.log("Table users created!");
         });
     }
+    if (connection.query("SELECT avatar FROM users") === null) {
+        connection.query(add_bapehuk_ava, function (err) {
+            if (err) throw err;
+            console.log("Bapehuk ava added!");
+        });
+        connection.query(add_kivi_ava, function (err) {
+            if (err) throw err;
+            console.log("Kivi Ava added!");
+        });
+        connection.query(add_maks_ava, function (err) {
+            if (err) throw err;
+            console.log("Maks Ava added!");
+        });
+        connection.query(add_ger_ava, function (err) {
+            if (err) throw err;
+            console.log("Ger Ava added!");
+        });
+        connection.query(add_nadvoe_ava, function (err) {
+            if (err) throw err;
+            console.log("Nadvoe Ava added!");
+        });
+        connection.query(add_sniyaq_ava, function (err) {
+            if (err) throw err;
+            console.log("Sinyaq Ava added!");
+        });
+        connection.query(add_tatti_ava, function (err) {
+            if (err) throw err;
+            console.log("Tatti Ava added!");
+        });
+    }    
 });
 function registration(connection, user_login, user_password){
     const jsonData = req.body;
