@@ -65,8 +65,8 @@ connection.connect(function (err){
         });
     }
 });
-function registration(connection, user_login, user_password){
-    const jsonData = req.body;
+function registration(connection, user_login, user_password, data){
+    const jsonData = data;
     user_login = jsonData.login.toString();
     user_password = jsonData.password.toString();
     connection.connect(function (err){
@@ -255,7 +255,7 @@ app.post('/endpoint', (req, res) => {
     let status = "";
 
     if (jsonData.window === 'registration') {
-        registration(connection, login, password);
+        registration(connection, login, password, jsonData);
         status = 'success';
         permissions = '0';
         return res.json({ login: login, status: status, username: username, permissions: permissions, test_attempts: test_attempts, piq_opinions: piq_opinions });
