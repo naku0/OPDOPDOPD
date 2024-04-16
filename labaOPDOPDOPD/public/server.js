@@ -9,9 +9,10 @@ let checkisreg = false;
 
 const mysql = require("mysql2");
 const connection = mysql.createConnection({
+    port: "1337",
     host: "localhost",
     user: "root",
-    password: "qwerty0987654321"
+    password: "1234"
 });
 connection.connect(function(err) {
     if (err) throw err;
@@ -25,7 +26,6 @@ connection.connect(function(err) {
 
 connection.connect(function (err){
     if (err) throw err;
-    const standDev = "ALTER TABLE test_attempt ADD COLUMN stadart_deviation DOUBLE NOT NULL";
     const use_db = "USE opdopdopd";
     const create_users = "CREATE TABLE IF NOT EXISTS users(id INT AUTO_INCREMENT, login VARCHAR(255) NOT NULL UNIQUE, password VARCHAR(255) NOT NULL, permissions INT CHECK (permissions = 2 or permissions = 1 OR permissions = 0) NOT NULL, PRIMARY KEY (id))";
     const create_professions = "CREATE TABLE IF NOT EXISTS professions(id INT AUTO_INCREMENT, name VARCHAR(255) NOT NULL, PRIMARY KEY (id))";
@@ -66,6 +66,9 @@ connection.connect(function (err){
     }
 });
 function registration(connection, user_login, user_password){
+    const jsonData = req.body;
+    user_login = jsonData.login.toString();
+    user_password = jsonData.password.toString();
     connection.connect(function (err){
         if (err) throw err;
         connection.query("SELECT login FROM users", function (err, result, fields){ //запрашиваем все логины
@@ -266,7 +269,7 @@ app.post('/endpoint', (req, res) => {
 
         if (result.length === 0) {
             status = "error";
-            return res.json({ login: login, status: status, username: username, permissions: permissions, test_attempts: test_attempts, piq_opinions: piq_opinions });
+            return res.json({login: login, status: status, username: username, permissions: permissions, test_attempts: test_attempts, piq_opinions: piq_opinions });
         }
 
         status = "success";
@@ -281,7 +284,7 @@ app.post('/endpoint', (req, res) => {
             }
 
             result.forEach(res => {
-                test_attempts.push([res.name.toString(), res.average_value.toString(), res.number_of_passes.toString(), res.number_of_mistakes.toString(), res.stadart_deviation.toString()]);
+                test_attempts.push([res.name.toString(), res.average_value.toString(), res.number_of_passes.toString(), res.number_of_mistakes.toString(), res.standart_deviation.toString()]);
             });
 
             connection.query("SELECT professions.name, piq.name, opinions.position FROM opinions JOIN professions ON professions.id = opinions.profession_id JOIN piq ON piq.id = opinions.piq_id WHERE user_id = ?", [user_id], function (err, result) {
