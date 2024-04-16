@@ -8,7 +8,7 @@ let counter = 0;
 let amount = 5;
 const secFinal = document.getElementById('sec');
 const milisecFinal  = document.getElementById('milisec');
-let results = new Array(amount);
+let results = [];
 
 function block_space(btn) {
     if (btn.keyCode === space) {
@@ -44,6 +44,7 @@ startBtn.addEventListener('keydown', function (event) {
     block_space(event);
     if (isSpaceKeyPressedAndCounterNotZero(event, counter)) {
         if (counter < amount) {
+            console.log(results);
             restartTest();
             const clr = setTimeout(startTest, getRandomInt(1, 5) * 1000);
             let dataSec = document.getElementById('sec').innerHTML;

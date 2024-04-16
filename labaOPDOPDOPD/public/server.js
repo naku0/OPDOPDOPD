@@ -9,10 +9,9 @@ let checkisreg = false;
 
 const mysql = require("mysql2");
 const connection = mysql.createConnection({
-    port: "1337",
     host: "localhost",
     user: "root",
-    password: "1234"
+    password: "qwerty0987654321"
 });
 connection.connect(function(err) {
     if (err) throw err;
@@ -32,6 +31,7 @@ connection.connect(function (err){
     const create_categories = "CREATE TABLE IF NOT EXISTS categories(id INT AUTO_INCREMENT, name VARCHAR(255) NOT NULL, PRIMARY KEY (id))";
     const create_PIQ = "CREATE TABLE IF NOT EXISTS piq(id INT AUTO_INCREMENT, name VARCHAR(255) NOT NULL, category_id INT NOT NULL, FOREIGN KEY fk_category_id (category_id) REFERENCES categories(id), PRIMARY KEY (id))";
     const create_opinions = "CREATE TABLE IF NOT EXISTS opinions(user_id INT NOT NULL, piq_id INT NOT NULL, profession_id INT NOT NULL, position INT CHECK (position > 0), FOREIGN KEY fk_user_id (user_id) REFERENCES users(id), FOREIGN KEY fk_piq_id (piq_id) REFERENCES piq(id), FOREIGN KEY fk_profession_id (profession_id) REFERENCES professions(id))";
+    const alta = "alter table users add column avatar text";
     const add_users = "INSERT INTO `users` (`login`, `password`, `name`, `permissions`) VALUES ('dvoeglasova_n@opdopdopd.com', '19842024', 'nadvoe', 1), ('egorova_varvara@opdopdopd.com', '27122005', 'bapehuk', 1), ('maks1488@opdopdopd.com', '413029', 'masema', 1), ('gerger@opdopdopd.com', '14881995', 'sexinstructor', 1), ('tatti@opdopdopd.com' , '444555666777', 'Mr.Marihuan4ik', 1), ('sniyaq@opdopdopd.com', '88005553535', 'naku0', 1), ('kivisd3n@opdopdopd.com', 'chonadosucca', 'Kivisdenchyk', 1)";
     const add_sniyaq_ava = "UPDATE users SET avatar = '/sniyaq.jpg' WHERE login = 'sniyaq@opdopdopd.com';";
     const add_nadvoe_ava = "UPDATE users SET avatar = '/nadvoe.jpg' WHERE login = 'dvoeglasova_n@opdopdopd.com';";
@@ -49,6 +49,7 @@ connection.connect(function (err){
         if (err) throw err;
         console.log("Table users created!");
     });
+    connection.query(alta);
     connection.query(create_professions, function (err, result){
         if (err) throw err;
         console.log("Table professions created!");
@@ -232,6 +233,14 @@ app.get('/professionCSS.css', (req, res) => {
     res.header("Content-Type", "text/css");
     res.sendFile(__dirname + '/professionCSS.css');
 });
+app.get('/script_test1.js', (req, res) => {
+    res.header("Content-Type", "application/javascript");
+    res.sendFile(__dirname + '/style_test.css');
+});
+app.get('/script_test2.js', (req, res) => {
+    res.header("Content-Type", "application/javascript");
+    res.sendFile(__dirname + '/script_test2.js');
+});
 app.get('/GameDesigner.html', (req, res) => {
     const htmlFilePath = path.join(__dirname, 'GameDesigner.html');
     res.sendFile(htmlFilePath);
@@ -268,7 +277,7 @@ app.get('/test2.html', (req, res) => {
     const htmlFilePath = path.join(__dirname, 'test2.html');
     res.sendFile(htmlFilePath);
 });
-app.get('style_test.css', (req, res) => {
+app.get('/style_test.css', (req, res) => {
     res.header("Content-Type", "text/css");
     res.sendFile(__dirname + '/style_test.css');
 });
