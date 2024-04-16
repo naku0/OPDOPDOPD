@@ -40,7 +40,7 @@ connection.connect(function (err){
     const add_ger_ava = "UPDATE users SET avatar = '/ger.jpg' WHERE login = 'gerger@opdopdopd.com';";
     const add_tatti_ava = "UPDATE users SET avatar = '/tatti.jpg' WHERE login = 'tatti@opdopdopd.com';";
     const add_kivi_ava = "UPDATE users SET avatar = '/Kivisdenchyk.jpg' WHERE login = 'kivisd3n@opdopdopd.com';";
-    connection.query(use_db, function (err, result){
+    connection.query(use_db, function (err, result) {
         if (err) throw err;
         console.log("DB is in use!");
     });
@@ -100,7 +100,7 @@ connection.connect(function (err){
             if (err) throw err;
             console.log("Tatti Ava added!");
         });
-    }    
+    }
 });
 function registration(connection, user_login, user_password){
     const jsonData = req.body;
