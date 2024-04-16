@@ -82,7 +82,7 @@ function registration(connection, user_login, user_password, data){
             if (!(flag)){ //если есть - шлём нахуй, хотя надо попросить придумать другой логин
                 console.log("User already exist!");
             }else{ //если нет - делаем новую запись в бд и все круто классно
-                connection.query(`INSERT INTO users (login, password, permissions) VALUES ('${user_login}', '${user_password}', 0)`, function (result){
+                connection.query(`INSERT INTO users (login, password, name, permissions) VALUES ('${user_login}', '${user_password}', 'user' , 0)`, function (result){
                     console.log("Registration success!");
                 });
             }
@@ -199,9 +199,17 @@ app.get('/script_test1.js', (req, res) => {
     res.header("Content-Type", "application/javascript");
     res.sendFile(__dirname + '/script_test1.js');
 });
+app.get('/script_test1.js', (req, res) => {
+    res.header("Content-Type", "application/javascript");
+    res.sendFile(__dirname + '/style_test.css');
+});
 app.get('/script_test2.js', (req, res) => {
     res.header("Content-Type", "application/javascript");
     res.sendFile(__dirname + '/script_test2.js');
+});
+app.get('/script_test2.js', (req, res) => {
+    res.header("Content-Type", "application/javascript");
+    res.sendFile(__dirname + '/style_test.css');
 });
 app.get('/GameDesigner.html', (req, res) => {
     const htmlFilePath = path.join(__dirname, 'GameDesigner.html');
