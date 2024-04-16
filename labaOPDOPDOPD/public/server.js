@@ -9,9 +9,10 @@ let checkisreg = false;
 
 const mysql = require("mysql2");
 const connection = mysql.createConnection({
+    port: "1337",
     host: "localhost",
     user: "root",
-    password: "qwerty0987654321"
+    password: "1234"
 });
 connection.connect(function(err) {
     if (err) throw err;
@@ -26,7 +27,7 @@ connection.connect(function(err) {
 connection.connect(function (err){
     if (err) throw err;
     const use_db = "USE opdopdopd";
-    const create_users = "CREATE TABLE IF NOT EXISTS users(id INT AUTO_INCREMENT, login VARCHAR(255) NOT NULL UNIQUE, password VARCHAR(255) NOT NULL, permissions INT CHECK (permissions = 2 or permissions = 1 OR permissions = 0) NOT NULL, PRIMARY KEY (id))";
+    const create_users = "CREATE TABLE IF NOT EXISTS users(id INT AUTO_INCREMENT, login VARCHAR(255) NOT NULL UNIQUE, password VARCHAR(255) NOT NULL, avatar CHAR(255), permissions INT CHECK (permissions = 2 or permissions = 1 OR permissions = 0) NOT NULL, PRIMARY KEY (id))";
     const create_professions = "CREATE TABLE IF NOT EXISTS professions(id INT AUTO_INCREMENT, name VARCHAR(255) NOT NULL, PRIMARY KEY (id))";
     const create_categories = "CREATE TABLE IF NOT EXISTS categories(id INT AUTO_INCREMENT, name VARCHAR(255) NOT NULL, PRIMARY KEY (id))";
     const create_PIQ = "CREATE TABLE IF NOT EXISTS piq(id INT AUTO_INCREMENT, name VARCHAR(255) NOT NULL, category_id INT NOT NULL, FOREIGN KEY fk_category_id (category_id) REFERENCES categories(id), PRIMARY KEY (id))";
@@ -49,7 +50,7 @@ connection.connect(function (err){
         if (err) throw err;
         console.log("Table users created!");
     });
-    connection.query(alta);
+    // connection.query(alta);
     connection.query(create_professions, function (err, result){
         if (err) throw err;
         console.log("Table professions created!");
@@ -103,8 +104,8 @@ connection.connect(function (err){
         });
     }
 });
-function registration(connection, user_login, user_password){
-    const jsonData = req.body;
+function registration(connection, user_login, user_password, data){
+    jsonData = data;
     user_login = jsonData.login.toString();
     user_password = jsonData.password.toString();
     connection.connect(function (err){
@@ -120,7 +121,7 @@ function registration(connection, user_login, user_password){
             if (!(flag)){ //если есть - шлём нахуй, хотя надо попросить придумать другой логин
                 console.log("User already exist!");
             }else{ //если нет - делаем новую запись в бд и все круто классно
-                connection.query(`INSERT INTO users (login, password, permissions) VALUES ('${user_login}', '${user_password}', 0)`, function (result){
+                connection.query(`INSERT INTO users (login, password, permissions, name) VALUES ('${user_login}', '${user_password}', 0, 'user')`, function (result){
                     console.log("Registration success!");
                 });
             }
@@ -301,7 +302,7 @@ app.post('/endpoint', (req, res) => {
     let status = "";
 
     if (jsonData.window === 'registration') {
-        registration(connection, login, password);
+        registration(connection, login, password, jsonData);
         status = 'success';
         permissions = '0';
         return res.json({ login: login, status: status, username: username, permissions: permissions, test_attempts: test_attempts, piq_opinions: piq_opinions });
