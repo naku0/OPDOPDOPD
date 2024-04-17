@@ -38,9 +38,11 @@ function CheckPerms() {
 function CheckData() {
     const name = sessionStorage.getItem('name');
     const namespace = document.querySelector('.name');
-    console.log(name);
-    const picture = document.querySelector('.picture')
+    const avatar = sessionStorage.getItem('avatar');
+    const picture = document.querySelector('.picture img')
+    console.log(name, avatar);
     namespace.textContent = name;
+    picture.src = avatar;
 }
 
 function ShowDiv(class1) {
@@ -122,8 +124,8 @@ function sendJSON(data1, data2, window) {
             sessionStorage.setItem('status', dataFlag.toString());
             sessionStorage.setItem('permissions', data.permissions);
             sessionStorage.setItem('name', data.username === (''||'user') ? data.login.split('@')[0] : data.username);
-
-            console.log(sessionStorage.getItem('status'), sessionStorage.getItem('permissions'), sessionStorage.getItem('name'));
+            sessionStorage.setItem('avatar', data.avatar===(''||null) ? '/Kivisdenchyk.jpg' : data.avatar);
+            console.log(sessionStorage.getItem('status'), sessionStorage.getItem('permissions'), sessionStorage.getItem('name'), sessionStorage.getItem('avatar'));
             if (dataFlag) {
                 StartSession();
                 closeDiv('RegWindow');

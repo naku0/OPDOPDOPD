@@ -72,7 +72,6 @@ connection.connect(function (err){
             console.log("Table users created!");
         });
     }
-    if (connection.query("SELECT avatar FROM users") === null) {
         connection.query(add_bapehuk_ava, function (err) {
             if (err) throw err;
             console.log("Bapehuk ava added!");
@@ -101,7 +100,6 @@ connection.connect(function (err){
             if (err) throw err;
             console.log("Tatti Ava added!");
         });
-    }
 });
 function registration(connection, user_login, user_password, data){
     jsonData = data;
@@ -211,7 +209,7 @@ function add_piq_opinion(connection, piq, user_login, profession_name, position)
 }
 
 
-
+app.use('/pictures', express.static(path.join(__dirname, 'public', 'pictures')));
 app.use(express.static(path.join(__dirname, 'public')));
 app.listen(PORT, () => {
     console.log(`Сервер запущен на порту ${PORT}`);
@@ -305,6 +303,7 @@ app.post('/endpoint', (req, res) => {
         registration(connection, login, password, jsonData);
         status = 'success';
         permissions = '0';
+        app.use(express.static(path.join(__dirname, 'public')));
         return res.json({ login: login, status: status, username: username, permissions: permissions, avatar: avatar, test_attempts: test_attempts, piq_opinions: piq_opinions });
     }
 
