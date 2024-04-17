@@ -9,9 +9,10 @@ let checkisreg = false;
 
 const mysql = require("mysql2");
 const connection = mysql.createConnection({
+    port: "1337",
     host: "localhost",
     user: "root",
-    password: "qwerty0987654321"
+    password: "1234"
 });
 connection.connect(function(err) {
     if (err) throw err;
@@ -279,9 +280,9 @@ app.get('/style_test.css', (req, res) => {
     res.header("Content-Type", "text/css");
     res.sendFile(__dirname + '/style_test.css');
 });
-app.get('/Kivisdenchyk.jpg', (req, res) => {
-    res.sendFile(path.join(__dirname, 'Kivisdenchyk.jpg'));
-});
+// app.get('/Kivisdenchyk.jpg', (req, res) => {
+//     res.sendFile(path.join(__dirname, 'Kivisdenchyk.jpg'));
+// });
 app.use(bodyParser.json());
 app.post('/endpoint', (req, res) => {
     const jsonData = req.body;
@@ -347,7 +348,11 @@ app.post('/endpoint', (req, res) => {
                 res.json({ login: login, status: status, username: username, permissions: permissions, avatar: avatar, test_attempts: test_attempts, piq_opinions: piq_opinions });
             });
         });
+        app.get(`${avatar}`, (req, res) => {
+            res.sendFile(path.join(__dirname, `${avatar}`));
+        });
     });
+
 });
 /*app.post('/endpoint', (req, res) => {
     const jsonData = req.body;
