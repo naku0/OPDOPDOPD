@@ -119,9 +119,9 @@ function sendJSON(data1, data2, window) {
         .then(data => {
             console.log('Данные от сервера:', data);
             const dataFlag = data.status === 'success';
-            sessionStorage.setItem('status', dataFlag);
+            sessionStorage.setItem('status', dataFlag.toString());
             sessionStorage.setItem('permissions', data.permissions);
-            sessionStorage.setItem('name', data.username ? data.username : data.login.split('@')[0]);
+            sessionStorage.setItem('name', data.username === (''||'user') ? data.login.split('@')[0] : data.username);
 
             console.log(sessionStorage.getItem('status'), sessionStorage.getItem('permissions'), sessionStorage.getItem('name'));
             if (dataFlag) {
