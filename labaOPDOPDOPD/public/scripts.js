@@ -26,8 +26,8 @@ function CheckSession() {
     window.onload = checker;
     const enterElement = document.querySelector(".startSession");
     const exitElement = document.querySelector(".endSession");
-    enterElement.style.display = checker() === 'true'? "none" : "flex";
-    exitElement.style.display = checker() === 'true'? "flex" : "none";
+    enterElement.style.display = checker() === 'true' ? "none" : "flex";
+    exitElement.style.display = checker() === 'true' ? "flex" : "none";
 }
 
 function CheckPerms() {
@@ -35,6 +35,7 @@ function CheckPerms() {
     const hiddenElement = document.querySelector(".hiddenElement");
     hiddenElement.style.display = permissions === '1' ? "flex" : "none";
 }
+
 function CheckData() {
     const name = sessionStorage.getItem('name');
     const namespace = document.querySelector('.name');
@@ -123,8 +124,8 @@ function sendJSON(data1, data2, window) {
             const dataFlag = data.status === 'success';
             sessionStorage.setItem('status', dataFlag.toString());
             sessionStorage.setItem('permissions', data.permissions);
-            sessionStorage.setItem('name', data.username === (''||'user') ? data.login.split('@')[0] : data.username);
-            sessionStorage.setItem('avatar', data.avatar===(''||null) ? '/Kivisdenchyk.jpg' : data.avatar);
+            sessionStorage.setItem('name', data.username === ('' || 'user') ? data.login.split('@')[0] : data.username);
+            sessionStorage.setItem('avatar', data.avatar === ('' || null) ? '/Kivisdenchyk.jpg' : data.avatar);
             console.log(sessionStorage.getItem('status'), sessionStorage.getItem('permissions'), sessionStorage.getItem('name'), sessionStorage.getItem('avatar'));
             if (dataFlag) {
                 StartSession();
@@ -153,13 +154,14 @@ function StartSession() {
 }
 
 function EndSession() {
-        flag._flag = false;
-        dataFlag = false;
-        sessionStorage.removeItem('status');
-        sessionStorage.removeItem('permissions');
-        console.log(sessionStorage.getItem('status'), sessionStorage.getItem('permissions'));
-        CheckSession();
-        CheckPerms();
+    window.location.href = '/opdopdopd.html';
+    flag._flag = false;
+    dataFlag = false;
+    sessionStorage.removeItem('status');
+    sessionStorage.removeItem('permissions');
+    console.log(sessionStorage.getItem('status'), sessionStorage.getItem('permissions'));
+    CheckSession();
+    CheckPerms();
 }
 
 function randomLogo(id1) {
@@ -292,3 +294,51 @@ function paintEntReg() {
     regWindow.classList.add("wrong");
     paragraph.textContent = "Проверьте введенные данные";
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+    console.log('DOM загружен');
+    loadUsers();
+});
+
+function loadUsers() {
+    // Отправка AJAX-запроса к серверу
+    fetch('/users') // URL вашего маршрута на бэкенде для получения данных о пользователях
+        .then(response => response.json()) // Преобразование ответа в JSON
+        .then(data => {
+            // Обработка полученных данных
+            data.forEach(user => {
+                // Создание элемента .profileinfo-mini для каждого пользователя
+                const profileMini = document.createElement('div');
+                profileMini.classList.add('profileinfo-mini');
+                // Добавление изображения пользователя (если есть)
+                const pictureMini = document.createElement('div');
+                pictureMini.classList.add('picture-mini');
+                if (user.pictureUrl) {
+                    const img = document.createElement('img');
+                    img.src = user.pictureUrl;
+                    pictureMini.appendChild(img);
+                }
+                profileMini.appendChild(pictureMini);
+                // Добавление имени пользователя
+                const nameMini = document.createElement('div');
+                nameMini.classList.add('name-mini');
+                nameMini.textContent = user.name;
+                profileMini.appendChild(nameMini);
+                // Добавление информации о статусе пользователя (если есть)
+                const hiddenElement = document.createElement('div');
+                hiddenElement.classList.add('hiddenElement');
+                const verifiedIcon = document.createElement('i');
+                verifiedIcon.classList.add('material-symbols-outlined');
+                verifiedIcon.title = 'Квалифицированный эксперт';
+                verifiedIcon.textContent = 'verified';
+                hiddenElement.appendChild(verifiedIcon);
+                profileMini.appendChild(hiddenElement);
+                // Добавление блока с информацией о пользователе на страницу
+                document.querySelector('.info').appendChild(profileMini);
+            });
+        })
+        .catch(error => console.error('Ошибка:', error)); // Обработка ошибок
+}
+
+// Вызов функции для загрузки данных о пользователях при загрузке страницы
+document.addEventListener('DOMContentLoaded', loadUsers);

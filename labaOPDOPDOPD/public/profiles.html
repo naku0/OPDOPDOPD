@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<meta charset="UTF-8">
 <head>
     <script type="text/javascript" src="scripts.js"></script>
     <link rel="stylesheet" href="profileCSS.css">
@@ -34,7 +33,7 @@
                         <a href="OPDOPDOPD.html">Главная</a>
                     </li>
                     <li class="profiles">
-                        <a href="profiles.html">Профили</a>
+                        <a href="profile.html">Личный кабинет</a>
                     </li>
                     <li class="exit" onclick="EndSession()">
                         Выйти
@@ -45,30 +44,23 @@
     </ul>
 </header>
 <main>
+
     <div class="info">
-        <div class="profileinfo">
-            <div class="picture"><img></div>
-            <div class="other">
-                <div class="nameW">
-                    <div class="name">имя фамилия</div>
-                    <div class="hiddenElement">
-                        <i class="material-symbols-outlined" title="Квалифицированный эксперт">verified</i>
-                        <div class="message"><p>квалифицированный эксперт</p></div>
-                    </div>
-                </div>
-                <hr>
-                <div class="completedTests">Завершенные тесты:
-                <div class="amountOf"></div></div>
-            </div>
+        <div class="title">Профили</div>
+        <hr>
+        <div class="profileinfo-mini">
+            <div class="picture-mini"><img></div>
+            <div class="name-mini">имя фамилия</div>
+            <div class="hiddenElement"><i class="material-symbols-outlined" title="Квалифицированный эксперт">verified</i></div>
         </div>
-        <div class="tests">Доступные тесты:
-            <a class="test" href="">Сенсонмоторная реакция</a>
-            <a class="test" href="testPage.html">Реакция на движующиеся объекты</a>
-            <a class="test" href="">test 3</a>
+        <div class="profileinfo-mini">
+            <div class="picture-mini"><img></div>
+            <div class="name-mini">имя фамилия</div>
+            <div class="hiddenElement"><i class="material-symbols-outlined" title="Квалифицированный эксперт">verified</i></div>
         </div>
+
     </div>
-    <script>CheckData();
-    CheckPerms()</script>
 </main>
 </body>
+<script>CheckSession(); CheckPerms()</script>
 </html>

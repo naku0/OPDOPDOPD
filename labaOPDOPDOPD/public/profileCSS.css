@@ -74,7 +74,7 @@ div.menu {
     display: none;
     width: 200px;
     margin-left: -140px;
-    margin-top: 200px;
+    margin-top: 250px;
     padding: 10px;
     background-color: rgba(250, 253, 255, 0.9);
     border-radius: 10px;
@@ -92,11 +92,18 @@ div.menu ul.menulist li {
 
 .menu .menulist li {
     color: #AAD94A;
+
 }
 
 .menu .menulist li:first-child {
     font-size: 15px;
 }
+
+
+.menulist .profiles {
+    font-size: 15px;
+}
+
 
 div.menu li:hover {
     background-color: #CCFA5B;
@@ -112,11 +119,13 @@ main {
     display: flex;
     place-content: center;
 }
+
 .profileinfo {
     display: flex;
     flex-direction: row;
     width: 100%;
 }
+
 .info {
     background-color: rgba(250, 253, 255, 0.7);
     border-radius: 50px;
@@ -127,7 +136,8 @@ main {
     display: flex;
     flex-direction: column;
 }
-.picture{
+
+.picture {
     box-shadow: 10px 10px 10px #AAD94A;
     border-radius: 50%;
     background-color: #EDF0F2;
@@ -135,17 +145,19 @@ main {
     display: flex;
     place-content: center;
 }
+
 .picture img {
 
     border-radius: 50%;
     height: 35vh;
     width: 35vh;
 }
-.profileinfo .other{
-    width: 100%;
 
+.profileinfo .other {
+    width: 100%;
 }
-.profileinfo .name{
+
+.profileinfo .name {
     font-size: 40px;
     width: auto;
     font-weight: bold;
@@ -153,7 +165,8 @@ main {
     place-content: center;
     height: auto;
 }
-.profileinfo .hiddenElement{
+
+.profileinfo .hiddenElement {
     width: auto;
     height: auto;
     cursor: pointer;
@@ -161,10 +174,12 @@ main {
     align-items: center;
     padding-left: 5px;
 }
-.profileinfo hr{
-    color: rgba(0,0,0,0.2);
+
+.profileinfo hr {
+    color: rgba(0, 0, 0, 0.2);
 }
-.profileinfo .nameW{
+
+.profileinfo .nameW {
     display: flex;
     flex-direction: row;
     place-content: start;
@@ -172,20 +187,23 @@ main {
     padding-left: 10px;
 
 }
-.profileinfo .message{
+
+.profileinfo .message {
     font-size: 15px;
     font-weight: normal;
     z-index: 1;
     display: none;
 }
-.tests{
+
+.tests {
     margin-top: 20px;
     width: auto;
     display: flex;
     place-content: center;
     flex-direction: column;
 }
-.tests .test{
+
+.tests .test {
     padding: 10px;
     border: solid rgba(0, 0, 0, 0.2);
     display: flex;
@@ -193,6 +211,64 @@ main {
     border-radius: 20px;
     width: 70%;
     box-shadow: 3px 3px rgba(0, 0, 0, 0.1);
-    background-color: #EDF0F2;
+    background-color: #f0f0f0;
 
+}
+.tests .test:hover{
+    background-color: #DFDFDF;
+}
+.tests a{
+    text-decoration: none;
+
+}
+.tests a:visited{
+    color: black;
+}
+.tests a:hover{
+    color: #000000;
+}
+.info .title {
+    font-size: 30px;
+    font-weight: bold;
+    padding: 20px;
+}
+.info hr{
+    color: rgba(0,0,0,0.9);
+}
+.profileinfo-mini{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding: 15px 10px 10px;
+}
+.profileinfo-mini .picture-mini{
+    box-shadow: 5px 5px 5px #AAD94A;
+    border-radius: 50%;
+    background-color: #EDF0F2;
+    padding: 10px;
+    display: flex;
+    place-content: center;
+}
+.profileinfo-mini .picture-mini img {
+
+    border-radius: 50%;
+    height: 3vh;
+    width: 3vh;
+}
+.profileinfo-mini .name-mini{
+    font-size: 3vh;
+    padding-left: 15px;
+    display: flex;
+    place-items: center;
+}
+.profileinfo-mini .hiddenElement{
+    width: auto;
+    height: auto;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding-left: 5px;
+}
+.profileinfo-mini .hiddenElement i.material-symbols-outlined{
+    font-size: 2vh;
 }

@@ -279,6 +279,10 @@ app.get('/style_test.css', (req, res) => {
     res.header("Content-Type", "text/css");
     res.sendFile(__dirname + '/style_test.css');
 });
+app.get('/profiles.html', (req, res) => {
+    const htmlFilePath = path.join(__dirname, 'profiles.html');
+    res.sendFile(htmlFilePath);
+})
 // app.get('/Kivisdenchyk.jpg', (req, res) => {
 //     res.sendFile(path.join(__dirname, 'Kivisdenchyk.jpg'));
 // });
