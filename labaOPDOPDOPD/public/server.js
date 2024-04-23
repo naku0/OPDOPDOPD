@@ -233,7 +233,7 @@ app.get('/professionCSS.css', (req, res) => {
 });
 app.get('/script_test1.js', (req, res) => {
     res.header("Content-Type", "application/javascript");
-    res.sendFile(__dirname + '/style_test.css');
+    res.sendFile(__dirname + '/script_test1.js');
 });
 app.get('/script_test2.js', (req, res) => {
     res.header("Content-Type", "application/javascript");

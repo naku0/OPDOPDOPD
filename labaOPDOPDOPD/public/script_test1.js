@@ -17,7 +17,7 @@ function block_space(btn) {
 }
 
 function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min)) + min;
+    return Math.floor(Math.random() * (max - min) + min);
 }
 
 
@@ -46,7 +46,7 @@ startBtn.addEventListener('keydown', function (event) {
         if (counter < amount) {
             console.log(results);
             restartTest();
-            const clr = setTimeout(startTest, getRandomInt(1, 5) * 1000);
+            const clr = setTimeout(startTest, (getRandomInt(1, 5) * 1000));
             let dataSec = document.getElementById('sec').innerHTML;
             let dataMilisec = document.getElementById('milisec').innerHTML;
             results.push(dataSec + dataMilisec);
@@ -58,7 +58,7 @@ startBtn.addEventListener('keydown', function (event) {
 
 startBtn.addEventListener('click', function () {
     if (counter === 0) {
-        const clr = setTimeout(startTest, getRandomInt(1, 5) * 1000);
+        const clr = setTimeout(startTest, (getRandomInt(1, 5) * 1000));
     }
 });
 
