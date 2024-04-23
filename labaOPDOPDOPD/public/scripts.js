@@ -333,6 +333,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     profileMini.appendChild(hiddenElement);
                     // Добавление блока с информацией о пользователе на страницу
                     document.querySelector('.info').appendChild(profileMini);
+                    console.log(user);
+                    console.log(data);
                 });
             })
             .catch(error => console.error('Ошибка:', error)); // Обработка ошибок

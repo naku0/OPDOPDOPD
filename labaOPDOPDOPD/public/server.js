@@ -8,6 +8,7 @@ let usertype = "null";
 let checkisreg = false;
 
 const mysql = require("mysql2");
+const {json} = require("express");
 const connection = mysql.createConnection({
     host: "localhost",
     user: "root",
@@ -383,6 +384,23 @@ app.post('/endpoint', (req, res) => {
         });
     });
 });
+app.post('/users', (req, res) => {
+    let arrayOfUsers = [];
+    let usersJsons = [];
+    connection.query("SELECT login FROM users", function (err, result) {
+        arrayOfUsers.push(result);
+        for (let i = 0; i < arrayOfUsers.length; i++) {
+            connection.query("SELECT avatar FROM users WHERE login = " + mysql.escape(arrayOfUsers[i]) + "", function (err, result) {
+                json({
+                    login: arrayOfUsers[i],
+                    avatar: result
+                });
+                usersJsons.push(json);
+            })
+        }
+    })
+    res.json(usersJsons);
+})
 /*app.post('/endpoint', (req, res) => {
     const jsonData = req.body;
     console.log('Полученные данные нового пользователя:', jsonData.login, jsonData.password);
