@@ -20,3 +20,16 @@ a {
 body{
     background-color: #EDF0F2;
 }
+.time{
+    display: none;
+}
+.buttons{
+    display: grid;
+    place-content: center;
+    margin: 50%;
+}
+.StartBtn{
+    display: flex;
+    place-content: center;
+    padding: 20px;
+}

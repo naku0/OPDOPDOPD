@@ -34,6 +34,9 @@ function restartTest() {
     second = 0;
     milisec = 0;
     testBtn.style.backgroundColor = "white";
+    let dataSec = document.getElementById('sec').innerHTML;
+    let dataMilisec = document.getElementById('milisec').innerHTML;
+    results.push(dataSec + dataMilisec);
 }
 
 function isSpaceKeyPressedAndCounterNotZero(event, counter) {
@@ -45,13 +48,12 @@ startBtn.addEventListener('keydown', function (event) {
     if (isSpaceKeyPressedAndCounterNotZero(event, counter)) {
         if (counter < amount) {
             console.log(results);
+
             restartTest();
             const clr = setTimeout(startTest, (getRandomInt(1, 5) * 1000));
-            let dataSec = document.getElementById('sec').innerHTML;
-            let dataMilisec = document.getElementById('milisec').innerHTML;
-            results.push(dataSec + dataMilisec);
         } else {
             timer = false;
+
         }
     }
 });
