@@ -9,11 +9,12 @@ let checkisreg = false;
 
 const mysql = require("mysql2");
 const connection = mysql.createConnection({
+    port: "1337",
     host: "localhost",
     user: "root",
-    password: "qwerty0987654321"
+    password: "1234"
 });
-connection.connect(function(err) {
+connection.connect(function (err) {
     if (err) throw err;
     console.log("Connected!");
     connection.query("CREATE DATABASE IF NOT EXISTS opdopdopd", function (err, result) {
@@ -23,7 +24,7 @@ connection.connect(function(err) {
 });
 
 
-connection.connect(function (err){
+connection.connect(function (err) {
     if (err) throw err;
     const use_db = "USE opdopdopd";
     const create_users = "CREATE TABLE IF NOT EXISTS users(id INT AUTO_INCREMENT, login VARCHAR(255) NOT NULL UNIQUE, password VARCHAR(255) NOT NULL, avatar CHAR(255), permissions INT CHECK (permissions = 2 or permissions = 1 OR permissions = 0) NOT NULL, PRIMARY KEY (id))";
@@ -45,80 +46,82 @@ connection.connect(function (err){
         console.log("DB is in use!");
     });
     console.log("Connected!");
-    connection.query(create_users, function (err, result){
+    connection.query(create_users, function (err, result) {
         if (err) throw err;
         console.log("Table users created!");
     });
     // connection.query(alta);
-    connection.query(create_professions, function (err, result){
+    connection.query(create_professions, function (err, result) {
         if (err) throw err;
         console.log("Table professions created!");
     });
-    connection.query(create_categories, function (err, result){
+    connection.query(create_categories, function (err, result) {
         if (err) throw err;
         console.log("Table categories created!");
     });
-    connection.query(create_PIQ, function (err, result){
+    connection.query(create_PIQ, function (err, result) {
         if (err) throw err;
         console.log("Table PIQ created!");
     });
-    connection.query(create_opinions, function (err, result){
+    connection.query(create_opinions, function (err, result) {
         if (err) throw err;
         console.log("Table opinions created!");
     });
-    if (connection.query("SELECT login FROM users") === null){
-        connection.query(add_users, function (err, result){
+    if (connection.query("SELECT login FROM users") === null) {
+        connection.query(add_users, function (err, result) {
             if (err) throw err;
             console.log("Table users created!");
         });
     }
-        connection.query(add_bapehuk_ava, function (err) {
-            if (err) throw err;
-            console.log("Bapehuk ava added!");
-        });
-        connection.query(add_kivi_ava, function (err) {
-            if (err) throw err;
-            console.log("Kivi Ava added!");
-        });
-        connection.query(add_maks_ava, function (err) {
-            if (err) throw err;
-            console.log("Maks Ava added!");
-        });
-        connection.query(add_ger_ava, function (err) {
-            if (err) throw err;
-            console.log("Ger Ava added!");
-        });
-        connection.query(add_nadvoe_ava, function (err) {
-            if (err) throw err;
-            console.log("Nadvoe Ava added!");
-        });
-        connection.query(add_sniyaq_ava, function (err) {
-            if (err) throw err;
-            console.log("Sinyaq Ava added!");
-        });
-        connection.query(add_tatti_ava, function (err) {
-            if (err) throw err;
-            console.log("Tatti Ava added!");
-        });
+    connection.query(add_bapehuk_ava, function (err) {
+        if (err) throw err;
+        console.log("Bapehuk ava added!");
+    });
+    connection.query(add_kivi_ava, function (err) {
+        if (err) throw err;
+        console.log("Kivi Ava added!");
+    });
+    connection.query(add_maks_ava, function (err) {
+        if (err) throw err;
+        console.log("Maks Ava added!");
+    });
+    connection.query(add_ger_ava, function (err) {
+        if (err) throw err;
+        console.log("Ger Ava added!");
+    });
+    connection.query(add_nadvoe_ava, function (err) {
+        if (err) throw err;
+        console.log("Nadvoe Ava added!");
+    });
+    connection.query(add_sniyaq_ava, function (err) {
+        if (err) throw err;
+        console.log("Sinyaq Ava added!");
+    });
+    connection.query(add_tatti_ava, function (err) {
+        if (err) throw err;
+        console.log("Tatti Ava added!");
+    });
 });
-function registration(connection, user_login, user_password, data){
+
+function registration(connection, user_login, user_password, data) {
     jsonData = data;
     user_login = jsonData.login.toString();
     user_password = jsonData.password.toString();
-    connection.connect(function (err){
+    connection.connect(function (err) {
         if (err) throw err;
-        connection.query("SELECT login FROM users", function (err, result, fields){ //запрашиваем все логины
+        connection.query("SELECT login FROM users", function (err, result, fields) { //запрашиваем все логины
             if (err) throw err;
             let flag = true;
-            for (let log in result){ //проверяем нет ли юзера с таким логином
-                if (log.login === user_login){
+            for (let log in result) { //проверяем нет ли юзера с таким логином
+                if (log.login === user_login) {
                     flag = false;
                 }
             }
-            if (!(flag)){ //если есть - шлём нахуй, хотя надо попросить придумать другой логин
+            if (!(flag)) { //если есть - шлём нахуй, хотя надо попросить придумать другой логин
                 console.log("User already exist!");
-            }else{ //если нет - делаем новую запись в бд и все круто классно
-                connection.query(`INSERT INTO users (login, password, permissions, name) VALUES ('${user_login}', '${user_password}', 0, 'user')`, function (result){
+            } else { //если нет - делаем новую запись в бд и все круто классно
+                connection.query(`INSERT INTO users (login, password, permissions, name)
+                                  VALUES ('${user_login}', '${user_password}', 0, 'user')`, function (result) {
                     console.log("Registration success!");
                 });
             }
@@ -126,34 +129,34 @@ function registration(connection, user_login, user_password, data){
     });
 }
 
-function authorisation(connection, user_login, user_password){
+function authorisation(connection, user_login, user_password) {
     let message; //итоговое сообщение
     let result = false; //результат авторизации
-    connection.connect(function (err){
+    connection.connect(function (err) {
         if (err) throw err;
-        connection.query("SELECT login, password FROM users", function(err, result, fields){ //выбираем из бд логины и пароли
+        connection.query("SELECT login, password FROM users", function (err, result, fields) { //выбираем из бд логины и пароли
             if (err) throw err;
             let logs_and_pass = result; //получаем массив объектов
             let flag = false;
             let login;
             let password;
-            for (let log of logs_and_pass){ //проверяем есть ли вообще такой логин
-                if (log.login === user_login){
+            for (let log of logs_and_pass) { //проверяем есть ли вообще такой логин
+                if (log.login === user_login) {
                     flag = true;
                     login = log.login;
                     password = log.password;
                     break;
                 }
             }
-            if (!(flag)){ //Если нет такого логина - шлем нахуй
+            if (!(flag)) { //Если нет такого логина - шлем нахуй
                 message = "No such user!";
                 result = false;
                 console.log(message);
                 return result;
-            }else{
-                if (user_password === password){ //если есть и пароль совпадает - все заебись
+            } else {
+                if (user_password === password) { //если есть и пароль совпадает - все заебись
                     message = "Authorisation successful!";
-                    connection.query("SELECT permissions FROM users WHERE login = " + mysql.escape(login) + " UNION SELECT id FROM users", function(err, res, fields){
+                    connection.query("SELECT permissions FROM users WHERE login = " + mysql.escape(login) + " UNION SELECT id FROM users", function (err, res, fields) {
                         if (err) throw err;
                         usertype = res[0].permissions;
                         console.log(usertype);
@@ -161,7 +164,7 @@ function authorisation(connection, user_login, user_password){
                     result = true;
                     console.log(message);
                     return result;
-                }else{ //если не совпадает пароль - тоже шлем нахуй, хотя надо бы еще раз пароль запросить
+                } else { //если не совпадает пароль - тоже шлем нахуй, хотя надо бы еще раз пароль запросить
                     message = "Wrong password!";
                     result = false;
                     console.log(message);
@@ -171,34 +174,35 @@ function authorisation(connection, user_login, user_password){
         });
     });
 }
-function add_piq_opinion(connection, piq, user_login, profession_name, position){
-    connection.connect(function (err){
+
+function add_piq_opinion(connection, piq, user_login, profession_name, position) {
+    connection.connect(function (err) {
         if (err) throw err;
-        connection.query("SELECT id FROM piq WHERE name = " + mysql.escape(piq) + " UNION SELECT id FROM users WHERE login = " + mysql.escape(user_login) + " UNION SELECT id FROM professions WHERE name = " + mysql.escape(profession_name), function (err, result, fields){
+        connection.query("SELECT id FROM piq WHERE name = " + mysql.escape(piq) + " UNION SELECT id FROM users WHERE login = " + mysql.escape(user_login) + " UNION SELECT id FROM professions WHERE name = " + mysql.escape(profession_name), function (err, result, fields) {
             //Находим айдишники ПВК, юзера и профессии
             if (err) throw err;
             let piq_id;
             let user_id;
             let profession_id;
             let counter = 0;
-            for (let id in result){
-                if (counter === 0){
+            for (let id in result) {
+                if (counter === 0) {
                     piq_id = id.id;
-                }else if (counter === 1){
+                } else if (counter === 1) {
                     user_id = id.id;
-                }else{
+                } else {
                     profession_id = id.id;
                 }
             }
-            connection.query("SELECT position FROM opinions WHERE piq_id = " + mysql.escape(piq_id) + " AND user_id = " + mysql.escape(user_id) + " AND profession_id = " + mysql.escape(profession_id), function (err, result, fields){
+            connection.query("SELECT position FROM opinions WHERE piq_id = " + mysql.escape(piq_id) + " AND user_id = " + mysql.escape(user_id) + " AND profession_id = " + mysql.escape(profession_id), function (err, result, fields) {
                 //Проверяем нет ли уже такого мнения у данного пользователя по данной профессии с данным ПВК
-                if (result === []){ //если такого мнения еще нет, добавляем новое
-                    connection.query("INSERT INTO opinions (user_id, piq_id, profession_id, position) VALUES (" + mysql.escape(user_id) + ", " + mysql.escape(piq_id) + ", " + mysql.escape(profession_id) + ", " + mysql.escape(position), function (err){
+                if (result === []) { //если такого мнения еще нет, добавляем новое
+                    connection.query("INSERT INTO opinions (user_id, piq_id, profession_id, position) VALUES (" + mysql.escape(user_id) + ", " + mysql.escape(piq_id) + ", " + mysql.escape(profession_id) + ", " + mysql.escape(position), function (err) {
                         if (err) throw err;
                         console.log("Opinion inserted!");
                     });
-                }else{ //если есть, то обновляем позицию
-                    connection.query("UPDATE opinions SET position = " + mysql.escape(position) + " WHERE piq_id = " + mysql.escape(piq_id) + " AND user_id = " + mysql.escape(user_id) + " AND profession_id = " + mysql.escape(profession_id), function (err){
+                } else { //если есть, то обновляем позицию
+                    connection.query("UPDATE opinions SET position = " + mysql.escape(position) + " WHERE piq_id = " + mysql.escape(piq_id) + " AND user_id = " + mysql.escape(user_id) + " AND profession_id = " + mysql.escape(profession_id), function (err) {
                         if (err) throw err;
                         console.log("Opinion updated!");
                     })
@@ -293,7 +297,7 @@ app.post('/endpoint', (req, res) => {
     const password = jsonData.password ? jsonData.password.toString() : null;
 
     if (!login || !password) {
-        return res.status(400).json({ error: 'Отсутствуют данные для аутентификации' });
+        return res.status(400).json({error: 'Отсутствуют данные для аутентификации'});
     }
 
     let username = "";
@@ -308,18 +312,34 @@ app.post('/endpoint', (req, res) => {
         status = 'success';
         permissions = '0';
         app.use(express.static(path.join(__dirname, 'public')));
-        return res.json({ login: login, status: status, username: username, permissions: permissions, avatar: avatar, test_attempts: test_attempts, piq_opinions: piq_opinions });
+        return res.json({
+            login: login,
+            status: status,
+            username: username,
+            permissions: permissions,
+            avatar: avatar,
+            test_attempts: test_attempts,
+            piq_opinions: piq_opinions
+        });
     }
 
     connection.query("SELECT * FROM users WHERE login = ? AND password = ?", [login, password], function (err, result) {
         if (err) {
             console.error('Ошибка выполнения запроса к базе данных:', err);
-            return res.status(500).json({ error: 'Ошибка выполнения запроса к базе данных' });
+            return res.status(500).json({error: 'Ошибка выполнения запроса к базе данных'});
         }
 
         if (result.length === 0) {
             status = "error";
-            return res.json({login: login, status: status, username: username, permissions: permissions, avatar: avatar, test_attempts: test_attempts, piq_opinions: piq_opinions });
+            return res.json({
+                login: login,
+                status: status,
+                username: username,
+                permissions: permissions,
+                avatar: avatar,
+                test_attempts: test_attempts,
+                piq_opinions: piq_opinions
+            });
         }
 
         status = "success";
@@ -331,7 +351,7 @@ app.post('/endpoint', (req, res) => {
         connection.query("SELECT test.name, test_attempt.average_value, test_attempt.number_of_passes, test_attempt.number_of_mistakes, test_attempt.stadart_deviation FROM test_attempt INNER JOIN test ON test_attempt.test_id = test.id WHERE test_attempt.user_id = ?", [user_id], function (err, result) {
             if (err) {
                 console.error('Ошибка выполнения запроса к базе данных:', err);
-                return res.status(500).json({ error: 'Ошибка выполнения запроса к базе данных' });
+                return res.status(500).json({error: 'Ошибка выполнения запроса к базе данных'});
             }
 
             result.forEach(res => {
@@ -341,21 +361,28 @@ app.post('/endpoint', (req, res) => {
             connection.query("SELECT professions.name, piq.name, opinions.position FROM opinions JOIN professions ON professions.id = opinions.profession_id JOIN piq ON piq.id = opinions.piq_id WHERE user_id = ?", [user_id], function (err, result) {
                 if (err) {
                     console.error('Ошибка выполнения запроса к базе данных:', err);
-                    return res.status(500).json({ error: 'Ошибка выполнения запроса к базе данных' });
+                    return res.status(500).json({error: 'Ошибка выполнения запроса к базе данных'});
                 }
 
                 result.forEach(res => {
                     piq_opinions.push([res.professions.name.toString(), res.piq.name.toString(), res.position.toString()]);
                 });
 
-                res.json({ login: login, status: status, username: username, permissions: permissions, avatar: avatar, test_attempts: test_attempts, piq_opinions: piq_opinions });
+                res.json({
+                    login: login,
+                    status: status,
+                    username: username,
+                    permissions: permissions,
+                    avatar: avatar,
+                    test_attempts: test_attempts,
+                    piq_opinions: piq_opinions
+                });
             });
         });
         app.get(`${avatar}`, (req, res) => {
             res.sendFile(path.join(__dirname, '/pictures', `${avatar}`));
         });
     });
-
 });
 /*app.post('/endpoint', (req, res) => {
     const jsonData = req.body;
@@ -386,7 +413,7 @@ app.post('/endpoint', (req, res) => {
     }
 });*/
 
-app.post('/pvkpoint', (req, res) =>{
+app.post('/pvkpoint', (req, res) => {
     const jsonData = req.body;
     console.log(jsonData)
 });
