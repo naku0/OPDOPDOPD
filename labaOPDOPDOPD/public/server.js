@@ -386,34 +386,15 @@ app.post('/endpoint', (req, res) => {
     });
 });
 app.post('/users', async (req, res) => {
-    try {
-        let arrayOfUsers = [];
-        let usersJsons = [];
-
-        arrayOfUsers = await new Promise((resolve, reject) => {
-            connection.query("SELECT login FROM users", function (err, result) {
-                if (err) reject(err);
-                resolve(result);
-            });
+    const users = await new Promise((resolve, reject) => {
+        connection.query("SELECT login, avatar FROM users", function (err, result) {
+            if (err) reject(err);
+            resolve(result);
         });
-
-        for (let i = 0; i < arrayOfUsers.length; i++) {
-            const avatarResult = await new Promise((resolve, reject) => {
-                connection.query("SELECT avatar FROM users WHERE login = " + mysql.escape(arrayOfUsers[i].login), function (err, result) {
-                    if (err) reject(err);
-                    resolve(result);
-                });
-            });
-
-            const avatar = String(avatarResult[0].avatar);
-
-            usersJsons.push({ login: arrayOfUsers[i].login, avatar });
-        }
-
-        res.json(usersJsons);
-    } catch (error) {
-        res.status(500).json({ error: 'Internal Server Error' });
-    }
+    });
+    const usersJsons = users.map(user => ({login: user.login, avatar: user.avatar}));
+    console.log('Полученные данные:', usersJsons);
+    res.json(usersJsons);
 });
 /*app.post('/endpoint', (req, res) => {
     const jsonData = req.body;
