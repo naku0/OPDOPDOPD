@@ -295,47 +295,42 @@ function paintEntReg() {
     paragraph.textContent = "Проверьте введенные данные";
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-    console.log('DOM загружен');
-    loadUsers();
-});
-
 function loadUsers() {
-    fetch('/users') // Запрос данных с сервера
-        .then(response => response.json()) // Преобразование ответа в JSON
+    console.log("Ща будет");
+    fetch('/users') // Отправка GET-запроса на сервер для получения данных о пользователях
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Ошибка при получении данных о пользователях');
+            }
+            return response.json(); // Преобразование ответа в JSON
+        })
         .then(data => {
-            console.log(data);
+            // Обработка полученных данных
+            console.log('Полученные данные о пользователях:', data);
             data.forEach(user => {
-
                 const profileMini = document.createElement('div');
                 profileMini.classList.add('profileinfo-mini');
 
                 const pictureMini = document.createElement('div');
                 pictureMini.classList.add('picture-mini');
                 const img = document.createElement('img');
-                img.src = user.avatar; // Правильное обращение к полю avatar
+                img.src = user.avatar;
                 pictureMini.appendChild(img);
                 profileMini.appendChild(pictureMini);
 
                 const nameMini = document.createElement('div');
                 nameMini.classList.add('name-mini');
-                nameMini.textContent = user.login; // Правильное обращение к полю login
+                nameMini.textContent = user.username;
                 profileMini.appendChild(nameMini);
-
-                const hiddenElement = document.createElement('div');
-                hiddenElement.classList.add('hiddenElement');
-                const verifiedIcon = document.createElement('i');
-                verifiedIcon.classList.add('material-symbols-outlined');
-                verifiedIcon.title = 'Квалифицированный эксперт';
-                verifiedIcon.textContent = 'verified';
-                hiddenElement.appendChild(verifiedIcon);
-                profileMini.appendChild(hiddenElement);
-
+                if(user.permission === 1) {
+                    const verifiedIcon = document.createElement('i');
+                    verifiedIcon.classList.add('material-symbols-outlined');
+                    verifiedIcon.title = 'Квалифицированный эксперт';
+                    verifiedIcon.textContent = 'verified';
+                    profileMini.appendChild(verifiedIcon);
+                }
                 document.querySelector('.info').appendChild(profileMini);
             });
         })
         .catch(error => console.error('Ошибка:', error)); // Обработка ошибок
 }
-
-// Вызов функции для загрузки данных о пользователях при загрузке страницы
-document.addEventListener('DOMContentLoaded', loadUsers);

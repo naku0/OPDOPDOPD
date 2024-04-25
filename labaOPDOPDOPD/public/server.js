@@ -10,10 +10,9 @@ let checkisreg = false;
 const mysql = require("mysql2");
 const {json} = require("express");
 const connection = mysql.createConnection({
-    port: "1337",
     host: "localhost",
     user: "root",
-    password: "1234"
+    password: "qwerty0987654321"
 });
 connection.connect(function (err) {
     if (err) throw err;
@@ -385,17 +384,7 @@ app.post('/endpoint', (req, res) => {
         });
     });
 });
-app.post('/users', async (req, res) => {
-    const users = await new Promise((resolve, reject) => {
-        connection.query("SELECT login, avatar FROM users", function (err, result) {
-            if (err) reject(err);
-            resolve(result);
-        });
-    });
-    const usersJsons = users.map(user => ({login: user.login, avatar: user.avatar}));
-    console.log('Полученные данные:', usersJsons);
-    res.json(usersJsons);
-});
+
 /*app.post('/endpoint', (req, res) => {
     const jsonData = req.body;
     console.log('Полученные данные нового пользователя:', jsonData.login, jsonData.password);
@@ -424,12 +413,28 @@ app.post('/users', async (req, res) => {
         res.json({status:  st, permissions: pm});
     }
 });*/
-
-app.post('/pvkpoint', (req, res) => {
-    const jsonData = req.body;
-    console.log(jsonData)
+app.get('/users', async (req, res) => {
+    try {
+        const users = await new Promise((resolve, reject) => {
+            connection.query("SELECT login, avatar,permissions, name FROM users", function (err, result) {
+                if (err) reject(err);
+                resolve(result);
+            });
+        });
+        const usersJsons = users.map(user => (
+            {
+                login: user.login,
+                avatar: user.avatar==null ? "/default.jpg": user.avatar.toString(),
+                permission: user.permissions,
+                username: user.name !== 'user' ? user.name : user.login.split('@')[0]
+            }));
+        console.log('Полученные данные:', usersJsons);
+        res.json(usersJsons);
+    } catch (error) {
+        console.error('Ошибка при получении данных о пользователях:', error);
+        res.status(500).json({ error: 'Ошибка при получении данных о пользователях' });
+    }
 });
-
 app.listen(PORT2, () => {
     console.log(`Сервер запущен на порту ${PORT2}`);
 });

@@ -149,7 +149,6 @@ main {
 }
 
 .picture img {
-
     border-radius: 50%;
     height: 35vh;
     width: 35vh;
@@ -247,15 +246,13 @@ main {
     box-shadow: 5px 5px 5px #AAD94A;
     border-radius: 50%;
     background-color: #EDF0F2;
-    padding: 10px;
     display: flex;
     place-content: center;
 }
 .profileinfo-mini .picture-mini img {
-
     border-radius: 50%;
-    height: 3vh;
-    width: 3vh;
+    height: 5vh;
+    width: 5vh;
 }
 .profileinfo-mini .name-mini{
     font-size: 3vh;
