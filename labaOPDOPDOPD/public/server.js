@@ -386,21 +386,21 @@ app.post('/endpoint', (req, res) => {
 });
 app.post('/users', (req, res) => {
     let arrayOfUsers = [];
-    let usersJsons = [];
     connection.query("SELECT login FROM users", function (err, result) {
-        arrayOfUsers.push(result);
-        for (let i = 0; i < arrayOfUsers.length; i++) {
-            connection.query("SELECT avatar FROM users WHERE login = " + mysql.escape(arrayOfUsers[i]) + "", function (err, result) {
-                json({
-                    login: arrayOfUsers[i],
-                    avatar: result
-                });
-                usersJsons.push(json);
-            })
-        }
-    })
-    res.json(usersJsons);
-})
+        if (err) throw err;
+        arrayOfUsers = result.map(row => row.login);
+        let usersJsons = arrayOfUsers.map(login => ({
+            login: login,
+            avatar: null
+        }));
+        console.log(arrayOfUsers);
+        res.setHeader('Content-Type', 'application/json');
+        res.json(JSON.stringify(usersJsons));
+    }).catch(err => {
+        console.error(err);
+        res.status(500).send('Internal Server Error');
+    });
+});
 /*app.post('/endpoint', (req, res) => {
     const jsonData = req.body;
     console.log('Полученные данные нового пользователя:', jsonData.login, jsonData.password);

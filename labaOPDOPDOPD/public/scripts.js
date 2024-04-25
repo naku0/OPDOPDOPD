@@ -300,45 +300,42 @@ document.addEventListener('DOMContentLoaded', function () {
     loadUsers();
 });
 
-    function loadUsers() {
-        // Отправка AJAX-запроса к серверу
-        fetch('/users') // URL вашего маршрута на бэкенде для получения данных о пользователях
-            .then(response => response.json())
-            .then(data => {
-                // Обработка полученных данных
-                data.forEach(user => {
-                    // Создание элемента .profileinfo-mini для каждого пользователя
-                    const profileMini = document.createElement('div');
-                    profileMini.classList.add('profileinfo-mini');
-                    // Добавление изображения пользователя (если есть)
-                    const pictureMini = document.createElement('div');
-                    pictureMini.classList.add('picture-mini');
-                    const img = document.createElement('img');
-                    img.src = user.picture;
-                    pictureMini.appendChild(img);
-                    profileMini.appendChild(pictureMini);
-                    // Добавление имени пользователя
-                    const nameMini = document.createElement('div');
-                    nameMini.classList.add('name-mini');
-                    nameMini.textContent = user.name;
-                    profileMini.appendChild(nameMini);
-                    // Добавление информации о статусе пользователя (если есть)
-                    const hiddenElement = document.createElement('div');
-                    hiddenElement.classList.add('hiddenElement');
-                    const verifiedIcon = document.createElement('i');
-                    verifiedIcon.classList.add('material-symbols-outlined');
-                    verifiedIcon.title = 'Квалифицированный эксперт';
-                    verifiedIcon.textContent = 'verified';
-                    hiddenElement.appendChild(verifiedIcon);
-                    profileMini.appendChild(hiddenElement);
-                    // Добавление блока с информацией о пользователе на страницу
-                    document.querySelector('.info').appendChild(profileMini);
-                    console.log(user);
-                    console.log(data);
-                });
-            })
-            .catch(error => console.error('Ошибка:', error)); // Обработка ошибок
-    }
+function loadUsers() {
+    fetch('/users') // Запрос данных с сервера
+        .then(response => response.json()) // Преобразование ответа в JSON
+        .then(data => {
+            console.log(data);
+            data.forEach(user => {
+
+                const profileMini = document.createElement('div');
+                profileMini.classList.add('profileinfo-mini');
+
+                const pictureMini = document.createElement('div');
+                pictureMini.classList.add('picture-mini');
+                const img = document.createElement('img');
+                img.src = user.avatar; // Правильное обращение к полю avatar
+                pictureMini.appendChild(img);
+                profileMini.appendChild(pictureMini);
+
+                const nameMini = document.createElement('div');
+                nameMini.classList.add('name-mini');
+                nameMini.textContent = user.login; // Правильное обращение к полю login
+                profileMini.appendChild(nameMini);
+
+                const hiddenElement = document.createElement('div');
+                hiddenElement.classList.add('hiddenElement');
+                const verifiedIcon = document.createElement('i');
+                verifiedIcon.classList.add('material-symbols-outlined');
+                verifiedIcon.title = 'Квалифицированный эксперт';
+                verifiedIcon.textContent = 'verified';
+                hiddenElement.appendChild(verifiedIcon);
+                profileMini.appendChild(hiddenElement);
+
+                document.querySelector('.info').appendChild(profileMini);
+            });
+        })
+        .catch(error => console.error('Ошибка:', error)); // Обработка ошибок
+}
 
 // Вызов функции для загрузки данных о пользователях при загрузке страницы
 document.addEventListener('DOMContentLoaded', loadUsers);

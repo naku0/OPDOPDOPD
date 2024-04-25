@@ -32,12 +32,14 @@ header {
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
     width: auto;
     height: auto;
+    position: sticky;
     display: flex;
     place-content: flex-end;
 
 }
 
 header ul.topper {
+
     width: 100%;
     list-style: none;
     display: flex;
