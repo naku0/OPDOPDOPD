@@ -10,9 +10,10 @@ let checkisreg = false;
 const mysql = require("mysql2");
 const {json} = require("express");
 const connection = mysql.createConnection({
+    port: "1337",
     host: "localhost",
     user: "root",
-    password: "qwerty0987654321"
+    password: "1234"
 });
 connection.connect(function (err) {
     if (err) throw err;
@@ -384,22 +385,35 @@ app.post('/endpoint', (req, res) => {
         });
     });
 });
-app.post('/users', (req, res) => {
-    let arrayOfUsers = [];
-    connection.query("SELECT login FROM users", function (err, result) {
-        if (err) throw err;
-        arrayOfUsers = result.map(row => row.login);
-        let usersJsons = arrayOfUsers.map(login => ({
-            login: login,
-            avatar: null
-        }));
-        console.log(arrayOfUsers);
-        res.setHeader('Content-Type', 'application/json');
-        res.json(JSON.stringify(usersJsons));
-    }).catch(err => {
-        console.error(err);
-        res.status(500).send('Internal Server Error');
-    });
+app.post('/users', async (req, res) => {
+    try {
+        let arrayOfUsers = [];
+        let usersJsons = [];
+
+        arrayOfUsers = await new Promise((resolve, reject) => {
+            connection.query("SELECT login FROM users", function (err, result) {
+                if (err) reject(err);
+                resolve(result);
+            });
+        });
+
+        for (let i = 0; i < arrayOfUsers.length; i++) {
+            const avatarResult = await new Promise((resolve, reject) => {
+                connection.query("SELECT avatar FROM users WHERE login = " + mysql.escape(arrayOfUsers[i].login), function (err, result) {
+                    if (err) reject(err);
+                    resolve(result);
+                });
+            });
+
+            const avatar = String(avatarResult[0].avatar);
+
+            usersJsons.push({ login: arrayOfUsers[i].login, avatar });
+        }
+
+        res.json(usersJsons);
+    } catch (error) {
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
 });
 /*app.post('/endpoint', (req, res) => {
     const jsonData = req.body;
