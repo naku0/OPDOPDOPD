@@ -323,11 +323,14 @@ function loadUsers() {
                 nameMini.textContent = user.username;
                 profileMini.appendChild(nameMini);
                 if(user.permission === 1) {
+                    const hiddenElement = document.createElement('div');
+                    hiddenElement.classList.add('hiddenElement');
                     const verifiedIcon = document.createElement('i');
                     verifiedIcon.classList.add('material-symbols-outlined');
                     verifiedIcon.title = 'Квалифицированный эксперт';
                     verifiedIcon.textContent = 'verified';
-                    profileMini.appendChild(verifiedIcon);
+                    profileMini.appendChild(hiddenElement);
+                    hiddenElement.appendChild(verifiedIcon);
                 }
                 document.querySelector('.info').appendChild(profileMini);
             });
