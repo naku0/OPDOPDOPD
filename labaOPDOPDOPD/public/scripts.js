@@ -297,12 +297,12 @@ function paintEntReg() {
 let dataPo = [];
 function loadUsers() {
     console.log("Ща будет");
-    fetch('/users') // Отправка GET-запроса на сервер для получения данных о пользователях
+    fetch('/users')
         .then(response => {
             if (!response.ok) {
                 throw new Error('Ошибка при получении данных о пользователях');
             }
-            return response.json(); // Преобразование ответа в JSON
+            return response.json();
         })
         .then(data => {
             // Обработка полученных данных
@@ -337,22 +337,26 @@ function loadUsers() {
         })
         .catch(error => console.error('Ошибка:', error)); // Обработка ошибок
 }
-function loadAvatars(address){
+function loadAvatars() {
     console.log(dataPo);
-    let UserData = {
-        "avatar": address
+    for (let str in dataPo) {
+        let UserData = {
+            "avatar": str
+        }
+
+        fetch('/avatars', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(UserData),
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Ошибка при получении данных о пользователях');
+                } else {
+                    return response.json();
+                }
+            });
     }
-    fetch('/avatars', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(UserData),
-    })
-        .then(response =>{
-            if(!response.ok){
-                throw new Error('Ошибка при получении данных о пользователях');
-            } else {
-                return response.json();
-            }
-        });}
+}
