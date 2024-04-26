@@ -379,9 +379,7 @@ app.post('/endpoint', (req, res) => {
                 });
             });
         });
-        app.get(`${avatar}`, (req, res) => {
-            res.sendFile(path.join(__dirname, '/pictures', `${avatar}`));
-        });
+
     });
 });
 
@@ -434,6 +432,14 @@ app.get('/users', async (req, res) => {
         console.error('Ошибка при получении данных о пользователях:', error);
         res.status(500).json({ error: 'Ошибка при получении данных о пользователях' });
     }
+});
+app.post('/avatars', (req, res) => {
+    const jsonData = req.body;
+    console.log(jsonData);
+    let avatar = jsonData.avatar;
+    app.get(`${avatar}`, (req, res) => {
+        res.sendFile(path.join(__dirname, '/pictures', `${avatar}`));
+    });
 });
 app.listen(PORT2, () => {
     console.log(`Сервер запущен на порту ${PORT2}`);

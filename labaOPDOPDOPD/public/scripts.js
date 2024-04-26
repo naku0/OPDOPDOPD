@@ -308,6 +308,7 @@ function loadUsers() {
             // Обработка полученных данных
             console.log('Полученные данные о пользователях:', data);
             data.forEach(user => {
+                loadAvatars(user.avatar);
                 const profileMini = document.createElement('div');
                 profileMini.classList.add('profileinfo-mini');
 
@@ -336,4 +337,23 @@ function loadUsers() {
             });
         })
         .catch(error => console.error('Ошибка:', error)); // Обработка ошибок
+}
+function loadAvatars(address){
+    let UserData = {
+        "avatar": address
+    }
+    fetch('/avatars', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(UserData),
+    })
+        .then(response =>{
+            if(!response.ok){
+                throw new Error('Ошибка при получении данных о пользователях');
+            } else {
+                return response.json();
+            }
+        });
 }
