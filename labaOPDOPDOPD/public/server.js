@@ -440,6 +440,7 @@ app.post('/avatars', (req, res) => {
     app.get(`${avatar}`, (req, res) => {
         res.sendFile(path.join(__dirname, '/pictures', `${avatar}`));
     });
+    res.sendFile(path.join(__dirname, '/pictures', `${avatar}`));
 });
 app.listen(PORT2, () => {
     console.log(`Сервер запущен на порту ${PORT2}`);

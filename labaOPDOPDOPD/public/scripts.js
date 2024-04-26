@@ -308,6 +308,7 @@ function loadUsers() {
             // Обработка полученных данных
             console.log('Полученные данные о пользователях:', data);
             data.forEach(user => {
+                loadAvatars(user.avatar);
                 const profileMini = document.createElement('div');
                 profileMini.classList.add('profileinfo-mini');
                 profileMini.dataset.id = user.id;
@@ -317,6 +318,7 @@ function loadUsers() {
                 img.src = user.avatar;
                 pictureMini.appendChild(img);
                 profileMini.appendChild(pictureMini);
+
                 dataPo.push(user.avatar);
                 const nameMini = document.createElement('div');
                 nameMini.classList.add('name-mini');
@@ -337,26 +339,22 @@ function loadUsers() {
         })
         .catch(error => console.error('Ошибка:', error)); // Обработка ошибок
 }
-function loadAvatars() {
+function loadAvatars(address){
     console.log(dataPo);
-    for (let str in dataPo) {
-        let UserData = {
-            "avatar": str
-        }
-
-        fetch('/avatars', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(UserData),
-        })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Ошибка при получении данных о пользователях');
-                } else {
-                    return response.json();
-                }
-            });
+    let UserData = {
+        "avatar": address
     }
-}
+    fetch('/avatars', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(UserData),
+    })
+        .then(response =>{
+            if(!response.ok){
+                throw new Error('Ошибка при получении данных о пользователях');
+            } else {
+                return response.json();
+            }
+        });}
