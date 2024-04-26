@@ -294,7 +294,7 @@ function paintEntReg() {
     regWindow.classList.add("wrong");
     paragraph.textContent = "Проверьте введенные данные";
 }
-
+let dataPo = [];
 function loadUsers() {
     console.log("Ща будет");
     fetch('/users') // Отправка GET-запроса на сервер для получения данных о пользователях
@@ -308,17 +308,16 @@ function loadUsers() {
             // Обработка полученных данных
             console.log('Полученные данные о пользователях:', data);
             data.forEach(user => {
-                loadAvatars(user.avatar);
                 const profileMini = document.createElement('div');
                 profileMini.classList.add('profileinfo-mini');
-
+                profileMini.dataset.id = user.id;
                 const pictureMini = document.createElement('div');
                 pictureMini.classList.add('picture-mini');
                 const img = document.createElement('img');
                 img.src = user.avatar;
                 pictureMini.appendChild(img);
                 profileMini.appendChild(pictureMini);
-
+                dataPo.push(user.avatar);
                 const nameMini = document.createElement('div');
                 nameMini.classList.add('name-mini');
                 nameMini.textContent = user.username;
@@ -339,6 +338,7 @@ function loadUsers() {
         .catch(error => console.error('Ошибка:', error)); // Обработка ошибок
 }
 function loadAvatars(address){
+    console.log(dataPo);
     let UserData = {
         "avatar": address
     }
@@ -355,5 +355,4 @@ function loadAvatars(address){
             } else {
                 return response.json();
             }
-        });
-}
+        });}
