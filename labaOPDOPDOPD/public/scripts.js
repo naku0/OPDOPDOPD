@@ -55,6 +55,30 @@ function ShowDiv(class1) {
     }
 }
 
+function showSidePanel() {
+    const button = document.querySelector('.logo');
+    const sidePanel = document.getElementById('sidepanel');
+    const overlay = document.querySelector('.overlay');
+
+    button.addEventListener('click',  (event) => {
+        if (sidePanel.style.display === "grid") {
+            sidePanel.style.display = "none";
+            overlay.classList.remove('visible');
+        } else {
+            sidePanel.style.display = "grid";
+            overlay.classList.add('visible');
+        }
+        sidePanel.addEventListener('click', () => {
+            if (event.target !== sidePanel || event.target !== button) {
+                sidePanel.style.display = "none";
+                overlay.classList.remove('visible');
+            }
+        });
+    });
+
+
+}
+
 function closeDiv(class1) {
     class1 = document.getElementById(class1);
     class1.style.display = "none";
@@ -221,13 +245,11 @@ function changeOrder() {
 
 
 function saveOrderToServer() {
-
     const items = document.querySelectorAll(".item");
     const order = [];
     items.forEach((item, index) => {
         order.push({
-            id: item.dataset.id,
-            order: index + 1
+            id: item.textContent
         });
     });
     fetch('/pvkpoint', {
@@ -294,7 +316,9 @@ function paintEntReg() {
     regWindow.classList.add("wrong");
     paragraph.textContent = "Проверьте введенные данные";
 }
+
 let dataPo = [];
+
 function loadUsers() {
     console.log("Ща будет");
     fetch('/users')
@@ -324,7 +348,7 @@ function loadUsers() {
                 nameMini.classList.add('name-mini');
                 nameMini.textContent = user.username;
                 profileMini.appendChild(nameMini);
-                if(user.permission === 1) {
+                if (user.permission === 1) {
                     const hiddenElement = document.createElement('div');
                     hiddenElement.classList.add('hiddenElement');
                     const verifiedIcon = document.createElement('i');
@@ -339,7 +363,8 @@ function loadUsers() {
         })
         .catch(error => console.error('Ошибка:', error)); // Обработка ошибок
 }
-function loadAvatars(address){
+
+function loadAvatars(address) {
     console.log(dataPo);
     let UserData = {
         "avatar": address
@@ -351,10 +376,11 @@ function loadAvatars(address){
         },
         body: JSON.stringify(UserData),
     })
-        .then(response =>{
-            if(!response.ok){
+        .then(response => {
+            if (!response.ok) {
                 throw new Error('Ошибка при получении данных о пользователях');
             } else {
                 return response.json();
             }
-        });}
+        });
+}

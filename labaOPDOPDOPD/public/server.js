@@ -259,7 +259,10 @@ app.get('/OPDOPDOPD.html', (req, res) => {
     const htmlFilePath = path.join(__dirname, 'OPDOPDOPD.html');
     res.sendFile(htmlFilePath)
 });
-
+app.get('/sidepanel.css', (req, res) => {
+    res.setHeader("Content-Type", "text/css"); // Use setHeader instead of header
+    res.sendFile(__dirname + '/sidepanel.css');
+});
 app.get('/popug.jpg', (req, res) => {
     res.sendFile(__dirname + '/popug.jpg');
 });
@@ -271,6 +274,7 @@ app.get('/profileCSS.css', (req, res) => {
     res.header("Content-Type", "text/css");
     res.sendFile(__dirname + '/profileCSS.css');
 });
+
 app.get('/test1.html', (req, res) => {
     const htmlFilePath = path.join(__dirname, 'test1.html');
     res.sendFile(htmlFilePath);
@@ -441,6 +445,10 @@ app.post('/avatars', (req, res) => {
         res.sendFile(path.join(__dirname, '/pictures', `${avatar}`));
     });
     res.sendFile(path.join(__dirname, '/pictures', `${avatar}`));
+});
+app.post('/pvkpoint', (req, res) => {
+   const jsonData = req.body;
+   console.log(jsonData);
 });
 app.listen(PORT2, () => {
     console.log(`Сервер запущен на порту ${PORT2}`);

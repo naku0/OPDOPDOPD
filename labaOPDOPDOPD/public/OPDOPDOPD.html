@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <script type="text/javascript" src="scripts.js"></script>
     <link rel="stylesheet" href="styling.css">
+    <link rel="stylesheet" href="sidepanel.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
@@ -21,7 +22,7 @@
     <header>
         <ul class="topper">
             <li class="logo">
-                <a href="https://youtu.be/dQw4w9WgXcQ?si=swkKsubkCwZgkvkd">OPDOPDOPD
+                <a href="#">OPDOPDOPD
                     <i class="material-icons" id="logo">
                         <script>randomLogo("logo")</script>
                     </i>
@@ -42,6 +43,12 @@
         </ul>
         <script>CheckSession()</script>
     </header>
+    <div class="sidepanel" id="sidepanel">
+        <ul class="sidelist">
+            <li class="profile" draggable="false"><a href="profile.html">Личный кабинет</a></li>
+            <li class="profiles" draggable="false"><a href="profiles.html">Профили</a></li>
+        </ul>
+    </div>
     <div class="laba">
         <div class="yaNeZnayu">
             <div class="RegWindow" id="RegWindow">
@@ -107,7 +114,8 @@
         </li>
     </ul>
 </div>
-<script>CheckSession()</script>
+<div class="overlay" id="overlay"></div>
+<script>showSidePanel();CheckSession()</script>
 <footer>
     <div class="heart">
         <i class="material-icons" id="heart" onclick="heartClicker('popug','heart')">favorite</i>
@@ -116,5 +124,6 @@
         <img src="popug.jpg" alt="popug">
     </div>
 </footer>
+
 </body>
 </html>
