@@ -240,10 +240,17 @@ main {
     display: flex;
     flex-direction: row;
     width: 100%;
-    padding: 15px 10px 10px;
+    padding: 10px;
+    cursor: pointer;
 }
+.profileinfo-mini:hover{
+    background-color: #CCCCCC;
+    border-radius: 20px;
+    width: auto;
+}
+
 .profileinfo-mini .picture-mini{
-    box-shadow: 5px 5px 5px #AAD94A;
+    box-shadow: 3px 3px 3px #AAD94A;
     border-radius: 50%;
     background-color: #EDF0F2;
     display: flex;
@@ -251,14 +258,21 @@ main {
 }
 .profileinfo-mini .picture-mini img {
     border-radius: 50%;
-    height: 5vh;
-    width: 5vh;
+    height: 4em;
+    width: 4em;
 }
 .profileinfo-mini .name-mini{
-    font-size: 3vh;
+    font-size: 15px;
     padding-left: 15px;
     display: flex;
     place-items: center;
+    text-decoration: none;
+}
+.profileinfo-mini .name-mini:hover{
+    color: #AAD94A;
+}
+.profileinfo-mini .name-mini:visited{
+    color: #AAD94A;
 }
 .profileinfo-mini .hiddenElement{
     width: auto;

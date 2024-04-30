@@ -1,9 +1,106 @@
-.sidepanel{
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.sidepanel {
     display: none;
-    z-index: 4;
+    z-index: 5;
     position: absolute;
-    margin: 50px 0 0;
-    background-color: rgba(255,255,255,0.9);
-    padding: 25px;
-    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.9);
+    animation: appear 250ms ease-in-out;
+    width: 200px;
+    border: 1px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+}
+
+.overlay {
+    position: fixed;
+    margin: auto;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    animation: fade 350ms;
+    display: none;
+}
+
+@keyframes fade {
+    0% {
+        opacity: 0;
+    }
+    25% {
+        opacity: 25%;
+    }
+    50% {
+        opacity: 50%;
+    }
+    75% {
+        opacity: 75%;
+    }
+    100% {
+        opacity: 100%;
+    }
+}
+
+@keyframes appear {
+    0% {
+        transform: translateX(-300px);
+    }
+    10% {
+        transform: translateX(-260px);
+    }
+    20% {
+        transform: translateX(-230px);
+    }
+    30% {
+        transform: translateX(-200px);
+    }
+    40% {
+        transform: translateX(-170px);
+    }
+    50% {
+        transform: translateX(-160px);
+    }
+    60% {
+        transform: translateX(-150px);
+    }
+    70% {
+        transform: translateX(-140px);
+    }
+    80% {
+        transform: translateX(-130px);
+    }
+    90% {
+        transform: translateX(-100px);
+    }
+    100% {
+        transform: translateX(0px);
+    }
+}
+
+.overlay.visible {
+    display: block;
+}
+
+.logoAndSidePanel li {
+    display: flex;
+    flex-direction: column;
+    place-items: center;
+    width: auto;
+}
+.sidelist li:last-child{
+    margin-top: auto;
+}
+.sidelist li{
+    width: 100%;
+}
+.sidelist li a {
+    width: 100%;
+}
+.logoAndSidePanel li:first-child {
+    display: flex;
+    place-content: center;
+
 }

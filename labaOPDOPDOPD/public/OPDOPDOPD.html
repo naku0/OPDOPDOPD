@@ -22,33 +22,35 @@
     <header>
         <ul class="topper">
             <li class="logo">
-                <a href="#">OPDOPDOPD
-                    <i class="material-icons" id="logo">
-                        <script>randomLogo("logo")</script>
-                    </i>
-                </a>
-            </li>
-            <li class="startSession" id="startSession">
-                <a href="#" onclick="ShowDiv('RegWindow')">Вход</a>
-            </li>
-            <li class="endSession" id="endSession">
-                <a onclick="ShowDiv('menu')"><i class="material-symbols-outlined">menu</i></a>
-                <div class="menu" id="menu">
-                    <ul class="menulist">
-                        <li class="profile" draggable="false"><a href="profile.html">Личный кабинет</a></li>
-                        <li class="exit" draggable="false" onclick="EndSession()"><a href="#">Выйти</a></li>
-                    </ul>
-                </div>
-            </li>
+                <ul class="logoAndSidePanel">
+                    <li>
+                        <a href="#" onclick="checkStatusForSidePanel()">OPDOPDOPD
+                            <i class="material-icons" id="logo">
+                                <script>randomLogo("logo")</script>
+                            </i>
+                        </a>
+                    </li>
+                    <li>
+                        <div class="sidepanel" id="sidepanel">
+                            <ul class="sidelist">
+                                <li class="profile" draggable="false"><a href="profile.html">Личный кабинет</a></li>
+                                <li class="profiles" draggable="false"><a href="profiles.html">Профили</a></li>
+                                <li class="test" draggable="false"><a href="testPage.html">Тест</a></li>
+                                <li class="exit" draggable="false"><a onclick="EndSession()">Выход</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+        </ul>
+        </li>
+        <li class="startSession" id="startSession">
+            <a href="#" onclick="ShowDiv('RegWindow')">Вход</a>
+        </li>
+        <li class="endSession" id="endSession">
+        </li>
         </ul>
         <script>CheckSession()</script>
     </header>
-    <div class="sidepanel" id="sidepanel">
-        <ul class="sidelist">
-            <li class="profile" draggable="false"><a href="profile.html">Личный кабинет</a></li>
-            <li class="profiles" draggable="false"><a href="profiles.html">Профили</a></li>
-        </ul>
-    </div>
     <div class="laba">
         <div class="yaNeZnayu">
             <div class="RegWindow" id="RegWindow">
@@ -115,7 +117,7 @@
     </ul>
 </div>
 <div class="overlay" id="overlay"></div>
-<script>showSidePanel();CheckSession()</script>
+<script>CheckSession()</script>
 <footer>
     <div class="heart">
         <i class="material-icons" id="heart" onclick="heartClicker('popug','heart')">favorite</i>

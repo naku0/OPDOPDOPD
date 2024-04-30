@@ -54,13 +54,19 @@ function ShowDiv(class1) {
         class1.style.display = "grid";
     }
 }
-
+function checkStatusForSidePanel(){
+    if (sessionStorage.getItem('status') === 'true') {
+        showSidePanel();
+    }
+    else {
+        return;
+    }
+}
 function showSidePanel() {
     const button = document.querySelector('.logo');
     const sidePanel = document.getElementById('sidepanel');
     const overlay = document.querySelector('.overlay');
-
-    button.addEventListener('click',  (event) => {
+    button.addEventListener('click', (event) => {
         if (sidePanel.style.display === "grid") {
             sidePanel.style.display = "none";
             overlay.classList.remove('visible');
@@ -68,14 +74,13 @@ function showSidePanel() {
             sidePanel.style.display = "grid";
             overlay.classList.add('visible');
         }
-        sidePanel.addEventListener('click', () => {
-            if (event.target !== sidePanel || event.target !== button) {
-                sidePanel.style.display = "none";
-                overlay.classList.remove('visible');
-            }
+        overlay.addEventListener('click', (event) => {
+           if (event.target === overlay || event.target === button) {
+               sidePanel.style.display = "none";
+               overlay.classList.remove('visible');
+           }
         });
     });
-
 
 }
 
@@ -344,8 +349,9 @@ function loadUsers() {
                 profileMini.appendChild(pictureMini);
 
                 dataPo.push(user.avatar);
-                const nameMini = document.createElement('div');
+                const nameMini = document.createElement('a');
                 nameMini.classList.add('name-mini');
+                nameMini.href = '/' + user.username;
                 nameMini.textContent = user.username;
                 profileMini.appendChild(nameMini);
                 if (user.permission === 1) {
