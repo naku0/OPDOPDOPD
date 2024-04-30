@@ -9,10 +9,12 @@ let checkisreg = false;
 
 const mysql = require("mysql2");
 const {json} = require("express");
+const {resolve} = require("path");
 const connection = mysql.createConnection({
+    port: "1337",
     host: "localhost",
     user: "root",
-    password: "qwerty0987654321"
+    password: "1234"
 });
 connection.connect(function (err) {
     if (err) throw err;
@@ -430,7 +432,6 @@ app.get('/users', async (req, res) => {
                 permission: user.permissions,
                 username: user.name !== 'user' ? user.name : user.login.split('@')[0]
             }));
-        console.log('Полученные данные:', usersJsons);
         res.json(usersJsons);
     } catch (error) {
         console.error('Ошибка при получении данных о пользователях:', error);
@@ -448,7 +449,17 @@ app.post('/avatars', (req, res) => {
 });
 app.post('/pvkpoint', (req, res) => {
    const jsonData = req.body;
-   console.log(jsonData);
+   const array = jsonData.map(obj => obj.id);
+   for (let i = 0; i < array; i++) {
+       //ВОТ ТУТ ВОПРОСЫ
+       connection.query("INSERT INTO opinions (user_id, piq_id, profession_id, position) VALUES (?, ?, ?, ?)", [0, array[i], 0, i], function (err, result) {
+           //ВОПРОСЫ ВОТ ТУТ
+           if (err) throw err;
+           resolve(result);
+       })
+       console.log("1 record inserted");
+   }
+   console.log(array);
 });
 app.listen(PORT2, () => {
     console.log(`Сервер запущен на порту ${PORT2}`);
