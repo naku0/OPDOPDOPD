@@ -30,24 +30,13 @@
                             </i>
                         </a>
                     </li>
-                    <li>
-                        <div class="sidepanel" id="sidepanel">
-                            <ul class="sidelist">
-                                <li class="profile" draggable="false"><a href="profile.html">Личный кабинет</a></li>
-                                <li class="profiles" draggable="false"><a href="profiles.html">Профили</a></li>
-                                <li class="test" draggable="false"><a href="testPage.html">Тест</a></li>
-                                <li class="exit" draggable="false"><a onclick="EndSession()">Выход</a></li>
-                            </ul>
-                        </div>
-                    </li>
                 </ul>
-        </ul>
-        </li>
-        <li class="startSession" id="startSession">
-            <a href="#" onclick="ShowDiv('RegWindow')">Вход</a>
-        </li>
-        <li class="endSession" id="endSession">
-        </li>
+            </li>
+            <li class="startSession" id="startSession">
+                <a href="#" onclick="ShowDiv('RegWindow')">Вход</a>
+            </li>
+            <li class="endSession" id="endSession">
+            </li>
         </ul>
         <script>CheckSession()</script>
     </header>
@@ -116,8 +105,40 @@
         </li>
     </ul>
 </div>
+<aside class="side">
+    <div class="sidepanel" id="sidepanel">
+        <ul class="sidelist">
+            <li class="profile">
+                <div class="divInfo">
+                    <ul class="ulInfo">
+                        <li class="picture">
+                            <div class="avatarka">
+                            <img src="popug.jpg">
+                            </div>
+                        </li>
+                        <li class="name">
+                            <div class="profileName">
+                                asdsa
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="home" draggable="false" tabindex="0"><a href="OPDOPDOPD.html">
+                <i class="material-symbols-outlined">home</i>Главная</a></li>
+            <li class="myPage" draggable="false" tabindex="0"><a href="profile.html">
+                <i class="material-symbols-outlined">account_circle</i>Личный кабинет</a></li>
+            <li class="profiles" draggable="false" tabindex="0"><a href="profiles.html">
+                <i class="material-symbols-outlined" tabindex="0">group</i>Профили</a></li>
+            <li class="test" draggable="false"><a href="testPage.html">
+                <i class="material-symbols-outlined" tabindex="0">quiz</i>Тест</a></li>
+            <li class="exit" draggable="false" tabindex="0"><a href="OPDOPDOPD.html" onclick="EndSession()">
+                <i class="material-symbols-outlined">logout</i>Выход</a></li>
+        </ul>
+    </div>
+</aside>
 <div class="overlay" id="overlay"></div>
-<script>CheckSession()</script>
+<script>CheckSession(); loadAvatars(); CheckData();</script>
 <footer>
     <div class="heart">
         <i class="material-icons" id="heart" onclick="heartClicker('popug','heart')">favorite</i>

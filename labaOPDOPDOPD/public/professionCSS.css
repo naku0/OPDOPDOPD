@@ -107,7 +107,10 @@ main {
     display: flex;
     justify-content: space-evenly;
 }
-main li {
+main .funcList li {
+    padding: 10px;
+}
+.pvkList li{
     padding: 10px;
 }
 

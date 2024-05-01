@@ -5,6 +5,7 @@
     <title>OPDOPDOPD</title>
     <script type="text/javascript" src="scripts.js"></script>
     <link rel="stylesheet" href="professionCSS.css">
+    <link rel="stylesheet" href="sidepanel.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
@@ -21,7 +22,7 @@
 
     <ul class="topper">
         <li class="logo">
-            <a href="OPDOPDOPD.html">OPDOPDOPD
+            <a href="#" onclick="checkStatusForSidePanel()">OPDOPDOPD
                 <i class="material-icons" id="logo">
                     <script>randomLogo("logo")</script>
                 </i>
@@ -29,22 +30,6 @@
         </li>
         <li class="startSession" id="startSession">
             <a href="OPDOPDOPD.html"><i class="material-symbols-outlined">home</i></a>
-        </li>
-        <li class="endSession" id="endSession">
-            <a onclick="ShowDiv('menu')"><i class="material-symbols-outlined">menu</i></a>
-            <div class="menu" id="menu">
-                <ul class="menulist">
-                    <li class="home">
-                        <a href="OPDOPDOPD.html">Главная</a>
-                    </li>
-                    <li class="profiles">
-                        <a href="profiles.html">Профили</a>
-                    </li>
-                    <li class="exit" onclick="EndSession()">
-                        Выйти
-                    </li>
-                </ul>
-            </div>
         </li>
     </ul>
 </header>
@@ -89,6 +74,39 @@
             <li class="item" draggable="true">...</li>
         </ol>
     </div>
+    <aside class="side">
+        <div class="sidepanel" id="sidepanel">
+            <ul class="sidelist">
+                <li class="profile">
+                    <div class="divInfo">
+                        <ul class="ulInfo">
+                            <li class="picture">
+                                <div class="avatarka">
+                                    <img src="popug.jpg">
+                                </div>
+                            </li>
+                            <li class="name">
+                                <div class="profileName">
+                                    asdsa
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="home" draggable="false" tabindex="0"><a href="OPDOPDOPD.html">
+                    <i class="material-symbols-outlined">home</i>Главная</a></li>
+                <li class="myPage" draggable="false" tabindex="0"><a href="profile.html">
+                    <i class="material-symbols-outlined">account_circle</i>Личный кабинет</a></li>
+                <li class="profiles" draggable="false" tabindex="0"><a href="profiles.html">
+                    <i class="material-symbols-outlined" tabindex="0">group</i>Профили</a></li>
+                <li class="test" draggable="false"><a href="testPage.html">
+                    <i class="material-symbols-outlined" tabindex="0">quiz</i>Тест</a></li>
+                <li class="exit" draggable="false" tabindex="0"><a href="OPDOPDOPD.html" onclick="EndSession()">
+                    <i class="material-symbols-outlined">logout</i>Выход</a></li>
+            </ul>
+        </div>
+    </aside>
+    <div class="overlay" id="overlay"></div>
     <script>CheckSession();
     CheckPerms()</script>
 </main>

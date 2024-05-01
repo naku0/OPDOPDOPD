@@ -2,18 +2,96 @@
     margin: 0;
     padding: 0;
 }
+.side{
+    height: 100%;
+    z-index: 5;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
 
-.sidepanel {
+.side .sidepanel {
+    top:0;
+    left: 0;
     display: none;
     z-index: 5;
     position: absolute;
     background-color: rgba(255, 255, 255, 0.9);
     animation: appear 250ms ease-in-out;
-    width: 200px;
+    height: 100%;
+    width: 250px;
     border: 1px rgba(0, 0, 0, 0.1);
-    border-radius: 20px;
+
+}
+aside.side .sidelist li:first-child{
+    display: flex;
+    padding: 0;
+    place-items: center;
+    width: auto;
+}
+aside.side .sidelist li{
+    display: flex;
+    flex-direction: column;
+    place-items: start;
+    width: auto;
+}
+aside.side .sidelist li a{
+    display: flex;
+    padding: 20px;
+    color: black;
+    width: 100%;
+    height: auto;
+    text-decoration: none;
+}
+aside.side .sidelist li a i{
+    padding-right: 10px;
+}
+aside.side .sidelist li.exit{
+    margin-top: auto;
+}
+aside.side .sidelist .divInfo li:hover{
+    background-color: transparent;
+    cursor: context-menu;
+}
+aside.side .sidelist li:hover{
+    background-color: #dddddd;
+}
+aside.side .sidelist li:focus-within{
+    background-color: #CCFA5B;
+    outline: none;
 }
 
+.side .sidelist .divInfo{
+    background-color: #CCFA5B;
+    width: 100%;
+    display: flex;
+    padding: 20px 0;
+    place-content: center;
+    filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.5));
+}
+.divInfo .ulInfo{
+    display: flex;
+    padding: 5px 10px 0;
+}
+.ulInfo .name{
+    display: flex;
+    place-content: center;
+    font-weight: bold;
+    font-size: 20px;
+}
+.avatarka{
+    background-color: #EDF0F2;
+    border-radius: 50%;
+    padding: 5px;
+    box-shadow: 10px 10px 10px #AAD94A;
+}
+.side .sidelist .picture img{
+    display: flex;
+    place-content: center;
+    border-radius: 50%;
+    height: 70px;
+    width: 70px;
+}
 .overlay {
     position: fixed;
     margin: auto;
@@ -83,24 +161,10 @@
 .overlay.visible {
     display: block;
 }
+aside.side .sidelist li {
 
-.logoAndSidePanel li {
-    display: flex;
-    flex-direction: column;
-    place-items: center;
-    width: auto;
 }
 .sidelist li:last-child{
     margin-top: auto;
 }
-.sidelist li{
-    width: 100%;
-}
-.sidelist li a {
-    width: 100%;
-}
-.logoAndSidePanel li:first-child {
-    display: flex;
-    place-content: center;
 
-}

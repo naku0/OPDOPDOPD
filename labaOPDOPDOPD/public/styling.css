@@ -64,16 +64,7 @@ header .topper li:first-child {
     margin-right: auto;
 
 }
-header .topper li:first-child a{
-    font-weight: bold;
-    margin-right: auto;
-    background-color: #EDF0F2;
-    border-color: rgba(0, 0, 0, 0.2);
-    z-index: 2;
-}
-header .topper li:first-child a:hover{
-    background-color: #CCFA5B;
-}
+
 header {
     width: auto;
     height: auto;
