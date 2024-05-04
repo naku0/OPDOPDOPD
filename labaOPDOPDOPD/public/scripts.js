@@ -38,11 +38,13 @@ function CheckPerms() {
 
 function CheckData() {
     const name = sessionStorage.getItem('name');
-    const namespace = document.querySelector('.name');
+    const namespace = document.querySelector('div.name');
+    const SideNamespace = document.querySelector('ul.ulInfo li.name div.name');
     const avatar = sessionStorage.getItem('avatar');
     const picture = document.querySelector('.picture img')
     console.log(name, avatar);
     namespace.textContent = name;
+    SideNamespace.textContent = name;
     picture.src = avatar;
 }
 
@@ -66,6 +68,10 @@ function showSidePanel() {
     const button = document.querySelector('.logo');
     const sidePanel = document.getElementById('sidepanel');
     const overlay = document.querySelector('.overlay');
+    const avatar = document.querySelector('.avatarka img');
+    const name = document.querySelector('.name');
+    name.textContent = sessionStorage.getItem('name');
+    avatar.src = sessionStorage.getItem('avatar');
     button.addEventListener('click', (event) => {
         if (sidePanel.style.display === "grid") {
             sidePanel.style.display = "none";
@@ -188,6 +194,7 @@ function EndSession() {
     dataFlag = false;
     sessionStorage.removeItem('status');
     sessionStorage.removeItem('permissions');
+    sessionStorage.removeItem('name');
     console.log(sessionStorage.getItem('status'), sessionStorage.getItem('permissions'));
     CheckSession();
     CheckPerms();
@@ -273,29 +280,6 @@ function saveOrderToServer() {
         });
 }
 
-// function sendSessionStatus(){
-//     let sessionStatus = {
-//         "sessionStatus": flag._flag
-//     }
-//     fetch('/endpoint', {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify(sessionStatus)
-//     })
-//         .then(response => {
-//             if (response.ok) {
-//                 return response.json();
-//             } else {
-//                 console.error('Ошибка отправки данных на сервер:', response.status);
-//             }
-//         })
-//         .catch((error) => {
-//             console.error('Ошибка:', error);
-//         });
-// }
-
 function paintRedReg() {
     const button = document.querySelector(".changer");
     const regWindow = document.querySelector(".RegWindow");
@@ -347,7 +331,6 @@ function loadUsers() {
                 img.src = user.avatar;
                 pictureMini.appendChild(img);
                 profileMini.appendChild(pictureMini);
-
                 dataPo.push(user.avatar);
                 const nameMini = document.createElement('a');
                 nameMini.classList.add('name-mini');

@@ -138,7 +138,7 @@
     </div>
 </aside>
 <div class="overlay" id="overlay"></div>
-<script>CheckSession(); loadAvatars(); CheckData();</script>
+<script>CheckSession(); loadAvatars(sessionStorage.getItem("avatar")); CheckData();</script>
 <footer>
     <div class="heart">
         <i class="material-icons" id="heart" onclick="heartClicker('popug','heart')">favorite</i>

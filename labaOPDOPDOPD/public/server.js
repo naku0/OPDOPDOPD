@@ -11,10 +11,9 @@ const mysql = require("mysql2");
 const {json} = require("express");
 const {resolve} = require("path");
 const connection = mysql.createConnection({
-    port: "1337",
     host: "localhost",
     user: "root",
-    password: "1234"
+    password: "qwerty0987654321"
 });
 connection.connect(function (err) {
     if (err) throw err;
@@ -464,3 +463,4 @@ app.post('/pvkpoint', (req, res) => {
 app.listen(PORT2, () => {
     console.log(`Сервер запущен на порту ${PORT2}`);
 });
+
