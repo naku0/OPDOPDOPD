@@ -1,6 +1,7 @@
 * {
     margin: 0;
     padding: 0;
+    font-family: "Montserrat", sans-serif;
 }
 .side{
     height: 100%;
@@ -56,7 +57,7 @@ aside.side .sidelist .divInfo li:hover{
 aside.side .sidelist li:hover{
     background-color: #dddddd;
 }
-aside.side .sidelist li:focus-within{
+aside.side .sidelist li:active{
     background-color: #CCFA5B;
     outline: none;
 }

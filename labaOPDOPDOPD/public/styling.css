@@ -72,25 +72,6 @@ header {
     place-content: flex-end;
 }
 
-div.menu ul.menulist li {
-    width: 100%;
-    display: grid;
-    place-content: center;
-    color: #CCFA5B;
-}
-
-.menu .menulist li{
-    color: #AAD94A;
-}
-.menu .menulist li:first-child{
-    font-size: 15px;
-}
-
-div.menu li:hover {
-    background-color: #CCFA5B;
-    color: #000000;
-}
-
 div.enter {
     display: grid;
 }

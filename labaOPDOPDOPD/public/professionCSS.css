@@ -66,39 +66,6 @@ header .topper li:first-child {
     width: auto;
 }
 
-div.menu {
-    display: none;
-    width: 200px;
-    margin-left: -140px;
-    margin-top: 200px;
-    padding: 10px;
-    background-color: rgba(250, 253, 255, 0.9);
-    border-radius: 10px;
-    z-index: 1;
-    position: absolute;
-    box-shadow: 3px 3px rgba(0, 0, 0, 0.1);
-
-}
-
-div.menu ul.menulist li {
-    width: 100%;
-    display: grid;
-    place-content: center;
-}
-
-.menu .menulist li {
-    color: #AAD94A;
-}
-
-.menu .menulist li:first-child {
-    font-size: 15px;
-}
-
-div.menu li:hover {
-    background-color: #CCFA5B;
-    color: #000000;
-}
-
 body {
     background: radial-gradient(circle at center, #EDF0F2 75%, #CCFA5B 100%);
 }

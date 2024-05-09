@@ -1,107 +1,66 @@
 const express = require('express');
-const app = express();
 const bodyParser = require('body-parser');
 const path = require('path');
-const PORT = 1488;
-const PORT2 = 5252;
-let usertype = "null";
-let checkisreg = false;
-
 const mysql = require("mysql2");
-const {json} = require("express");
 const {resolve} = require("path");
-const connection = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "qwerty0987654321"
-});
+
+//const host = "::"||process.env.IP||"fd00::5:7e7b";
+const app = express();
+const PORT = "1488";
+const PORT2 = "5252";
+
+const connection = mysql.createConnection(
+    {
+        //host: "mysql-opd.alwaysdata.net",
+        //user: "opd",
+        //password: "aPEn+3487",
+        //port: "3306",
+        host:"localhost",
+        user:"root",
+        password:"qwerty0987654321",
+        database:"opdopdopd"
+    }
+);
+
 connection.connect(function (err) {
     if (err) throw err;
-    console.log("Connected!");
-    connection.query("CREATE DATABASE IF NOT EXISTS opdopdopd", function (err, result) {
-        if (err) throw err;
-        console.log("Database created");
-    });
+    console.log("Connected to MySQL database!");
+    createTables();
 });
 
-
-connection.connect(function (err) {
-    if (err) throw err;
-    const use_db = "USE opdopdopd";
-    const create_users = "CREATE TABLE IF NOT EXISTS users(id INT AUTO_INCREMENT, login VARCHAR(255) NOT NULL UNIQUE, password VARCHAR(255) NOT NULL, avatar CHAR(255), permissions INT CHECK (permissions = 2 or permissions = 1 OR permissions = 0) NOT NULL, PRIMARY KEY (id))";
-    const create_professions = "CREATE TABLE IF NOT EXISTS professions(id INT AUTO_INCREMENT, name VARCHAR(255) NOT NULL, PRIMARY KEY (id))";
-    const create_categories = "CREATE TABLE IF NOT EXISTS categories(id INT AUTO_INCREMENT, name VARCHAR(255) NOT NULL, PRIMARY KEY (id))";
-    const create_PIQ = "CREATE TABLE IF NOT EXISTS piq(id INT AUTO_INCREMENT, name VARCHAR(255) NOT NULL, category_id INT NOT NULL, FOREIGN KEY fk_category_id (category_id) REFERENCES categories(id), PRIMARY KEY (id))";
-    const create_opinions = "CREATE TABLE IF NOT EXISTS opinions(user_id INT NOT NULL, piq_id INT NOT NULL, profession_id INT NOT NULL, position INT CHECK (position > 0), FOREIGN KEY fk_user_id (user_id) REFERENCES users(id), FOREIGN KEY fk_piq_id (piq_id) REFERENCES piq(id), FOREIGN KEY fk_profession_id (profession_id) REFERENCES professions(id))";
-    const alta = "alter table users add column avatar text";
-    const add_users = "INSERT INTO `users` (`login`, `password`, `name`, `permissions`) VALUES ('dvoeglasova_n@opdopdopd.com', '19842024', 'nadvoe', 1), ('egorova_varvara@opdopdopd.com', '27122005', 'bapehuk', 1), ('maks1488@opdopdopd.com', '413029', 'masema', 1), ('gerger@opdopdopd.com', '14881995', 'sexinstructor', 1), ('tatti@opdopdopd.com' , '444555666777', 'Mr.Marihuan4ik', 1), ('sniyaq@opdopdopd.com', '88005553535', 'naku0', 1), ('kivisd3n@opdopdopd.com', 'chonadosucca', 'Kivisdenchyk', 1)";
-    const add_sniyaq_ava = "UPDATE users SET avatar = '/sniyaq.jpg' WHERE login = 'sniyaq@opdopdopd.com';";
-    const add_nadvoe_ava = "UPDATE users SET avatar = '/nadvoe.jpg' WHERE login = 'dvoeglasova_n@opdopdopd.com';";
-    const add_bapehuk_ava = "UPDATE users SET avatar = '/bapehuk.jpg' WHERE login = 'egorova_varvara@opdopdopd.com';";
-    const add_maks_ava = "UPDATE users SET avatar = '/maks.jpg' WHERE login = 'maks1488@opdopdopd.com';";
-    const add_ger_ava = "UPDATE users SET avatar = '/ger.jpg' WHERE login = 'gerger@opdopdopd.com';";
-    const add_tatti_ava = "UPDATE users SET avatar = '/tatti.jpg' WHERE login = 'tatti@opdopdopd.com';";
-    const add_kivi_ava = "UPDATE users SET avatar = '/Kivisdenchyk.jpg' WHERE login = 'kivisd3n@opdopdopd.com';";
-    connection.query(use_db, function (err, result) {
-        if (err) throw err;
-        console.log("DB is in use!");
-    });
-    console.log("Connected!");
-    connection.query(create_users, function (err, result) {
+function createTables() {
+    connection.query("CREATE TABLE IF NOT EXISTS users(id INT AUTO_INCREMENT, login VARCHAR(255) NOT NULL UNIQUE, password VARCHAR(255) NOT NULL, avatar VARCHAR(255), permissions INT CHECK (permissions = 2 or permissions = 1 OR permissions = 0) NOT NULL, PRIMARY KEY (id))", function (err) {
         if (err) throw err;
         console.log("Table users created!");
     });
-    // connection.query(alta);
-    connection.query(create_professions, function (err, result) {
+
+    connection.query("CREATE TABLE IF NOT EXISTS professions(id INT AUTO_INCREMENT, name VARCHAR(255) NOT NULL, PRIMARY KEY (id))", function (err) {
         if (err) throw err;
         console.log("Table professions created!");
     });
-    connection.query(create_categories, function (err, result) {
+
+    connection.query("CREATE TABLE IF NOT EXISTS categories(id INT AUTO_INCREMENT, name VARCHAR(255) NOT NULL, PRIMARY KEY (id))", function (err) {
         if (err) throw err;
         console.log("Table categories created!");
     });
-    connection.query(create_PIQ, function (err, result) {
+
+    connection.query("CREATE TABLE IF NOT EXISTS piq(id INT AUTO_INCREMENT, name VARCHAR(255) NOT NULL, category_id INT NOT NULL, FOREIGN KEY fk_category_id (category_id) REFERENCES categories(id), PRIMARY KEY (id))", function (err) {
         if (err) throw err;
         console.log("Table PIQ created!");
     });
-    connection.query(create_opinions, function (err, result) {
+
+    connection.query("CREATE TABLE IF NOT EXISTS opinions(user_id INT NOT NULL, piq_id INT NOT NULL, profession_id INT NOT NULL, position INT CHECK (position > 0), FOREIGN KEY fk_user_id (user_id) REFERENCES users(id), FOREIGN KEY fk_piq_id (piq_id) REFERENCES piq(id), FOREIGN KEY fk_profession_id (profession_id) REFERENCES professions(id))", function (err) {
         if (err) throw err;
         console.log("Table opinions created!");
     });
-    if (connection.query("SELECT login FROM users") === null) {
-        connection.query(add_users, function (err, result) {
-            if (err) throw err;
-            console.log("Table users created!");
-        });
-    }
-    connection.query(add_bapehuk_ava, function (err) {
-        if (err) throw err;
-        console.log("Bapehuk ava added!");
-    });
-    connection.query(add_kivi_ava, function (err) {
-        if (err) throw err;
-        console.log("Kivi Ava added!");
-    });
-    connection.query(add_maks_ava, function (err) {
-        if (err) throw err;
-        console.log("Maks Ava added!");
-    });
-    connection.query(add_ger_ava, function (err) {
-        if (err) throw err;
-        console.log("Ger Ava added!");
-    });
-    connection.query(add_nadvoe_ava, function (err) {
-        if (err) throw err;
-        console.log("Nadvoe Ava added!");
-    });
-    connection.query(add_sniyaq_ava, function (err) {
-        if (err) throw err;
-        console.log("Sinyaq Ava added!");
-    });
-    connection.query(add_tatti_ava, function (err) {
-        if (err) throw err;
-        console.log("Tatti Ava added!");
-    });
+}
+
+app.use('/pictures', express.static(path.join(__dirname, 'public', 'pictures')));
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.json());
+
+app.listen(PORT, () => {
+    console.log(`Сервер запущен на порту ${PORT}`);
 });
 
 function registration(connection, user_login, user_password, data) {
@@ -216,9 +175,6 @@ function add_piq_opinion(connection, piq, user_login, profession_name, position)
 
 app.use('/pictures', express.static(path.join(__dirname, 'public', 'pictures')));
 app.use(express.static(path.join(__dirname, 'public')));
-app.listen(PORT, () => {
-    console.log(`Сервер запущен на порту ${PORT}`);
-});
 
 app.get('/', (req, res) => {
     const htmlFilePath = path.join(__dirname, 'OPDOPDOPD.html');
@@ -277,11 +233,11 @@ app.get('/profileCSS.css', (req, res) => {
 });
 
 app.get('/test1.html', (req, res) => {
-    const htmlFilePath = path.join(__dirname, 'test1.html');
+    const htmlFilePath = path.join(__dirname, '/test1.html');
     res.sendFile(htmlFilePath);
 });
 app.get('/test2.html', (req, res) => {
-    const htmlFilePath = path.join(__dirname, 'test2.html');
+    const htmlFilePath = path.join(__dirname, '/test2.html');
     res.sendFile(htmlFilePath);
 });
 app.get('/style_test.css', (req, res) => {
@@ -289,12 +245,47 @@ app.get('/style_test.css', (req, res) => {
     res.sendFile(__dirname + '/style_test.css');
 });
 app.get('/profiles.html', (req, res) => {
-    const htmlFilePath = path.join(__dirname, 'profiles.html');
+    const htmlFilePath = path.join(__dirname, '/profiles.html');
     res.sendFile(htmlFilePath);
 })
+app.get('/testPage.html', (req, res) => {
+   const htmlFilePath = path.join(__dirname, '/testPage.html');
+   res.sendFile(htmlFilePath);
+});
+app.get('/favicon.ico', (req, res) => {
+    res.sendFile(__dirname + '/pictures' + '/icons' + '/favicon.ico');
+});
+app.get('/apple-touch-icon.png',(req, res) => {
+    res.sendFile(__dirname + '/apple-touch-icon.png');
+});
+app.get('/testPage.css', (req, res) => {
+    res.header("Content-Type", "text/css");
+    res.sendFile(__dirname + '/testPage.css');
+});
 // app.get('/Kivisdenchyk.jpg', (req, res) => {
 //     res.sendFile(path.join(__dirname, 'Kivisdenchyk.jpg'));
 // });
+app.get('/1.png', (req, res) => {
+    res.sendFile(__dirname + '/1.png');
+});
+app.get('/2.png', (req, res) => {
+    res.sendFile(path.join(__dirname, '/2.png'));
+});
+app.get('/3.png', (req, res) => {
+    res.sendFile(path.join(__dirname, '/3.png'));
+});
+app.get('/4.png', (req, res) => {
+    res.sendFile(path.join(__dirname, '/4.png'));
+});
+app.get('/5.png', (req, res) => {
+    res.sendFile(path.join(__dirname, '/5.png'));
+});
+app.get('/6.png', (req, res) => {
+    res.sendFile(path.join(__dirname, '/6.png'));
+});
+app.get('/sleep.png', (req, res) => {
+    res.sendFile(path.join(__dirname, '/sleep.png'));
+});
 app.use(bodyParser.json());
 app.post('/endpoint', (req, res) => {
     const jsonData = req.body;
@@ -388,34 +379,6 @@ app.post('/endpoint', (req, res) => {
     });
 });
 
-/*app.post('/endpoint', (req, res) => {
-    const jsonData = req.body;
-    console.log('Полученные данные нового пользователя:', jsonData.login, jsonData.password);
-    let user_login = jsonData.login.toString();
-    let user_password = jsonData.password.toString();
-    let check = false;
-    let st,pm;
-
-    if (jsonData.window.toString() === 'enter'){
-        authorisation(connection, user_login, user_password);
-        connection.query("SELECT * FROM users WHERE login = " + mysql.escape(user_login) + " AND password = " + mysql.escape(user_password), function (err, result, fields){
-            if (result === []){
-                st = 'error';
-                pm = '';
-            }else{
-                st = 'success';
-                pm = result[0].permissions.toString();
-                console.log(pm);
-            }
-            res.json({status:  st, permissions: pm});
-        });
-    }else if (jsonData.window.toString() === 'registration'){
-        registration(connection, user_login, user_password);
-        st = 'success';
-        pm = '0';
-        res.json({status:  st, permissions: pm});
-    }
-});*/
 app.get('/users', async (req, res) => {
     try {
         const users = await new Promise((resolve, reject) => {
@@ -427,14 +390,14 @@ app.get('/users', async (req, res) => {
         const usersJsons = users.map(user => (
             {
                 login: user.login,
-                avatar: user.avatar==null ? "/default.jpg": user.avatar.toString(),
+                avatar: user.avatar == null ? "/default.jpg" : user.avatar.toString(),
                 permission: user.permissions,
                 username: user.name !== 'user' ? user.name : user.login.split('@')[0]
             }));
         res.json(usersJsons);
     } catch (error) {
         console.error('Ошибка при получении данных о пользователях:', error);
-        res.status(500).json({ error: 'Ошибка при получении данных о пользователях' });
+        res.status(500).json({error: 'Ошибка при получении данных о пользователях'});
     }
 });
 app.post('/avatars', (req, res) => {
@@ -446,21 +409,24 @@ app.post('/avatars', (req, res) => {
     });
     res.sendFile(path.join(__dirname, '/pictures', `${avatar}`));
 });
+
+/*
 app.post('/pvkpoint', (req, res) => {
-   const jsonData = req.body;
-   const array = jsonData.map(obj => obj.id);
-   for (let i = 0; i < array; i++) {
-       //ВОТ ТУТ ВОПРОСЫ
-       connection.query("INSERT INTO opinions (user_id, piq_id, profession_id, position) VALUES (?, ?, ?, ?)", [0, array[i], 0, i], function (err, result) {
-           //ВОПРОСЫ ВОТ ТУТ
-           if (err) throw err;
-           resolve(result);
-       })
-       console.log("1 record inserted");
-   }
-   console.log(array);
+    const jsonData = req.body;
+    const array = jsonData.map(obj => obj.id);
+    for (let i = 0; i < array; i++) {
+        //ВОТ ТУТ ВОПРОСЫ
+        connection.query("INSERT INTO opinions (user_id, piq_id, profession_id, position) VALUES (?, ?, ?, ?)", [0, array[i], 0, i], function (err, result) {
+            //ВОПРОСЫ ВОТ ТУТ
+            if (err) throw err;
+            resolve(result);
+        })
+        console.log("1 record inserted");
+    }
+    console.log(array);
 });
-app.listen(PORT2, () => {
-    console.log(`Сервер запущен на порту ${PORT2}`);
+*/
+app.listen(PORT2,()=>{
+   console.log("Сервер запущен на порту "+PORT2);
 });
 

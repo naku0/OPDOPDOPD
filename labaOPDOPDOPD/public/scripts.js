@@ -56,14 +56,15 @@ function ShowDiv(class1) {
         class1.style.display = "grid";
     }
 }
-function checkStatusForSidePanel(){
+
+function checkStatusForSidePanel() {
     if (sessionStorage.getItem('status') === 'true') {
         showSidePanel();
-    }
-    else {
+    } else {
         return;
     }
 }
+
 function showSidePanel() {
     const button = document.querySelector('.logo');
     const sidePanel = document.getElementById('sidepanel');
@@ -72,7 +73,7 @@ function showSidePanel() {
     const name = document.querySelector('.name');
     name.textContent = sessionStorage.getItem('name');
     avatar.src = sessionStorage.getItem('avatar');
-    button.addEventListener('click', (event) => {
+    button.addEventListener('click', () => {
         if (sidePanel.style.display === "grid") {
             sidePanel.style.display = "none";
             overlay.classList.remove('visible');
@@ -81,10 +82,10 @@ function showSidePanel() {
             overlay.classList.add('visible');
         }
         overlay.addEventListener('click', (event) => {
-           if (event.target === overlay || event.target === button) {
-               sidePanel.style.display = "none";
-               overlay.classList.remove('visible');
-           }
+            if (event.target === overlay || event.target === button) {
+                sidePanel.style.display = "none";
+                overlay.classList.remove('visible');
+            }
         });
     });
 
@@ -304,6 +305,99 @@ function paintEntReg() {
     });
     regWindow.classList.add("wrong");
     paragraph.textContent = "Проверьте введенные данные";
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    addCarousel();
+});
+
+let index = 2;
+function addCarousel() {
+    const slides = document.querySelectorAll('.block');
+    let back = document.querySelector('.prev');
+    let next = document.querySelector('.next');
+    showSlide(slides, 0, index);
+    workCarousel(index, slides[index]);
+
+    back.addEventListener('click', () => {
+        prevSlide(slides);
+        workCarousel(index, slides[index]);
+    });
+    next.addEventListener('click', () => {
+        nextSlide(slides);
+        workCarousel(index, slides[index]);
+    });
+}
+
+function workCarousel(index, slide) {
+    const first = document.querySelector('h1.first-block');
+    const second = document.querySelector('h1.second-block');
+    const third = document.querySelector('h1.third-block');
+    slide.addEventListener('click', () => {
+        console.log(index);
+        switch (index) {
+            case (0): {
+                first.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                console.log("first");
+                break;
+            }
+            case (1): {
+                second.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                console.log("second");
+                break;
+            }
+            case (2): {
+                third.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                console.log("third");
+                break;
+            }
+        }
+    });
+}
+
+function prevSlide(slides) {
+    let newIndex = index - 1;
+    if (newIndex < 0) {
+        newIndex = slides.length - 1;
+    }
+    showSlide(slides, newIndex);
+}
+
+function nextSlide(slides) {
+    let newIndex = index + 1;
+    if (newIndex >= slides.length) {
+        newIndex = 0;
+    }
+    showSlide(slides, newIndex);
+}
+
+function showSlide(slides, newIndex) {
+    const currentSlide = slides[index];
+    const nextSlide = slides[newIndex];
+    if ((newIndex > index) || (newIndex === 0 && index === 2)) {
+        currentSlide.classList.add('fade-out');
+        currentSlide.classList.remove('active');
+        setTimeout(() => {
+            currentSlide.classList.remove('fade-out');
+        }, 700);
+        nextSlide.classList.add('fade-in');
+        nextSlide.classList.add('active');
+        setTimeout(() => {
+            nextSlide.classList.remove('fade-in');
+        }, 700);
+    } else if ((newIndex < index) || (newIndex === 2 && index === 0)) {
+        currentSlide.classList.add('current-to-right');
+        currentSlide.classList.remove('active');
+        setTimeout(() => {
+            currentSlide.classList.remove('current-to-right');
+        }, 700);
+        nextSlide.classList.add('next-to-left');
+        nextSlide.classList.add('active');
+        setTimeout(() => {
+            nextSlide.classList.remove('next-to-left');
+        }, 700);
+    }
+    index = newIndex;
 }
 
 let dataPo = [];
