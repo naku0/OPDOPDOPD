@@ -286,6 +286,14 @@ app.get('/6.png', (req, res) => {
 app.get('/sleep.png', (req, res) => {
     res.sendFile(path.join(__dirname, '/sleep.png'));
 });
+app.get('/test3.html', (req, res) => {
+    const htmlFilePath = path.join(__dirname, '/test3.html');
+    res.sendFile(htmlFilePath);
+});
+app.get('/test4.html', (req, res) => {
+    const htmlFilePath = path.join(__dirname, '/test4.html');
+    res.sendFile(htmlFilePath);
+});
 app.use(bodyParser.json());
 app.post('/endpoint', (req, res) => {
     const jsonData = req.body;
