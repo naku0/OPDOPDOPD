@@ -377,8 +377,7 @@ app.post('/tes1res', (req, res) => {
     const user_name = jsonData.name;
     const results = jsonData.res;
     const test_id = 1;
-    const sum = results.reduce((acc, cur) => acc + parseFloat(cur), 0);
-    const avg = sum / results.length;
+    const avg = results.reduce((acc, cur) => acc + parseFloat(cur), 0) / results.length;
     const deviation = calculateStandardDeviation(results);
     connection.query("INSERT INTO test_attempt (user_id, test_id, attempt_number, average_value, number_of_passes, stadart_deviation) VALUES ((SELECT id FROM users WHERE name = ?), ?, ?, ?, ?, ?);", [user_name, test_id, 0, avg, 0, deviation], function(err, result){
         if (err) {
@@ -389,6 +388,75 @@ app.post('/tes1res', (req, res) => {
     });
 });
 
+app.post('/tes2res', (req, res) => {
+    const jsonData = req.body;
+    const user_name = jsonData.name;
+    const results = jsonData.res;
+    const test_id = 2;
+    const avg = results.reduce((acc, cur) => acc + parseFloat(cur), 0) / results.length;
+    const deviation = calculateStandardDeviation(results);
+    connection.query("INSERT INTO test_attempt (user_id, test_id, attempt_number, average_value, number_of_passes, stadart_deviation) VALUES ((SELECT id FROM users WHERE name = ?), ?, ?, ?, ?, ?);", [user_name, test_id, 0, avg, 0, deviation], function(err, result){
+        if (err) {
+            console.error('Ошибка выполнения запроса к базе данных:', err);
+            return res.status(500).json({error: 'Ошибка выполнения запроса к базе данных'});
+        }
+        console.log("Test attempt added to db");
+    });
+});
+
+app.post('/tes3res', (req, res) => {
+    const jsonData = req.body;
+    const user_name = jsonData.name;
+    const result = jsonData.res;
+    const test_id = 3;
+    const number_of_mistakes = result[0];
+    const results = result.slice(1);
+    const avg = results.reduce((acc, cur) => acc + parseFloat(cur), 0) / results.length;
+    const deviation = calculateStandardDeviation(results);
+    connection.query("INSERT INTO test_attempt (user_id, test_id, attempt_number, average_value, number_of_passes, stadart_deviation, number_of_mistakes) VALUES ((SELECT id FROM users WHERE name = ?), ?, ?, ?, ?, ?, ?);", [user_name, test_id, 0, avg, 0, deviation, number_of_mistakes], function(err, result){
+        if (err) {
+            console.error('Ошибка выполнения запроса к базе данных:', err);
+            return res.status(500).json({error: 'Ошибка выполнения запроса к базе данных'});
+        }
+        console.log("Test attempt added to db");
+    });
+});
+
+app.post('/tes4res', (req, res) => {
+    const jsonData = req.body;
+    const user_name = jsonData.name;
+    const result = jsonData.res;
+    const test_id = 4;
+    const number_of_mistakes = result[0];
+    const results = result.slice(1);
+    const avg = results.reduce((acc, cur) => acc + parseFloat(cur), 0) / results.length;
+    const deviation = calculateStandardDeviation(results);
+    connection.query("INSERT INTO test_attempt (user_id, test_id, attempt_number, average_value, number_of_passes, stadart_deviation, number_of_mistakes) VALUES ((SELECT id FROM users WHERE name = ?), ?, ?, ?, ?, ?, ?);", [user_name, test_id, 0, avg, 0, deviation, number_of_mistakes], function(err, result){
+        if (err) {
+            console.error('Ошибка выполнения запроса к базе данных:', err);
+            return res.status(500).json({error: 'Ошибка выполнения запроса к базе данных'});
+        }
+        console.log("Test attempt added to db");
+    });
+});
+
+app.post('/tes5res', (req, res) => {
+    const jsonData = req.body;
+    const user_name = jsonData.name;
+    const result = jsonData.res;
+    const test_id = 5;
+    const number_of_mistakes = result[0];
+    const results = result.slice(1);
+    const avg = results.reduce((acc, cur) => acc + parseFloat(cur), 0) / results.length;
+    const deviation = calculateStandardDeviation(results);
+    connection.query("INSERT INTO test_attempt (user_id, test_id, attempt_number, average_value, number_of_passes, stadart_deviation, number_of_mistakes) VALUES ((SELECT id FROM users WHERE name = ?), ?, ?, ?, ?, ?, ?);", [user_name, test_id, 0, avg, 0, deviation, number_of_mistakes], function(err, result){
+        if (err) {
+            console.error('Ошибка выполнения запроса к базе данных:', err);
+            return res.status(500).json({error: 'Ошибка выполнения запроса к базе данных'});
+        }
+        console.log("Test attempt added to db");
+    });
+});
 
 
 app.use(bodyParser.json());
