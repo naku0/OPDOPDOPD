@@ -271,20 +271,23 @@ function checkTime(){
 
 
 function startTest() {
-    const num = getRandomInt(1, 4);
-    if (num === 1){
-        dop_Angle = Math.PI * ((getRandomInt(-50, 50))/1000);
-        dop_Angle1 = 0;
-        dop_Angle2 = 0;
-    }else if (num === 2){
-        dop_Angle1 = Math.PI * ((getRandomInt(-50, 50))/1000);
-        dop_Angle = 0;
-        dop_Angle2 = 0;
-    }else{
-        dop_Angle2 = Math.PI * ((getRandomInt(-50, 50))/1000);
-        dop_Angle = 0;
-        dop_Angle1 = 0;
-    }
+    // const num = getRandomInt(1, 4);
+    // if (num === 1){
+    //     dop_Angle = Math.PI * ((getRandomInt(-50, 50))/1000);
+    //     dop_Angle1 = 0;
+    //     dop_Angle2 = 0;
+    // }else if (num === 2){
+    //     dop_Angle1 = Math.PI * ((getRandomInt(-50, 50))/1000);
+    //     dop_Angle = 0;
+    //     dop_Angle2 = 0;
+    // }else{
+    //     dop_Angle2 = Math.PI * ((getRandomInt(-50, 50))/1000);
+    //     dop_Angle = 0;
+    //     dop_Angle1 = 0;
+    // }
+    dop_Angle = Math.PI * ((getRandomInt(-20, 20))/1000);
+    dop_Angle2 = Math.PI * ((getRandomInt(-20, 20))/1000);
+    dop_Angle1 = Math.PI * ((getRandomInt(-20, 20))/1000);
     continueAnimating = true;
     requestAnimationFrame(tick);
     timer = true;
@@ -313,14 +316,15 @@ function isKeyPressedAndCounterNotZero(event){
 function doTest(){
     if (counter > 0){
         restartTest();
-        setTimeout(startTest, getRandomInt(1, 5) * 1000);
+        startTest();
+        //setTimeout(startTest, getRandomInt(1, 5) * 1000);
         results.push(checkTime());
         console.log(results);
     }
     else {
         continueAnimating = false;
         results.push(checkTime());
-        console.log(results.filter(Boolean));
+        //console.log(results.filter(Boolean));
         okno.style.backgroundColor = "#EDF0F2";
         document.querySelector('.canva').style.display = "none";
         document.querySelector('.finish').style.display = "flex";
@@ -344,7 +348,7 @@ document.addEventListener('keydown', function (event){
             doTest();
             fill(counter*(100/amount), line);
             results[0]++;
-            console.log(incorrectAnswer);
+            //console.log(incorrectAnswer);
         }else{
             continueAnimating = false;
             results[0]++;
@@ -357,7 +361,8 @@ document.addEventListener('keydown', function (event){
 startBtn.addEventListener('click', function () {
     document.querySelector(".info").style.display = "none";
     if (counter === amount) {
-        setTimeout(startTest, getRandomInt(1, 5) * 1000);
+        startTest();
+        //setTimeout(startTest, getRandomInt(1, 5) * 1000);
     }
 });
 

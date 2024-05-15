@@ -382,7 +382,7 @@ app.post('/tes1res', (req, res) => {
             console.error('Ошибка выполнения запроса к базе данных:', err);
             return res.status(500).json({error: 'Ошибка выполнения запроса к базе данных'});
         }
-        console.log("Test attempt added to db");76
+        console.log("Test attempt added to db");
     });
 });
 

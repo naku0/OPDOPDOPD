@@ -113,9 +113,6 @@ function getRandomInt(min, max) {
 
 
 // тут я устала
-// если юзер не успел нажать до того как шарик покинул верхнюю половину то
-// ответ все равно надо записать (это будет время между моментом когда шарик
-// был наверху и моментом когда шарик был справа (в нуле) взятое с минусом)
 
 function checkTime(){
     speed = Math.abs((60 * dop_Angle) / (Math.PI));
@@ -171,7 +168,8 @@ function isKeyPressedAndCounterNotZero(event){
 function doTest(){
     if (counter > 0){
         restartTest();
-        setTimeout(startTest, getRandomInt(1, 5) * 1000);
+        startTest();
+        //setTimeout(startTest, getRandomInt(1, 5) * 1000);
         results.push(checkTime());
         console.log(results);
     }
@@ -204,7 +202,8 @@ document.addEventListener('keydown', function (event){
 startBtn.addEventListener('click', function () {
     document.querySelector(".info").style.display = "none";
     if (counter === amount) {
-        setTimeout(startTest, getRandomInt(1, 5) * 1000);
+        startTest();
+        //setTimeout(startTest, getRandomInt(1, 5) * 1000);
     }
 });
 
