@@ -234,31 +234,40 @@ function changeOrder() {
     const pvkList = document.querySelector(".pvkList")
     const items = document.querySelectorAll(".item");
     const done = document.querySelector(".done");
-    const initSortableList = (e) => {
-        const draggingItem = pvkList.querySelector(".dragging");
-        const siblings = [...pvkList.querySelectorAll(".item:not(.dragging)")];
-        let nextSibling = siblings.find(sibling => {
-            return e.clientY <= sibling.offsetTop + sibling.offsetHeight / 2;
-        });
-        pvkList.insertBefore(draggingItem, nextSibling);
+    const currentPageUrl = window.location.href;
+    let prof = null;
+    if (currentPageUrl === 'http://localhost:1488/GameDesigner.html') {
+        prof = 1;
+    } else if (currentPageUrl === 'http://localhost:1488/SysAdmin.html') {
+        prof = 3;
+    } else {
+        prof = 2;
     }
-    items.forEach(item => {
-        item.addEventListener("dragstart", () => {
-            setTimeout(() => item.classList.add("dragging"), 0);
-        });
-        item.addEventListener("dragend", () => {
-            item.classList.remove("dragging");
-        });
+const initSortableList = (e) => {
+    const draggingItem = pvkList.querySelector(".dragging");
+    const siblings = [...pvkList.querySelectorAll(".item:not(.dragging)")];
+    let nextSibling = siblings.find(sibling => {
+        return e.clientY <= sibling.offsetTop + sibling.offsetHeight / 2;
     });
-    pvkList.addEventListener("dragover", initSortableList)
-    done.addEventListener("click", () => {
-        saveOrderToServer()
-        pvkList.removeEventListener("dragover", initSortableList)
+    pvkList.insertBefore(draggingItem, nextSibling);
+}
+items.forEach(item => {
+    item.addEventListener("dragstart", () => {
+        setTimeout(() => item.classList.add("dragging"), 0);
     });
+    item.addEventListener("dragend", () => {
+        item.classList.remove("dragging");
+    });
+});
+pvkList.addEventListener("dragover", initSortableList)
+done.addEventListener("click", () => {
+    saveOrderToServer(prof)
+    pvkList.removeEventListener("dragover", initSortableList)
+});
 }
 
 
-function saveOrderToServer() {
+function saveOrderToServer(prof) {
     const items = document.querySelectorAll(".item");
     const order = [];
     items.forEach((item, index) => {
@@ -266,6 +275,10 @@ function saveOrderToServer() {
             id: item.textContent
         });
     });
+    let orderProf = {
+        "order": order,
+        "prof":prof
+    }
     fetch('/pvkpoint', {
         method: 'POST',
         headers: {
@@ -449,6 +462,12 @@ function loadUsers() {
         .catch(error => console.error('Ошибка:', error)); // Обработка ошибок
 }
 
+/*function loadPVK(){
+    fetch('pvk',(req, res) => {
+        res.;
+    })
+}*/
+
 function loadAvatars(address) {
     console.log(dataPo);
     let UserData = {
@@ -475,7 +494,7 @@ function showStat() {
     const overlay = document.querySelector('.overlay');
     const statblock = document.querySelector(".stat");
     button.addEventListener('click', () => {
-        statblock.style.display ="flex";
+        statblock.style.display = "flex";
         overlay.classList.add('visible');
         overlay.addEventListener('click', (event) => {
             if (event.target === overlay) {
@@ -488,7 +507,7 @@ function showStat() {
             }
         });
         let userData = {
-            "testName": document.querySelector(),
+            "testNum": document.querySelector(),
             "username": sessionStorage.getItem('name')
         }
         fetch('/mystats', {
@@ -504,6 +523,7 @@ function showStat() {
             })
             .then(data => {
                 data.forEach((testData, index) => {
+                    console.log(data.toString())
                     const canvas = document.createElement('canvas');
                     canvas.id = `myChart${index}`;
                     canvas.width = 400;

@@ -14,7 +14,7 @@ const connection = mysql.createConnection(
         // port: "1337",
         host: "localhost",
         user: "root",
-        password: "1234",
+        password: "qwerty0987654321",
         database: "opdopdopd"
     }
 );
@@ -382,7 +382,7 @@ app.post('/tes1res', (req, res) => {
             console.error('Ошибка выполнения запроса к базе данных:', err);
             return res.status(500).json({error: 'Ошибка выполнения запроса к базе данных'});
         }
-        console.log("Test attempt added to db");
+        console.log("Test attempt added to db");76
     });
 });
 
