@@ -14,10 +14,10 @@ const connection = mysql.createConnection(
         //host: "mysql-opd.alwaysdata.net",
         //user: "opd",
         //password: "aPEn+3487",
-        //port: "3306",
+        port: "3306",
         host:"localhost",
         user:"root",
-        password:"qwerty0987654321",
+        password:"1234",
         database:"opdopdopd"
     }
 );
@@ -87,6 +87,16 @@ function registration(connection, user_login, user_password, data) {
             }
         });
     });
+}
+
+function calculateStandardDeviation(arr) {
+    const n = arr.length;
+    const avg = arr.reduce((acc, cur) => acc + parseFloat(cur), 0) / n;
+    let sum = 0;
+    for (let number in arr){
+        sum += Math.pow(number - avg, 2);
+    }
+    return Math.sqrt(sum / (n - 1));
 }
 
 function authorisation(connection, user_login, user_password) {
@@ -362,6 +372,22 @@ app.get('/test7.html',(req, res)=>{
     res.sendFile(htmlFilePath);
 });
 
+app.post('/tes1res', (req, res) => {
+    const jsonData = req.body;
+    const user_name = jsonData.name;
+    const results = jsonData.res;
+    const test_id = 1;
+    const sum = results.reduce((acc, cur) => acc + parseFloat(cur), 0);
+    const avg = sum / results.length;
+    const deviation = calculateStandardDeviation(results);
+    connection.query("INSERT INTO test_attempt (user_id, test_id, attempt_number, average_value, number_of_passes, stadart_deviation) VALUES ((SELECT id FROM users WHERE name = ?), ?, ?, ?, ?, ?);", [user_name, test_id, 0, avg, 0, deviation], function(err, result){
+        if (err) {
+            console.error('Ошибка выполнения запроса к базе данных:', err);
+            return res.status(500).json({error: 'Ошибка выполнения запроса к базе данных'});
+        }
+        console.log("Test attempt added to db");
+    });
+});
 
 
 
