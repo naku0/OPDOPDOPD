@@ -14,7 +14,7 @@ const connection = mysql.createConnection(
         // port: "1337",
         host: "localhost",
         user: "root",
-        password: "qwerty0987654321",
+        password: "1234",
         database: "opdopdopd"
     }
 );
@@ -643,16 +643,16 @@ app.get('/myStat', (req, res) => {
 app.post('/pvkpoint', (req, res) => {
     const jsonData = req.body;
     console.log(jsonData);
-    const array = jsonData.forEach(element => {
-        array.push(element.name);
-    });
-    for (let i = 0; i < array.length; i++) {
+    const user_name = jsonData.name;
+    const profession_id = jsonData.prof;
+    const order = jsonData.order;
+    for (let i = 0; i < order.length; i++) {
         //ВОТ ТУТ ВОПРОСЫ
-        connection.query("SELECT id FROM piq WHERE name = ?",[array[i]], function (err, result) {
+        connection.query("SELECT id FROM piq WHERE name = ?",[order.id], function (err, result) {
             //ВОПРОСЫ ВОТ ТУТ
             if (err) throw err;
             piqId = result[0];
-            connection.query("INSERT INTO opinions (user_id, piq_id, profession_id, position) VALUES (?, ?, ?, ?)", [9999, piqId, 9999, i], function (err, result) {
+            connection.query("INSERT INTO opinions (user_id, piq_id, profession_id, position) VALUES ((SELECT id FROM user WHERE name = ?), ?, ?, ?)", [user_name, piqId, profession_id, i], function (err, result) {
                 if (err) throw err;
                 console.log("1 record inserted");
             })
