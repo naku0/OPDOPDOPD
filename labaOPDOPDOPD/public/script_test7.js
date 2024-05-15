@@ -301,11 +301,11 @@ function restartTest() {
 
 function isKeyPressedAndCounterNotZero(event){
     if (dop_Angle !== 0){
-        return event.keyCode === 37;
+        return event.keyCode === 48;
     }else if (dop_Angle1 !== 0){
-        return event.keyCode === 38;
+        return event.keyCode === 49;
     }else {
-        return event.keyCode === 39;
+        return event.keyCode === 50;
     }
 }
 

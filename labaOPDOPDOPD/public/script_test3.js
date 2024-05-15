@@ -27,14 +27,16 @@ function fill(n, line) {
 function startTest() {
     const colour = getRandomInt(1, 4);
     if (colour === 1){
-        testBtn.style.backgroundColor = "#f8c4f3";
+        testBtn.style.backgroundColor = 'green';
     }
     else if (colour === 2){
-        testBtn.style.backgroundColor = "#94bff9";
+        testBtn.style.backgroundColor = "blue";
     }
     else{
-        testBtn.style.backgroundColor = "#95c29f";
+        testBtn.style.backgroundColor = "red";
     }
+    //"#95c29f"
+    //#94bff9
     timer = true;
     stopWatch();
     counter --;
@@ -49,14 +51,14 @@ function restartTest() {
 }
 
 function isKeyPressedAndCounterNotZero(event) {
-    if (testBtn.style.backgroundColor === "#f8c4f3"){
-        return event.keyCode === 37
+    if (testBtn.style.backgroundColor === 'green'){
+        return event.keyCode === 37;
     }
-    if (testBtn.style.backgroundColor === "#94bff9"){
-        return event.keyCode === 38
+    else if (testBtn.style.backgroundColor === 'blue'){
+        return event.keyCode === 38;
     }
     else{
-        return event.keyCode === 39
+        return event.keyCode === 39;
     }
 }
 
@@ -88,6 +90,7 @@ document.addEventListener('keydown', function (event){
             doTest();
             fill(counter*(100/amount), line);
             console.log(results);
+            console.log(testBtn.style.backgroundColor);
         }
     }
     else{
@@ -96,6 +99,7 @@ document.addEventListener('keydown', function (event){
             fill(counter*(100/amount), line);
             results[0]++;
             console.log(results);
+            console.log(testBtn.style.backgroundColor);
         }
     }
 })

@@ -48,10 +48,10 @@ function restartTest() {
 
 function isKeyPressedAndCounterNotZero(event){
     if (finalNumber % 2 === 0){
-        return event.keyCode === 37
+        return event.keyCode === 50;
     }
     else{
-        return event.keyCode === 39
+        return event.keyCode === 49;
     }
 }
 
