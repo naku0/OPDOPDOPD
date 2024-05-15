@@ -15,10 +15,10 @@ const connection = mysql.createConnection(
         //user: "opd",
         //password: "aPEn+3487",
         //port: "3306",
-        host:"localhost",
-        user:"root",
-        password:"qwerty0987654321",
-        database:"opdopdopd"
+        host: "localhost",
+        user: "root",
+        password: "qwerty0987654321",
+        database: "opdopdopd"
     }
 );
 
@@ -54,6 +54,7 @@ function createTables() {
         console.log("Table opinions created!");
     });
 }
+
 
 app.use('/pictures', express.static(path.join(__dirname, 'public', 'pictures')));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -136,7 +137,7 @@ function authorisation(connection, user_login, user_password) {
 }
 
 function add_piq_opinion(connection, piq, user_login, profession_name, position) {
-        connection.connect(function (err) {
+    connection.connect(function (err) {
         if (err) throw err;
         connection.query("SELECT id FROM piq WHERE name = " + mysql.escape(piq) + " UNION SELECT id FROM users WHERE login = " + mysql.escape(user_login) + " UNION SELECT id FROM professions WHERE name = " + mysql.escape(profession_name), function (err, result, fields) {
             //Находим айдишники ПВК, юзера и профессии
@@ -269,13 +270,13 @@ app.get('/profiles.html', (req, res) => {
     res.sendFile(htmlFilePath);
 })
 app.get('/testPage.html', (req, res) => {
-   const htmlFilePath = path.join(__dirname, '/testPage.html');
-   res.sendFile(htmlFilePath);
+    const htmlFilePath = path.join(__dirname, '/testPage.html');
+    res.sendFile(htmlFilePath);
 });
 app.get('/favicon.ico', (req, res) => {
     res.sendFile(__dirname + '/pictures' + '/icons' + '/favicon.ico');
 });
-app.get('/apple-touch-icon.png',(req, res) => {
+app.get('/apple-touch-icon.png', (req, res) => {
     res.sendFile(__dirname + '/apple-touch-icon.png');
 });
 app.get('/testPage.css', (req, res) => {
@@ -352,17 +353,15 @@ app.get('/sounds/10.mp3', (req, res) => {
     res.sendFile(path.join(__dirname, '/sounds/10.mp3'));
 });
 
-app.get('/test6.html',(req, res)=>{
+app.get('/test6.html', (req, res) => {
     const htmlFilePath = path.join(__dirname, '/test6.html');
     res.sendFile(htmlFilePath);
 });
 
-app.get('/test7.html',(req, res)=>{
+app.get('/test7.html', (req, res) => {
     const htmlFilePath = path.join(__dirname, '/test7.html');
     res.sendFile(htmlFilePath);
 });
-
-
 
 
 app.use(bodyParser.json());
@@ -490,10 +489,11 @@ app.post('/avatars', (req, res) => {
 });
 
 
-/*
+
 app.post('/pvkpoint', (req, res) => {
     const jsonData = req.body;
     const array = jsonData.map(obj => obj.id);
+    console.log(jsonData);
     for (let i = 0; i < array; i++) {
         //ВОТ ТУТ ВОПРОСЫ
         connection.query("INSERT INTO opinions (user_id, piq_id, profession_id, position) VALUES (?, ?, ?, ?)", [0, array[i], 0, i], function (err, result) {
@@ -503,10 +503,9 @@ app.post('/pvkpoint', (req, res) => {
         })
         console.log("1 record inserted");
     }
-    console.log(array);
 });
-*/
-app.listen(PORT2,()=>{
-   console.log("Сервер запущен на порту "+PORT2);
+
+app.listen(PORT2, () => {
+    console.log("Сервер запущен на порту " + PORT2);
 });
 

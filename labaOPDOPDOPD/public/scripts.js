@@ -33,6 +33,7 @@ function CheckSession() {
 function CheckPerms() {
     const permissions = sessionStorage.getItem('permissions');
     const hiddenElement = document.querySelector(".hiddenElement");
+    console.log(permissions + 'asd');
     hiddenElement.style.display = permissions === '1' ? "flex" : "none";
 }
 
@@ -312,6 +313,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 let index = 2;
+
 function addCarousel() {
     const slides = document.querySelectorAll('.block');
     let back = document.querySelector('.prev');
@@ -337,17 +339,17 @@ function workCarousel(index, slide) {
         console.log(index);
         switch (index) {
             case (0): {
-                first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                first.scrollIntoView({behavior: 'smooth', block: 'center'});
                 console.log("first");
                 break;
             }
             case (1): {
-                second.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                second.scrollIntoView({behavior: 'smooth', block: 'center'});
                 console.log("second");
                 break;
             }
             case (2): {
-                third.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                third.scrollIntoView({behavior: 'smooth', block: 'center'});
                 console.log("third");
                 break;
             }
@@ -399,6 +401,7 @@ function showSlide(slides, newIndex) {
     }
     index = newIndex;
 }
+
 let dataPo = [];
 
 function loadUsers() {
@@ -465,4 +468,68 @@ function loadAvatars(address) {
                 return response.json();
             }
         });
+}
+
+function showStat() {
+    const button = document.querySelector('.statbutton');
+    const overlay = document.querySelector('.overlay');
+    const statblock = document.querySelector(".stat");
+    button.addEventListener('click', () => {
+        statblock.style.display ="flex";
+        overlay.classList.add('visible');
+        overlay.addEventListener('click', (event) => {
+            if (event.target === overlay) {
+                overlay.classList.remove('visible');
+                const statContainers = document.querySelectorAll('.stat');
+                statContainers.forEach(container => {
+                    container.style.display = "none"; // Скрываем все контейнеры со статистикой
+                    container.innerHTML = ''; // Очищаем содержимое контейнера
+                });
+            }
+        });
+        let userData = {
+            "testName": document.querySelector(),
+            "username": sessionStorage.getItem('name')
+        }
+        fetch('/mystats', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(userData)
+
+        })
+            .then(response => {
+                return response.json();
+            })
+            .then(data => {
+                data.forEach((testData, index) => {
+                    const canvas = document.createElement('canvas');
+                    canvas.id = `myChart${index}`;
+                    canvas.width = 400;
+                    canvas.height = 400;
+                    statblock.appendChild(canvas); // Добавляем канвас внутрь statblock
+
+                    let ctx = canvas.getContext('2d');
+
+                    new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: ['Test 1', 'Test 2', 'Test 3', 'Test 4', 'Test 5', 'Test 6', 'Test 7'],
+                            datasets: [{
+                                label: `Test ${index + 1} Results`,
+                                data: testData,
+                                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                                borderColor: 'rgba(255, 99, 132, 1)',
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false
+                        }
+                    });
+                });
+            });
+    });
 }

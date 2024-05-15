@@ -105,8 +105,8 @@
         </div>
     </aside>
     <div class="overlay" id="overlay"></div>
-    <script>CheckSession(); CheckPerms()</script>
+    <script>CheckSession(); </script>
 </main>
-<script>loadAvatars();CheckData();</script>
+<script>CheckPerms();loadAvatars(sessionStorage.getItem('avatar'));CheckData()</script>
 </body>
 </html>
