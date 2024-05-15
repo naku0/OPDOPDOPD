@@ -235,7 +235,7 @@ function changeOrder() {
     const items = document.querySelectorAll(".item");
     const done = document.querySelector(".done");
     const currentPageUrl = window.location.href;
-    let prof = null;
+    let prof;
     if (currentPageUrl === 'http://localhost:1488/GameDesigner.html') {
         prof = 1;
     } else if (currentPageUrl === 'http://localhost:1488/SysAdmin.html') {
@@ -243,6 +243,7 @@ function changeOrder() {
     } else {
         prof = 2;
     }
+    console.log(prof);
 const initSortableList = (e) => {
     const draggingItem = pvkList.querySelector(".dragging");
     const siblings = [...pvkList.querySelectorAll(".item:not(.dragging)")];
@@ -277,7 +278,8 @@ function saveOrderToServer(prof) {
     });
     let orderProf = {
         "order": order,
-        "prof":prof
+        "prof":prof,
+        "id":sessionStorage.getItem('id')
     }
     fetch('/pvkpoint', {
         method: 'POST',

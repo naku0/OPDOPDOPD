@@ -642,7 +642,10 @@ app.get('/myStat', (req, res) => {
 
 app.post('/pvkpoint', (req, res) => {
     const jsonData = req.body;
-    const array = jsonData.map(obj => obj.id);
+    console.log(jsonData);
+    const array = jsonData.forEach(element => {
+        array.push(element.name);
+    });
     for (let i = 0; i < array.length; i++) {
         //ВОТ ТУТ ВОПРОСЫ
         connection.query("SELECT id FROM piq WHERE name = ?",[array[i]], function (err, result) {
