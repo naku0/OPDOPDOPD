@@ -284,7 +284,7 @@ function saveOrderToServer(prof) {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(order),
+        body: JSON.stringify(orderProf),
     })
         .then(response => response.json())
         .then(data => {
@@ -463,6 +463,8 @@ function loadUsers() {
 }
 
 /*function loadPVK(){
+    const currentPage = window.location.href;
+
     fetch('pvk',(req, res) => {
         res.;
     })
