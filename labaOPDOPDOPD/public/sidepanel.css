@@ -63,7 +63,7 @@ aside.side .sidelist li:active{
 }
 
 .side .sidelist .divInfo{
-    background-color: #CCFA5B;
+    background: linear-gradient(135deg, rgba(164,244,226,1) 0%,  rgba(181,255,156,1) 70%);
     width: 100%;
     display: flex;
     padding: 20px 0;
@@ -84,7 +84,6 @@ aside.side .sidelist li:active{
     background-color: #EDF0F2;
     border-radius: 50%;
     padding: 5px;
-    box-shadow: 10px 10px 10px #AAD94A;
 }
 .side .sidelist .picture img{
     display: flex;

@@ -136,7 +136,7 @@ function authorisation(connection, user_login, user_password) {
 }
 
 function add_piq_opinion(connection, piq, user_login, profession_name, position) {
-    connection.connect(function (err) {
+        connection.connect(function (err) {
         if (err) throw err;
         connection.query("SELECT id FROM piq WHERE name = " + mysql.escape(piq) + " UNION SELECT id FROM users WHERE login = " + mysql.escape(user_login) + " UNION SELECT id FROM professions WHERE name = " + mysql.escape(profession_name), function (err, result, fields) {
             //Находим айдишники ПВК, юзера и профессии
@@ -199,6 +199,26 @@ app.get('/script_test1.js', (req, res) => {
 app.get('/script_test2.js', (req, res) => {
     res.header("Content-Type", "application/javascript");
     res.sendFile(__dirname + '/script_test2.js');
+});
+app.get('/script_test3.js', (req, res) => {
+    res.header("Content-Type", "application/javascript");
+    res.sendFile(__dirname + '/script_test3.js');
+});
+app.get('/script_test4.js', (req, res) => {
+    res.header("Content-Type", "application/javascript");
+    res.sendFile(__dirname + '/script_test4.js');
+});
+app.get('/script_test5.js', (req, res) => {
+    res.header("Content-Type", "application/javascript");
+    res.sendFile(__dirname + '/script_test5.js');
+});
+app.get('/script_test6.js', (req, res) => {
+    res.header("Content-Type", "application/javascript");
+    res.sendFile(__dirname + '/script_test6.js');
+});
+app.get('/script_test7.js', (req, res) => {
+    res.header("Content-Type", "application/javascript");
+    res.sendFile(__dirname + '/script_test7.js');
 });
 app.get('/GameDesigner.html', (req, res) => {
     const htmlFilePath = path.join(__dirname, 'GameDesigner.html');
@@ -294,6 +314,57 @@ app.get('/test4.html', (req, res) => {
     const htmlFilePath = path.join(__dirname, '/test4.html');
     res.sendFile(htmlFilePath);
 });
+app.get('/test5.html', (req, res) => {
+    const htmlFilePath = path.join(__dirname, '/test5.html');
+    res.sendFile(htmlFilePath);
+});
+app.get('/sound.mp3', (req, res) => {
+    res.sendFile(path.join(__dirname, '/sound.mp3'));
+});
+app.get('/sounds/1.mp3', (req, res) => {
+    res.sendFile(path.join(__dirname, '/sounds/1.mp3'));
+});
+app.get('/sounds/2.mp3', (req, res) => {
+    res.sendFile(path.join(__dirname, '/sounds/2.mp3'));
+});
+app.get('/sounds/3.mp3', (req, res) => {
+    res.sendFile(path.join(__dirname, '/sounds/3.mp3'));
+});
+app.get('/sounds/4.mp3', (req, res) => {
+    res.sendFile(path.join(__dirname, '/sounds/4.mp3'));
+});
+app.get('/sounds/5.mp3', (req, res) => {
+    res.sendFile(path.join(__dirname, '/sounds/5.mp3'));
+});
+app.get('/sounds/6.mp3', (req, res) => {
+    res.sendFile(path.join(__dirname, '/sounds/6.mp3'));
+});
+app.get('/sounds/7.mp3', (req, res) => {
+    res.sendFile(path.join(__dirname, '/sounds/7.mp3'));
+});
+app.get('/sounds/8.mp3', (req, res) => {
+    res.sendFile(path.join(__dirname, '/sounds/8.mp3'));
+});
+app.get('/sounds/9.mp3', (req, res) => {
+    res.sendFile(path.join(__dirname, '/sounds/9.mp3'));
+});
+app.get('/sounds/10.mp3', (req, res) => {
+    res.sendFile(path.join(__dirname, '/sounds/10.mp3'));
+});
+
+app.get('/test6.html',(req, res)=>{
+    const htmlFilePath = path.join(__dirname, '/test6.html');
+    res.sendFile(htmlFilePath);
+});
+
+app.get('/test7.html',(req, res)=>{
+    const htmlFilePath = path.join(__dirname, '/test7.html');
+    res.sendFile(htmlFilePath);
+});
+
+
+
+
 app.use(bodyParser.json());
 app.post('/endpoint', (req, res) => {
     const jsonData = req.body;
@@ -417,6 +488,7 @@ app.post('/avatars', (req, res) => {
     });
     res.sendFile(path.join(__dirname, '/pictures', `${avatar}`));
 });
+
 
 /*
 app.post('/pvkpoint', (req, res) => {

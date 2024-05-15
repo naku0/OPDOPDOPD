@@ -1,40 +1,45 @@
-let testBtn = document.getElementById('okno');
 let startBtn = document.getElementById('start');
 let line = document.getElementById('line');
 let second = 0;
 let milisec = 0;
 let timer = false;
-let amount = 3;
+let amount = 5;
 let counter = amount;
 const secFinal = document.getElementById('sec');
 const milisecFinal  = document.getElementById('milisec');
 let results = new Array(amount+1);
 results[0] = 0;
-let finalNumber;
-
 
 
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
 }
 
+function playNumber(number){
+    audio = new Audio('../sounds/' + number + '.mp3');
+    audio.play();
+}
+
 function fill(n, line) {
     line.style.background = `linear-gradient(90deg, #dfff8d 0%, #3bcaab ${100 - n}%,  #EDF0F2 ${100 - n}%)`;
 }
+
 
 function block_space(btn){
     if (btn.keyCode === '32') {
         btn.preventDefault();
     }
 };
-
 function startTest() {
-    const firstNumber = getRandomInt(1, 5);
-    const secondNumber = getRandomInt(1, 5);
-    document.querySelector('.numberField').innerHTML = firstNumber + ' + ' + secondNumber;
+    const firstNumber = getRandomInt(1, 10);
+    const secondNumber = getRandomInt(1, 10);
+    const plus = 10;
+    playNumber(firstNumber);
+    const int1 = setTimeout(playNumber, 700, plus);
+    setTimeout(playNumber, 1500, secondNumber);
     finalNumber = firstNumber + secondNumber;
     timer = true;
-    stopWatch();
+    const time = setTimeout(stopWatch, 2100);
     counter --;
     console.log("Counter = " + counter);
 }
@@ -45,7 +50,6 @@ function restartTest() {
     milisec = 0;
 }
 
-
 function isKeyPressedAndCounterNotZero(event){
     if (finalNumber % 2 === 0){
         return event.keyCode === 37
@@ -54,6 +58,7 @@ function isKeyPressedAndCounterNotZero(event){
         return event.keyCode === 39
     }
 }
+
 
 function doTest(){
     if (counter > 0){
@@ -70,7 +75,7 @@ function doTest(){
         results.push(dataSec + dataMilisec);
         console.log(results.filter(Boolean));
         okno.style.backgroundColor = "#EDF0F2";
-        document.querySelector('.numberField').style.display = "none";
+        document.querySelector('.start').style.display = "none";
         document.querySelector('.finish').style.display = "flex";
         sendData(results.filter(Boolean));
     }
@@ -110,7 +115,6 @@ startBtn.addEventListener('click', function () {
     }
 });
 
-
 function stopWatch() {
     if (timer) {
         milisec++;
@@ -137,7 +141,7 @@ function sendData(data) {
         "name": sessionStorage.getItem('name'),
         "res": data
     }
-    fetch('/tes4res', {
+    fetch('/tes5res', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

@@ -11,7 +11,7 @@ class Flag {
 }
 
 const flag = new Flag();
-let counter = 0;
+let counterP = 0;
 let dataFlag = false;
 
 function CheckSession() {
@@ -215,9 +215,9 @@ function heartClicker(id1, buttonId) {
     buttonId = document.getElementById(buttonId);
 
     function incrementCounter() {
-        counter++;
-        console.log(counter)
-        if ((counter === 2 || counter % 3 === 0) && counter !== 3) {
+        counterP++;
+        console.log(counterP)
+        if ((counterP === 2 || counterP % 3 === 0) && counterP !== 3) {
             id1.style.display = "flex";
             id1.scrollIntoView({behavior: 'smooth', block: 'end'});
         } else {
@@ -330,24 +330,24 @@ function addCarousel() {
 }
 
 function workCarousel(index, slide) {
-    const first = document.querySelector('h1.first-block');
-    const second = document.querySelector('h1.second-block');
-    const third = document.querySelector('h1.third-block');
+    const first = document.querySelector('div.first');
+    const second = document.querySelector('div.second');
+    const third = document.querySelector('div.third');
     slide.addEventListener('click', () => {
         console.log(index);
         switch (index) {
             case (0): {
-                first.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                first.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 console.log("first");
                 break;
             }
             case (1): {
-                second.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                second.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 console.log("second");
                 break;
             }
             case (2): {
-                third.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                third.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 console.log("third");
                 break;
             }
@@ -399,7 +399,6 @@ function showSlide(slides, newIndex) {
     }
     index = newIndex;
 }
-
 let dataPo = [];
 
 function loadUsers() {

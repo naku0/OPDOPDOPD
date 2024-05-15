@@ -81,7 +81,7 @@ div.reg {
 }
 
 body {
-    min-height: 10vh;
+    min-height: 10dvh;
     background-color: #EDF0F2;
     display: grid;
 }
@@ -98,8 +98,18 @@ div.RegWindow {
     border-radius: 50px;
     position: absolute;
     box-shadow: 3px 3px rgba(0, 0, 0, 0.1);
+    animation: fade-in 1s forwards;
 }
-
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+        transform: translateY(20%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 hr {
     border: 1px solid #f0f0f0;
     margin-bottom: 25px;

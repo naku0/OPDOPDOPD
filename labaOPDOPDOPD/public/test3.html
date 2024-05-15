@@ -3,10 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <title>Test 3</title>
+    <link rel="stylesheet" href="style_test.css">
+    <link rel="stylesheet" href="sidepanel.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Quicksand:wght@300..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"/>
+    <script src="scripts.js"></script>
 </head>
 <body>
+<header>
+    <ul class="topper">
+        <li class="logo">
+            <a href="#" onclick="checkStatusForSidePanel()">OPDOPDOPD
+                <i class="material-icons" id="logo">
+                    <script>randomLogo("logo")</script>
+                </i>
+            </a>
+        </li>
+        <li class="startSession" id="startSession">
+            <a href="OPDOPDOPD.html"><i class="material-symbols-outlined">home</i></a>
+        </li>
+    </ul>
+</header>
 <div class="container">
-
     <div id="time">
         <span class="txt">Sec</span>
         <span class="digit" id="sec">
@@ -15,15 +41,78 @@
         <span class="digit" id="milisec">
                 00</span>
     </div>
+    <div class="block">
+        <div id="okno">
+            <div class="finish">
+                <div class="notification">
+                    <h1>Тест пройден!</h1>
+                </div>
+                <div class="icons">
+                    <div class="back">
+                        <i class="material-symbols-outlined">reply</i>
+                        <a href="testPage.html">Назад к тестам</a>
+                    </div>
+                    <div class="share">
+                        <i class="material-symbols-outlined">share</i>
+                        <a href="#" onclick="alert('Ссылка скопирована!')">Поделиться тестом</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="line"></div>
+    <div class="info">
+        <div class="rules">
+            <h1>ПРАВИЛА</h1>
+            <p>ПРЯМОУГОЛЬНИК С РАЗНОЙ ПЕРИОДИЧНОСТЬЮ ОКРАШИВАЕТСЯ В 3 ЦВЕТА.</p>
+            <p>КАК ТОЛЬКО ПРОИЗОЙДЕТ СМЕНА ЦВЕТА – НЕОБХОДИМО НАЖАТЬ НА РАЗНЫЕ КНОПКИ.</p>
+            <h4 style="color:#94bff9">ГОЛУБОЙ – 1</h4></h4>
+            <h4 style="color:#95c29f">ЗЕЛЕНЫЙ – 2</h4>
+            <h4 style="color:#f8c4f3">РОЗОВЫЙ – 3</h4>
+            <p>ТЕСТ ОПРЕДЕЛИТ ВРЕМЯ, КОТОРОЕ ПОТРЕБОВАЛОСЬ ВАМ ДЛЯ РЕАКЦИИ НА ИЗМЕНЕНИЕ ЦВЕТОВ И НАЖАТИЕ ПРОБЕЛА.</p>
+            <p>ТЕСТИРОВАНИЕ ЗАВЕРШИТСЯ АВТОМАТИЧЕСКИ.</p>
 
-    <div id = "okno" style = "width: 70%; height: 300px; border: 3px solid; margin-right: auto;"></div>
-    <div style = "color: aliceblue;"> hi</div>
-    <!-- <div class = "btn" id = "start" style = "width: 30%; height: 25px; border: 1px solid; margin: auto;">START TEST</div> -->
-    <div id="buttons">
-        <button class="btn" id = "start" style="width: 20%; height: 30px; border: 1px solid; margin: auto;%;">START TEST</button>
+        </div>
+        <div id="buttons">
+            <button class="btn" id="start">НАЧАТЬ ТЕСТ</button>
+            <button class="btn" id="stats">СТАТИСТИКА</button>
+        </div>
     </div>
 </div>
 
+<aside class="side">
+    <div class="sidepanel" id="sidepanel">
+        <ul class="sidelist">
+            <li class="profile">
+                <div class="divInfo">
+                    <ul class="ulInfo">
+                        <li class="picture">
+                            <div class="avatarka">
+                                <img src="popug.jpg">
+                            </div>
+                        </li>
+                        <li class="name">
+                            <div class="profileName">
+                                asdsa
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="home" draggable="false" tabindex="0"><a href="OPDOPDOPD.html">
+                <i class="material-symbols-outlined">home</i>Главная</a></li>
+            <li class="myPage" draggable="false" tabindex="0"><a href="profile.html">
+                <i class="material-symbols-outlined">account_circle</i>Личный кабинет</a></li>
+            <li class="profiles" draggable="false" tabindex="0"><a href="profiles.html">
+                <i class="material-symbols-outlined" tabindex="0">group</i>Профили</a></li>
+            <li class="test" draggable="false"><a href="testPage.html">
+                <i class="material-symbols-outlined" tabindex="0">quiz</i>Тест</a></li>
+            <li class="exit" draggable="false" tabindex="0"><a href="OPDOPDOPD.html" onclick="EndSession()">
+                <i class="material-symbols-outlined">logout</i>Выход</a></li>
+        </ul>
+    </div>
+</aside>
+<div class="overlay" id="overlay"></div>
 <script src="script_test3.js"></script>
 </body>
 </html>
