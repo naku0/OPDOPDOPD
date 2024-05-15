@@ -7,7 +7,7 @@ let amount = 5;
 let counter = amount;
 const secFinal = document.getElementById('sec');
 const milisecFinal  = document.getElementById('milisec');
-let results = new Array(amount+1);
+let results = [];
 results[0] = 0;
 
 
@@ -77,7 +77,7 @@ function doTest(){
         okno.style.backgroundColor = "#EDF0F2";
         document.querySelector('.start').style.display = "none";
         document.querySelector('.finish').style.display = "flex";
-        sendData(results.filter(Boolean));
+        sendData(results);
     }
 
 }

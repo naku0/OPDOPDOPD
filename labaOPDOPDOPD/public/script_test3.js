@@ -7,7 +7,7 @@ let amount = 5;
 let counter = amount;
 const secFinal = document.getElementById('sec');
 const milisecFinal  = document.getElementById('milisec');
-let results = new Array(amount + 1);
+let results = [];
 results[0] = 0;
 
 function block_space(btn){
@@ -27,13 +27,13 @@ function fill(n, line) {
 function startTest() {
     const colour = getRandomInt(1, 4);
     if (colour === 1){
-        testBtn.style.backgroundColor = 'green';
+        testBtn.style.backgroundColor = 'pink';
     }
     else if (colour === 2){
         testBtn.style.backgroundColor = "blue";
     }
     else{
-        testBtn.style.backgroundColor = "red";
+        testBtn.style.backgroundColor = "green";
     }
     //"#95c29f"
     //#94bff9
@@ -51,14 +51,14 @@ function restartTest() {
 }
 
 function isKeyPressedAndCounterNotZero(event) {
-    if (testBtn.style.backgroundColor === 'green'){
-        return event.keyCode === 37;
+    if (testBtn.style.backgroundColor === 'pink'){
+        return event.keyCode === 51;
     }
     else if (testBtn.style.backgroundColor === 'blue'){
-        return event.keyCode === 38;
+        return event.keyCode === 49;
     }
     else{
-        return event.keyCode === 39;
+        return event.keyCode === 50;
     }
 }
 
@@ -78,7 +78,7 @@ function doTest(){
         results.push(dataSec + dataMilisec);
         okno.style.backgroundColor = "#EDF0F2";
         document.querySelector('.finish').style.display = "flex";
-        sendData(results.filter(Boolean));
+        sendData(results);
     }
 
 }

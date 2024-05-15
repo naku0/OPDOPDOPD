@@ -9,7 +9,7 @@ let timer = false;
 let amount = 5;
 let counter = amount;
 var continueAnimating = true;
-let results = new Array(amount+1);
+let results = [];
 results[0] = 0;
 let pTimestamp = 0;
 let angle = 0;
@@ -301,11 +301,11 @@ function restartTest() {
 
 function isKeyPressedAndCounterNotZero(event){
     if (dop_Angle !== 0){
-        return event.keyCode === 48;
-    }else if (dop_Angle1 !== 0){
         return event.keyCode === 49;
-    }else {
+    }else if (dop_Angle1 !== 0){
         return event.keyCode === 50;
+    }else {
+        return event.keyCode === 51;
     }
 }
 
@@ -324,7 +324,7 @@ function doTest(){
         okno.style.backgroundColor = "#EDF0F2";
         document.querySelector('.canva').style.display = "none";
         document.querySelector('.finish').style.display = "flex";
-        sendData(results.filter(Boolean));
+        sendData(results);
     }
 }
 
