@@ -279,7 +279,7 @@ function saveOrderToServer(prof) {
     let orderProf = {
         "order": order,
         "prof":prof,
-        "id":sessionStorage.getItem('id')
+        "name":sessionStorage.getItem('name')
     }
     fetch('/pvkpoint', {
         method: 'POST',
