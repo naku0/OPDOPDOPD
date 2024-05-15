@@ -11,13 +11,10 @@ const PORT2 = "5252";
 
 const connection = mysql.createConnection(
     {
-        //host: "mysql-opd.alwaysdata.net",
-        //user: "opd",
-        //password: "aPEn+3487",
-        //port: "3306",
+        port: "1337",
         host: "localhost",
         user: "root",
-        password: "qwerty0987654321",
+        password: "1234",
         database: "opdopdopd"
     }
 );
@@ -54,7 +51,6 @@ function createTables() {
         console.log("Table opinions created!");
     });
 }
-
 
 app.use('/pictures', express.static(path.join(__dirname, 'public', 'pictures')));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -378,7 +374,8 @@ app.post('/tes1res', (req, res) => {
     const user_name = jsonData.name;
     const results = jsonData.res;
     const test_id = 1;
-    const avg = results.reduce((acc, cur) => acc + parseFloat(cur), 0) / results.length;
+    const sum = results.reduce((acc, cur) => acc + parseFloat(cur), 0);
+    const avg = sum / results.length;
     const deviation = calculateStandardDeviation(results);
     connection.query("INSERT INTO test_attempt (user_id, test_id, attempt_number, average_value, number_of_passes, stadart_deviation) VALUES ((SELECT id FROM users WHERE name = ?), ?, ?, ?, ?, ?);", [user_name, test_id, 0, avg, 0, deviation], function(err, result){
         if (err) {
@@ -389,75 +386,6 @@ app.post('/tes1res', (req, res) => {
     });
 });
 
-app.post('/tes2res', (req, res) => {
-    const jsonData = req.body;
-    const user_name = jsonData.name;
-    const results = jsonData.res;
-    const test_id = 2;
-    const avg = results.reduce((acc, cur) => acc + parseFloat(cur), 0) / results.length;
-    const deviation = calculateStandardDeviation(results);
-    connection.query("INSERT INTO test_attempt (user_id, test_id, attempt_number, average_value, number_of_passes, stadart_deviation) VALUES ((SELECT id FROM users WHERE name = ?), ?, ?, ?, ?, ?);", [user_name, test_id, 0, avg, 0, deviation], function(err, result){
-        if (err) {
-            console.error('Ошибка выполнения запроса к базе данных:', err);
-            return res.status(500).json({error: 'Ошибка выполнения запроса к базе данных'});
-        }
-        console.log("Test attempt added to db");
-    });
-});
-
-app.post('/tes3res', (req, res) => {
-    const jsonData = req.body;
-    const user_name = jsonData.name;
-    const result = jsonData.res;
-    const test_id = 3;
-    const number_of_mistakes = result[0];
-    const results = result.slice(1);
-    const avg = results.reduce((acc, cur) => acc + parseFloat(cur), 0) / results.length;
-    const deviation = calculateStandardDeviation(results);
-    connection.query("INSERT INTO test_attempt (user_id, test_id, attempt_number, average_value, number_of_passes, stadart_deviation, number_of_mistakes) VALUES ((SELECT id FROM users WHERE name = ?), ?, ?, ?, ?, ?, ?);", [user_name, test_id, 0, avg, 0, deviation, number_of_mistakes], function(err, result){
-        if (err) {
-            console.error('Ошибка выполнения запроса к базе данных:', err);
-            return res.status(500).json({error: 'Ошибка выполнения запроса к базе данных'});
-        }
-        console.log("Test attempt added to db");
-    });
-});
-
-app.post('/tes4res', (req, res) => {
-    const jsonData = req.body;
-    const user_name = jsonData.name;
-    const result = jsonData.res;
-    const test_id = 4;
-    const number_of_mistakes = result[0];
-    const results = result.slice(1);
-    const avg = results.reduce((acc, cur) => acc + parseFloat(cur), 0) / results.length;
-    const deviation = calculateStandardDeviation(results);
-    connection.query("INSERT INTO test_attempt (user_id, test_id, attempt_number, average_value, number_of_passes, stadart_deviation, number_of_mistakes) VALUES ((SELECT id FROM users WHERE name = ?), ?, ?, ?, ?, ?, ?);", [user_name, test_id, 0, avg, 0, deviation, number_of_mistakes], function(err, result){
-        if (err) {
-            console.error('Ошибка выполнения запроса к базе данных:', err);
-            return res.status(500).json({error: 'Ошибка выполнения запроса к базе данных'});
-        }
-        console.log("Test attempt added to db");
-    });
-});
-
-app.post('/tes5res', (req, res) => {
-    const jsonData = req.body;
-    const user_name = jsonData.name;
-    const result = jsonData.res;
-    const test_id = 5;
-    const number_of_mistakes = result[0];
-    const results = result.slice(1);
-    const avg = results.reduce((acc, cur) => acc + parseFloat(cur), 0) / results.length;
-    const deviation = calculateStandardDeviation(results);
-    connection.query("INSERT INTO test_attempt (user_id, test_id, attempt_number, average_value, number_of_passes, stadart_deviation, number_of_mistakes) VALUES ((SELECT id FROM users WHERE name = ?), ?, ?, ?, ?, ?, ?);", [user_name, test_id, 0, avg, 0, deviation, number_of_mistakes], function(err, result){
-        if (err) {
-            console.error('Ошибка выполнения запроса к базе данных:', err);
-            return res.status(500).json({error: 'Ошибка выполнения запроса к базе данных'});
-        }
-        console.log("Test attempt added to db");
-    });
-});
 app.use(bodyParser.json());
 app.post('/endpoint', (req, res) => {
     const jsonData = req.body;
@@ -550,15 +478,15 @@ app.post('/endpoint', (req, res) => {
 
     });
 });
-
 app.get('/users', async (req, res) => {
     try {
         const users = await new Promise((resolve, reject) => {
-            connection.query("SELECT login, avatar,permissions, name FROM users", function (err, result) {
+            connection.query("SELECT login, avatar, permissions, name FROM users", function (err, result) {
                 if (err) reject(err);
                 resolve(result);
             });
         });
+
         const usersJsons = users.map(user => (
             {
                 login: user.login,
@@ -566,6 +494,15 @@ app.get('/users', async (req, res) => {
                 permission: user.permissions,
                 username: user.name !== 'user' ? user.name : user.login.split('@')[0]
             }));
+
+        usersJsons.forEach(user => {
+            const name = user.username;
+            app.get(`/${name}`, (req, res) => {
+                const htmlFilePath = path.join(__dirname, 'profile.html');
+                res.sendFile(htmlFilePath);
+            });
+        });
+
         res.json(usersJsons);
     } catch (error) {
         console.error('Ошибка при получении данных о пользователях:', error);
@@ -581,22 +518,35 @@ app.post('/avatars', (req, res) => {
     });
     res.sendFile(path.join(__dirname, '/pictures', `${avatar}`));
 });
-
-
+app.get('/myStat', (req, res) => {
+    name = req.body.username;
+    testNum = req.body.testNum;
+    connection.query("SELECT id FROM users WHERE name = ?", [name], function (err, result) {
+        if (err) throw err;
+        user_id = result[0];
+        connection.query("SELECT test_attempt.average_value FROM test_attempt WHERE test_attempt.user_id = ? AND test_attempt.test_id = ?", [user_id], [testNum], function (err, result) {
+            if (err) throw err;
+            res.send(result);
+        })
+    })
+});
 
 app.post('/pvkpoint', (req, res) => {
     const jsonData = req.body;
     const array = jsonData.map(obj => obj.id);
-    console.log(jsonData);
-    for (let i = 0; i < array; i++) {
+    for (let i = 0; i < array.length; i++) {
         //ВОТ ТУТ ВОПРОСЫ
-        connection.query("INSERT INTO opinions (user_id, piq_id, profession_id, position) VALUES (?, ?, ?, ?)", [0, array[i], 0, i], function (err, result) {
+        connection.query("SELECT id FROM piq WHERE name = ?",[array[i]], function (err, result) {
             //ВОПРОСЫ ВОТ ТУТ
             if (err) throw err;
-            resolve(result);
+            piqId = result[0];
+            connection.query("INSERT INTO opinions (user_id, piq_id, profession_id, position) VALUES (?, ?, ?, ?)", [9999, piqId, 9999, i], function (err, result) {
+                if (err) throw err;
+                console.log("1 record inserted");
+            })
         })
-        console.log("1 record inserted");
     }
+    console.log(array);
 });
 
 app.listen(PORT2, () => {
