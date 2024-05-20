@@ -493,67 +493,107 @@ function loadAvatars(address) {
         });
 }
 
+
+let testNum = 1;
 function showStat() {
     const button = document.querySelector('.statbutton');
     const overlay = document.querySelector('.overlay');
     const statblock = document.querySelector(".stat");
+    const canvasField = document.querySelector('.statistics');
+    const next = document.querySelector('.next');
+    const prev = document.querySelector('.prev');
+
     button.addEventListener('click', () => {
-        statblock.style.display = "flex";
-        overlay.classList.add('visible');
-        overlay.addEventListener('click', (event) => {
-            if (event.target === overlay) {
-                overlay.classList.remove('visible');
-                const statContainers = document.querySelectorAll('.stat');
-                statContainers.forEach(container => {
-                    container.style.display = "none"; // Скрываем все контейнеры со статистикой
-                    container.innerHTML = ''; // Очищаем содержимое контейнера
-                });
-            }
-        });
-        let userData = {
-            "testNum": document.querySelector(),
-            "username": sessionStorage.getItem('name')
+        displayOverlay(statblock, overlay);
+        fetchAndDisplayStats(canvasField, testNum);
+    });
+
+    overlay.addEventListener('click', (event) => {
+        if (event.target === overlay) {
+            hideOverlay(overlay, statblock);
         }
-        fetch('/mystats', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(userData)
+    });
 
+    next.addEventListener('click', () => {
+        testNum++;
+        fetchAndDisplayStats(canvasField, testNum);
+    });
+
+    prev.addEventListener('click', () => {
+        testNum = Math.max(1, testNum - 1);
+        fetchAndDisplayStats(canvasField, testNum);
+    });
+}
+
+function displayOverlay(statblock, overlay) {
+    statblock.style.display = "flex";
+    overlay.classList.add('visible');
+}
+
+function hideOverlay(overlay, statblock) {
+    overlay.classList.remove('visible');
+    statblock.style.display = "none";
+    testNum =1;
+}
+
+function fetchAndDisplayStats(canvasField, testNum) {
+    const username = sessionStorage.getItem('name');
+
+    fetch(`/myStat?testNum=${testNum}&username=${username}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.json();
         })
-            .then(response => {
-                return response.json();
-            })
-            .then(data => {
-                data.forEach((testData, index) => {
-                    console.log(data.toString())
-                    const canvas = document.createElement('canvas');
-                    canvas.id = `myChart${index}`;
-                    canvas.width = 400;
-                    canvas.height = 400;
-                    statblock.appendChild(canvas); // Добавляем канвас внутрь statblock
+        .then(data => {
+            clearStatBlock(canvasField);
+            if (Array.isArray(data)) {
+                generateChart(canvasField, data, testNum);
+            } else {
+                console.error('Unexpected data format:', data);
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+        });
+}
 
-                    let ctx = canvas.getContext('2d');
+function clearStatBlock(canvasField) {
+    canvasField.innerHTML = '';
+}
 
-                    new Chart(ctx, {
-                        type: 'bar',
-                        data: {
-                            labels: ['Test 1', 'Test 2', 'Test 3', 'Test 4', 'Test 5', 'Test 6', 'Test 7'],
-                            datasets: [{
-                                label: `Test ${index + 1} Results`,
-                                data: testData,
-                                backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                                borderColor: 'rgba(255, 99, 132, 1)',
-                                borderWidth: 1
-                            }]
-                        },
-                        options: {
-                            responsive: true,
-                            maintainAspectRatio: false
-                        }
-                    });
-                });
-            });
+function generateChart(canvasField, testData, index) {
+    const canvas = document.createElement('canvas');
+    canvas.id = `myChart${index}`;
+    canvas.width = 400;
+    canvas.height = 400;
+    canvasField.appendChild(canvas);
+
+    const ctx = canvas.getContext('2d');
+    const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+    gradient.addColorStop(0, 'rgba(143,255,221,1)');
+    gradient.addColorStop(1, 'rgba(179,255,125,1)');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: testData.map((_, i) => `Попытка ${i + 1}`),
+            datasets: [{
+                label: `Результаты теста ${index}`,
+                data: testData,
+                backgroundColor: gradient,
+                borderColor: 'rgba(0,0,0,0.3)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false
+        }
     });
 }

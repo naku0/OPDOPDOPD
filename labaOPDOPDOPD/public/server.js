@@ -624,16 +624,21 @@ app.post('/avatars', (req, res) => {
     res.sendFile(path.join(__dirname, '/pictures', `${avatar}`));
 });
 app.get('/myStat', (req, res) => {
-    name = req.body.username;
-    testNum = req.body.testNum;
+    const name = req.query.username;
+    const testNum = req.query.testNum;
+
     connection.query("SELECT id FROM users WHERE name = ?", [name], function (err, result) {
         if (err) throw err;
-        user_id = result[0];
-        connection.query("SELECT test_attempt.average_value FROM test_attempt WHERE test_attempt.user_id = ? AND test_attempt.test_id = ?", [user_id], [testNum], function (err, result) {
+        if (result.length === 0) {
+            return res.status(404).send('User not found');
+        }
+        const user_id = result[0].id;
+
+        connection.query("SELECT test_attempt.average_value FROM test_attempt WHERE test_attempt.user_id = ? AND test_attempt.test_id = ?", [user_id, testNum], function (err, result) {
             if (err) throw err;
-            res.send(result);
-        })
-    })
+            res.json(result.map(row => row.average_value));
+        });
+    });
 });
 
 app.post('/pvkpoint', (req, res) => {

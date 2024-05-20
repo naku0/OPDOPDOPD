@@ -36,9 +36,15 @@
         <div class="statname">
             <h1>Статистика</h1>
         </div>
-        <canvas id="myChart">
-
-        </canvas>
+        <div class="statistics"></div>
+        <div class="buttons">
+            <div class="prev">
+                <i class="material-symbols-outlined">arrow_back_ios</i>
+            </div>
+            <div class="next">
+                <i class="material-symbols-outlined">arrow_forward_ios</i>
+            </div>
+        </div>
     </div>
     <div class="info">
         <div class="profileinfo">
@@ -97,7 +103,9 @@
     </aside>
     <div class="overlay" id="overlay"></div>
 </main>
-<script>CheckData();CheckPerms();showStat()</script>
+<script>CheckData();
+CheckPerms();
+showStat()</script>
 </body>
 
 </html>

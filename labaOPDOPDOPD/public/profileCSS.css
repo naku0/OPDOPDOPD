@@ -291,10 +291,47 @@ main {
     backdrop-filter: blur(5px);
     height: 70dvh;
     width: 70dvw;
+    padding: 20px;
+    box-sizing: content-box;
     top: 10%;
-    border-radius: 20px;
+    border-radius: 40px;
     z-index: 2;
     animation: fade-in 0.5s forwards;
+    place-content: center;
+    flex-direction: column;
+    h1{
+        display: flex;
+        place-content: center;
+        font-size: 40px;
+        font-weight: bold;
+        padding: 20px;
+    }
+
+}
+.buttons {
+    display: flex;
+    width: 100%;
+    place-content: center;
+    height: 70dvh;
+    cursor: pointer;
+}
+.buttons .prev {
+    position: relative;
+    left: 0;
+    margin-right: auto;
+    display: flex;
+    place-items: center;
+    height: auto;
+    cursor: pointer;
+}
+.buttons .next {
+    position: relative;
+    right: 0;
+    margin-left: auto;
+    display: flex;
+    place-items: center;
+    height: auto;
+    cursor: pointer;
 }
 
 @keyframes fade-in {
