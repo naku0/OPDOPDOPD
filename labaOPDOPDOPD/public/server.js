@@ -14,7 +14,7 @@ const connection = mysql.createConnection(
         // port: "1337",
         host: "localhost",
         user: "root",
-        password: "1234",
+        password: "qwerty0987654321",
         database: "opdopdopd"
     }
 );
@@ -558,10 +558,6 @@ app.post('/endpoint', (req, res) => {
                 console.error('Ошибка выполнения запроса к базе данных:', err);
                 return res.status(500).json({error: 'Ошибка выполнения запроса к базе данных'});
             }
-
-            result.forEach(res => {
-                test_attempts.push([res.name.toString(), res.average_value.toString(), res.number_of_passes.toString(), res.number_of_mistakes.toString(), res.standart_deviation.toString()]);
-            });
 
             connection.query("SELECT professions.name, piq.name, opinions.position FROM opinions JOIN professions ON professions.id = opinions.profession_id JOIN piq ON piq.id = opinions.piq_id WHERE user_id = ?", [user_id], function (err, result) {
                 if (err) {
