@@ -344,3 +344,15 @@ main {
         transform: translateY(0);
     }
 }
+.statbutton{
+    display: flex;
+    place-content: center;
+    margin-top: 10px;
+    button{
+        font-size: 20px;
+        font-weight: bold;
+        border-radius: 20px;
+        cursor: pointer;
+        padding: 10px;
+    }
+}
