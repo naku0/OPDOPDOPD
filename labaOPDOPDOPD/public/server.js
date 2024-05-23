@@ -14,7 +14,7 @@ const connection = mysql.createConnection(
         // port: "1337",
         host: "localhost",
         user: "root",
-        password: "qwerty0987654321",
+        password: "1234",
         database: "opdopdopd"
     }
 );
@@ -653,21 +653,23 @@ app.post('/pvkpoint', (req, res) => {
             //ВОПРОСЫ ВОТ ТУТ
             if (err) throw err;
             piqId = result[0];
-            connection.query("INSERT INTO opinions (user_id, piq_id, profession_id, position) VALUES ((SELECT id FROM user WHERE name = ?), ?, ?, ?)", [user_name, piqId, profession_id, i], function (err, result) {
+            connection.query("INSERT INTO opinions (user_id, piq_id, profession_id, position) VALUES ((SELECT id FROM users WHERE name = ?), ?, ?, ?)", [user_name, piqId, profession_id, i], function (err, result) {
                 if (err) throw err;
                 console.log("1 record inserted");
             })
         })
     }
-    console.log(array);
+    console.log();
 });
 app.get('/api/pvk-items', (req, res) => {
+    console.log('aaaa');
     connection.query('SELECT id, name FROM piq', (err, results) => {
         if (err) {
             console.error('Error fetching PVK items:', err);
             res.status(500).send('Server error');
         } else {
             res.json(results);
+            console.log(results);
         }
     });
 });
