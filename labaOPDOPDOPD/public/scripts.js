@@ -597,3 +597,51 @@ function generateChart(canvasField, testData, index) {
         }
     });
 }
+
+const pvkSelect = document.getElementById('pvkSelect');
+const choices = new Choices(pvkSelect, {
+    removeItemButton: true,
+    searchResultLimit: 10,
+    placeholderValue: 'Select items',
+    searchPlaceholderValue: 'Search items'
+});
+
+// Fetch data from the server
+fetch('/api/pvk-items')
+    .then(response => response.json())
+    .then(data => {
+        data.forEach(item => {
+            const option = document.createElement('option');
+            option.value = item.id;
+            option.textContent = item.name;
+            pvkSelect.appendChild(option);
+        });
+        choices.setChoices(data, 'id', 'name', true);
+    })
+    .catch(error => console.error('Error fetching PVK items:', error));
+
+function showModal() {
+    document.getElementById('modal').style.display = 'block';
+}
+
+function hideModal() {
+    document.getElementById('modal').style.display = 'none';
+}
+
+function saveSelectedItems() {
+    const pvkSelect = document.getElementById('pvkSelect');
+    const selectedItems = Array.from(pvkSelect.selectedOptions).map(option => option.textContent);
+
+    const pvkList = document.getElementById('pvkList');
+    pvkList.innerHTML = ''; // Clear current list
+
+    selectedItems.forEach(item => {
+        const li = document.createElement('li');
+        li.className = 'item';
+        li.draggable = true;
+        li.textContent = item;
+        pvkList.appendChild(li);
+    });
+
+    hideModal();
+}

@@ -661,6 +661,16 @@ app.post('/pvkpoint', (req, res) => {
     }
     console.log(array);
 });
+app.get('/api/pvk-items', (req, res) => {
+    connection.query('SELECT id, name FROM piq', (err, results) => {
+        if (err) {
+            console.error('Error fetching PVK items:', err);
+            res.status(500).send('Server error');
+        } else {
+            res.json(results);
+        }
+    });
+});
 
 app.listen(PORT2, () => {
     console.log("Сервер запущен на порту " + PORT2);

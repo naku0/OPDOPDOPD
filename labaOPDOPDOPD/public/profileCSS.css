@@ -113,7 +113,7 @@ div.menu li:hover {
 }
 
 body {
-    background: radial-gradient(circle at center, #CCFA5B 20%, #EDF0F2 100%);
+    background: radial-gradient(circle at center, #CCFA5B 0%, #EDF0F2 100%);
     display: grid;
 }
 
@@ -142,7 +142,7 @@ main {
 }
 
 .picture {
-    box-shadow: 10px 10px 10px #AAD94A;
+    box-shadow: 0 0 20px #AAD94A;
     border-radius: 50%;
     background-color: #EDF0F2;
     padding: 10px;
