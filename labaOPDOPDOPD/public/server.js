@@ -14,7 +14,7 @@ const connection = mysql.createConnection(
         // port: "1337",
         host: "localhost",
         user: "root",
-        password: "1234",
+        password: "qwerty0987654321",
         database: "opdopdopd"
     }
 );
@@ -199,6 +199,14 @@ app.get('/professionCSS.css', (req, res) => {
     res.header("Content-Type", "text/css");
     res.sendFile(__dirname + '/professionCSS.css');
 });
+app.get('/css8.css', (req, res) => {
+    res.header("Content-Type", "text/css");
+    res.sendFile(__dirname + '/css8.css');
+});
+app.get('/css9.css', (req, res) => {
+    res.header("Content-Type", "text/css");
+    res.sendFile(__dirname + '/css9.css');
+});
 app.get('/script_test1.js', (req, res) => {
     res.header("Content-Type", "application/javascript");
     res.sendFile(__dirname + '/script_test1.js');
@@ -227,6 +235,15 @@ app.get('/script_test7.js', (req, res) => {
     res.header("Content-Type", "application/javascript");
     res.sendFile(__dirname + '/script_test7.js');
 });
+app.get('/script_test8.js', (req, res) => {
+    res.header("Content-Type", "application/javascript");
+    res.sendFile(__dirname + '/script_test8.js');
+});
+app.get('/script_test9.js', (req, res) => {
+    res.header("Content-Type", "application/javascript");
+    res.sendFile(__dirname + '/script_test9.js');
+});
+
 app.get('/GameDesigner.html', (req, res) => {
     const htmlFilePath = path.join(__dirname, 'GameDesigner.html');
     res.sendFile(htmlFilePath);
@@ -368,6 +385,17 @@ app.get('/test7.html', (req, res) => {
     const htmlFilePath = path.join(__dirname, '/test7.html');
     res.sendFile(htmlFilePath);
 });
+
+app.get('/test8.html', (req, res) => {
+    const htmlFilePath = path.join(__dirname, '/test8.html');
+    res.sendFile(htmlFilePath);
+});
+
+app.get('/test9.html', (req, res) => {
+    const htmlFilePath = path.join(__dirname, '/test9.html');
+    res.sendFile(htmlFilePath);
+});
+
 
 app.post('/tes1res', (req, res) => {
     const jsonData = req.body;

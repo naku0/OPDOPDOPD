@@ -244,27 +244,27 @@ function changeOrder() {
         prof = 2;
     }
     console.log(prof);
-const initSortableList = (e) => {
-    const draggingItem = pvkList.querySelector(".dragging");
-    const siblings = [...pvkList.querySelectorAll(".item:not(.dragging)")];
-    let nextSibling = siblings.find(sibling => {
-        return e.clientY <= sibling.offsetTop + sibling.offsetHeight / 2;
+    const initSortableList = (e) => {
+        const draggingItem = pvkList.querySelector(".dragging");
+        const siblings = [...pvkList.querySelectorAll(".item:not(.dragging)")];
+        let nextSibling = siblings.find(sibling => {
+            return e.clientY <= sibling.offsetTop + sibling.offsetHeight / 2;
+        });
+        pvkList.insertBefore(draggingItem, nextSibling);
+    }
+    items.forEach(item => {
+        item.addEventListener("dragstart", () => {
+            setTimeout(() => item.classList.add("dragging"), 0);
+        });
+        item.addEventListener("dragend", () => {
+            item.classList.remove("dragging");
+        });
     });
-    pvkList.insertBefore(draggingItem, nextSibling);
-}
-items.forEach(item => {
-    item.addEventListener("dragstart", () => {
-        setTimeout(() => item.classList.add("dragging"), 0);
+    pvkList.addEventListener("dragover", initSortableList)
+    done.addEventListener("click", () => {
+        saveOrderToServer(prof)
+        pvkList.removeEventListener("dragover", initSortableList)
     });
-    item.addEventListener("dragend", () => {
-        item.classList.remove("dragging");
-    });
-});
-pvkList.addEventListener("dragover", initSortableList)
-done.addEventListener("click", () => {
-    saveOrderToServer(prof)
-    pvkList.removeEventListener("dragover", initSortableList)
-});
 }
 
 
@@ -278,8 +278,8 @@ function saveOrderToServer(prof) {
     });
     let orderProf = {
         "order": order,
-        "prof":prof,
-        "name":sessionStorage.getItem('name')
+        "prof": prof,
+        "name": sessionStorage.getItem('name')
     }
     fetch('/pvkpoint', {
         method: 'POST',
@@ -495,6 +495,7 @@ function loadAvatars(address) {
 
 
 let testNum = 1;
+
 function showStat() {
     const button = document.querySelector('.statbutton');
     const overlay = document.querySelector('.overlay');
@@ -533,7 +534,7 @@ function displayOverlay(statblock, overlay) {
 function hideOverlay(overlay, statblock) {
     overlay.classList.remove('visible');
     statblock.style.display = "none";
-    testNum =1;
+    testNum = 1;
 }
 
 function fetchAndDisplayStats(canvasField, testNum) {
@@ -598,27 +599,28 @@ function generateChart(canvasField, testData, index) {
     });
 }
 
-const pvkSelect = document.getElementById('pvkSelect');
-const choices = new Choices(pvkSelect, {
-    removeItemButton: true,
-    searchResultLimit: 10,
-    placeholderValue: 'Select items',
-    searchPlaceholderValue: 'Search items'
-});
 
-// Fetch data from the server
-fetch('/api/pvk-items')
-    .then(response => response.json())
-    .then(data => {
-        data.forEach(item => {
-            const option = document.createElement('option');
-            option.value = item.id;
-            option.textContent = item.name;
-            pvkSelect.appendChild(option);
-        });
-        choices.setChoices(data, 'id', 'name', true);
-    })
-    .catch(error => console.error('Error fetching PVK items:', error));
+function loadPVK() {
+    const pvkSelect = document.getElementById('pvkSelect');
+    const choices = new Choices(pvkSelect, {
+        removeItemButton: true,
+        searchResultLimit: 10,
+        placeholderValue: 'Select items',
+        searchPlaceholderValue: 'Search items'
+    });
+    fetch('/api/pvk-items')
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(item => {
+                const option = document.createElement('option');
+                option.value = item.id;
+                option.textContent = item.name;
+                pvkSelect.appendChild(option);
+            });
+            choices.setChoices(data, 'id', 'name', true);
+        })
+        .catch(error => console.error('Error fetching PVK items:', error));
+}
 
 function showModal() {
     document.getElementById('modal').style.display = 'block';

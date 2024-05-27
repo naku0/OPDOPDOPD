@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Test 7</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test 8</title>
     <link rel="stylesheet" href="style_test.css">
     <link rel="stylesheet" href="sidepanel.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,6 +17,7 @@
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"/>
     <script src="scripts.js"></script>
+    <link rel="stylesheet" href="css8.css">
 </head>
 <body>
 <header>
@@ -33,19 +35,18 @@
     </ul>
 </header>
 <div class="container">
-    <div id="time">
-        <span class="txt">Sec</span>
-        <span class="digit" id="sec">
-                00</span>
-        <span class="txt">Milisec</span>
-        <span class="digit" id="milisec">
-                00</span>
-    </div>
     <div class="block">
         <div id="okno">
-            <canvas class="canva">
-
-            </canvas>
+            <div class="track">
+                <div class="marker" id="marker"></div>
+                <div class="center-line"></div>
+            </div>
+            <div class="controls">
+                <div>Текущая попытка: <span id="currentAttempt">0.00</span> секунд</div>
+                <div>Оставшееся время: <span id="remainingTime">0</span> секунд</div>
+                <div>Среднее время: <span id="averageTime">0.00</span> секунд</div>
+                <div>Стандартное отклонение: <span id="stdDeviation">0.00</span> секунд</div>
+            </div>
             <div class="finish">
                 <div class="notification">
                     <h1>Тест пройден!</h1>
@@ -62,34 +63,31 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div id="line"></div>
-    <div class="info">
-        <div class="rules">
-            <h1>ПРАВИЛА</h1>
-            <p>НА ЭКРАНЕ ПОЯВИТСЯ ОКРУЖНОСТЬ, ПО
-                ПЕРИМЕТРУ КОТОРОЙ РАСПОЛОЖЕНЫ
-                ДВИЖУЩИЙСЯ ЭЛЕМЕНТ И ЗАФИКСИРОВАННАЯ
-                ЗОНА, ОБОЗНАЧЕННАЯ ЗВЕЗДОЧКОЙ.</p>
+        <div class="info">
+            <div class="rules">
+                <h1>ПРАВИЛА</h1>
+                <p>НА ЭКРАНЕ ПОЯВИТСЯ ОКРУЖНОСТЬ, ПО
+                    ПЕРИМЕТРУ КОТОРОЙ РАСПОЛОЖЕНЫ
+                    ДВИЖУЩИЙСЯ ЭЛЕМЕНТ И ЗАФИКСИРОВАННАЯ
+                    ЗОНА, ОБОЗНАЧЕННАЯ ЗВЕЗДОЧКОЙ.</p>
 
-            <p>ВАМ НЕОБХОДИМО НАЖАТЬ НУЖНУЮ КНОПКУ, КАК
-                ТОЛЬКО ДВИЖУЩИЙСЯ ЭЛЕМЕНТ ОКАЖЕТСЯ В
-                ЗОНЕ.</p>
-            <h4 style="color:#95c29f">ЗЕЛЕНЫЙ – 1</h4>
-            <h4 style="color:#94bff9">ГОЛУБОЙ – 2</h4>
-            <h4 style="color:#f8b25f">ОРАНЖЕВЫЙ – 3</h4>
+                <p>ВАМ НЕОБХОДИМО НАЖАТЬ НУЖНУЮ КНОПКУ, КАК
+                    ТОЛЬКО ДВИЖУЩИЙСЯ ЭЛЕМЕНТ ОКАЖЕТСЯ В
+                    ЗОНЕ.</p>
+                <h4 style="color:#95c29f">ЗЕЛЕНЫЙ – 1</h4>
+                <h4 style="color:#94bff9">ГОЛУБОЙ – 2</h4>
+                <h4 style="color:#f8b25f">ОРАНЖЕВЫЙ – 3</h4>
 
+                <p>ТЕСТИРОВАНИЕ ЗАВЕРШИТСЯ АВТОМАТИЧЕСКИ.</p>
 
-            <p>ТЕСТИРОВАНИЕ ЗАВЕРШИТСЯ АВТОМАТИЧЕСКИ.</p>
-
-        </div>
-        <div id="buttons">
-            <button class="btn" id="start">НАЧАТЬ ТЕСТ</button>
-            <button class="btn" id="stats">СТАТИСТИКА</button>
+            </div>
+            <div id="buttons">
+                <button class="btn" id="start">НАЧАТЬ ТЕСТ</button>
+                <button class="btn" id="stats">СТАТИСТИКА</button>
+            </div>
         </div>
     </div>
 </div>
-
 <aside class="side">
     <div class="sidepanel" id="sidepanel">
         <ul class="sidelist">
@@ -123,6 +121,6 @@
     </div>
 </aside>
 <div class="overlay" id="overlay"></div>
-<script src="script_test7.js"></script>
+<script src="script_test8.js"></script>
 </body>
 </html>

@@ -1,0 +1,153 @@
+.but {
+    display: flex;
+    place-content: center;
+}
+
+button {
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    box-shadow: none;
+    cursor: pointer;
+    width: 500px;
+    padding: 0;
+    height: 250px;
+
+    .sky {
+        background: linear-gradient(180deg, rgba(248, 243, 189, 1) 0%, rgba(250, 193, 109, 1) 39%, rgba(255, 91, 148, 1) 100%);
+        display: none;
+        width: 100%;
+        height: 50%;
+        top: 0;
+        left: 0;
+        position: relative;
+        border-radius: 10px 10px 0 0;
+        z-index: 1;
+    }
+
+    .sea {
+        background: linear-gradient(180deg, rgba(255, 0, 88, 1) 0%, rgba(255, 172, 51, 1) 60%, rgba(255, 254, 248, 1) 100%);
+        display: none;
+        width: 100%;
+        height: 50%;
+        left: 0;
+        position: relative;
+        border-radius: 0 0 10px 10px;
+        z-index: 2;
+    }
+
+    .beach {
+        background-color: navajowhite;
+        display: none;
+        width: 100%;
+        height: 50%;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        position: relative;
+        border-radius: 0 0 10px 10px;
+        z-index: 3;
+    }
+
+    .sun {
+        place-content: center;
+        background: radial-gradient(circle, rgba(248, 243, 189, 1) 0%, rgba(250, 193, 109, 1) 85%, rgba(255, 91, 148, 1) 100%);
+        display: none;
+        width: 90px;
+        height: 90px;
+        border-radius: 50% 50%;
+        left: 50%;
+        top: 50%;
+        position: relative;
+        z-index: 2;
+        filter: drop-shadow(0 0 100px crimson);
+        transform: translate(-50%, -50%);
+    }
+
+    .bleach {
+        background: linear-gradient(90deg, transparent 0%, rgba(250, 193, 109, 1) 45%, rgba(250, 193, 109, 1) 55%, transparent 100%);
+        display: none;
+        width: 90px;
+        height: 50%;
+        left: 50%;
+        position: relative;
+        border-radius: 0 0 10px 10px;
+        z-index: 2;
+    }
+}
+
+button:hover {
+    color: white;
+
+    .sky {
+        display: block;
+        animation: down 0.5s forwards;
+    }
+
+    .sun {
+        display: block;
+        animation: fade 0.8s forwards;
+    }
+
+    .bleach {
+        display: block;
+        animation: down 1s forwards;
+    }
+
+    .beach {
+        display: block;
+        animation: up 0.5s forwards;
+    }
+
+    .sea {
+        display: block;
+        animation: up 0.5s forwards;
+    }
+}
+
+@keyframes up {
+    0% {
+        transform: translateY(10%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes down {
+    0% {
+        transform: translateY(-20%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0%);
+        opacity: 1;
+    }
+}
+
+@keyframes fade {
+    0% {
+        opacity: 0;
+        transform: translateY(150%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.testaaa {
+    background-color: transparent;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 30px;
+    z-index: 10;
+    font-family: "Quicksand", sans-serif;
+    text-decoration: none;
+    color: black;
+}

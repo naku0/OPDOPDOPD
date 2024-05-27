@@ -1,0 +1,36 @@
+.track {
+    position: relative;
+    width: 500px;
+    height: 20px;
+    background-color: #ddd;
+    margin: 20px auto;
+    border-radius: 10px;
+}
+#okno{
+    display: flex;
+    flex-direction: column;
+    place-content: center;
+    place-items: center;
+    height: 70%;
+    width: 70%;
+    border: solid 2px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+}
+
+#orangeMarker, #greenMarker {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+#orangeMarker {
+    background-color: orange;
+}
+
+#greenMarker {
+    background-color: green;
+    transition: left 0.1s linear; /* Плавный переход */
+}
+
+

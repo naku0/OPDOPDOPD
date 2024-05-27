@@ -7,7 +7,8 @@
 a {
     text-decoration: none;
 }
-body{
+
+body {
     background: linear-gradient(45deg, #F9F9F9 25%, #EDF0F2 50%, #F9F9F9 75%, #EDF0F2 100%);
 }
 
@@ -333,7 +334,7 @@ div.first {
 }
 
 div.second {
-    background: linear-gradient(45deg, rgba(133,67,251,1) 20%, rgba(253,140,140,1) 80%);
+    background: linear-gradient(45deg, rgba(133, 67, 251, 1) 20%, rgba(253, 140, 140, 1) 80%);
     border-radius: 10px;
     padding: 20px 40px;
     height: 100dvh;
@@ -344,11 +345,13 @@ div.second {
     grid-column-gap: 20px;
     grid-row-gap: 20px;
     margin-top: 30px;
-    .image{
+
+    .image {
         filter: drop-shadow(-5px -7px 10px #CCFA5B) drop-shadow(5px 7px 10px #00FFFF);
     }
-    .testfield{
-        border: 1px solid rgba(0,0,0,0.1);
+
+    .testfield {
+        border: 1px solid rgba(0, 0, 0, 0.1);
         border-radius: 10px;
         box-shadow: rgba(0, 0, 0, 0.5) 5px 5px 10px 0;
         background: #EDF0F2;
@@ -358,35 +361,121 @@ div.second {
 div.third {
     margin-top: 30px;
     height: 100dvh;
-    display: none;
+    display: flex;
+    flex-direction: column;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 0.5fr);
     grid-column-gap: 20px;
     grid-row-gap: 20px;
     place-items: center;
+    box-shadow: rgba(0, 0, 0, 0.5) 0 0 10px 0;
+    border-radius: 10px;
+
+    h1.third-block {
+        z-index: 1;
+        font-size: 24px;
+        font-weight: bold;
+        color: black;
+        position: absolute;
+    }
 }
 
-.third .tests{
+.backgroundtests {
+    position: relative;
+    background-color: #f0f0f0;
     display: flex;
-    flex-direction: row;
-    width: 20%;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    flex-direction: column;
+    height: auto;
+    width: auto;
+    border-radius: 10px 10px 0 0;
+}
+span{
+    color: rgb(148, 191, 249, 0.2);
+    top: 0;
+    left: 0;
+    font-size: 40px;
+    padding: 0;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: marquee linear infinite;
+    white-space: nowrap;
+}
+@keyframes marquee {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
 }
 
-@keyframes moviiing {
-    0%{
-        width: 20%;
+.row1 {
+    top: 10%;
+    animation-duration: 10s;
+}
+
+.row2 {
+    top: 50%;
+    animation-duration: 12s;
+}
+
+.row3 {
+    top: 100%;
+    animation-duration: 14s;
+}
+
+
+.third .tests {
+    display: flex;
+    flex-direction: column;
+    place-content: center;
+    place-items: center;
+    width: 100%;
+    z-index: 2;
+}
+
+.third .tests .testfield {
+    z-index: 2;
+    display: flex;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    transition: background 300ms linear;
+
+    a h1 {
+
+        place-content: center;
+        font-size: 30px;
+    }
+
+}
+.third .testfield:hover {
+    animation: bleach 300ms linear forwards;
+}
+@keyframes bleach {
+    0% {
         background-color: #EDF0F2;
     }
-    100%{
-        width: 90%;
-        background-color: #00FFFF;
+    25%{
+        background-size: 200% 100%;
+        background: linear-gradient(90deg, #EDF0F2 99%, #94bff9 100%) 100% 0;
+    }
+    50%{
+        background-size: 200% 100%;
+        background: linear-gradient(90deg, #EDF0F2 50%, #94bff9 100%) 50% 0;
+    }
+    75%{
+        background-size: 200% 100%;
+        background: linear-gradient(90deg, #EDF0F2 0%, #94bff9 50%) 0 0;
+    }
+    100% {
+        background: linear-gradient(90deg, #EDF0F2 0%, #94bff9 0%) 0 0;
+        border-radius: 0 0 10px 10px;
     }
 }
-
-.third .tests .testfield:hover{
-    animation: moviiing  0.5s forwards;
-}
-
 .test-container {
     padding: 20px;
 }
@@ -465,6 +554,7 @@ div.third {
     img.first {
         object-position: 100% 20%;
     }
+
     img.second {
         object-position: 100% 40%;
     }
@@ -477,7 +567,7 @@ div.third {
         object-position: 100% 25%;
     }
 
-   img.fifth {
+    img.fifth {
         object-position: 100% 35%;
     }
 }
@@ -485,7 +575,7 @@ div.third {
 .testfield a {
     height: 30%;
     text-align: center;
-    font-size: calc((0.5vh + 2vw)/2);
+    font-size: calc((0.5vh + 2vw) / 2);
     text-decoration: none;
     color: black;
 }
@@ -501,24 +591,26 @@ div.third {
 
 }
 
-.second .testfield a{
+.second .testfield a {
     display: flex;
     place-content: center;
-    h1{
+
+    h1 {
         place-content: center;
     }
 }
-.second .testfield:hover{
+
+.second .testfield:hover {
     animation: secondhover 300ms forwards;
 }
 
 @keyframes secondhover {
-    0%{
+    0% {
         background-color: #EDF0F2;
     }
-    100%{
-        background: linear-gradient(53deg,rgba(226,255,153,1) 0%, rgba(59,202,171,1)  90%);
-        box-shadow: inset rgba(0,0,0,0.3) 0 0 10px 2px;
+    100% {
+        background: linear-gradient(53deg, rgba(226, 255, 153, 1) 0%, rgba(59, 202, 171, 1) 90%);
+        box-shadow: inset rgba(0, 0, 0, 0.3) 0 0 10px 2px;
     }
 }
 
@@ -577,8 +669,7 @@ div.third {
 }
 
 
-
-.coming{
+.coming {
     margin-top: 100px;
     display: flex;
     flex-direction: column;
@@ -588,14 +679,17 @@ div.third {
     height: 100%;
     width: 100%;
 }
-.coming h1{
+
+.coming h1 {
     padding: 20px;
 }
-.coming .picture{
+
+.coming .picture {
     display: flex;
     place-content: center;
 }
-.coming .picture img{
+
+.coming .picture img {
     object-fit: contain;
     object-position: 100%;
     max-height: 70%;
