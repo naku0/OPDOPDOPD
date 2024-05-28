@@ -3,10 +3,7 @@
     transition: all 1s;
 }
 
-
-
-
-#next_slide {
+#nextQuestion {
     padding: 20px 50px;
     cursor: pointer;
     display: none;
