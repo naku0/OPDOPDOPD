@@ -743,23 +743,27 @@ app.get('/myStat', (req, res) => {
 
 app.post('/pvkpoint', (req, res) => {
     const jsonData = req.body;
-    console.log(jsonData);
+    // console.log(jsonData);
     const user_name = jsonData.name;
     const profession_id = jsonData.prof;
     const order = jsonData.order;
+    connection.query("DELETE FROM opinions WHERE profession_id = ?", [profession_id], function (err, result) {
+        if (err) throw err;
+        console.log("opinions in update");
+    });
     for (let i = 0; i < order.length; i++) {
         //ВОТ ТУТ ВОПРОСЫ
-        connection.query("SELECT id FROM piq WHERE name = ?",[order.id], function (err, result) {
+        connection.query("SELECT id FROM piq WHERE name = ?",[order[i].id], function (err, result) {
             //ВОПРОСЫ ВОТ ТУТ
             if (err) throw err;
-            piqId = result[0];
-            connection.query("INSERT INTO opinions (user_id, piq_id, profession_id, position) VALUES ((SELECT id FROM users WHERE name = ?), ?, ?, ?)", [user_name, piqId, profession_id, i], function (err, result) {
+            console.log(result);
+            let piqId = result[0].id;
+            connection.query("INSERT INTO opinions (user_id, piq_id, profession_id, position) VALUES ((SELECT id FROM users WHERE name = ?), ?, ?, ?)", [user_name, piqId, profession_id, i + 1], function (err, result) {
                 if (err) throw err;
                 console.log("1 record inserted");
             })
         })
     }
-    console.log();
 });
 app.get('/api/pvk-items', (req, res) => {
     console.log('aaaa');
@@ -769,9 +773,19 @@ app.get('/api/pvk-items', (req, res) => {
             res.status(500).send('Server error');
         } else {
             res.json(results);
-            console.log(results);
+            // console.log(results);
         }
     });
+});
+
+app.post('/suka', (req, res) => {
+    console.log('aaaaa');
+    const jsonData = req.body;
+    const profession_id = jsonData.profession_id;
+    connection.query("SELECT piq.name, opinions.position FROM opinions JOIN piq ON piq.id = opinions.piq_id WHERE profession_id = ?", [profession_id], function (err, result){
+        if (err) throw err;
+        res.json(result);
+    })
 });
 
 app.listen(PORT2, () => {

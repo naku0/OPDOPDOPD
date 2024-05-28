@@ -627,6 +627,43 @@ function loadPVK() {
         })
         .catch(error => console.error('Error fetching PVK items:', error));
 }
+// Загрузка актуальных пвк для конкретных профессий
+function insertPVK(){
+    const pvkList = document.getElementById('pvkList');
+    const selectedItems = Array.from(pvkSelect.selectedOptions).map(option => option.textContent);
+    while(pvkList.firstChild) {
+        pvkList.removeChild(pvkList.firstChild);
+    }
+    const currentPageUrl = window.location.href;
+    let prof;
+    if (currentPageUrl === 'http://localhost:1488/GameDesigner.html') {
+        prof = 1;
+    } else if (currentPageUrl === 'http://localhost:1488/SysAdmin.html') {
+        prof = 3;
+    } else {
+        prof = 2;
+    }
+    let professionId = { "profession_id" : prof}
+    fetch('/suka', {
+        method : 'POST',
+        headers : {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(professionId),
+    })
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(item => {
+                const li = document.createElement('li');
+                li.className = 'item';
+                li.draggable = true;
+                li.textContent = item.name;
+                pvkList.appendChild(li);
+            })
+        })
+
+
+}
 
 function showModal() {
     document.getElementById('modal').style.display = 'block';
@@ -641,7 +678,13 @@ function saveSelectedItems() {
     const selectedItems = Array.from(pvkSelect.selectedOptions).map(option => option.textContent);
 
     const pvkList = document.getElementById('pvkList');
-    pvkList.innerHTML = ''; // Clear current list
+    // pvkList.innerHTML = ""; // Clear current list
+    // console.log(pvkList);
+    while(pvkList.firstChild) {
+        pvkList.removeChild(pvkList.firstChild);
+    }
+    console.log(pvkList);
+
 
     selectedItems.forEach(item => {
         const li = document.createElement('li');

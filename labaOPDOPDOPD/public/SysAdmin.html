@@ -21,7 +21,6 @@
 </head>
 <body>
 <header>
-
     <ul class="topper">
         <li class="logo">
             <a href="#" onclick="checkStatusForSidePanel()">OPDOPDOPD
@@ -59,15 +58,14 @@
             <div class="hiddenElement" id="hiddenElement">
                 <div class="edit" id="edit">
                     <i class="material-icons"
-                       onclick="ChangeDiv('done', 'edit'); changeOrder(); showModal()">edit_note</i>
-                </div>
+                       onclick="ChangeDiv('done', 'edit'); changeOrder(); showModal()">edit_note</i></div>
                 <div class="done" id="done">
                     <i class="material-symbols-outlined"
                        onclick="ChangeDiv('edit', 'done'); hideModal()">done</i>
                 </div>
             </div>
         </div>
-        <ol class="pvkList">
+        <ol class="pvkList" id="pvkList">
             <li class="item" draggable="true">a</li>
             <li class="item" draggable="true">b</li>
             <li class="item" draggable="true">c</li>
@@ -119,7 +117,7 @@
             <button onclick="saveSelectedItems()">Save</button>
         </div>
     </div>
-    <script>loadPVK();
+    <script>insertPVK();loadPVK();
     CheckPerms();
     loadAvatars(sessionStorage.getItem('avatar'));
     CheckData()</script>
