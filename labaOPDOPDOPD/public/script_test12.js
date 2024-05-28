@@ -107,11 +107,15 @@ function stopWatch() {
     }
 }
 function sendData(data) {
-    fetch('/test12res', {
+    let UserRes={
+        "name": sessionStorage.getItem('name'),
+        "res": data
+    }
+    fetch('/tes12res', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify(UserRes),
     });
 }

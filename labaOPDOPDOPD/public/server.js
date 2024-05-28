@@ -605,7 +605,6 @@ app.post('/tes7res', (req, res) => {
     const jsonData = req.body;
     const user_name = jsonData.name;
     const result = jsonData.res;
-    console.log(jsonData);
     const test_id = 7;
     const number_of_mistakes = result[0];
     const results = result.slice(1);
@@ -649,17 +648,56 @@ app.post('/tes9res', (req, res) => {
 app.post('/tes11res', (req, res) => {
     const jsonData = req.body;
     const user_name = jsonData.name;
-    console.log(jsonData);
+    const result = jsonData.res;
+    const test_id = 11;
+    const number_of_mistakes = result[0];
+    const results = result.slice(1).filter(x => x !== null);
+    const avg = results.reduce((acc, cur) => acc + parseFloat(cur), 0) / results.length;
+    const deviation = calculateStandardDeviation(results);
+    connection.query("INSERT INTO test_attempt (user_id, test_id, attempt_number, average_value, number_of_passes, stadart_deviation, number_of_mistakes) VALUES ((SELECT id FROM users WHERE name = ?), ?, ?, ?, ?, ?, ?);", [user_name, test_id, 0, avg, 0, deviation, number_of_mistakes], function(err, result){
+        if (err) {
+            console.error('Ошибка выполнения запроса к базе данных:', err);
+            return res.status(500).json({error: 'Ошибка выполнения запроса к базе данных'});
+        }
+        console.log("Test attempt added to db");
+    });
 });
 
 app.post('/tes12res', (req, res) => {
     const jsonData = req.body;
     const user_name = jsonData.name;
-    console.log(jsonData);
+    const result = jsonData.res;
+    const number_of_mistakes = 49 - result[0];
+    console.log(result);
+    const spent_time = result[1]/100;
+    const test_id = 12;
+    connection.query("INSERT INTO test_attempt (user_id, test_id, attempt_number, average_value, number_of_passes, number_of_mistakes, stadart_deviation, time_spent) VALUES ((SELECT id FROM users WHERE name = ?), ?, ?, ?, ?, ?, ?, ?)", [user_name, test_id, 0, 0, 0, number_of_mistakes, 0, spent_time], function(err, result){
+        if (err) {
+            console.error('Ошибка выполнения запроса к базе данных:', err);
+            return res.status(500).json({error: 'Ошибка выполнения запроса к базе данных'});
+        }
+        console.log("Test attempt added to db");
+    })
 })
 
 app.post('/tes13res', (req, res) => {
+    const jsonData = req.body;
+    const user_name = jsonData.name;
+    const result = jsonData.res;
+    const number_of_mistakes = result[0];
+    const number_of_passes = result[1];
+    const test_id = 13;
+    connection.query("INSERT INTO test_attempt (user_id, test_id, attempt_number, average_value, number_of_passes, number_of_mistakes, stadart_deviation) VALUES ((SELECT id FROM users WHERE name = ?), ?, ?, ?, ?, ?, ?)", [user_name, test_id, 0, 0, number_of_passes, number_of_mistakes, 0], function(err, result){
+        if (err) {
+            console.error('Ошибка выполнения запроса к базе данных:', err);
+            return res.status(500).json({error: 'Ошибка выполнения запроса к базе данных'});
+        }
+        console.log("Test attempt added to db");
+    })
+});
 
+app.post('/tes14res', (req, res) => {
+    
 })
 
 app.use(bodyParser.json());
