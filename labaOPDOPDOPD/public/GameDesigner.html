@@ -64,7 +64,7 @@
                 </div>
             </div>
         </div>
-        <ol class="pvkList">
+        <ol class="pvkList" id="pvkList">
             <li class="item" draggable="true">a</li>
             <li class="item" draggable="true">b</li>
             <li class="item" draggable="true">c</li>
@@ -116,6 +116,6 @@
         <button onclick="saveSelectedItems()">Save</button>
     </div>
 </div>
-<script>loadPVK();CheckPerms();loadAvatars(sessionStorage.getItem('avatar'));CheckData()</script>
+<script>insertPVK();loadPVK();CheckPerms();loadAvatars(sessionStorage.getItem('avatar'));CheckData();</script>
 </body>
 </html>
