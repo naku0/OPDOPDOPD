@@ -14,7 +14,7 @@ const connection = mysql.createConnection(
         // port: "1337",
         host: "localhost",
         user: "root",
-        password: "qwerty0987654321",
+        password: "1234",
         database: "opdopdopd"
     }
 );
@@ -178,8 +178,33 @@ function add_piq_opinion(connection, piq, user_login, profession_name, position)
         });
     });
 }
-
-
+// function countPiqUserCompatibility(piq_id, user_id){
+//     let itog = 0;
+//     connection.query("SELECT formula_id FROM formulas WHERE piq_id = ?", [piq_id], function (err, result) {
+//         if (err) throw err;
+//         const form_id = result[0];
+//         connection.query("SELECT test_id, test_value, coefficient FROM args WHERE formula_id = ?", [form_id], function (err, result) {
+//             if (err) throw err;
+//             for (let i = 0; i < result.length; i ++) {
+//                 let a;
+//                 connection.query("SELECT ?, test_attempt FROM test_attempt WHERE test_id = ? AND user_id = ?", [result[i][0], user_id], function (err, result) {
+//                     if (err) throw err;
+//                     let max_att = 0;
+//                     let val;
+//                     for (let j = 0; j < result.length; j ++) {
+//                         if (result[j][1] > max_att){
+//                             max_att = result[j][1];
+//                             val = result[j][0];
+//                         }
+//                     }
+//                     a = val * result[i][2];
+//                     itog += a;
+//                 })
+//             }
+//         })
+//     })
+//     return itog;
+// }
 app.use('/pictures', express.static(path.join(__dirname, 'public', 'pictures')));
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -593,6 +618,48 @@ app.post('/tes7res', (req, res) => {
         }
         console.log("Test attempt added to db");
     });
+})
+
+app.post('/tes8res', (req, res) => {
+    const jsonData = req.body;
+    const user_name = jsonData.name;
+    const result = jsonData.res;
+    const test_id = 8;
+    const avg = result.reduce((acc, cur) => acc + parseFloat(cur), 0) / result.length;
+    const deviation = calculateStandardDeviation(result);
+    connection.query("INSERT INTO test_attempt (user_id, test_id, attempt_number, average_value, number_of_passes, stadart_deviation, number_of_mistakes) VALUES ((SELECT id FROM users WHERE name = ?), ?, ?, ?, ?, ?, ?)", [user_name, test_id, 0, avg, 0, deviation, 0], function(err, result){
+        if (err) throw err;
+        console.log("Test attempt added to db");
+    })
+});
+
+app.post('/tes9res', (req, res) => {
+    const jsonData = req.body;
+    const user_name = jsonData.name;
+    const result = jsonData.res;
+    const test_id = 9;
+    const avg = result.reduce((acc, cur) => acc + parseFloat(cur), 0) / result.length;
+    const deviation = calculateStandardDeviation(result);
+    connection.query("INSERT INTO test_attempt (user_id, test_id, attempt_number, average_value, number_of_passes, stadart_deviation, number_of_mistakes) VALUES ((SELECT id FROM users WHERE name = ?), ?, ?, ?, ?, ?, ?)", [user_name, test_id, 0, avg, 0, deviation, 0], function(err, result){
+        if (err) throw err;
+        console.log("Test attempt added to db");
+    })
+});
+
+app.post('/tes11res', (req, res) => {
+    const jsonData = req.body;
+    const user_name = jsonData.name;
+    console.log(jsonData);
+});
+
+app.post('/tes12res', (req, res) => {
+    const jsonData = req.body;
+    const user_name = jsonData.name;
+    console.log(jsonData);
+})
+
+app.post('/tes13res', (req, res) => {
+
 })
 
 app.use(bodyParser.json());
