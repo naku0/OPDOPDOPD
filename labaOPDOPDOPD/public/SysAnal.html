@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
 </head>
 <body>
 <header>
@@ -55,11 +57,12 @@
             <p class="PVKname">СПИСОК ПВК</p>
             <div class="hiddenElement" id="hiddenElement">
                 <div class="edit" id="edit">
-                    <i class="material-icons" onclick="ChangeDiv('done', 'edit'); changeOrder()">edit_note</i>
+                    <i class="material-icons"
+                       onclick="ChangeDiv('done', 'edit'); changeOrder(); showModal()">edit_note</i>
                 </div>
                 <div class="done" id="done">
                     <i class="material-symbols-outlined"
-                       onclick="saveOrderToServer(); ChangeDiv('edit', 'done')">done</i>
+                       onclick="ChangeDiv('edit', 'done'); hideModal()">done</i>
                 </div>
             </div>
         </div>
@@ -106,7 +109,20 @@
         </div>
     </aside>
     <div class="overlay" id="overlay"></div>
-    <script>loadPVK();CheckPerms();loadAvatars(sessionStorage.getItem('avatar'));CheckData()</script>
+    <script>CheckSession();
+    loadPVK()</script>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="hideModal()">&times;</span>
+            <select id="pvkSelect" multiple></select>
+            <button onclick="saveSelectedItems()">Save</button>
+        </div>
+    </div>
+    <script>loadPVK();
+    CheckPerms();
+    loadAvatars(sessionStorage.getItem('avatar'));
+    CheckData()</script>
 </main>
 </body>
 </html>
