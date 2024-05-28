@@ -774,6 +774,10 @@ app.get('/api/pvk-items', (req, res) => {
     });
 });
 
+app.get('/pictures/tests/2/1.png', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'pictures', 'tests', '2', '1.png'));
+});
+
 app.listen(PORT2, () => {
     console.log("Сервер запущен на порту " + PORT2);
 });

@@ -81,21 +81,20 @@ function displayImages(count) {
         if (displayedCount >= count) {
             clearInterval(intervalId);
             zaeb(1);
-            showImage(1, './images/' + step + '/1.png', 100, 100);
-            showImage(2, './images/' + step + '/2.png', 100, 100);
-            showImage(3, './images/' + step + '/3.png', 100, 100);
-            showImage(4, './images/' + step + '/4.png', 100, 100);
-            showImage(5, './images/' + step + '/5.png', 100, 100);
-            showImage(6, './images/' + step + '/6.png', 100, 100);
-            showImage(7, './images/' + step + '/7.png', 100, 100);
-            showImage(8, './images/' + step + '/8.png', 100, 100);
-            showImage(9, './images/' + step + '/9.png', 100, 100);
+            showImage(1, './pictures/tests/' + step + '/1.png', 100, 100);
+            showImage(2, './pictures/tests/' + step + '/2.png', 100, 100);
+            showImage(3, './pictures/tests/' + step + '/3.png', 100, 100);
+            showImage(4, './pictures/tests/' + step + '/4.png', 100, 100);
+            showImage(5, './pictures/tests/' + step + '/5.png', 100, 100);
+            showImage(6, './pictures/tests/' + step + '/6.png', 100, 100);
+            showImage(7, './pictures/tests/' + step + '/7.png', 100, 100);
+            showImage(8, './pictures/tests/' + step + '/8.png', 100, 100);
+            showImage(9, './pictures/tests/' + step + '/9.png', 100, 100);
 
 
             return;
         }
-        var imageName = '`' + '<img src= ./images/'+ step + '/' + curr_array[i] + '.png>' + '`';
-        imageContainer.innerHTML = imageName;
+        imageContainer.innerHTML = '`' + '<img src= ./pictures/tests/' + step + '/' + curr_array[i] + '.png>' + '`';
         console.log(i, curr_array);
         displayedCount++;
         i++;
