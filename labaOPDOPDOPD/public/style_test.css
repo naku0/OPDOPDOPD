@@ -349,4 +349,17 @@ button#start:hover {
     border-radius: 10px;
     border: inset 2px rgba(0,0,0,0.5);
 }
+.question {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-content: start;
+    place-content: center;
+    right: 70%;
+    top: 50%;
+}
+.question input {
+    margin-right: 20px; /* Adjust margin for more space */
+}
 

@@ -1,4 +1,5 @@
 let okno = document.getElementById('okno');
+let start = document.querySelector('.start');
 let startBtn = document.getElementById('start');
 let nextBtn = document.getElementById('next');
 let line = document.getElementById('line');
@@ -63,17 +64,14 @@ const generateArray = (length, min, max) => {
 
 // Костыльная функция, но она нужна -_-
 function zaeb(id) {
-    okno.innerHTML = "<div id='" + id + "'></div>";
-    var image = document.getElementById(id);
-    var imageName = '`' + '<img src= ./images/1_' + id + '.png>' + '`';
-    image.innerHTML = imageName;
+    start.innerHTML = "<div id='" + id + "'></div>";
 }
 
 function displayImages(count) {
     i = 0;
     let displayedCount = 0;
     const interval = 2000;
-    const imageContainer = document.getElementById('okno');
+    const imageContainer = document.querySelector('.start');
     const intervalId = setInterval(() => {
         if (displayedCount >= count) {
             clearInterval(intervalId);
@@ -99,7 +97,7 @@ function showImage(id, src, width, height) {
     img.src = src;
     img.width = width;
     img.height = height;
-    okno.append(img);
+    start.append(img);
 }
 
 function checkResult() {
@@ -113,7 +111,7 @@ function checkResult() {
     console.log(success, errors);
 }
 
-okno.addEventListener('click', function (event) {
+start.addEventListener('click', function (event) {
     if (event.target.className === 'image') {
         if (event.target.classList.contains('blocked')) {
             return;
@@ -125,11 +123,13 @@ okno.addEventListener('click', function (event) {
 });
 
 function fill(n, line) {
-    line.style.backgroundImage = `linear-gradient(90deg, #444444 ${100 - n
-    }%, #ffffff ${100 - n}%)`;
+    line.style.background = `linear-gradient(90deg, #dfff8d 0%, #3bcaab ${100 - n}%,  #EDF0F2 ${100 - n}%)`;
 }
 
 function result(success, errors) {
+    document.querySelector(".finish").style.display = "flex";
+    document.querySelector(".start").style.display = "none";
+    document.querySelector("#nextbutton").style.display = "none";
     var percentage = Math.round((success / amount * 100) * 100) / 100;
     var result_desc = "";
     if (percentage > 98) {
@@ -145,6 +145,10 @@ function result(success, errors) {
     } else {
         result_desc = "У вас плохая кратковременная память. Мы рекомендуем вам проконсультироваться со специалистом, чтобы убедиться, что это не является признаком какого-либо заболевания."
     }
-
-    okno.innerHTML = result_desc + `<br> Количество правильных ответов: ` + success + `<br> Количество ошибок: ` + errors + `<br> `;
+    const notificationDiv = document.createElement('div');
+    notificationDiv.style.display = "flex";
+    notificationDiv.style.flexDirection = "column";
+    notificationDiv.style.placeContent = "center";
+    notificationDiv.innerHTML = result_desc + `<br> Количество правильных ответов: ` + success + `<br> Количество ошибок: ` + errors + `<br> `;
+    document.querySelector(".finish").appendChild(notificationDiv);
 }
