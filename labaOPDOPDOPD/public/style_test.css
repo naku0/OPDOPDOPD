@@ -94,6 +94,7 @@ body {
     width: 100%;
     padding: 40px 0;
 }
+
 .container .block #okno {
     display: flex;
     place-content: center;
@@ -102,18 +103,21 @@ body {
     width: 70%;
     border: solid 2px rgba(0, 0, 0, 0.2);
     border-radius: 20px;
+
     .numberField {
         display: flex;
         place-content: center;
         place-items: center;
         font-size: 50px;
     }
-    .canva{
+
+    .canva {
         display: flex;
         place-content: center;
         place-items: center;
 
     }
+
     .start {
         display: flex;
         flex-direction: column;
@@ -242,6 +246,7 @@ button#start {
 button#start:hover {
     background: linear-gradient(90deg, rgba(196, 243, 180, 1) 0%, rgba(146, 218, 202, 1) 50%, rgba(143, 206, 219, 1) 100%);
 }
+
 @keyframes fadein {
     from {
         opacity: 0;
@@ -250,6 +255,61 @@ button#start:hover {
     to {
         opacity: 1;
         transform: translateY(0%);
+    }
+}
+
+#testbuttons {
+    display: flex;
+    flex-direction: row;
+    place-content: center;
+    place-items: center;
+    margin-top: 20px;
+
+    .btn {
+        width: 100%;
+        height: auto;
+        background-color: #EDF0F2;
+        border-radius: 5px;
+        cursor: pointer;
+        padding: 10px;
+    }
+
+    .btn:hover {
+        background-color: #DFDFDF;
+    }
+
+    .btn:active {
+        background-color: #DFDFDF;
+    }
+
+}
+
+#table {
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
+}
+
+#form {
+    display: none;
+    align-content: space-evenly;
+    width: 100%;
+    place-items: center;
+    flex-direction: column;
+    margin-top: -100px;
+    margin-bottom: 10px;
+    .row {
+        display: flex;
+        flex-direction: row;
+        align-content: space-evenly;
+        padding: 5px;
+        input {
+            width: 100%;
+            text-align: center;
+            margin: 0 10px;
+            -moz-appearance: textfield;
+            border-radius: 10px;
+        }
     }
 }
 

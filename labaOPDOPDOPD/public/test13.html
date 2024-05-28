@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test 3</title>
+    <link rel="stylesheet" href="style_test.css">
+    <link rel="stylesheet" href="sidepanel.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Quicksand:wght@300..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"/>
+    <script src="scripts.js"></script>
+</head>
+<body>
+<header>
+    <ul class="topper">
+        <li class="logo">
+            <a href="#" onclick="checkStatusForSidePanel()">OPDOPDOPD
+                <i class="material-icons" id="logo">
+                    <script>randomLogo("logo")</script>
+                </i>
+            </a>
+        </li>
+        <li class="startSession" id="startSession">
+            <a href="OPDOPDOPD.html"><i class="material-symbols-outlined">home</i></a>
+        </li>
+    </ul>
+</header>
+<div class="container">
+    <div class="block">
+        <div id="okno">
+            <div class="start"></div>
+            <div class="finish">
+                <div class="notification">
+                    <h1>Тест пройден!</h1>
+                </div>
+                <div class="icons">
+                    <div class="back">
+                        <i class="material-symbols-outlined">reply</i>
+                        <a href="testPage.html">Назад к тестам</a>
+                    </div>
+                    <div class="share">
+                        <i class="material-symbols-outlined">share</i>
+                        <a href="#" onclick="alert('Ссылка скопирована!')">Поделиться тестом</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="info">
+            <div class="rules">
+                <h1>ПРАВИЛА</h1>
+                <p>НА ЭКРАНЕ ПОЯВИТСЯ ОКРУЖНОСТЬ, ПО
+                    ПЕРИМЕТРУ КОТОРОЙ РАСПОЛОЖЕНЫ
+                    ДВИЖУЩИЙСЯ ЭЛЕМЕНТ И ЗАФИКСИРОВАННАЯ
+                    ЗОНА, ОБОЗНАЧЕННАЯ ЗВЕЗДОЧКОЙ.</p>
+
+                <p>ВАМ НЕОБХОДИМО НАЖАТЬ НУЖНУЮ КНОПКУ, КАК
+                    ТОЛЬКО ДВИЖУЩИЙСЯ ЭЛЕМЕНТ ОКАЖЕТСЯ В
+                    ЗОНЕ.</p>
+                <h4 style="color:#95c29f">ЗЕЛЕНЫЙ – 1</h4>
+                <h4 style="color:#94bff9">ГОЛУБОЙ – 2</h4>
+                <h4 style="color:#f8b25f">ОРАНЖЕВЫЙ – 3</h4>
+
+                <p>ТЕСТИРОВАНИЕ ЗАВЕРШИТСЯ АВТОМАТИЧЕСКИ.</p>
+
+            </div>
+            <div id="buttons">
+                <button class="btn" id="start">НАЧАТЬ ТЕСТ</button>
+                <button class="btn" id="stats">СТАТИСТИКА</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="form">
+        <div class="row1 row">
+            <input type="number" id="1">
+            <input type="number" id="2">
+            <input type="number" id="3">
+            <input type="number" id="4">
+        </div>
+        <div class="row2 row">
+            <input type="number" id="5">
+            <input type="number" id="6">
+            <input type="number" id="7">
+            <input type="number" id="8">
+        </div>
+        <div class="row3 row">
+        <input type="number" id="9">
+        <input type="number" id="10">
+        <input type="number" id="11">
+        <input type="number" id="12">
+        </div>
+        <div class="row4 row">
+        <input type="number" id="13">
+        <input type="number" id="14">
+        <input type="number" id="15">
+        <input type="number" id="16">
+        </div>
+        <div class="row5 row">
+        <input type="number" id="17">
+        <input type="number" id="18">
+        <input type="number" id="19">
+        <input type="number" id="20">
+        </div>
+    </div>
+    <div id="line"></div>
+</div>
+
+<script src="script_test13.js"></script>
+</body>
+</html>

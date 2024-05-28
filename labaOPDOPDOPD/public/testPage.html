@@ -43,6 +43,9 @@
         <div class="block">
             <h1>ТРЕТИЙ БЛОК</h1>
         </div>
+        <div class="block">
+            <h1>ЧЕТВЕРТЫЙ БЛОК</h1>
+        </div>
     </div>
     <div class="buttons">
         <button class="prev">
@@ -55,8 +58,8 @@
 </article>
 <div class="test-container">
     <div class="first">
-        <div class="blockname" id ="first">
-            <h1 class="first-block" >ПЕРВЫЙ БЛОК</h1>
+        <div class="blockname" id="first">
+            <h1 class="first-block">ПЕРВЫЙ БЛОК</h1>
         </div>
         <div class="test-first">
             <div class="testfield">
@@ -78,7 +81,7 @@
         </div>
         <div class="test-fourth">
             <div class="testfield">
-                <img class="fourth" src="4.png" alt="">
+                <img class="forth" src="4.png" alt="">
                 <a href="test4.html"><h1>ТЕСТ #4</h1></a>
             </div>
         </div>
@@ -90,7 +93,7 @@
         </div>
     </div>
     <div class="second">
-        <div class="blockname"  id = "second">
+        <div class="blockname" id="second">
             <h1 class="second-block">ВТОРОЙ БЛОК</h1>
         </div>
         <div class="image">
@@ -108,7 +111,7 @@
         </div>
     </div>
     <div class="third">
-        <div class="blockname"  id = "third">
+        <div class="blockname" id="third">
             <div class="backgroundtests">
                 <span class="row1">3RD BLOCK OPDOPDOPD 3RD BLOCK OPDOPDOPD 3RD BLOCK OPDOPDOPD 3RD BLOCK </span>
                 <span class="row2">3RD BLOCK OPDOPDOPD 3RD BLOCK OPDOPDOPD 3RD BLOCK OPDOPDOPD 3RD BLOCK</span>
@@ -128,18 +131,75 @@
             <div class="test-first">
                 <div class="testfield">
                     <a href="test8.html">
-                    <h1>ТЕСТ #1</h1>
+                        <h1>ТЕСТ #1</h1>
                     </a>
                 </div>
             </div>
             <div class="test-second">
                 <div class="testfield">
                     <a href="test9.html">
-                    <h1>ТЕСТ #2</h1>
+                        <h1>ТЕСТ #2</h1>
                     </a>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="fourth">
+        <div class="blockname" id="fourth">
+            <h1 class="fourth-block">ЧЕТВЕРТЫЙ БЛОК</h1>
+        </div>
+        <div class="planets-container">
+            <div class="orb1 orb" id = "orb1">
+            </div>
+            <div class="orb2 orb" id="orb2">
+            </div>
+            <div class="orb3 orb" id="orb3">
+                </div>
+            </div>
+        <div class="testcontainers">
+            <div class="firstorb orbtest" id = "test-orb1">
+                <div class="test-first">
+                    <div class="testfield">
+                        <a href="test11.html"><h1>ТЕСТ #1</h1></a>
+                    </div>
+                </div>
+                <div class="test-second">
+                    <div class="testfield">
+                        <a href="test12.html"><h1>ТЕСТ #2</h1></a>
+                    </div>
+                </div>
+            </div>
+            <div class="secondorb orbtest" id = "test-orb2">
+                <div class="test-third">
+                    <div class="testfield">
+                        <a href="test13.html"><h1>ТЕСТ #3</h1></a>
+                    </div>
+                </div>
+                <div class="test-fourth">
+                    <div class="testfield">
+                        <a href="test14.html"><h1>ТЕСТ #4</h1></a>
+                    </div>
+                </div>
+            </div>
+            <div class="thirdorb orbtest" id = "test-orb3">
+                <div class="test-fifth">
+                    <div class="testfield">
+                        <a href="test15.html"><h1>ТЕСТ #5</h1></a>
+                    </div>
+                </div>
+                <div class="test-sixth">
+                    <div class="testfield">
+                        <a href="test16.html"><h1>ТЕСТ #6</h1></a>
+                    </div>
+                </div>
+                <div class="test-seventh">
+                    <div class="testfield">
+                        <a href="test17.html"><h1>ТЕСТ #7</h1></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
     <div class="coming">
         <h1>coming soon</h1>
@@ -183,9 +243,10 @@
 <div class="overlay" id="overlay"></div>
 </body>
 <script>
-        CheckSession();
-CheckPerms();
-loadAvatars(sessionStorage.getItem("avatar"));
-addCarousel();
+    loadOrbs();
+    CheckSession();
+    CheckPerms();
+    loadAvatars(sessionStorage.getItem("avatar"));
+    addCarousel();
 </script>
 </html>

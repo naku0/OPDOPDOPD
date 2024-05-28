@@ -243,7 +243,38 @@ app.get('/script_test9.js', (req, res) => {
     res.header("Content-Type", "application/javascript");
     res.sendFile(__dirname + '/script_test9.js');
 });
-
+app.get('/script_test10.js', (req, res) => {
+    res.header("Content-Type", "application/javascript");
+    res.sendFile(__dirname + '/script_test10.js');
+});
+app.get('/script_test11.js', (req, res) => {
+    res.header("Content-Type", "application/javascript");
+    res.sendFile(__dirname + '/script_test11.js');
+});
+app.get('/script_test12.js', (req, res) => {
+    res.header("Content-Type", "application/javascript");
+    res.sendFile(__dirname + '/script_test12.js');
+});
+app.get('/script_test13.js', (req, res) => {
+    res.header("Content-Type", "application/javascript");
+    res.sendFile(__dirname + '/script_test13.js');
+});
+app.get('/script_test14.js', (req, res) => {
+    res.header("Content-Type", "application/javascript");
+    res.sendFile(__dirname + '/script_test14.js');
+});
+app.get('/script_test15.js', (req, res) => {
+    res.header("Content-Type", "application/javascript");
+    res.sendFile(__dirname + '/script_test15.js');
+});
+app.get('/script_test16.js', (req, res) => {
+    res.header("Content-Type", "application/javascript");
+    res.sendFile(__dirname + '/script_test16.js');
+});
+app.get('/script_test17.js', (req, res) => {
+    res.header("Content-Type", "application/javascript");
+    res.sendFile(__dirname + '/script_test17.js');
+});
 app.get('/GameDesigner.html', (req, res) => {
     const htmlFilePath = path.join(__dirname, 'GameDesigner.html');
     res.sendFile(htmlFilePath);
@@ -395,6 +426,47 @@ app.get('/test9.html', (req, res) => {
     const htmlFilePath = path.join(__dirname, '/test9.html');
     res.sendFile(htmlFilePath);
 });
+
+app.get('/test10.html', (req, res) => {
+    const htmlFilePath = path.join(__dirname, '/test10.html');
+    res.sendFile(htmlFilePath);
+});
+
+app.get('/test11.html', (req, res) => {
+    const htmlFilePath = path.join(__dirname, '/test11.html');
+    res.sendFile(htmlFilePath);
+});
+
+app.get('/test12.html', (req, res) => {
+    const htmlFilePath = path.join(__dirname, '/test12.html');
+    res.sendFile(htmlFilePath);
+});
+
+app.get('/test13.html', (req, res) => {
+    const htmlFilePath = path.join(__dirname, '/test13.html');
+    res.sendFile(htmlFilePath);
+});
+
+app.get('/test14.html', (req, res) => {
+    const htmlFilePath = path.join(__dirname, '/test14.html');
+    res.sendFile(htmlFilePath);
+});
+
+app.get('/test15.html', (req, res) => {
+    const htmlFilePath = path.join(__dirname, '/test15.html');
+    res.sendFile(htmlFilePath);
+});
+
+app.get('/test16.html', (req, res) => {
+    const htmlFilePath = path.join(__dirname, '/test16.html');
+    res.sendFile(htmlFilePath);
+});
+
+app.get('/test17.html', (req, res) => {
+    const htmlFilePath = path.join(__dirname, '/test17.html');
+    res.sendFile(htmlFilePath);
+});
+
 
 
 app.post('/tes1res', (req, res) => {

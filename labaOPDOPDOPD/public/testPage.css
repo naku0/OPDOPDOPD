@@ -287,6 +287,11 @@ header .topper li:first-child {
     background: linear-gradient(90deg, rgba(67, 226, 191, 1) 10%, rgba(204, 250, 91, 1) 90%);
 }
 
+.carousel .block:nth-child(4) {
+    background: linear-gradient(147deg, rgba(0,0,0,1) 0%, rgba(122,44,168,1) 29%, rgba(177,28,130,1) 46%, rgba(94,47,144,1) 61%, rgba(69,45,113,1) 77%, rgba(0,0,0,1) 100%);    h1{
+        color: white;
+    }
+}
 .carousel .block.active {
     display: grid;
     opacity: 1;
@@ -392,7 +397,8 @@ div.third {
     width: auto;
     border-radius: 10px 10px 0 0;
 }
-span{
+
+span {
     color: rgb(148, 191, 249, 0.2);
     top: 0;
     left: 0;
@@ -405,6 +411,7 @@ span{
     animation: marquee linear infinite;
     white-space: nowrap;
 }
+
 @keyframes marquee {
     0% {
         transform: translateX(100%);
@@ -446,28 +453,29 @@ span{
     transition: background 300ms linear;
 
     a h1 {
-
         place-content: center;
         font-size: 30px;
     }
 
 }
+
 .third .testfield:hover {
     animation: bleach 300ms linear forwards;
 }
+
 @keyframes bleach {
     0% {
         background-color: #EDF0F2;
     }
-    25%{
+    25% {
         background-size: 200% 100%;
         background: linear-gradient(90deg, #EDF0F2 99%, #94bff9 100%) 100% 0;
     }
-    50%{
+    50% {
         background-size: 200% 100%;
         background: linear-gradient(90deg, #EDF0F2 50%, #94bff9 100%) 50% 0;
     }
-    75%{
+    75% {
         background-size: 200% 100%;
         background: linear-gradient(90deg, #EDF0F2 0%, #94bff9 50%) 0 0;
     }
@@ -476,6 +484,7 @@ span{
         border-radius: 0 0 10px 10px;
     }
 }
+
 .test-container {
     padding: 20px;
 }
@@ -563,7 +572,7 @@ span{
         object-position: 100% 20%;
     }
 
-    img.fourth {
+    img.forth {
         object-position: 100% 25%;
     }
 
@@ -694,4 +703,148 @@ span{
     object-position: 100%;
     max-height: 70%;
     max-width: 70%;
+}
+
+.fourth  {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: black;
+    border-radius: 10px;
+    margin-top: 30px;
+
+    .blockname {
+        position: absolute;
+        margin-top: 10px;
+        top: 20px;
+        text-align: center;
+        width: 100%;
+        color: #EDF0F2;
+    }
+
+    .planets-container {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+    }
+
+    .orb {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        transition: transform 0.5s ease, z-index 0.5s ease;
+        cursor: pointer;
+        top: 0;
+
+    }
+
+    .orb1 {
+        box-shadow: inset 0 0 50px #fff,
+        inset 20px 0 80px #94bff9,
+        inset -20px 0 80px violet,
+        inset 20px 0 300px #94bff9,
+        inset -20px 0 300px violet,
+        0 0 50px #fff,
+        -10px 0 80px #f0f,
+        10px 0 80px #0ff;
+    }
+
+    .orb2 {
+        box-shadow: inset 0 0 50px #fff,
+        inset 20px 0 80px hotpink,
+        inset -20px 0 80px cornflowerblue,
+        inset 20px 0 300px hotpink,
+        inset -20px 0 300px cornflowerblue,
+        0 0 50px #fff,
+        -10px 0 80px pink,
+        10px 0 80px lightskyblue;
+    }
+
+    .orb3 {
+        box-shadow: inset 0 0 50px #fff,
+        inset 20px 0 80px orange,
+        inset -20px 0 80px greenyellow,
+        inset 20px 0 300px orange,
+        inset -20px 0 300px greenyellow,
+        0 0 50px #fff,
+        -10px 0 80px orange,
+        10px 0 80px lawngreen;
+
+    }
+
+    .orb:hover {
+        transform: scale(1.1);
+    }
+
+    .orb.active {
+        z-index: 10;
+        transform: scale(1.5);
+        animation: float 3s linear infinite;;
+    }
+
+    .testcontainers {
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+        height: 50%;
+    }
+
+    .orbtest {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .testfield {
+        text-align: center;
+        padding: 10px 40px;
+        border-radius: 5px;
+        height: auto;
+        width: 100%;
+        h1{
+            color: #94bff9;
+        }
+    }
+
+    .orbtest.active {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly ;
+        border: 6px outset #94bff9;
+        background-color: rgb(148, 191, 249, 0.1);
+        padding: 0 10px;
+        border-radius: 10px;
+        width: 100%;
+        height: auto;
+    }
+    .testfield:hover{
+        animation: scale 150ms linear forwards;
+    }
+    .testfield:active{
+        color: rgb(148, 191, 249,0.9);
+        animation: scale 300ms linear backwards;
+    }
+    .testfield:focus-within{
+        color: rgb(148, 191, 249,0.9);
+    }
+}
+@keyframes float {
+    50%{
+        top:10px;
+    }
+}
+@keyframes scale {
+    100%{
+        transform: scale(1.3);
+    }
 }

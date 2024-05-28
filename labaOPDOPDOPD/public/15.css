@@ -1,0 +1,13 @@
+.slider_line{
+    display: flex;
+    transition: all 1s;
+}
+.question{
+    width: 300px;
+    height: 300px;
+}
+.slider{
+    width: 300px;
+    overflow: hidden;
+    position: relative;
+}

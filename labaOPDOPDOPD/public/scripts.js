@@ -350,6 +350,7 @@ function workCarousel(index, slide) {
     const first = document.querySelector('div.first');
     const second = document.querySelector('div.second');
     const third = document.querySelector('div.third');
+    const fourth = document.querySelector('div.fourth');
     slide.addEventListener('click', () => {
         console.log(index);
         switch (index) {
@@ -366,6 +367,11 @@ function workCarousel(index, slide) {
             case (2): {
                 third.scrollIntoView({behavior: 'smooth', block: 'center'});
                 console.log("third");
+                break;
+            }
+            case (3): {
+                fourth.scrollIntoView({behavior: 'smooth', block: 'center'});
+                console.log("fourth");
                 break;
             }
         }
@@ -644,6 +650,20 @@ function saveSelectedItems() {
         li.textContent = item;
         pvkList.appendChild(li);
     });
-
     hideModal();
+}
+
+function loadOrbs(){
+    const orbs = document.querySelectorAll(".orb");
+    const testContainers = document.querySelectorAll(".orbtest");
+    orbs.forEach(orb => {
+        orb.addEventListener("click", () => {
+            // Remove active class from all orbs
+            orbs.forEach(o => o.classList.remove("active"));
+            testContainers.forEach(tc => tc.classList.remove("active"));
+            // Add active class to clicked orb
+            orb.classList.add("active");
+            document.querySelector(`#test-${orb.id}`).classList.add("active");
+        });
+    });
 }
