@@ -55,17 +55,16 @@
         <div class="info">
             <div class="rules">
                 <h1>ПРАВИЛА</h1>
-                <p>НА ЭКРАНЕ ПОЯВИТСЯ ОКРУЖНОСТЬ, ПО
-                    ПЕРИМЕТРУ КОТОРОЙ РАСПОЛОЖЕНЫ
-                    ДВИЖУЩИЙСЯ ЭЛЕМЕНТ И ЗАФИКСИРОВАННАЯ
-                    ЗОНА, ОБОЗНАЧЕННАЯ ЗВЕЗДОЧКОЙ.</p>
+                <p>ТЕСТ НА ОПЕРАТИВНУЮ ПАМЯТЬ</p>
 
-                <p>ВАМ НЕОБХОДИМО НАЖАТЬ НУЖНУЮ КНОПКУ, КАК
-                    ТОЛЬКО ДВИЖУЩИЙСЯ ЭЛЕМЕНТ ОКАЖЕТСЯ В
-                    ЗОНЕ.</p>
-                <h4 style="color:#95c29f">ЗЕЛЕНЫЙ – 1</h4>
-                <h4 style="color:#94bff9">ГОЛУБОЙ – 2</h4>
-                <h4 style="color:#f8b25f">ОРАНЖЕВЫЙ – 3</h4>
+                <p>НА ЭКРАНЕ ПО ОЧЕРЕДИ ПОЯВЯТСЯ 5 РЯДОВ
+                    СОСТОЯЩИЕ ИЗ 5 ЧИСЕЛ (СНАЧАЛА 1 РЯД,
+                    ПОТОМ 2 РЯД И ТАК ДАЛЕЕ).</p>
+                <p>ВАША ЗАДАЧА ВПИСАТЬ В 4 ЯЧЕЙКИ КАЖДОГО
+                    РЯДА СУММЫ 1 И 2, 2 И 3, 3 И 4, 4 И 5 ЧИСЕЛ
+                    СООТВЕТСТВУЮЩЕГО РЯДА.</p>
+                <p>ИНТЕРВАЛ МЕЖДУ ЧИСЛАМИ – 1,5 СЕКУНДЫ.
+                    ИНТЕРВАЛ МЕЖДУ РЯДАМИ – 10 СЕКУНД.</p>
 
                 <p>ТЕСТИРОВАНИЕ ЗАВЕРШИТСЯ АВТОМАТИЧЕСКИ.</p>
 
@@ -111,6 +110,39 @@
     </div>
     <div id="line"></div>
 </div>
+<aside class="side">
+    <div class="sidepanel" id="sidepanel">
+        <ul class="sidelist">
+            <li class="profile">
+                <div class="divInfo">
+                    <ul class="ulInfo">
+                        <li class="picture">
+                            <div class="avatarka">
+                                <img src="popug.jpg">
+                            </div>
+                        </li>
+                        <li class="name">
+                            <div class="profileName">
+                                asdsa
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="home" draggable="false" tabindex="0"><a href="OPDOPDOPD.html">
+                <i class="material-symbols-outlined">home</i>Главная</a></li>
+            <li class="myPage" draggable="false" tabindex="0"><a href="profile.html">
+                <i class="material-symbols-outlined">account_circle</i>Личный кабинет</a></li>
+            <li class="profiles" draggable="false" tabindex="0"><a href="profiles.html">
+                <i class="material-symbols-outlined" tabindex="0">group</i>Профили</a></li>
+            <li class="test" draggable="false"><a href="testPage.html">
+                <i class="material-symbols-outlined" tabindex="0">quiz</i>Тест</a></li>
+            <li class="exit" draggable="false" tabindex="0"><a href="OPDOPDOPD.html" onclick="EndSession()">
+                <i class="material-symbols-outlined">logout</i>Выход</a></li>
+        </ul>
+    </div>
+</aside>
+<div class="overlay" id="overlay"></div>
 
 <script src="script_test13.js"></script>
 </body>

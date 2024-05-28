@@ -81,6 +81,7 @@ function compare(){
     document.querySelector("#form").style.display = "none";
     document.querySelector(".start").style.display = "none";
     document.querySelector(".finish").style.display = "flex";
+    sendData(results);
 }
 
 function startTest() {
@@ -91,7 +92,6 @@ function startTest() {
 }
 
 
-
 startBtn.addEventListener('click', function () {
     document.querySelector(".info").style.display = "none";
     document.querySelector("#form").style.display = "flex";
@@ -99,3 +99,12 @@ startBtn.addEventListener('click', function () {
         setInterval(startTest(), 2000);
     }
 });
+function sendData(data){
+    fetch('/test13res', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    });
+}

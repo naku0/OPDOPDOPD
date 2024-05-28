@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
             "name": sessionStorage.getItem('name'),
             "res": data
         }
-        fetch('/tes8res', {
+        fetch('/tes9res', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

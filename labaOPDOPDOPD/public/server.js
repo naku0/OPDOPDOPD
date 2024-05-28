@@ -14,7 +14,7 @@ const connection = mysql.createConnection(
         // port: "1337",
         host: "localhost",
         user: "root",
-        password: "1234",
+        password: "qwerty0987654321",
         database: "opdopdopd"
     }
 );
@@ -774,6 +774,16 @@ app.get('/api/pvk-items', (req, res) => {
         } else {
             res.json(results);
             // console.log(results);
+        }
+    });
+});
+app.get('/pictures/tests/:subfolder/:filename', (req, res) => {
+    const {subfolder, filename } = req.params;
+    const filePath = path.join(__dirname, 'pictures','tests', subfolder, filename);
+    console.log(filePath);
+    res.sendFile(filePath, (err) => {
+        if (err) {
+            res.status(404).send('File not found');
         }
     });
 });
