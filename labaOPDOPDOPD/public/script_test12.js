@@ -21,10 +21,10 @@ for (let i = 25; i >= 1; i--) {
     }
 }
 
-for (let i = 25; i >= 1; i--) {
+for (let i = 1; i <= 25; i++) {
     if (i < 25) {
-        arr.push([i, 'red']);
         arr.push([i, 'black']);
+        arr.push([25-i, 'red']);
     } else {
         arr.push([i, 'black']);
     }
