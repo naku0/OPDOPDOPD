@@ -1,5 +1,3 @@
-
-
 let okno = document.getElementById('okno');
 let startBtn = document.getElementById('start');
 let nextBtn = document.getElementById('next');
@@ -24,18 +22,20 @@ var i = 0;
 var pick_array = [];
 var success = 0;
 var errors = 0;
+var curr_array = [];
 
-// это функция чтобы начать тест, кнопку выносить на страницу не надо,
-//только на начальную страницу с описанием теста
-
+// Это функция чтобы начать тест, кнопку выносить на страницу не надо,
+// только на начальную страницу с описанием теста
 startBtn.addEventListener('click', function () {
+    document.querySelector(".info").style.display = "none";
+    document.querySelector("#nextbutton").style.display = "flex";
     step++;
     var imageQuantity = parseInt(questNumbers.get(step.toString()));
     curr_array = generateArray(imageQuantity, 1, 9);
     displayImages(imageQuantity);
 })
 
-// функция для следующего вопроса, она нужна на странице
+// Функция для следующего вопроса, она нужна на странице
 nextBtn.addEventListener('click', function () {
     if (step !== 9){
         console.log(step);
@@ -44,14 +44,12 @@ nextBtn.addEventListener('click', function () {
         var imageQuantity = parseInt(questNumbers.get(step.toString()));
         curr_array = generateArray(imageQuantity, 1, 9);
         displayImages(imageQuantity);
-    }else{
+    } else {
         fill(counter*(100/amount), line);
         checkResult();
         result(success, errors);
     }
 })
-
-
 
 const generateArray = (length, min, max) => {
     const rands = [];
@@ -63,14 +61,13 @@ const generateArray = (length, min, max) => {
     } return rands;
 };
 
-// костыльная функция, но она нужна -_-
+// Костыльная функция, но она нужна -_-
 function zaeb(id) {
     okno.innerHTML = "<div id='" + id + "'></div>";
     var image = document.getElementById(id);
     var imageName = '`' + '<img src= ./images/1_' + id + '.png>' + '`';
-    image.innerHTMl = imageName;
+    image.innerHTML = imageName;
 }
-
 
 function displayImages(count) {
     i = 0;
@@ -81,17 +78,9 @@ function displayImages(count) {
         if (displayedCount >= count) {
             clearInterval(intervalId);
             zaeb(1);
-            showImage(1, './pictures/tests/' + step + '/1.png', 100, 100);
-            showImage(2, './pictures/tests/' + step + '/2.png', 100, 100);
-            showImage(3, './pictures/tests/' + step + '/3.png', 100, 100);
-            showImage(4, './pictures/tests/' + step + '/4.png', 100, 100);
-            showImage(5, './pictures/tests/' + step + '/5.png', 100, 100);
-            showImage(6, './pictures/tests/' + step + '/6.png', 100, 100);
-            showImage(7, './pictures/tests/' + step + '/7.png', 100, 100);
-            showImage(8, './pictures/tests/' + step + '/8.png', 100, 100);
-            showImage(9, './pictures/tests/' + step + '/9.png', 100, 100);
-
-
+            for (let j = 1; j <= 9; j++) {
+                showImage(j, './pictures/tests/' + step + '/' + j + '.png', 100, 100);
+            }
             return;
         }
         imageContainer.innerHTML = '`' + '<img src= ./pictures/tests/' + step + '/' + curr_array[i] + '.png>' + '`';
@@ -102,6 +91,7 @@ function displayImages(count) {
     counter--;
     step++;
 }
+
 function showImage(id, src, width, height) {
     var img = document.createElement("img");
     img.className = 'image';
@@ -129,20 +119,18 @@ okno.addEventListener('click', function (event) {
             return;
         }
         pick_array.push(event.target.getAttribute('id'));
-        console.log('xfdcgjkl', pick_array);
-        //event.target.style.border = '5px'
+        event.target.classList.add('pressed');
+        console.log('picked:', pick_array);
     }
 });
-
-
 
 function fill(n, line) {
     line.style.backgroundImage = `linear-gradient(90deg, #444444 ${100 - n
     }%, #ffffff ${100 - n}%)`;
 }
 
-function result(success, errors){
-    var percentage = Math.round((success / 12 * 100) * 100) / 100;
+function result(success, errors) {
+    var percentage = Math.round((success / amount * 100) * 100) / 100;
     var result_desc = "";
     if (percentage > 98) {
         result_desc = "Вау, у вас необыкновенная кратковременная память! Только 2% респондентов имеют такой результат."
@@ -159,5 +147,4 @@ function result(success, errors){
     }
 
     okno.innerHTML = result_desc + `<br> Количество правильных ответов: ` + success + `<br> Количество ошибок: ` + errors + `<br> `;
-
 }

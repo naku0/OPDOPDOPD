@@ -34,10 +34,47 @@
 </header>
 <div class="container">
     <div class="block">
-        <div id = "okno" >
+        <div id="okno">
+            <div class="start"></div>
+            <div class="finish">
+                <div class="notification">
+                    <h1>Тест пройден!</h1>
+                </div>
+                <div class="icons">
+                    <div class="back">
+                        <i class="material-symbols-outlined">reply</i>
+                        <a href="testPage.html">Назад к тестам</a>
+                    </div>
+                    <div class="share">
+                        <i class="material-symbols-outlined">share</i>
+                        <a href="#" onclick="alert('Ссылка скопирована!')">Поделиться тестом</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="info">
+            <div class="rules">
+                <h1>ПРАВИЛА</h1>
+                <p>ТЕСТ НА КРАТКОВРЕМЕННУЮ ПАМЯТЬ</p>
+
+                <p>ВАМ БУДЕТ ПРЕДЛОЖЕНО 12 ВОПРОСОВ. В
+                    КАЖДОМ ВОПРОСЕ ВАМ БУДЕТ ПОКАЗАНО ДО 8
+                    РАЗЛИЧНЫХ ИЗОБРАЖЕНИЙ.</p>
+                <p>ЗАПОМНИТЕ ИХ, А ЗАТЕМ НАЖМИТЕ НА
+                    СООТВЕТСТВУЮЩИЕ КАРТИНКИ В ВЕРНОМ
+                    ПОРЯДКЕ, ЧТОБЫ ПОЛУЧИТЬ ТАКУЮ ЖЕ
+                    ПОСЛЕДОВАТЕЛЬНОСТЬ.</p>
+
+                <p>ТЕСТИРОВАНИЕ ЗАВЕРШИТСЯ АВТОМАТИЧЕСКИ.</p>
+
+            </div>
+            <div id="buttons">
+                <button class="btn" id="start">НАЧАТЬ ТЕСТ</button>
+                <button class="btn" id="stats">СТАТИСТИКА</button>
+            </div>
         </div>
     </div>
-    <div id="buttons">
+    <div id="nextbutton">
         <button class="btn" id = "next" >NEXT</button>
     </div>
     <div id="line"></div>
