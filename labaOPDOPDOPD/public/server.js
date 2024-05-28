@@ -14,7 +14,7 @@ const connection = mysql.createConnection(
         // port: "1337",
         host: "localhost",
         user: "root",
-        password: "1234",
+        password: "qwerty0987654321",
         database: "opdopdopd"
     }
 );
@@ -40,6 +40,7 @@ function createTables() {
         if (err) throw err;
         console.log("Table categories created!");
     });
+
 
     connection.query("CREATE TABLE IF NOT EXISTS piq(id INT AUTO_INCREMENT, name VARCHAR(255) NOT NULL, category_id INT NOT NULL, FOREIGN KEY fk_category_id (category_id) REFERENCES categories(id), PRIMARY KEY (id))", function (err) {
         if (err) throw err;
@@ -492,6 +493,10 @@ app.get('/test17.html', (req, res) => {
     res.sendFile(htmlFilePath);
 });
 
+app.get('/15.css', (req, res) => {
+    res.header("Content-Type", "text/css");
+    res.sendFile(__dirname + '/15.css');
+});
 
 
 app.post('/tes1res', (req, res) => {
