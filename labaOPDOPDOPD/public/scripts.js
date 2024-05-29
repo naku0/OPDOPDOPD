@@ -536,6 +536,11 @@ function showRes() {
     const button = document.querySelector('.resbutton');
     const overlay = document.querySelector('.overlay');
     const statblock = document.querySelector(".res");
+    const name = sessionStorage.getItem("name");
+
+    let nameJSON = {
+        "name": name
+    };
     button.addEventListener('click', () => {
         displayOverlay(statblock, overlay);
         statblock.style.display = "flex";
@@ -549,7 +554,8 @@ function showRes() {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
-        }
+        },
+        body: JSON.stringify(nameJSON),
     })
         .then(response => {
             if (!response.ok) {
