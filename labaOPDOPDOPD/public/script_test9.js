@@ -113,7 +113,9 @@ document.addEventListener('DOMContentLoaded', () => {
         isTestRunning = false;
         calculateAndDisplayStatistics();
         let max = (Math.max(...reactionTimes)).toFixed(2);
-        sendData(max);
+        let avg = (reactionTimes.reduce((a, b) => a + b, 0) / reactionTimes.length).toFixed(2);
+        let res = [max, avg];
+        sendData(res);
         document.querySelector(".controls").style.display = "none";
         document.querySelector(".track").style.display = "none";
         document.querySelector(".finish").style.display = "flex";
