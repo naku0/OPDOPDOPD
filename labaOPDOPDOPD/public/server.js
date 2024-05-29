@@ -11,9 +11,10 @@ const PORT2 = "5252";
 
 const connection = mysql.createConnection(
     {
+        port: 1337,
         host: "localhost",
         user: "root",
-        password: "qwerty0987654321",
+        password: "1234",
         database: "opdopdopd"
     }
 );
@@ -1288,7 +1289,9 @@ app.post('/addFormula', (req, res) => {
     })
 });
 
-app.get('/showResults', (req, res) => {
+
+
+app.post("/res", (req, res) => {
     const jsonData = req.body;
     const user_name = jsonData.name;
     connection.query("SELECT piq.name, results.result FROM results JOIN piq ON piq.id = result.piq_id WHERE user_id = (SELECT user_id WHERE name = ?)", [user_name], function (err, result) {
@@ -1299,21 +1302,17 @@ app.get('/showResults', (req, res) => {
                 result : item.result
             }
         ));
-        res.json(resultsJson);
+        connection.query("SELECT results.result FROM results JOIN piq ON piq.id = result.piq_id WHERE user_id = (SELECT user_id WHERE name = ?)", [user_name], function (err, result){
+            if (err) throw err;
+            let sum = 0;
+            result.forEach(item => sum += item.result);
+            let resJson =   {sum : sum};
+            res.json(resJson);
+        });
+        res.send(resultsJson);
     });
-});
+})
 
-app.get('/calculateResForProf', (req, res) => {
-    const jsonData = req.body;
-    const user_name = jsonData.name;
-    connection.query("SELECT results.result FROM results JOIN piq ON piq.id = result.piq_id WHERE user_id = (SELECT user_id WHERE name = ?)", [user_name], function (err, result){
-        if (err) throw err;
-        let sum = 0;
-        result.forEach(item => sum += item.result);
-        let resJson =   {sum : sum};
-        res.json(resJson);
-    });
-});
 
 app.listen(PORT2, () => {
     console.log("Сервер запущен на порту " + PORT2);
