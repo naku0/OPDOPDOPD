@@ -312,7 +312,7 @@ main {
     display: flex;
     width: 100%;
     place-content: center;
-    height: 70dvh;
+    height: 100%;
     cursor: pointer;
 }
 .buttons .prev {
@@ -344,15 +344,41 @@ main {
         transform: translateY(0);
     }
 }
-.statbutton{
+.statbutton, .resbuttons{
     display: flex;
     place-content: center;
     margin-top: 10px;
+    height: 50px;
+    padding: 10px;
     button{
         font-size: 20px;
         font-weight: bold;
         border-radius: 20px;
         cursor: pointer;
         padding: 10px;
+    }
+}
+
+.res{
+    position: absolute;
+    display: none;
+    background-color: rgba(237, 240, 242,0.9);
+    backdrop-filter: blur(5px);
+    height: 70dvh;
+    width: 70dvw;
+    padding: 20px;
+    box-sizing: content-box;
+    top: 10%;
+    border-radius: 40px;
+    z-index: 2;
+    animation: fade-in 0.5s forwards;
+    place-content: center;
+    flex-direction: column;
+    h1{
+        display: flex;
+        place-content: center;
+        font-size: 40px;
+        font-weight: bold;
+        padding: 20px;
     }
 }

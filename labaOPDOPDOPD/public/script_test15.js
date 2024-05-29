@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
     //const readyButton = document.getElementById('ready');
     let results = [];
     results[0] = 0;
-
+    let wrong = [];
 
     questions[currentQuestionIndex].style.display = "flex";
 
@@ -17,16 +17,13 @@ document.addEventListener("DOMContentLoaded", function () {
             if (options[i].checked) {
                 option_value = options[i].value;
                 if (option_value !== "правильный") {
+                    wrong[0]++;
+                    break;
+                } else {
                     results[0]++;
                     break;
                 }
-            } else {
-                results[0]++;
-                break;
             }
-
-
-
         }
     }
 
@@ -46,8 +43,11 @@ document.addEventListener("DOMContentLoaded", function () {
         checkAnswer(13);
         checkAnswer(14);
         checkAnswer(15);
-        sendData(results);
-        console.log(results);
+        let right = results.length;
+        let wrongArr = wrong.length;
+        let res = [right, wrongArr];
+        sendData(res);
+        console.log(res);
     }
 
     startBtn.addEventListener('click', function () {

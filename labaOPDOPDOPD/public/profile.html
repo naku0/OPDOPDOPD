@@ -32,6 +32,34 @@
     </ul>
 </header>
 <main>
+    <div class="res">
+        <div class="statname">
+            <h1>Резюме</h1>
+        </div>
+        <div class="resume">
+            <div class="gamedev">
+                <h2>Гейм-дизайнер</h2>
+                <div class="data">
+                <div class="line"></div>
+                <div class="percent"></div>
+                </div>
+            </div>
+            <div class="sysanalist">
+                <h2>Системный аналитик</h2>
+                <div class="data">
+                    <div class="line"></div>
+                    <div class="percent"></div>
+                </div>
+            </div>
+            <div class="sysadmin">
+                <h2>Системный администратор</h2>
+                <div class="data">
+                    <div class="line"></div>
+                    <div class="percent"></div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="stat">
         <div class="statname">
             <h1>Статистика</h1>
@@ -58,8 +86,13 @@
                     </div>
                 </div>
                 <hr>
-                <div class="statbutton">
-                    <button>Статистика</button>
+                <div class="buttons">
+                    <div class="statbutton">
+                        <button>Статистика</button>
+                    </div>
+                    <div class="resbutton">
+                        <button>Результаты</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -105,7 +138,7 @@
 </main>
 <script>CheckData();
 CheckPerms();
-showStat()</script>
+showStat(); showRes();</script>
 </body>
 
 </html>

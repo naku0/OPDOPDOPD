@@ -532,6 +532,46 @@ function showStat() {
     });
 }
 
+function showRes() {
+    const button = document.querySelector('.resbutton');
+    const overlay = document.querySelector('.overlay');
+    const statblock = document.querySelector(".res");
+    button.addEventListener('click', () => {
+        displayOverlay(statblock, overlay);
+        statblock.style.display = "flex";
+    });
+    overlay.addEventListener('click', (event) => {
+        if (event.target === overlay) {
+            hideOverlay(overlay, statblock);
+        }
+    });
+    fetch('/res', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(data);
+            let n = data[0].percent;
+            line.style.background = `linear-gradient(90deg, #dfff8d 0%, #3bcaab ${100 - n}%,  #EDF0F2 ${100 - n}%)`;
+
+
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+        });
+
+}
+
+}
+
 function displayOverlay(statblock, overlay) {
     statblock.style.display = "flex";
     overlay.classList.add('visible');
@@ -627,11 +667,12 @@ function loadPVK() {
         })
         .catch(error => console.error('Error fetching PVK items:', error));
 }
+
 // Загрузка актуальных пвк для конкретных профессий
-function insertPVK(){
+function insertPVK() {
     const pvkList = document.getElementById('pvkList');
     const selectedItems = Array.from(pvkSelect.selectedOptions).map(option => option.textContent);
-    while(pvkList.firstChild) {
+    while (pvkList.firstChild) {
         pvkList.removeChild(pvkList.firstChild);
     }
     const currentPageUrl = window.location.href;
@@ -643,10 +684,10 @@ function insertPVK(){
     } else {
         prof = 2;
     }
-    let professionId = { "profession_id" : prof}
+    let professionId = {"profession_id": prof}
     fetch('/suka', {
-        method : 'POST',
-        headers : {
+        method: 'POST',
+        headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(professionId),
@@ -680,7 +721,7 @@ function saveSelectedItems() {
     const pvkList = document.getElementById('pvkList');
     // pvkList.innerHTML = ""; // Clear current list
     // console.log(pvkList);
-    while(pvkList.firstChild) {
+    while (pvkList.firstChild) {
         pvkList.removeChild(pvkList.firstChild);
     }
     console.log(pvkList);
@@ -696,7 +737,7 @@ function saveSelectedItems() {
     hideModal();
 }
 
-function loadOrbs(){
+function loadOrbs() {
     const orbs = document.querySelectorAll(".orb");
     const testContainers = document.querySelectorAll(".orbtest");
     orbs.forEach(orb => {
