@@ -16,6 +16,7 @@ var errors = 0;
 //только на начальную страницу с описанием теста
 
 startBtn.addEventListener('click', function () {
+    document.querySelector('.info').style.display = 'none';
     step++;
     displayImages();
 })
@@ -33,6 +34,13 @@ nextBtn.addEventListener('click', function () {
         fill(counter * (100 / amount), line);
         checkResult();
         console.log(errors, success);
+        document.querySelector(".start").style.display = "none";
+        document.querySelector(".finish").style.display = "flex";
+        document.querySelector("#answer").style.display = "none";
+        document.querySelector("#next").style.display = "none";
+        let res = [errors, success];
+        sendData(res);
+
         if (userAnswers.length === answers.length) {
             compare();
         }
@@ -41,17 +49,15 @@ nextBtn.addEventListener('click', function () {
 
 
 function displayImages() {
-    const imageContainer = document.getElementById('okno');
-    var imageName = '`' + '<img src= ./images/differences/' + step + '.jpg style=" width: 1000px; height: 400px;">' + '`';
-    imageContainer.innerHTML = imageName;
+    const imageContainer = document.querySelector('.start');
+    imageContainer.innerHTML = '`' + '<img src= ./pictures/tests/differences/' + step + '.jpg>' + '`';
     counter--;
     step++;
 }
 
 
 function fill(n, line) {
-    line.style.backgroundImage = `linear-gradient(90deg, #444444 ${100 - n
-    }%, #ffffff ${100 - n}%)`;
+    line.style.background = `linear-gradient(90deg, #dfff8d 0%, #3bcaab ${100 - n}%,  #EDF0F2 ${100 - n}%)`;
 }
 
 function checkResult() {

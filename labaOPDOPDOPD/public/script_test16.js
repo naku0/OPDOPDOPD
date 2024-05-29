@@ -1,15 +1,14 @@
-let okno = document.getElementById('okno');
+let start = document.querySelector(".start");
 let startBtn = document.getElementById('start');
 let option1 = document.getElementById('option1');
 let option2 = document.getElementById('option2');
 let option3 = document.getElementById('option3');
 let option4 = document.getElementById('option4');
 let line = document.getElementById('line');
+let arrTEST =[];
 
 function fill(n, line) {
-    line.style.backgroundImage = `linear-gradient(90deg, #444444 ${
-        100 - n
-    }%, #ffffff ${100 - n}%)`;
+    line.style.background = `linear-gradient(90deg, #dfff8d 0%, #3bcaab ${100 - n}%,  #EDF0F2 ${100 - n}%)`;
 }
 
 const questions = [
@@ -48,8 +47,7 @@ const questions = [
 
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
-
-    while (0 !== currentIndex) {
+    while (0!== currentIndex) {
         randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex -= 1;
         temporaryValue = array[currentIndex];
@@ -64,38 +62,49 @@ for (var i = 0; i < 3; i++)
     arr.push(i);
 shuffle(arr);
 console.log(arr);
-var index = 0;
+var indexTEST = 0;
 counter = arr.length;
 
 function displayQuestion() {
-    var randomIndex = arr[index];
-
-    if (index != arr.length) {
+    displayQuestion.currentIndex = displayQuestion.currentIndex || 0;
+    if (displayQuestion.currentIndex < arr.length) {
+        var randomIndex = arr[displayQuestion.currentIndex];
         const text = questions[randomIndex];
-
-        okno.innerText = text.text;
+        start.innerText = text.text;
         option1.innerText = text.options[0];
         option2.innerText = text.options[1];
         option3.innerText = text.options[2];
         option4.innerText = text.options[3];
-
-        index++;
-        counter --;
-        fill((counter)*(100/(arr.length)), line);
-        console.log(randomIndex, index);
+        fill((arr.length - displayQuestion.currentIndex) * (100 / arr.length), line);
+        displayQuestion.currentIndex++;
+    } else {
+        option1.removeEventListener('click', checkAnswer);
+        option2.removeEventListener('click', checkAnswer);
+        option3.removeEventListener('click', checkAnswer);
+        option4.removeEventListener('click', checkAnswer);
+        finishTest();
     }
-    return randomIndex;
+}
+
+function finishTest() {
+    fill((arr.length - displayQuestion.currentIndex) * (100 / arr.length), line);
+    document.querySelector(".finish").style.display = "flex";
+    document.querySelector("#variants").style.display = "none";
+    document.querySelector(".start").style.display = "none";
+    console.log(arrTEST);
+    sendData(arrTEST);
 }
 
 function checkAnswer(event) {
     const buttonId = event.target.id;
-    const correctButton = questions[displayQuestion.currentIndex].correctButton;
-    console.log(displayQuestion.currentIndex, correctButton, `option${correctButton}`, buttonId);
+    const correctButton = questions[arr[displayQuestion.currentIndex-1]].correctButton;
+    arrTEST.push(displayQuestion.currentIndex-1, correctButton, `option${correctButton}`, buttonId);
     if (buttonId === `option${correctButton}`) {
         console.log('Правильный ответ!');
     } else {
         console.log('Неправильный ответ!');
     }
+    displayQuestion();
 }
 
 option1.addEventListener('click', checkAnswer);
@@ -103,6 +112,17 @@ option2.addEventListener('click', checkAnswer);
 option3.addEventListener('click', checkAnswer);
 option4.addEventListener('click', checkAnswer);
 
-startBtn.addEventListener('click', function () {
-    displayQuestion.currentIndex = displayQuestion();
-})
+startBtn.addEventListener('click', ()=>{
+    document.querySelector(".info").style.display = "none";
+    displayQuestion();
+});
+
+function sendData(data) {
+    fetch('/test16res', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    });
+}

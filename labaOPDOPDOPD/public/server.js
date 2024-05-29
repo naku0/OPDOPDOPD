@@ -859,6 +859,16 @@ app.get('/pictures/tests/:subfolder/:filename', (req, res) => {
         }
     });
 });
+app.get('/pictures/tests/differences/:filename', (req, res) => {
+    const {subfolder, filename } = req.params;
+    const filePath = path.join(__dirname, 'pictures','tests', subfolder, filename);
+    console.log(filePath);
+    res.sendFile(filePath, (err) => {
+        if (err) {
+            res.status(404).send('File not found');
+        }
+    });
+});
 app.post('/suka', (req, res) => {
     console.log('aaaaa');
     const jsonData = req.body;

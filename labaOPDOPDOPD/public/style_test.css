@@ -145,6 +145,11 @@ body {
         height: auto;
         padding: 20px;
     }
+    img{
+        box-sizing: content-box;
+        width: 60%;
+        place-content: center;
+    }
 
     .icons {
         display: flex;
@@ -361,5 +366,14 @@ button#start:hover {
 }
 .question input {
     margin-right: 20px; /* Adjust margin for more space */
+}
+
+#answer{
+    height: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+    -moz-appearance: textfield;
+    background-color: #ffffff;
+    cursor: pointer;
 }
 

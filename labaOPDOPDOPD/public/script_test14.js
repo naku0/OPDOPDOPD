@@ -150,5 +150,16 @@ function result(success, errors) {
     notificationDiv.style.flexDirection = "column";
     notificationDiv.style.placeContent = "center";
     notificationDiv.innerHTML = result_desc + `<br> Количество правильных ответов: ` + success + `<br> Количество ошибок: ` + errors + `<br> `;
+    let res = [success, errors];
+    sendData(res);
     document.querySelector(".finish").appendChild(notificationDiv);
+}
+function sendData(){
+    fetch('/test14res', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    });
 }

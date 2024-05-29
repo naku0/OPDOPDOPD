@@ -4,13 +4,45 @@
 }
 
 #nextQuestion {
-    padding: 20px 50px;
     cursor: pointer;
-    display: none;
 }
 
 label {
     display: flex;
-    flex-direction: row;
+    flex-direction:row;
     align-items: center;
+}
+
+#testbuttons {
+    display: flex;
+    flex-direction: row;
+    place-content: center;
+    place-items: center;
+    margin-top: 20px;
+
+    .btn {
+        width: 100%;
+        height: auto;
+        background-color: #EDF0F2;
+        border-radius: 5px;
+        cursor: pointer;
+        padding: 10px;
+    }
+
+    .btn:hover {
+        background-color: #DFDFDF;
+    }
+
+    .btn:active {
+        background-color: #DFDFDF;
+    }
+
+}
+.btn {
+    width: 100%;
+    height: auto;
+    background-color: #EDF0F2;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 10px;
 }

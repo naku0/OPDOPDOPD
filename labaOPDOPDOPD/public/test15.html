@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Test 5</title>
@@ -10,13 +11,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Quicksand:wght@300..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-          rel="stylesheet">
+    <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Quicksand:wght@300..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+            rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"/>
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link rel="stylesheet" href="15.css">
+    <script src="scripts.js"></script>
 </head>
+
 <body>
 <header>
     <ul class="topper">
@@ -37,15 +41,13 @@
         <div class="info">
             <div class="rules">
                 <h1>ПРАВИЛА</h1>
-                <p>ТЕСТ НА КРАТКОВРЕМЕННУЮ ПАМЯТЬ</p>
+                <p>ТЕСТ НА АНАЛИЗ И КЛАССИФИКАЦИЮ.</p>
 
-                <p>ВАМ БУДЕТ ПРЕДЛОЖЕНО 12 ВОПРОСОВ. В
-                    КАЖДОМ ВОПРОСЕ ВАМ БУДЕТ ПОКАЗАНО ДО 8
-                    РАЗЛИЧНЫХ ИЗОБРАЖЕНИЙ.</p>
-                <p>ЗАПОМНИТЕ ИХ, А ЗАТЕМ НАЖМИТЕ НА
-                    СООТВЕТСТВУЮЩИЕ КАРТИНКИ В ВЕРНОМ
-                    ПОРЯДКЕ, ЧТОБЫ ПОЛУЧИТЬ ТАКУЮ ЖЕ
-                    ПОСЛЕДОВАТЕЛЬНОСТЬ.</p>
+                <p>ВАМ БУДЕТ ПРЕДЛОЖЕНО 4 СЛОВА. ВАША
+                    ЗАДАЧА НАЙТИ И ВЫБРАТЬ ТО, КОТОРОЕ
+                    ВЫБИВАЕТСЯ ИЗ ОБЩЕЙ ЛОГИКИ.</p>
+                <p>ВСЕГО 15 ВОПРОСОВ. ВРЕМЯ НА КАЖДЫЙ
+                    ОГРАНИЧЕНО.</p>
 
                 <p>ТЕСТИРОВАНИЕ ЗАВЕРШИТСЯ АВТОМАТИЧЕСКИ.</p>
 
@@ -56,31 +58,44 @@
             </div>
         </div>
         <div id="okno">
+            <div class="finish">
+                <div class="notification">
+                    <h1>Тест пройден!</h1>
+                </div>
+                <div class="icons">
+                    <div class="back">
+                        <i class="material-symbols-outlined">reply</i>
+                        <a href="testPage.html">Назад к тестам</a>
+                    </div>
+                    <div class="share">
+                        <i class="material-symbols-outlined">share</i>
+                        <a href="#" onclick="alert('Ссылка скопирована!')">Поделиться тестом</a>
+                    </div>
+                </div>
+            </div>
             <div class="slider">
                 <div class="slider_line">
                     <div class="question">
-                        <div>Вопрос 1:</div>
                         <label>
                             <input type="radio" name="1" value="правильный"> Иванов
                         </label>
                         <label>
-                            <input type="radio" name="1" value=""> Василий
+                            <input type="radio" name="1" value="hj"> Василий
                         </label>
                         <label>
-                            <input type="radio" name="1" value=""> Федор
+                            <input type="radio" name="1" value="ghbjn"> Федор
                         </label>
                         <label>
-                            <input type="radio" name="1" value=""> Семен
+                            <input type="radio" name="1" value="ghjk"> Семен
                         </label>
                         <label>
-                            <input type="radio" name="1" value=""> Петр
+                            <input type="radio" name="1" value="ghj"> Петр
                         </label>
                     </div>
 
                     <div class="question" style="display:none;">
-                        <div>Вопрос 2:</div>
                         <label>
-                            <input type="radio" name="2" value="">Дряхлый
+                            <input type="radio" name="2" value="vhbj">Дряхлый
                         </label>
                         <label>
                             <input type="radio" name="2" value="правильный">Маленький
@@ -97,7 +112,6 @@
                     </div>
 
                     <div class="question" style="display:none;">
-                        <div>Вопрос 3:</div>
                         <label>
                             <input type="radio" name="3" value="правильный">Землетрясение
                         </label>
@@ -116,7 +130,6 @@
                     </div>
 
                     <div class="question" style="display:none;">
-                        <div>Вопрос 4:</div>
                         <label>
                             <input type="radio" name="4" value="">Скоро
                         </label>
@@ -134,7 +147,6 @@
                         </label>
                     </div>
                     <div class="question" style="display:none;">
-                        <div>Вопрос 5:</div>
                         <label>
                             <input type="radio" name="5" value="">Лист
                         </label>
@@ -153,7 +165,6 @@
                     </div>
 
                     <div class="question" style="display:none;">
-                        <div>Вопрос 6:</div>
                         <label>
                             <input type="radio" name="6" value="">Ненавидеть
                         </label>
@@ -171,7 +182,6 @@
                         </label>
                     </div>
                     <div class="question" style="display:none;">
-                        <div>Вопрос 7:</div>
                         <label>
                             <input type="radio" name="7" value="">Темный
                         </label>
@@ -190,7 +200,6 @@
                     </div>
 
                     <div class="question" style="display:none;">
-                        <div>Вопрос 8:</div>
                         <label>
                             <input type="radio" name="8" value="">Гнездо
                         </label>
@@ -209,7 +218,6 @@
                     </div>
 
                     <div class="question" style="display:none;">
-                        <div>Вопрос 9:</div>
                         <label>
                             <input type="radio" name="9" value="">Молочный
                         </label>
@@ -228,7 +236,6 @@
                     </div>
 
                     <div class="question" style="display:none;">
-                        <div>Вопрос 10:</div>
                         <label>
                             <input type="radio" name="10" value="правильный">Грустный
                         </label>
@@ -247,7 +254,6 @@
                     </div>
 
                     <div class="question" style="display:none;">
-                        <div>Вопрос 11:</div>
                         <label>
                             <input type="radio" name="11" value="">Окружение
                         </label>
@@ -266,7 +272,6 @@
                     </div>
 
                     <div class="question" style="display:none;">
-                        <div>Вопрос 12:</div>
                         <label>
                             <input type="radio" name="12" value="">Глубокий
                         </label>
@@ -282,73 +287,74 @@
                         <label>
                             <input type="radio" name="12" value="">Обширный
                         </label>
-                        <div class="question" style="display:none;">
-                            <div>Вопрос 13:</div>
-                            <label>
-                                <input type="radio" name="13" value="правильный"> Влажный
-                            </label>
-                            <label>
-                                <input type="radio" name="13" value=""> Жаркий
-                            </label>
-                            <label>
-                                <input type="radio" name="13" value=""> Сухой
-                            </label>
-                            <label>
-                                <input type="radio" name="13" value=""> Холодный
-                            </label>
-                            <label>
-                                <input type="radio" name="13" value=""> Теплый
-                            </label>
-                        </div>
-
-                        <!-- Question 14 -->
-                        <div class="question" style="display:none;">
-                            <div>Вопрос 14:</div>
-                            <label>
-                                <input type="radio" name="14" value="правильный"> Долина
-                            </label>
-                            <label>
-                                <input type="radio" name="14" value=""> Гора
-                            </label>
-                            <label>
-                                <input type="radio" name="14" value=""> Лес
-                            </label>
-                            <label>
-                                <input type="radio" name="14" value=""> Поле
-                            </label>
-                            <label>
-                                <input type="radio" name="14" value=""> Луг
-                            </label>
-                        </div>
-
-                        <!-- Question 15 -->
-                        <div class="question" style="display:none;">
-                            <div>Вопрос 15:</div>
-                            <label>
-                                <input type="radio" name="15" value="правильный"> Кошка
-                            </label>
-                            <label>
-                                <input type="radio" name="15" value=""> Собака
-                            </label>
-                            <label>
-                                <input type="radio" name="15" value=""> Лошадь
-                            </label>
-                            <label>
-                                <input type="radio" name="15" value=""> Корова
-                            </label>
-                            <label>
-                                <input type="radio" name="15" value=""> Курица
-                            </label>
-                        </div>
-                        <button class="btn next" id="nextQuestion">ДАЛЕЕ</button>
-                        <button class="btn" id="ready" style="display:none;">ГОТОВО</button>
                     </div>
+                    <div class="question" style="display:none;">
+                        <label>
+                            <input type="radio" name="13" value="правильный"> Влажный
+                        </label>
+                        <label>
+                            <input type="radio" name="13" value=""> Жаркий
+                        </label>
+                        <label>
+                            <input type="radio" name="13" value=""> Сухой
+                        </label>
+                        <label>
+                            <input type="radio" name="13" value=""> Холодный
+                        </label>
+                        <label>
+                            <input type="radio" name="13" value=""> Теплый
+                        </label>
+                    </div>
+                    <div class="question" style="display:none;">
+                        <label>
+                            <input type="radio" name="14" value="правильный"> Долина
+                        </label>
+                        <label>
+                            <input type="radio" name="14" value=""> Гора
+                        </label>
+                        <label>
+                            <input type="radio" name="14" value=""> Лес
+                        </label>
+                        <label>
+                            <input type="radio" name="14" value=""> Поле
+                        </label>
+                        <label>
+                            <input type="radio" name="14" value=""> Луг
+                        </label>
+                    </div>
+                    <div class="question" style="display:none;">
+                        <label>
+                            <input type="radio" name="15" value="правильный"> Кошка
+                        </label>
+                        <label>
+                            <input type="radio" name="15" value=""> Собака
+                        </label>
+                        <label>
+                            <input type="radio" name="15" value=""> Лошадь
+                        </label>
+                        <label>
+                            <input type="radio" name="15" value=""> Корова
+                        </label>
+                        <label>
+                            <input type="radio" name="15" value=""> Курица
+                        </label>
+                    </div>
+                    <!-- <button class="btn next" id="nextQuestion">ДАЛЕЕ</button> -->
                 </div>
-            </div>
-        </div>
 
+            </div>
+
+            <!-- <button class="btn" id="ready" style="display:none;">ГОТОВО</button>
+                 -->
+        </div>
+        <div id="testbuttons">
+            <button class="btn" id="nextQuestion">ДАЛЕЕ</button>
+        </div>
     </div>
+
+</div>
 </div>
 <script src="script_test15.js"></script>
 </body>
+
 </html>
