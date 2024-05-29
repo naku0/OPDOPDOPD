@@ -11,10 +11,10 @@ const PORT2 = "5252";
 
 const connection = mysql.createConnection(
     {
-        // port: "1337",
+        port: "1337",
         host: "localhost",
         user: "root",
-        password: "qwerty0987654321",
+        password: "1234",
         database: "opdopdopd"
     }
 );
@@ -88,7 +88,7 @@ function registration(connection, user_login, user_password, data) {
 
 function calculateStandardDeviation(arr) {
     const n = arr.length;
-    const avg = arr;
+    const avg = arr[1];
     let sum = 0;
     for (let number in arr) {
         sum += Math.pow(number - avg, 2);
@@ -784,8 +784,8 @@ app.post('/tes9res', (req, res) => {
     const user_name = jsonData.name;
     const result = jsonData.res;
     const test_id = 9;
-    const avg = result;
-    let max_val = jsonData.res;
+    const avg = result[1];
+    let max_val = result[0];
     const deviation = calculateStandardDeviation(result);
     let attempt_number = 1;
     connection.query("SELECT attempt_number FROM test_attempt WHERE user_id = (SELECT id FROM users WHERE name = ?) AND test_id = ?", [user_name, test_id], function (err, result) {
