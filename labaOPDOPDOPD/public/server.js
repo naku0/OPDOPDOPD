@@ -1294,7 +1294,7 @@ app.post('/addFormula', (req, res) => {
 app.post("/res", (req, res) => {
     const jsonData = req.body;
     const user_name = jsonData.name;
-    connection.query("SELECT piq.name, results.result FROM results JOIN piq ON piq.id = result.piq_id WHERE user_id = (SELECT user_id WHERE name = ?)", [user_name], function (err, result) {
+    connection.query("SELECT piq.name, results.result FROM results JOIN piq ON piq.id = results.piq_id WHERE user_id = (SELECT user_id WHERE name = ?)", [user_name], function (err, result) {
         if (err) throw err;
         const resultsJson = result.map(item => (
             {
@@ -1302,15 +1302,13 @@ app.post("/res", (req, res) => {
                 result : item.result
             }
         ));
-        connection.query("SELECT results.result FROM results JOIN piq ON piq.id = result.piq_id WHERE user_id = (SELECT user_id WHERE name = ?)", [user_name], function (err, result){
+    });
+        connection.query("SELECT results.result FROM results JOIN piq ON piq.id = results.piq_id WHERE user_id = (SELECT user_id WHERE name = ?)", [user_name], function (err, result){
             if (err) throw err;
             let sum = 0;
             result.forEach(item => sum += item.result);
             let resJson =   {sum : sum};
-            res.json(resJson);
         });
-        res.send(resultsJson);
-    });
 })
 
 
