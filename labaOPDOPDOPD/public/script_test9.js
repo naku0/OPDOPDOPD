@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const averageTimeDisplay = document.getElementById('averageTime');
     const stdDeviationDisplay = document.getElementById('stdDeviation');
 
-    const testDuration = 120 * 1000; // Устанавливаем время выполнения теста в миллисекундах (120 секунд)
+    const testDuration = 20 * 1000; // Устанавливаем время выполнения теста в миллисекундах (120 секунд)
     let trackWidth = document.querySelector('.track').offsetWidth;
     let orangeMarkerPosition = trackWidth / 2;
     let greenMarkerPosition = trackWidth / 2;
@@ -112,7 +112,8 @@ document.addEventListener('DOMContentLoaded', () => {
         startButton.disabled = false;
         isTestRunning = false;
         calculateAndDisplayStatistics();
-        sendData(reactionTimes);
+        let max = (Math.max(...reactionTimes)).toFixed(2);
+        sendData(max);
         document.querySelector(".controls").style.display = "none";
         document.querySelector(".track").style.display = "none";
         document.querySelector(".finish").style.display = "flex";

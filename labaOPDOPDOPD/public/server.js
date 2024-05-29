@@ -88,7 +88,7 @@ function registration(connection, user_login, user_password, data) {
 
 function calculateStandardDeviation(arr) {
     const n = arr.length;
-    const avg = arr.reduce((acc, cur) => acc + parseFloat(cur), 0) / n;
+    const avg = arr;
     let sum = 0;
     for (let number in arr) {
         sum += Math.pow(number - avg, 2);
@@ -784,8 +784,8 @@ app.post('/tes9res', (req, res) => {
     const user_name = jsonData.name;
     const result = jsonData.res;
     const test_id = 9;
-    const avg = result.reduce((acc, cur) => acc + parseFloat(cur), 0) / result.length;
-    const max_val = Math.max(result);
+    const avg = result;
+    let max_val = jsonData.res;
     const deviation = calculateStandardDeviation(result);
     let attempt_number = 1;
     connection.query("SELECT attempt_number FROM test_attempt WHERE user_id = (SELECT id FROM users WHERE name = ?) AND test_id = ?", [user_name, test_id], function (err, result) {
