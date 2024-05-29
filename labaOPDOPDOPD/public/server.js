@@ -11,7 +11,6 @@ const PORT2 = "5252";
 
 const connection = mysql.createConnection(
     {
-        port: "1337",
         host: "localhost",
         user: "root",
         password: "1234",
@@ -1287,7 +1286,34 @@ app.post('/addFormula', (req, res) => {
             })
         }
     })
-})
+});
+
+app.get('/showResults', (req, res) => {
+    const jsonData = req.body;
+    const user_name = jsonData.name;
+    connection.query("SELECT piq.name, results.result FROM results JOIN piq ON piq.id = result.piq_id WHERE user_id = (SELECT user_id WHERE name = ?)", [user_name], function (err, result) {
+        if (err) throw err;
+        const resultsJson = result.map(item => (
+            {
+                piq_name : item.name,
+                result : item.result
+            }
+        ));
+        res.json(resultsJson);
+    });
+});
+
+app.get('/calculateResForProf', (req, res) => {
+    const jsonData = req.body;
+    const user_name = jsonData.name;
+    connection.query("SELECT results.result FROM results JOIN piq ON piq.id = result.piq_id WHERE user_id = (SELECT user_id WHERE name = ?)", [user_name], function (err, result){
+        if (err) throw err;
+        let sum = 0;
+        result.forEach(item => sum += item.result);
+        let resJson =   {sum : sum};
+        res.json(resJson);
+    });
+});
 
 app.listen(PORT2, () => {
     console.log("Сервер запущен на порту " + PORT2);
