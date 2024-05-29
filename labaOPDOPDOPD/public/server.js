@@ -178,9 +178,10 @@ function add_piq_opinion(connection, piq, user_login, profession_name, position)
         });
     });
 }
-function writeResult(user_id, test_id){
+
+function writeResult(user_id, test_id) {
     let itog = 0;
-    connection.query("SELECT formulas.piq_id FROM formulas JOIN arguments ON arguments.formula_id = formulas.formula_id JOIN test ON ? = arguments.test_id", [test_id],function (err, res, fields) {
+    connection.query("SELECT formulas.piq_id FROM formulas JOIN arguments ON arguments.formula_id = formulas.formula_id JOIN test ON ? = arguments.test_id", [test_id], function (err, res, fields) {
         if (err) throw err;
         for (let i = 0; i < res.length; i++) {
             let piq_id = res[i].piq_id;
@@ -202,27 +203,28 @@ function writeResult(user_id, test_id){
         }
     })
 }
+
 // считаем на сколько юзеру подходит данный пвк по формуле
-function countPiqUserCompatibility(piq_id, user_id, itog){
+function countPiqUserCompatibility(piq_id, user_id, itog) {
     connection.query("SELECT formula_id FROM formulas WHERE piq_id = ?", [piq_id], function (err, result) {
         if (err) throw err;
         const form_id = result[0];
         connection.query("SELECT test_id, test_value, coefficient, abs FROM args WHERE formula_id = ?", [form_id], function (err, result) {
             if (err) throw err;
             let abs = result[0].abs;
-            for (let i = 0; i < result.length; i ++) {
+            for (let i = 0; i < result.length; i++) {
                 let a;
-                connection.query("SELECT ?, test_attempt FROM test_attempt WHERE test_id = ? AND user_id = ?", [result[i][1] ,result[i][0], user_id], function (err, result) {
+                connection.query("SELECT ?, test_attempt FROM test_attempt WHERE test_id = ? AND user_id = ?", [result[i][1], result[i][0], user_id], function (err, result) {
                     if (err) throw err;
                     let max_att = 0;
                     let val;
-                    for (let j = 0; j < result.length; j ++) {
-                        if (result[j][1] > max_att){
+                    for (let j = 0; j < result.length; j++) {
+                        if (result[j][1] > max_att) {
                             max_att = result[j][1];
                             val = result[j][0];
                         }
                     }
-                    if (abs){
+                    if (abs) {
                         val = Math.abs(val);
                     }
                     a = val * result[i][2];
@@ -233,6 +235,7 @@ function countPiqUserCompatibility(piq_id, user_id, itog){
     })
     return itog;
 }
+
 app.use('/pictures', express.static(path.join(__dirname, 'public', 'pictures')));
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -782,7 +785,7 @@ app.post('/tes9res', (req, res) => {
     const result = jsonData.res;
     const test_id = 9;
     const avg = result.reduce((acc, cur) => acc + parseFloat(cur), 0) / result.length;
-    const max_val = result.result((a, b) => Math.max(a, b));
+    const max_val = Math.max(result);
     const deviation = calculateStandardDeviation(result);
     let attempt_number = 1;
     connection.query("SELECT attempt_number FROM test_attempt WHERE user_id = (SELECT id FROM users WHERE name = ?) AND test_id = ?", [user_name, test_id], function (err, result) {
@@ -791,6 +794,7 @@ app.post('/tes9res', (req, res) => {
                 attempt_number = Math.max(attempt_number, result[i].attempt_number + 1);
             }
         }
+        console.log(max_val)
         connection.query("INSERT INTO test_attempt (user_id, test_id, attempt_number, average_value, number_of_passes, stadart_deviation, number_of_mistakes, max_value) VALUES ((SELECT id FROM users WHERE name = ?), ?, ?, ?, ?, ?, ?, ?)", [user_name, test_id, attempt_number, avg, 0, deviation, 0, max_val], function (err, result) {
             if (err) throw err;
             console.log("Test attempt added to db");
@@ -1214,8 +1218,8 @@ app.get('/pictures/tests/:subfolder/:filename', (req, res) => {
     });
 });
 app.get('/pictures/tests/differences/:filename', (req, res) => {
-    const {subfolder, filename } = req.params;
-    const filePath = path.join(__dirname, 'pictures','tests', subfolder, filename);
+    const {subfolder, filename} = req.params;
+    const filePath = path.join(__dirname, 'pictures', 'tests', subfolder, filename);
     console.log(filePath);
     res.sendFile(filePath, (err) => {
         if (err) {
@@ -1261,9 +1265,9 @@ app.post('/addFormula', (req, res) => {
                     });
                 }
             });
-        }else{
+        } else {
             let formula_id = result[0].formula_id;
-            connection.query("DELETE FROM args WHERE formula_id = ?", [formula_id], function (err, result){
+            connection.query("DELETE FROM args WHERE formula_id = ?", [formula_id], function (err, result) {
                 if (err) {
                     console.error('Ошибка выполнения запроса к базе данных:', err);
                     return res.status(500).json({error: 'Ошибка выполнения запроса к базе данных'});

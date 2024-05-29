@@ -122,6 +122,8 @@ document.addEventListener('DOMContentLoaded', () => {
             "name": sessionStorage.getItem('name'),
             "res": data
         }
+        console.log(data)
+        console.log(UserRes)
         fetch('/tes9res', {
             method: 'POST',
             headers: {
