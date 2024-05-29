@@ -562,6 +562,12 @@ function showRes() {
     document.querySelector(".line1").style.background = `linear-gradient(90deg, #dfff8d 0%, #3bcaab ${100 - n}%,  #EDF0F2 ${100 - n}%)`;
     document.querySelector(".line2").style.background = `linear-gradient(90deg, #dfff8d 0%, #3bcaab ${100 - b}%,  #EDF0F2 ${100 - b}%)`;
     document.querySelector(".line3").style.background = `linear-gradient(90deg, #dfff8d 0%, #3bcaab ${100 - c}%,  #EDF0F2 ${100 - c}%)`;
+    fetch('/res', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
 }
 
 function displayOverlay(statblock, overlay) {
