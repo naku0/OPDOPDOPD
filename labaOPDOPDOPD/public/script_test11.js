@@ -61,16 +61,18 @@ function doTest(){
         fill(counter*(100/amount), line);
     }
     else {
+        console.log("aaaaa")
         timer = false;
         let dataSec = document.getElementById('sec').innerHTML;
         let dataMilisec = document.getElementById('milisec').innerHTML;
         results.push(dataSec + dataMilisec);
+        console.log("sending data");
+        sendData(results);
         fill(counter*(100/amount), line);
         start.style.backgroundColor = "#EDF0F2";
         document.querySelector('.start').style.display = "none";
         document.querySelector('.finish').style.display = "flex";
         document.querySelector('#testbuttonst').style.display = "none";
-        sendData(results);
     }
 
 }
@@ -236,6 +238,7 @@ function sendData(data) {
         "name": sessionStorage.getItem('name'),
         "res": data
     }
+    console.log("sending data");
     fetch('/tes11res', {
         method: 'POST',
         headers: {

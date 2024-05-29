@@ -109,6 +109,7 @@ function checkResult() {
         errors++;
     }
     console.log(success, errors);
+    pick_array = [];
 }
 
 start.addEventListener('click', function (event) {
