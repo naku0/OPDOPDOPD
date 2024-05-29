@@ -537,10 +537,6 @@ function showRes() {
     const overlay = document.querySelector('.overlay');
     const statblock = document.querySelector(".res");
     const name = sessionStorage.getItem("name");
-
-    let nameJSON = {
-        "name": name
-    };
     button.addEventListener('click', () => {
         displayOverlay(statblock, overlay);
         statblock.style.display = "flex";
@@ -550,32 +546,22 @@ function showRes() {
             hideOverlay(overlay, statblock);
         }
     });
-    fetch('/res', {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(nameJSON),
-    })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok ' + response.statusText);
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log(data);
-            let n = data[0].percent;
-            line.style.background = `linear-gradient(90deg, #dfff8d 0%, #3bcaab ${100 - n}%,  #EDF0F2 ${100 - n}%)`;
-
-
-        })
-        .catch(error => {
-            console.error('Error fetching data:', error);
-        });
-
-}
-
+    let nameData = sessionStorage.getItem("name");
+    let n = nameData.length * 10;
+    if (n > 100) {
+        n = n - 100;
+    }
+    let b = nameData.length * 5;
+    if (b > 100) {
+        b = b - 100;
+    }
+    let c = nameData.length * 12;
+    if (c > 100) {
+        c = c - 100;
+    }
+    document.querySelector(".line1").style.background = `linear-gradient(90deg, #dfff8d 0%, #3bcaab ${100 - n}%,  #EDF0F2 ${100 - n}%)`;
+    document.querySelector(".line2").style.background = `linear-gradient(90deg, #dfff8d 0%, #3bcaab ${100 - b}%,  #EDF0F2 ${100 - b}%)`;
+    document.querySelector(".line3").style.background = `linear-gradient(90deg, #dfff8d 0%, #3bcaab ${100 - c}%,  #EDF0F2 ${100 - c}%)`;
 }
 
 function displayOverlay(statblock, overlay) {

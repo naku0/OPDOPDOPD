@@ -381,4 +381,11 @@ main {
         font-weight: bold;
         padding: 20px;
     }
+    .line1, .line2, .line3{
+        place-content: center;
+        width: 30%;
+        height: 2dvh;
+        border: solid 2px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+    }
 }
