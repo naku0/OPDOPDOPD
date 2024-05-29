@@ -14,7 +14,7 @@ const connection = mysql.createConnection(
         // port: "1337",
         host: "localhost",
         user: "root",
-        password: "1234",
+        password: "qwerty0987654321",
         database: "opdopdopd"
     }
 );
@@ -30,7 +30,6 @@ function createTables() {
         if (err) throw err;
         console.log("Table users created!");
     });
-
     connection.query("CREATE TABLE IF NOT EXISTS professions(id INT AUTO_INCREMENT, name VARCHAR(255) NOT NULL, PRIMARY KEY (id))", function (err) {
         if (err) throw err;
         console.log("Table professions created!");
