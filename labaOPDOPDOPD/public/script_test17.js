@@ -77,3 +77,17 @@ function compare() {
     }
     console.log(errors, success);
 }
+function sendData(data) {
+    console.log("aaa");
+    let UserRes={
+        "name": sessionStorage.getItem('name'),
+        "res": data
+    }
+    fetch('/tes17res', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(UserRes)
+    });
+}

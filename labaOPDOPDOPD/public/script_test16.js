@@ -118,11 +118,16 @@ startBtn.addEventListener('click', ()=>{
 });
 
 function sendData(data) {
-    fetch('/test16res', {
+    console.log("aaa");
+    let UserRes={
+        "name": sessionStorage.getItem('name'),
+        "res": data
+    }
+    fetch('/tes16res', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify(UserRes)
     });
 }

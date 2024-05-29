@@ -822,7 +822,7 @@ app.post('/tes11res', (req, res) => {
                 attempt_number = Math.max(attempt_number, result[i].attempt_number + 1);
             }
         }
-        connection.query("INSERT INTO test_attempt (user_id, test_id, attempt_number, average_value, number_of_passes, stadart_deviation, number_of_mistakes, amount_of_answers) VALUES ((SELECT id FROM users WHERE name = ?), ?, ?, ?, ?, ?, ?, ?);", [user_name, test_id, attempt_number, avg, 0, deviation, number_of_mistakes, amount_of_answers], function (err, result) {
+        connection.query("INSERT INTO test_attempt (user_id, test_id, attempt_number, average_value, number_of_passes, stadart_deviation, number_of_mistakes, answers_amount) VALUES ((SELECT id FROM users WHERE name = ?), ?, ?, ?, ?, ?, ?, ?);", [user_name, test_id, attempt_number, avg, 0, deviation, number_of_mistakes, amount_of_answers], function (err, result) {
             if (err) {
                 console.error('Ошибка выполнения запроса к базе данных:', err);
                 return res.status(500).json({error: 'Ошибка выполнения запроса к базе данных'});
@@ -854,7 +854,7 @@ app.post('/tes12res', (req, res) => {
                 attempt_number = Math.max(attempt_number, result[i].attempt_number + 1);
             }
         }
-        connection.query("INSERT INTO test_attempt (user_id, test_id, attempt_number, average_value, number_of_passes, number_of_mistakes, stadart_deviation, time_spent, amount_of_answers) VALUES ((SELECT id FROM users WHERE name = ?), ?, ?, ?, ?, ?, ?, ?, ?)", [user_name, test_id, attempt_number, 0, 0, number_of_mistakes, 0, spent_time, amount_of_answers], function (err, result) {
+        connection.query("INSERT INTO test_attempt (user_id, test_id, attempt_number, average_value, number_of_passes, number_of_mistakes, stadart_deviation, time_spent, answers_amount) VALUES ((SELECT id FROM users WHERE name = ?), ?, ?, ?, ?, ?, ?, ?, ?)", [user_name, test_id, attempt_number, 0, 0, number_of_mistakes, 0, spent_time, amount_of_answers], function (err, result) {
             if (err) {
                 console.error('Ошибка выполнения запроса к базе данных:', err);
                 return res.status(500).json({error: 'Ошибка выполнения запроса к базе данных'});
@@ -903,6 +903,7 @@ app.post('/tes13res', (req, res) => {
 
 app.post('/tes14res', (req, res) => {
     const jsonData = req.body;
+    console.log(jsonData)
     const user_name = jsonData.name;
     const result = jsonData.res;
     const test_id = 13;
@@ -915,7 +916,7 @@ app.post('/tes14res', (req, res) => {
                 attempt_number = Math.max(attempt_number, result[i].attempt_number + 1);
             }
         }
-        connection.query("INSERT INTO test_attempt (user_id, test_id, attempt_number, average_value, number_of_passes, number_of_mistakes, stadart_deviation, amount_of_answers) VALUES ((SELECT id FROM users WHERE name = ?), ?, ?, ?, ?, ?, ?, ?)", [user_name, test_id, attempt_number, 0, 0, amount_of_mistakes, 0, amount_of_answers], function (err, result) {
+        connection.query("INSERT INTO test_attempt (user_id, test_id, attempt_number, average_value, number_of_passes, number_of_mistakes, stadart_deviation, answers_amount) VALUES ((SELECT id FROM users WHERE name = ?), ?, ?, ?, ?, ?, ?, ?)", [user_name, test_id, attempt_number, 0, 0, amount_of_mistakes, 0, amount_of_answers], function (err, result) {
             if (err) {
                 console.error('Ошибка выполнения запроса к базе данных:', err);
                 return res.status(500).json({error: 'Ошибка выполнения запроса к базе данных'});
@@ -933,6 +934,7 @@ app.post('/tes14res', (req, res) => {
 
 app.post('/tes15res', (req, res) => {
     const jsonData = req.body;
+    console.log(jsonData);
     const user_name = jsonData.name;
     const result = jsonData.res;
     const test_id = 14;
@@ -945,7 +947,7 @@ app.post('/tes15res', (req, res) => {
                 attempt_number = Math.max(attempt_number, result[i].attempt_number + 1);
             }
         }
-        connection.query("INSERT INTO test_attempt (user_id, test_id, attempt_number, average_value, number_of_passes, number_of_mistakes, stadart_deviation, amount_of_answers) VALUES ((SELECT id FROM users WHERE name = ?), ?, ?, ?, ?, ?, ?, ?)", [user_name, test_id, attempt_number, 0, 0, amount_of_mistakes, 0, amount_of_answers], function (err, result) {
+        connection.query("INSERT INTO test_attempt (user_id, test_id, attempt_number, average_value, number_of_passes, number_of_mistakes, stadart_deviation, answers_amount) VALUES ((SELECT id FROM users WHERE name = ?), ?, ?, ?, ?, ?, ?, ?)", [user_name, test_id, attempt_number, 0, 0, amount_of_mistakes, 0, amount_of_answers], function (err, result) {
             if (err) {
                 console.error('Ошибка выполнения запроса к базе данных:', err);
                 return res.status(500).json({error: 'Ошибка выполнения запроса к базе данных'});

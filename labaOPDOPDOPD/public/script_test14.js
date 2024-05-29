@@ -146,21 +146,26 @@ function result(success, errors) {
     } else {
         result_desc = "У вас плохая кратковременная память. Мы рекомендуем вам проконсультироваться со специалистом, чтобы убедиться, что это не является признаком какого-либо заболевания."
     }
+    let res = [success, errors];
     const notificationDiv = document.createElement('div');
     notificationDiv.style.display = "flex";
     notificationDiv.style.flexDirection = "column";
     notificationDiv.style.placeContent = "center";
     notificationDiv.innerHTML = result_desc + `<br> Количество правильных ответов: ` + success + `<br> Количество ошибок: ` + errors + `<br> `;
-    let res = [success, errors];
     sendData(res);
     document.querySelector(".finish").appendChild(notificationDiv);
 }
-function sendData(){
-    fetch('/test14res', {
+function sendData(data){
+    console.log("aaa");
+    let UserRes={
+        "name": sessionStorage.getItem('name'),
+        "res": data
+    }
+    fetch('/tes14res', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify(UserRes),
     });
 }
