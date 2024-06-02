@@ -803,4 +803,8 @@ function showFormulas() {
         placeholderValue: 'Выберите показатель',
         searchPlaceholderValue: 'Выберите показатель',
     });
+    const save = document.querySelector(".saveBTN");
+    save.addEventListener("click", () => {
+        hideOverlay(overlay, statblock);
+    });
 }
