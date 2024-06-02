@@ -11,10 +11,9 @@ const PORT2 = "5252";
 
 const connection = mysql.createConnection(
     {
-        port: 1337,
         host: "localhost",
         user: "root",
-        password: "1234",
+        password: "qwerty0987654321",
         database: "opdopdopd"
     }
 );
@@ -1203,7 +1202,7 @@ app.get('/api/pvk-items', (req, res) => {
             res.status(500).send('Server error');
         } else {
             res.json(results);
-            // console.log(results);
+            console.log(results);
         }
     });
 });
@@ -1291,7 +1290,7 @@ app.post('/addFormula', (req, res) => {
 
 
 
-app.post("/res", (req, res) => {
+app.get("/res", (req, res) => {
     const jsonData = req.body;
     const user_name = jsonData.name;
     connection.query("SELECT piq.name, results.result FROM results JOIN piq ON piq.id = results.piq_id WHERE user_id = (SELECT user_id WHERE name = ?)", [user_name], function (err, result) {
@@ -1309,7 +1308,8 @@ app.post("/res", (req, res) => {
             result.forEach(item => sum += item.result);
             let resJson =   {sum : sum};
         });
-})
+
+});
 
 
 app.listen(PORT2, () => {

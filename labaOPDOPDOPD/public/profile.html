@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
 
     <title>OPDOPDOPD</title>
 </head>
@@ -57,6 +59,44 @@
             </div>
         </div>
     </div>
+    <div class="form">
+        <div class="statname">
+            <h1>Конструктор формул</h1>
+        </div>
+        <div class="constructor">
+            <select class ="pvkSelect" id="pvkSelect"></select>
+            <select id="constructortests">
+                <option value="1">Простой тест на свет</option>
+                <option value="2">Простой тест на звук</option>
+                <option value="3">Сложный тест на свет</option>
+                <option value="4">Тест на визуальное восприятие цифр</option>
+                <option value="5">Тест на аудиальное воспрития цифр</option>
+                <option value="6">Простой РДО</option>
+                <option value="7">Сложный РДО</option>
+                <option value="8">Аналоговое слежение</option>
+                <option value="9">Слежение с преследованием</option>
+                <option value="10">Тест Струпа</option>
+                <option value="11">Таблица Шульте</option>
+                <option value="12">Тест на оперативную память</option>
+                <option value="13">Тест на кратковременную память</option>
+                <option value="14">Тест на анализ и классификацию</option>
+                <option value="15">Тест на продолжение числового ряда</option>
+                <option value="16">Тест на поиск отличий</option>
+            </select>
+            <select id="constructoranswer">
+                <option value="1">Кол-во попыток</option>
+                <option value="2">Средний ответ</option>
+                <option value="3">Кол-во правильных ответов</option>
+                <option value="4">Кол-во ошибок</option>
+                <option value="5">Стандартное отклонение</option>
+                <option value="6">Потраченное время</option>
+                <option value="7">Максимальное значение</option>
+                <option value="8">Кол-во ответов</option>
+            </select>
+            <input type="checkbox">Модуль</input>
+            <button class="saveBTN">Сохранить</button>
+        </div>
+    </div>
     <div class="stat">
         <div class="statname">
             <h1>Статистика</h1>
@@ -89,6 +129,9 @@
                     </div>
                     <div class="resbutton">
                         <button>Результаты</button>
+                    </div>
+                    <div class="formulabutton">
+                        <button>Формулы</button>
                     </div>
                 </div>
             </div>
@@ -133,9 +176,11 @@
     </aside>
     <div class="overlay" id="overlay"></div>
 </main>
-<script>CheckData();
+<script> CheckData();
 CheckPerms();
 showStat();
+showFormulas();
+loadPVK();
 showRes();</script>
 </body>
 

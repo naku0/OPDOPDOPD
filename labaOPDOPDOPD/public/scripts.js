@@ -646,23 +646,23 @@ function generateChart(canvasField, testData, index) {
 
 function loadPVK() {
     const pvkSelect = document.getElementById('pvkSelect');
-    const choices = new Choices(pvkSelect, {
-        removeItemButton: true,
-        searchResultLimit: 10,
-        placeholderValue: 'Select items',
-        searchPlaceholderValue: 'Search items'
-    });
-    fetch('/api/pvk-items')
-        .then(response => response.json())
-        .then(data => {
-            data.forEach(item => {
-                const option = document.createElement('option');
-                option.value = item.id;
-                option.textContent = item.name;
-                pvkSelect.appendChild(option);
-            });
-            choices.setChoices(data, 'id', 'name', true);
-        })
+        const choices = new Choices(pvkSelect, {
+            removeItemButton: true,
+            searchResultLimit: 10,
+            placeholderValue: 'Select items',
+            searchPlaceholderValue: 'Search items'
+        });
+        fetch('/api/pvk-items')
+            .then(response => response.json())
+            .then(data => {
+                data.forEach(item => {
+                    const option = document.createElement('option');
+                    option.value = item.id;
+                    option.textContent = item.name;
+                    pvkSelect.appendChild(option);
+                });
+                choices.setChoices(data, 'id', 'name', true);
+            })
         .catch(error => console.error('Error fetching PVK items:', error));
 }
 
@@ -747,5 +747,60 @@ function loadOrbs() {
             orb.classList.add("active");
             document.querySelector(`#test-${orb.id}`).classList.add("active");
         });
+    });
+}
+
+function showFormulas() {
+    const button = document.querySelector('.formulabutton');
+    const overlay = document.querySelector('.overlay');
+    const statblock = document.querySelector(".form");
+
+    button.addEventListener('click', () => {
+        displayOverlay(statblock, overlay);
+        statblock.style.display = "flex";
+    });
+
+    overlay.addEventListener('click', (event) => {
+        if (event.target === overlay) {
+            hideOverlay(overlay, statblock);
+        }
+    });
+
+    const element = document.getElementById('constructortests');
+    const choices = new Choices(element, {
+        removeItemButton: true,
+        searchEnabled: false,
+        searchResultLimit: 10,
+        placeholderValue: 'Выберите тест',
+        searchPlaceholderValue: 'Выберите тест',
+    });
+
+    const pvkSelect = document.getElementById('pvkSelect');
+    const choicesPVK = new Choices(pvkSelect, {
+        removeItemButton: true,
+        searchEnabled: true,
+        searchResultLimit: 10,
+        placeholderValue: 'Выберите пвк',
+        searchPlaceholderValue: 'Выберите пвк',
+    });
+
+    fetch('/api/pvk-items')
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(item => {
+                const option = document.createElement('option');
+                option.value = item.id;
+                option.textContent = item.name;
+                pvkSelect.appendChild(option);
+            });
+            choicesPVK.setChoices(data, 'id', 'name', true);
+        });
+    const answs = document.getElementById('constructoranswer');
+    const choicesAnsw = new Choices(answs, {
+        removeItemButton: true,
+        searchEnabled: false,
+        searchResultLimit: 10,
+        placeholderValue: 'Выберите показатель',
+        searchPlaceholderValue: 'Выберите показатель',
     });
 }
