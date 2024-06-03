@@ -838,7 +838,9 @@ function addFormBlock() {
                 <option value="7">Максимальное значение</option>
                 <option value="8">Кол-во ответов</option>
             `;
-
+    const coef = document.createElement('input');
+    coef.type = 'number';
+    coef.placeholder = 'Коэффициент';
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
     const checkboxLabel = document.createElement('label');
@@ -847,6 +849,7 @@ function addFormBlock() {
 
     formBlock.appendChild(testSelect);
     formBlock.appendChild(answerSelect);
+    formBlock.appendChild(coef);
     formBlock.appendChild(checkboxLabel);
 
     constructor.appendChild(formBlock);

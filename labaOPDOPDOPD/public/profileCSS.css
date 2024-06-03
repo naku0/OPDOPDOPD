@@ -485,6 +485,11 @@ main {
     margin-left: auto;
     margin-bottom: 20px;
 }
+.form input[type='number']{
+    -moz-appearance: textfield;
+    width: 100%;
+    box-sizing: border-box;
+}
 
 .saveBTN {
     display: flex;
