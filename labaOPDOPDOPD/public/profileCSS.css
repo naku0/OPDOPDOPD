@@ -217,53 +217,63 @@ main {
     background-color: #f0f0f0;
 
 }
-.tests .test:hover{
+
+.tests .test:hover {
     background-color: #DFDFDF;
 }
-.tests a{
+
+.tests a {
     text-decoration: none;
 
 }
-.tests a:visited{
+
+.tests a:visited {
     color: black;
 }
-.tests a:hover{
+
+.tests a:hover {
     color: #000000;
 }
+
 .info .title {
     font-size: 30px;
     font-weight: bold;
     padding: 20px;
 }
-.info hr{
-    color: rgba(0,0,0,0.9);
+
+.info hr {
+    color: rgba(0, 0, 0, 0.9);
 }
-.profileinfo-mini{
+
+.profileinfo-mini {
     display: flex;
     flex-direction: row;
     width: 100%;
     padding: 10px;
     cursor: pointer;
 }
-.profileinfo-mini:hover{
+
+.profileinfo-mini:hover {
     background-color: #f0f0f0;
     border-radius: 20px;
     width: auto;
 }
 
-.profileinfo-mini .picture-mini{
+.profileinfo-mini .picture-mini {
     box-shadow: 3px 3px 3px #AAD94A;
     border-radius: 50%;
     background-color: #EDF0F2;
     display: flex;
     place-content: center;
 }
+
 .profileinfo-mini .picture-mini img {
     border-radius: 50%;
     height: 4em;
     width: 4em;
 }
-.profileinfo-mini .name-mini{
+
+.profileinfo-mini .name-mini {
     font-size: 20px;
     padding-left: 15px;
     display: flex;
@@ -273,7 +283,7 @@ main {
     font-weight: bold;
 }
 
-.profileinfo-mini .hiddenElement{
+.profileinfo-mini .hiddenElement {
     width: auto;
     height: auto;
     cursor: pointer;
@@ -281,13 +291,15 @@ main {
     align-items: center;
     padding-left: 5px;
 }
-.profileinfo-mini i.material-symbols-outlined{
+
+.profileinfo-mini i.material-symbols-outlined {
     font-size: 15px;
 }
-.stat, .form{
+
+.stat, .form {
     position: absolute;
     display: none;
-    background-color: rgba(237, 240, 242,0.9);
+    background-color: rgba(237, 240, 242, 0.9);
     backdrop-filter: blur(5px);
     height: 70dvh;
     width: 70dvw;
@@ -299,7 +311,8 @@ main {
     animation: fade-in 0.5s forwards;
     place-content: center;
     flex-direction: column;
-    h1{
+
+    h1 {
         display: flex;
         place-content: center;
         font-size: 40px;
@@ -308,6 +321,7 @@ main {
     }
 
 }
+
 .buttons {
     display: flex;
     width: 100%;
@@ -315,6 +329,7 @@ main {
     height: 100%;
     cursor: pointer;
 }
+
 .buttons .prev {
     position: relative;
     left: 0;
@@ -324,6 +339,7 @@ main {
     height: auto;
     cursor: pointer;
 }
+
 .buttons .next {
     position: relative;
     right: 0;
@@ -335,22 +351,24 @@ main {
 }
 
 @keyframes fade-in {
-    0%{
+    0% {
         opacity: 0;
         transform: translateY(-200px);
     }
-    100%{
+    100% {
         opacity: 1;
         transform: translateY(0);
     }
 }
-.statbutton, .resbutton, .formulabutton{
+
+.statbutton, .resbutton, .formulabutton {
     display: flex;
     place-content: center;
     margin-top: 10px;
     height: 50px;
     padding: 10px;
-    button{
+
+    button {
         font-size: 20px;
         font-weight: bold;
         border-radius: 20px;
@@ -359,10 +377,11 @@ main {
     }
 }
 
-.res, .form{
+.res, .form {
+    overflow: scroll;
     position: absolute;
     display: none;
-    background-color: rgba(237, 240, 242,0.9);
+    background-color: rgba(237, 240, 242, 0.9);
     backdrop-filter: blur(5px);
     height: 70dvh;
     width: 70dvw;
@@ -374,42 +393,82 @@ main {
     animation: fade-in 0.5s forwards;
     place-content: center;
     flex-direction: column;
-    h1{
+
+    h1 {
         display: flex;
         place-content: center;
         font-size: 40px;
         font-weight: bold;
         padding: 20px;
     }
-    .line1, .line2, .line3{
+
+    .line1, .line2, .line3 {
         place-content: center;
         width: 30%;
         height: 2dvh;
         border: solid 2px rgba(0, 0, 0, 0.2);
         border-radius: 10px;
     }
-    .sysadmin, .sysanalist, .gamedev{
+
+    .sysadmin, .sysanalist, .gamedev {
         display: flex;
         place-content: center;
         flex-direction: column;
         padding: 20px;
-        h2{
+
+        h2 {
             display: flex;
             place-content: center;
             font-size: 20px;
             font-weight: bold;
             padding: 20px;
         }
-        .data{
+
+        .data {
             display: flex;
             place-content: center;
         }
     }
+
+    .pvkSelect {
+        margin-bottom: 20px;
+    }
+
+    .buttons {
+        display: flex;
+        height: auto;
+        cursor: pointer;
+        place-content: start;
+        margin-right: auto;
+        .addButton, .removeButton {
+            background-color: #CCFA5B;
+            border-radius: 20px;
+            border: none;
+            filter: drop-shadow(2px 2px 10px rgba(0, 0, 0, 0.3));
+            padding: 20px;
+            display: flex;
+            cursor: pointer;
+            margin: 20px;
+            margin-left: 0;
+            button {
+                font-size: 20px;
+                font-weight: bold;
+                border-radius: 20px;
+                cursor: pointer;
+                padding: 10px;
+            }
+        }
+        .addButton:hover, .removeButton:hover{
+            background-color: #AAD94A;
+        }
+    }
 }
-.form h1{
+
+.form h1 {
     padding: 40px;
 }
-.form select{
+
+.form select {
     width: 100%;
     height: 50px;
     font-size: 20px;
@@ -418,13 +477,16 @@ main {
     cursor: pointer;
     padding: 10px;
 }
-.form input{
+
+.form input {
     border-radius: 20px;
     cursor: pointer;
     padding: 10px;
     margin-left: auto;
+    margin-bottom: 20px;
 }
-.saveBTN{
+
+.saveBTN {
     display: flex;
     place-content: center;
     align-items: center;
@@ -436,8 +498,9 @@ main {
     background-color: #CCFA5B;
     border-radius: 20px;
     border: none;
-    filter: drop-shadow(2px 2px 10px rgba(0,0,0,0.3));
-    button{
+    filter: drop-shadow(2px 2px 10px rgba(0, 0, 0, 0.3));
+
+    button {
         place-content: center;
         font-size: 20px;
         font-weight: bold;
@@ -446,6 +509,7 @@ main {
         padding: 10px;
     }
 }
-.saveBTN:hover{
+
+.saveBTN:hover {
     background-color: #AAD94A;
 }

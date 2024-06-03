@@ -751,6 +751,8 @@ function loadOrbs() {
 }
 
 function showFormulas() {
+    const plus = document.querySelector('.addButton');
+    const minus = document.querySelector('.removeButton');
     const button = document.querySelector('.formulabutton');
     const overlay = document.querySelector('.overlay');
     const statblock = document.querySelector(".form");
@@ -766,13 +768,11 @@ function showFormulas() {
         }
     });
 
-    const element = document.getElementById('constructortests');
-    const choices = new Choices(element, {
-        removeItemButton: true,
-        searchEnabled: false,
-        searchResultLimit: 10,
-        placeholderValue: 'Выберите тест',
-        searchPlaceholderValue: 'Выберите тест',
+    plus.addEventListener('click', () => {
+       addFormBlock();
+    });
+    minus.addEventListener('click', () => {
+        removeFormBlock();
     });
 
     const pvkSelect = document.getElementById('pvkSelect');
@@ -795,16 +795,82 @@ function showFormulas() {
             });
             choicesPVK.setChoices(data, 'id', 'name', true);
         });
-    const answs = document.getElementById('constructoranswer');
-    const choicesAnsw = new Choices(answs, {
+
+    const save = document.querySelector(".saveBTN");
+    save.addEventListener("click", () => {
+        hideOverlay(overlay, statblock);
+    });
+}
+function addFormBlock() {
+    const constructor = document.getElementById('constructor');
+
+    const formBlock = document.createElement('div');
+    formBlock.classList.add('form-block');
+
+    const testSelect = document.createElement('select');
+    testSelect.innerHTML = `
+                <option value="1">Простой тест на свет</option>
+                <option value="2">Простой тест на звук</option>
+                <option value="3">Сложный тест на свет</option>
+                <option value="4">Тест на визуальное восприятие цифр</option>
+                <option value="5">Тест на аудиальное воспрития цифр</option>
+                <option value="6">Простой РДО</option>
+                <option value="7">Сложный РДО</option>
+                <option value="8">Аналоговое слежение</option>
+                <option value="9">Слежение с преследованием</option>
+                <option value="10">Тест Струпа</option>
+                <option value="11">Таблица Шульте</option>
+                <option value="12">Тест на оперативную память</option>
+                <option value="13">Тест на кратковременную память</option>
+                <option value="14">Тест на анализ и классификацию</option>
+                <option value="15">Тест на продолжение числового ряда</option>
+                <option value="16">Тест на поиск отличий</option>
+            `;
+
+    const answerSelect = document.createElement('select');
+    answerSelect.innerHTML = `
+                <option value="1">Кол-во попыток</option>
+                <option value="2">Средний ответ</option>
+                <option value="3">Кол-во правильных ответов</option>
+                <option value="4">Кол-во ошибок</option>
+                <option value="5">Стандартное отклонение</option>
+                <option value="6">Потраченное время</option>
+                <option value="7">Максимальное значение</option>
+                <option value="8">Кол-во ответов</option>
+            `;
+
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    const checkboxLabel = document.createElement('label');
+    checkboxLabel.textContent = 'Модуль';
+    checkboxLabel.appendChild(checkbox);
+
+    formBlock.appendChild(testSelect);
+    formBlock.appendChild(answerSelect);
+    formBlock.appendChild(checkboxLabel);
+
+    constructor.appendChild(formBlock);
+    new Choices(testSelect, {
+        removeItemButton: true,
+        searchEnabled: false,
+        searchResultLimit: 10,
+        placeholderValue: 'Выберите тест',
+        searchPlaceholderValue: 'Выберите тест',
+    });
+
+    new Choices(answerSelect, {
         removeItemButton: true,
         searchEnabled: false,
         searchResultLimit: 10,
         placeholderValue: 'Выберите показатель',
         searchPlaceholderValue: 'Выберите показатель',
     });
-    const save = document.querySelector(".saveBTN");
-    save.addEventListener("click", () => {
-        hideOverlay(overlay, statblock);
-    });
 }
+function removeFormBlock() {
+    const constructor = document.getElementById('constructor');
+    if (constructor.lastElementChild) {
+        constructor.removeChild(constructor.lastElementChild);
+    }
+}
+
+
