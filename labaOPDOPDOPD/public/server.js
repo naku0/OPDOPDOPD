@@ -1306,7 +1306,7 @@ app.post("/res", (req, res) => {
 
         const user_id = result[0].id;
 
-        connection.query("SELECT average_value, attempt_number FROM test_attempt WHERE user_id = ?", [user_id], function (err, result) {
+        connection.query("SELECT average_value, attempt_number, stadart_deviation FROM test_attempt WHERE user_id = ?", [user_id], function (err, result) {
             if (err) {
                 console.error('Error executing query:', err);
                 return res.status(500).json({ error: 'Internal server error' });
@@ -1315,15 +1315,18 @@ app.post("/res", (req, res) => {
 
             let resOfTest = 0;
             let resOfCount = 0;
+            let resOfDev = 0;
 
             for (let i = 0; i < result.length; i++) {
                 resOfTest += result[i].average_value;
                 resOfCount += result[i].attempt_number;
+                resOfDev += result[i].stadart_deviation;
             }
 
             res.json({
                 result: resOfTest,
-                deviation: resOfCount
+                count: resOfCount,
+                deviation: resOfDev
             });
         });
     });
