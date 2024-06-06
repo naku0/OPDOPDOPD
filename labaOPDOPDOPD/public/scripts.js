@@ -802,7 +802,7 @@ function showFormulas() {
         hideOverlay(overlay, statblock);
     });
 }
-unction sendData() {
+function sendData() {
     const constructor = document.getElementById('constructor');
     const formBlocks = constructor.querySelectorAll('.form-block');
     const pvkSelect = document.getElementById('pvkSelect');
@@ -836,6 +836,7 @@ unction sendData() {
             console.error('Error:', error);
         });
 }
+
 function addFormBlock() {
     const constructor = document.getElementById('constructor');
 
