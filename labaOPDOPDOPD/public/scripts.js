@@ -802,9 +802,12 @@ function showFormulas() {
         hideOverlay(overlay, statblock);
     });
 }
-function sendData() {
+unction sendData() {
     const constructor = document.getElementById('constructor');
     const formBlocks = constructor.querySelectorAll('.form-block');
+    const pvkSelect = document.getElementById('pvkSelect');
+    const pvkValue = pvkSelect.options[pvkSelect.selectedIndex].text;
+
     const data = Array.from(formBlocks).map(block => {
         const selects = block.querySelectorAll('select');
         return {
@@ -820,7 +823,10 @@ function sendData() {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ formulas: data })
+        body: JSON.stringify({
+            pvkSelect: pvkValue,
+            formulas: data
+        })
     })
         .then(response => response.json())
         .then(result => {
