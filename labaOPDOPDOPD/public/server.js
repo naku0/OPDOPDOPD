@@ -11,9 +11,10 @@ const PORT2 = "5252";
 
 const connection = mysql.createConnection(
     {
+        port: 1337,
         host: "localhost",
         user: "root",
-        password: "qwerty0987654321",
+        password: "1234",
         database: "opdopdopd"
     }
 );
@@ -1231,12 +1232,14 @@ app.post('/suka', (req, res) => {
         res.json(result);
     })
 });
+
+
 // сохранение новой формулы
-app.post('/addFormula', (req, res) => {
+app.post('/api/save-formula', (req, res) => {
     const jsonData = req.body;
     const piq = jsonData.piq;
     const args = jsonData.args;
-    connection.query("SELECT formula_id FROM formulas WHERE name = (SELECT piq_id FROM piq WHERE piq = ?))", [piq], function (err, result) {
+    connection.query("SELECT formula_id FROM formulas WHERE piq_id = (SELECT piq_id FROM piq WHERE piq = ?))", [piq], function (err, result) {
         if (err) {
             console.error('Ошибка выполнения запроса к базе данных:', err);
             return res.status(500).json({error: 'Ошибка выполнения запроса к базе данных'});
