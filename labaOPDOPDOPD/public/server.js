@@ -1318,7 +1318,7 @@ app.post("/res", (req, res) => {
 
             for (let i = 0; i < result.length; i++) {
                 resOfTest += result[i].average_value;
-                resOfCount += result[i].testCount;
+                resOfCount = result[i].testCount;
             }
 
             res.json({
