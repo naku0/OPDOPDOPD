@@ -1303,7 +1303,7 @@ app.post("/res", (req, res) => {
             return res.status(404).json({ error: 'User not found' });
         }
 
-        const user_id = result[0].user_id;
+        const user_id = result[0].id;
 
         connection.query("SELECT average_value FROM test_attempt WHERE user_id = ?", [user_id], function (err, result) {
             if (err) {

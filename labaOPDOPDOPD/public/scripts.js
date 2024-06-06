@@ -479,7 +479,7 @@ function loadUsers() {
 }*/
 
 function loadAvatars(address) {
-    console.log(dataPo);
+
     let UserData = {
         "avatar": address
     }
@@ -562,16 +562,14 @@ function showRes() {
             if (!response.ok) { // Проверяем успешность ответа до обработки данных
                 throw new Error('Network response was not ok');
             }
-            let ad = response.json();
-            console.log(ad);
-            return ad;
+            return response.json();
             // Возвращаем промис с данными
         })
         .then((data) => {
-            let n = (data.result / 3);
-            let b = data.result /12;
-            let c = data.result /10;
-            console.log(data.result, n, b, c);
+            let a = data.result;
+            let n =a/10 *0.16;
+            let b = a/12 * 0.23;
+            let c = a/15 * 1.3;
             document.querySelector(".line1").style.background = `linear-gradient(90deg, #dfff8d 0%, #3bcaab ${100 - n}%, #EDF0F2 ${100 - n}%)`;
             document.querySelector(".line2").style.background = `linear-gradient(90deg, #dfff8d 0%, #3bcaab ${100 - b}%, #EDF0F2 ${100 - b}%)`;
             document.querySelector(".line3").style.background = `linear-gradient(90deg, #dfff8d 0%, #3bcaab ${100 - c}%, #EDF0F2 ${100 - c}%)`;
@@ -734,10 +732,7 @@ function saveSelectedItems() {
     while (pvkList.firstChild) {
         pvkList.removeChild(pvkList.firstChild);
     }
-    console.log(pvkList);
-
-
-    selectedItems.forEach(item => {
+        selectedItems.forEach(item => {
         const li = document.createElement('li');
         li.className = 'item';
         li.draggable = true;
