@@ -1311,6 +1311,24 @@ app.get("/res", (req, res) => {
         });
 
 });
+app.post("/res", (req, res) => {
+    const jsonData = req.body;
+    const name = jsonData.nameData;
+    connection.query("SELECT user_id FROM users WHERE name = ?", [name], function (err, result) {
+        if (err) throw err;
+        let user_id = result;
+        connection.query("SELECT average_value FROM test_attempt WHERE user_id = ?", [user_id], function (err, result) {
+            let resOfTest = 0;
+            for (i = 0; i < result.length; i++) {
+                resOfTest += result[i].average_value;
+            }
+            const jsonTest = {
+                result : resOfTest
+            }
+            res.sendFile(jsonTest);
+        })
+    })
+})
 
 
 app.listen(PORT2, () => {
