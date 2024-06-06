@@ -11,9 +11,10 @@ const PORT2 = "5252";
 
 const connection = mysql.createConnection(
     {
+        port: "1337",
         host: "localhost",
         user: "root",
-        password: "qwerty0987654321",
+        password: "1234",
         database: "opdopdopd"
     }
 );
@@ -1323,9 +1324,9 @@ app.post("/res", (req, res) => {
             }
 
             res.json({
-                result: resOfTest,
-                count: resOfCount,
-                deviation: resOfDev
+                result: resOfTest%10,
+                count: resOfCount%10,
+                deviation: resOfDev%10
             });
         });
     });
