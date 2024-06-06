@@ -806,9 +806,10 @@ function sendData() {
     const constructor = document.getElementById('constructor');
     const formBlocks = constructor.querySelectorAll('.form-block');
     const data = Array.from(formBlocks).map(block => {
+        const selects = block.querySelectorAll('select');
         return {
-            test: block.querySelector('select:first-child').value,
-            answer: block.querySelector('select:nth-child(2)').value,
+            test: selects[0].value,
+            answer: selects[1].value,
             coefficient: block.querySelector('input[type="number"]').value,
             module: block.querySelector('input[type="checkbox"]').checked
         };
