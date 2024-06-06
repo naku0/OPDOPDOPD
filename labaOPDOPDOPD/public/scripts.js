@@ -537,37 +537,50 @@ function showRes() {
     const overlay = document.querySelector('.overlay');
     const statblock = document.querySelector(".res");
     const name = sessionStorage.getItem("name");
+
     button.addEventListener('click', () => {
         displayOverlay(statblock, overlay);
         statblock.style.display = "flex";
     });
+
     overlay.addEventListener('click', (event) => {
         if (event.target === overlay) {
             hideOverlay(overlay, statblock);
         }
     });
-    let nameData = sessionStorage.getItem("name");
 
-    document.querySelector(".line1").style.background = `linear-gradient(90deg, #dfff8d 0%, #3bcaab ${100 - n}%,  #EDF0F2 ${100 - n}%)`;
-    document.querySelector(".line2").style.background = `linear-gradient(90deg, #dfff8d 0%, #3bcaab ${100 - b}%,  #EDF0F2 ${100 - b}%)`;
-    document.querySelector(".line3").style.background = `linear-gradient(90deg, #dfff8d 0%, #3bcaab ${100 - c}%,  #EDF0F2 ${100 - c}%)`;
+    let nameData = { name: name }; // Оберните данные в объект
+
     fetch('/res', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(nameData),
-    }).then((response) => {
-            if (!response.ok) {
+    })
+        .then((response) => {
+            if (!response.ok) { // Проверяем успешность ответа до обработки данных
                 throw new Error('Network response was not ok');
             }
-            return response.json();
-        },
-        (error) => {
-            console.log('Error:', error);
-        }
-    )
+            let ad = response.json();
+            console.log(ad);
+            return ad;
+            // Возвращаем промис с данными
+        })
+        .then((data) => {
+            let n = (data.result / 3);
+            let b = data.result /12;
+            let c = data.result /10;
+            console.log(data.result, n, b, c);
+            document.querySelector(".line1").style.background = `linear-gradient(90deg, #dfff8d 0%, #3bcaab ${100 - n}%, #EDF0F2 ${100 - n}%)`;
+            document.querySelector(".line2").style.background = `linear-gradient(90deg, #dfff8d 0%, #3bcaab ${100 - b}%, #EDF0F2 ${100 - b}%)`;
+            document.querySelector(".line3").style.background = `linear-gradient(90deg, #dfff8d 0%, #3bcaab ${100 - c}%, #EDF0F2 ${100 - c}%)`;
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
 }
+
 
 function displayOverlay(statblock, overlay) {
     statblock.style.display = "flex";

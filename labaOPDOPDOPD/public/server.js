@@ -11,10 +11,9 @@ const PORT2 = "5252";
 
 const connection = mysql.createConnection(
     {
-        port: "1337",
         host: "localhost",
         user: "root",
-        password: "1234",
+        password: "qwerty0987654321",
         database: "opdopdopd"
     }
 );
@@ -1289,45 +1288,41 @@ app.post('/api/save-formulas', (req, res) => {
     })
 });
 
-
-
-app.get("/res", (req, res) => {
-    const jsonData = req.body;
-    const user_name = jsonData.name;
-    connection.query("SELECT piq.name, results.result FROM results JOIN piq ON piq.id = results.piq_id WHERE user_id = (SELECT user_id WHERE name = ?)", [user_name], function (err, result) {
-        if (err) throw err;
-        const resultsJson = result.map(item => (
-            {
-                piq_name : item.name,
-                result : item.result
-            }
-        ));
-    });
-        connection.query("SELECT results.result FROM results JOIN piq ON piq.id = results.piq_id WHERE user_id = (SELECT user_id WHERE name = ?)", [user_name], function (err, result){
-            if (err) throw err;
-            let sum = 0;
-            result.forEach(item => sum += item.result);
-            let resJson =   {sum : sum};
-        });
-
-});
 app.post("/res", (req, res) => {
     const jsonData = req.body;
     const name = jsonData.name;
-    connection.query("SELECT user_id FROM users WHERE name = ?", [name], function (err, result) {
-        if (err) throw err;
-        let user_id = result;
+
+    connection.query("SELECT id FROM users WHERE name = ?", [name], function (err, result) {
+        if (err) {
+            console.error('Error executing query:', err);
+            return res.status(500).json({ error: 'Internal server error' });
+        }
+
+        if (result.length === 0) {
+            console.error('User not found for name:', name);
+            return res.status(404).json({ error: 'User not found' });
+        }
+
+        const user_id = result[0].user_id;
+
         connection.query("SELECT average_value FROM test_attempt WHERE user_id = ?", [user_id], function (err, result) {
-            let resOfTest = 0;
-            for (i = 0; i < result.length; i++) {
-                resOfTest += result[i];
+            if (err) {
+                console.error('Error executing query:', err);
+                return res.status(500).json({ error: 'Internal server error' });
             }
+
+            let resOfTest = 0;
+
+            for (let i = 0; i < result.length; i++) {
+                resOfTest += result[i].average_value;
+            }
+
             res.json({
                 result: resOfTest
-            })
-        })
-    })
-})
+            });
+        });
+    });
+});
 
 
 app.listen(PORT2, () => {
