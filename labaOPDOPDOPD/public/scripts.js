@@ -811,10 +811,10 @@ function sendData() {
     const data = Array.from(formBlocks).map(block => {
         const selects = block.querySelectorAll('select');
         return {
-            test: selects[0].value,
-            answer: selects[1].value,
-            coefficient: block.querySelector('input[type="number"]').value,
-            module: block.querySelector('input[type="checkbox"]').checked
+            test_id: selects[0].value,
+            test_value: selects[1].value,
+            coef: block.querySelector('input[type="number"]').value,
+            abs: block.querySelector('input[type="checkbox"]').checked
         };
     });
 
@@ -824,8 +824,8 @@ function sendData() {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            pvkSelect: pvkValue,
-            formulas: data
+            piq: pvkValue,
+            args: data
         })
     })
         .then(response => response.json())

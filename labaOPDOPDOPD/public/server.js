@@ -11,9 +11,10 @@ const PORT2 = "5252";
 
 const connection = mysql.createConnection(
     {
+        port: "1337",
         host: "localhost",
         user: "root",
-        password: "qwerty0987654321",
+        password: "1234",
         database: "opdopdopd"
     }
 );
@@ -1234,28 +1235,29 @@ app.post('/suka', (req, res) => {
 
 
 // сохранение новой формулы
-app.post('/api/save-formula', (req, res) => {
+app.post('/api/save-formulas', (req, res) => {
     const jsonData = req.body;
     const piq = jsonData.piq;
     const args = jsonData.args;
     console.log(args);
-    connection.query("SELECT formula_id FROM formulas WHERE piq_id = (SELECT piq_id FROM piq WHERE piq = ?))", [piq], function (err, result) {
+    connection.query("SELECT formula_id FROM formulas WHERE piq_id = (SELECT id FROM piq WHERE name = ?)", [piq], function (err, result) {
         if (err) {
             console.error('Ошибка выполнения запроса к базе данных:', err);
             return res.status(500).json({error: 'Ошибка выполнения запроса к базе данных'});
         }
         if (result.length === 0) {
-            connection.query("INSERT INTO formulas (piq_id) VALUES ((SELECT piq_id FROM piq WHERE piq = ?)) RETURNING formula_id", [piq], function (err, result) {
+            connection.query("INSERT INTO formulas (piq_id) VALUES ((SELECT id FROM piq WHERE name = ?))", [piq], function (err, result) {
                 if (err) {
                     console.error('Ошибка выполнения запроса к базе данных:', err);
                     return res.status(500).json({error: 'Ошибка выполнения запроса к базе данных'});
                 }
+                let formula_id = result.insertId;
                 for (let i = 0; i < args.length; i++) {
-                    const test_name = args[i].test_name;
+                    const test_id = args[i].test_id;
                     const test_value = args[i].test_value;
                     const coef = args[i].coef;
                     const abs = args[i].abs;
-                    connection.query("INSERT INTO arguments (formula_id, test_id, test_value, coefficient, abs) VALUES (?, (SELECT id FROM test WHERE name = ?), ?, ?, ?)", [result[0].formula_id, test_name, test_value, coef, abs], function (err, result) {
+                    connection.query("INSERT INTO arguments (formula_id, test_id, test_value, coefficient, abs) VALUES (?, ?, ?, ?, ?)", [formula_id, test_id, test_value, coef, abs], function (err, result) {
                         if (err) {
                             console.error('Ошибка выполнения запроса к базе данных:', err);
                             return res.status(500).json({error: 'Ошибка выполнения запроса к базе данных'});
@@ -1265,17 +1267,17 @@ app.post('/api/save-formula', (req, res) => {
             });
         } else {
             let formula_id = result[0].formula_id;
-            connection.query("DELETE FROM args WHERE formula_id = ?", [formula_id], function (err, result) {
+            connection.query("DELETE FROM arguments WHERE formula_id = ?", [formula_id], function (err, result) {
                 if (err) {
                     console.error('Ошибка выполнения запроса к базе данных:', err);
                     return res.status(500).json({error: 'Ошибка выполнения запроса к базе данных'});
                 }
                 for (let i = 0; i < args.length; i++) {
-                    const test_name = args[i].test_name;
+                    const test_name = args[i].test_id;
                     const test_value = args[i].test_value;
                     const coef = args[i].coef;
                     const abs = args[i].abs;
-                    connection.query("INSERT INTO arguments (formula_id, test_id, test_value, coefficient, abs) VALUES (?, (SELECT id FROM test WHERE name = ?), ?, ?, ?)", [formula_id, test_name, test_value, coef, abs], function (err, result) {
+                    connection.query("INSERT INTO arguments (formula_id, test_id, test_value, coefficient, abs) VALUES (?, ?, ?, ?, ?)", [formula_id, test_name, test_value, coef, abs], function (err, result) {
                         if (err) {
                             console.error('Ошибка выполнения запроса к базе данных:', err);
                             return res.status(500).json({error: 'Ошибка выполнения запроса к базе данных'});
