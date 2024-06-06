@@ -547,18 +547,7 @@ function showRes() {
         }
     });
     let nameData = sessionStorage.getItem("name");
-    let n = nameData.length * 10;
-    if (n > 100) {
-        n = n - 100;
-    }
-    let b = nameData.length * 5;
-    if (b > 100) {
-        b = b - 100;
-    }
-    let c = nameData.length * 12;
-    if (c > 100) {
-        c = c - 100;
-    }
+
     document.querySelector(".line1").style.background = `linear-gradient(90deg, #dfff8d 0%, #3bcaab ${100 - n}%,  #EDF0F2 ${100 - n}%)`;
     document.querySelector(".line2").style.background = `linear-gradient(90deg, #dfff8d 0%, #3bcaab ${100 - b}%,  #EDF0F2 ${100 - b}%)`;
     document.querySelector(".line3").style.background = `linear-gradient(90deg, #dfff8d 0%, #3bcaab ${100 - c}%,  #EDF0F2 ${100 - c}%)`;
@@ -567,7 +556,16 @@ function showRes() {
         headers: {
             'Content-Type': 'application/json',
         },
-    })
+    }).then((response) => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        },
+        (error) => {
+            console.log('Error:', error);
+        }
+    )
 }
 
 function displayOverlay(statblock, overlay) {
