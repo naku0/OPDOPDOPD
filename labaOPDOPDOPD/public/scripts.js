@@ -569,9 +569,9 @@ function showRes() {
             let k1 = data.result;
             let k3 = data.count;
             let k2 = data.deviation;
-            let n =  k1/k2 *k3;
-            let b = (k1+k2*2) / (k3*5);
-            let c = k3*(k1+k2*3)/k2;
+            let n = (k2-k1)*k3*1.5;
+            let b = k3*(k2+(k1/10));
+            let c = (k2+k3*k2)*(k1*200);
             console.log(k1, k2,k3, n, b, c);
             document.querySelector(".line1").style.background = `linear-gradient(90deg, #dfff8d 0%, #3bcaab ${100 - n}%, #EDF0F2 ${100 - n}%)`;
             document.querySelector(".line2").style.background = `linear-gradient(90deg, #dfff8d 0%, #3bcaab ${100 - b}%, #EDF0F2 ${100 - b}%)`;
