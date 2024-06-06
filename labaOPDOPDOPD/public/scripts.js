@@ -556,6 +556,7 @@ function showRes() {
         headers: {
             'Content-Type': 'application/json',
         },
+        body: JSON.stringify(nameData),
     }).then((response) => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
