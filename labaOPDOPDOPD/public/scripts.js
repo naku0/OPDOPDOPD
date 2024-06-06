@@ -798,8 +798,36 @@ function showFormulas() {
 
     const save = document.querySelector(".saveBTN");
     save.addEventListener("click", () => {
+        sendData();
         hideOverlay(overlay, statblock);
     });
+}
+function sendData() {
+    const constructor = document.getElementById('constructor');
+    const formBlocks = constructor.querySelectorAll('.form-block');
+    const data = Array.from(formBlocks).map(block => {
+        return {
+            test: block.querySelector('select:first-child').value,
+            answer: block.querySelector('select:nth-child(2)').value,
+            coefficient: block.querySelector('input[type="number"]').value,
+            module: block.querySelector('input[type="checkbox"]').checked
+        };
+    });
+
+    fetch('/api/save-formulas', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ formulas: data })
+    })
+        .then(response => response.json())
+        .then(result => {
+            console.log('Success:', result);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
 }
 function addFormBlock() {
     const constructor = document.getElementById('constructor');

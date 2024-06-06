@@ -1094,10 +1094,6 @@ app.post('/endpoint', (req, res) => {
                     return res.status(500).json({error: 'Ошибка выполнения запроса к базе данных'});
                 }
 
-                result.forEach(res => {
-                    piq_opinions.push([res.professions.name.toString(), res.piq.name.toString(), res.position.toString()]);
-                });
-
                 res.json({
                     login: login,
                     status: status,
