@@ -11,9 +11,10 @@ const PORT2 = "5252";
 
 const connection = mysql.createConnection(
     {
+        port: "1337",
         host: "localhost",
         user: "root",
-        password: "qwerty0987654321",
+        password: "1234",
         database: "opdopdopd"
     }
 );
@@ -1305,20 +1306,24 @@ app.post("/res", (req, res) => {
 
         const user_id = result[0].id;
 
-        connection.query("SELECT average_value FROM test_attempt WHERE user_id = ?", [user_id], function (err, result) {
+        connection.query("SELECT average_value, stadart_deviation FROM test_attempt WHERE user_id = ?", [user_id], function (err, result) {
             if (err) {
                 console.error('Error executing query:', err);
                 return res.status(500).json({ error: 'Internal server error' });
             }
+            console.log(result);
 
             let resOfTest = 0;
+            let resOfDev = 0;
 
             for (let i = 0; i < result.length; i++) {
                 resOfTest += result[i].average_value;
+                resOfDev += result[i].stadart_deviation;
             }
 
             res.json({
-                result: resOfTest
+                result: resOfTest,
+                deviation: resOfDev
             });
         });
     });
