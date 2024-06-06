@@ -1313,7 +1313,7 @@ app.get("/res", (req, res) => {
 });
 app.post("/res", (req, res) => {
     const jsonData = req.body;
-    const name = jsonData.nameData;
+    const name = jsonData.name;
     connection.query("SELECT user_id FROM users WHERE name = ?", [name], function (err, result) {
         if (err) throw err;
         let user_id = result;
